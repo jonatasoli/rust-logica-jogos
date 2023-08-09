@@ -1,0 +1,24 @@
+site_name: Rust da Lógica aos Jogos
+site_url: https://rustlogicajogos.jonatasoliveira.dev
+docs_dir: aulas
+repo_url: https://github.com/jonatasoli/rust-logica-jogos
+repo_name: jonatasolivera/rust-logica-jogos
+edit_uri: tree/main/aulas
+
+theme:
+  name: material
+
+features:
+  - content.tabs.link
+  - search.suggest
+  - search.highlight
+  - search.share
+
+plugins:
+  - mkdocs-backlinks
+  - search
+  - autolinks
+  - git-authors:
+      show_email_address: false
+      show_line_count: true
+  - git-revision-date-localized
