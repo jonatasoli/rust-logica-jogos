@@ -1,0 +1,1032 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://rustlogicajogos.jonatasoliveira.dev/1_2_tipos_de_dados_e_funcoes/">
+      
+      
+        <link rel="prev" href="../1_1_variaveis_mutabilidade/">
+      
+      
+        <link rel="next" href="../1_3_controle_de_fluxo_e_propriedade/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>Jogo da adivinhação Raio-x - Rust da Lógica aos Jogos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jogo-da-adivinhacao-raio-x" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Rust da Lógica aos Jogos" class="md-header__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rust da Lógica aos Jogos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Jogo da adivinhação Raio-x
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jonatasoli/rust-logica-jogos" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jonatasolivera/rust-logica-jogos
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Rust da Lógica aos Jogos" class="md-nav__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Rust da Lógica aos Jogos
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jonatasoli/rust-logica-jogos" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    jonatasolivera/rust-logica-jogos
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Bem vindo ao curso Rust lógica com jogos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_0_introducao/" class="md-nav__link">
+        1 0 introducao
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_1_variaveis_mutabilidade/" class="md-nav__link">
+        1 1 variaveis mutabilidade
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Jogo da adivinhação Raio-x
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Jogo da adivinhação Raio-x
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regras" class="md-nav__link">
+    Regras
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comecando-o-projeto" class="md-nav__link">
+    Começando o projeto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-str-e-string" class="md-nav__link">
+    Diferença entre &amp;str e String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alocacao-de-memoria-em-rust" class="md-nav__link">
+    Alocação de memória em Rust
+  </a>
+  
+    <nav class="md-nav" aria-label="Alocação de memória em Rust">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stack-pilha" class="md-nav__link">
+    1. Stack (Pilha)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-heap" class="md-nav__link">
+    2. Heap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-memoria-estatica" class="md-nav__link">
+    3. Memória Estática
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-string-vs-str" class="md-nav__link">
+    4. String vs &amp;str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-a-funcao-do-jogo" class="md-nav__link">
+    Criando a função do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ownership-e-borrowing" class="md-nav__link">
+    Ownership e Borrowing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduzindo-testes-ao-nosso-codigo" class="md-nav__link">
+    Introduzindo testes ao nosso código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-nossa-funcao-do-jogo" class="md-nav__link">
+    Criando nossa função do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-de-memoria" class="md-nav__link">
+    Segurança de Memória
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_3_controle_de_fluxo_e_propriedade/" class="md-nav__link">
+        1 3 controle de fluxo e propriedade
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../INDICE/" class="md-nav__link">
+        Summary
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regras" class="md-nav__link">
+    Regras
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comecando-o-projeto" class="md-nav__link">
+    Começando o projeto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-str-e-string" class="md-nav__link">
+    Diferença entre &amp;str e String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alocacao-de-memoria-em-rust" class="md-nav__link">
+    Alocação de memória em Rust
+  </a>
+  
+    <nav class="md-nav" aria-label="Alocação de memória em Rust">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stack-pilha" class="md-nav__link">
+    1. Stack (Pilha)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-heap" class="md-nav__link">
+    2. Heap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-memoria-estatica" class="md-nav__link">
+    3. Memória Estática
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-string-vs-str" class="md-nav__link">
+    4. String vs &amp;str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-a-funcao-do-jogo" class="md-nav__link">
+    Criando a função do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ownership-e-borrowing" class="md-nav__link">
+    Ownership e Borrowing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduzindo-testes-ao-nosso-codigo" class="md-nav__link">
+    Introduzindo testes ao nosso código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-nossa-funcao-do-jogo" class="md-nav__link">
+    Criando nossa função do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-de-memoria" class="md-nav__link">
+    Segurança de Memória
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="jogo-da-adivinhacao-raio-x">Jogo da adivinhação Raio-x</h1>
+<p>Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatóriamente. O jogo inicia com 1000 pontos para o
+jogador e cada vez que ele erra o número é subtraido 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.</p>
+<h2 id="regras">Regras</h2>
+<p>As regras são as seguintes:
+- Ao iniciar o jogo o jogador tem a escolha de começar o jogo ou sair do jogo
+- O jogador vai escolher um número entre 0 a 100
+- Caso o jogador escolha um número fora desse intervalo será solicitado para ele escolher novamente
+- Caso o jogador escolha uma letra ou um caractere especial também será solicitado para escolher o novamente
+- Caso o jogador escolha um número menor que o número escolhido pelo jogo o jogo deve informar que o número escolhido foi menor
+- Caso o jogador escolha um número maior que o número escolhido pelo jogo o jogo deve informar que o número escolhido foi maior
+- Casa escolha que não seja o número escolhido pelo jogo deverá marcar um contador de erro
+- O jogador começa com 1000 pontos caso aconteça um erro cada contador de erro deve subtrair 100 pontos
+- Caso o jogador perca o jogo deverá ter um menu informando pra fechar o jogo ou jogar novamente
+- Caso o jogador vença deverá mostrar o placar que ele obteve o a opção de sair do jogo ou tentar novamente.</p>
+<h2 id="comecando-o-projeto">Começando o projeto</h2>
+<p>Vamos iniciar um novo projeto em nossa pasta projects</p>
+<pre><code class="language-bash">cd ~/projects
+cargo new guessing_game
+</code></pre>
+<p>Agora para iniciar o nosso jogo vamos fazer o loop que já conhecemos e vamos criar o menu recebendo o input do usuário e imprimir na tela o valor escolhido e caso ele escolha
+iniciar vamos imprimir que o jogo começou e caso ele sair nós vamos encerrar o jogo.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        println!(&quot;A sua escolha foi {}&quot;, escolha_str);
+        break;
+    }
+
+}
+</code></pre>
+<p>Aqui vamos mudar ao invés de usar números para opções vamos usar letras pois vamos precisar fazer um tratamento especial no código, estamos usando a captura que estavamos fazendo
+anteriormente fazendo um println apenas no item escolhido, no final vamos dar um break apenas pra encerrar o loop.
+Agora se rodarmos o código vamos ver que ele pegou a escolha que gostariamos e printou na tela.</p>
+<pre><code>cargo run
+</code></pre>
+<p>Certo agora vamos fazer um match com nossa escolha str só que como estamos usando letras vou forçar que o que venha de letras senha minuscula ou maiuscula que ele force sempre a
+ser minúsculo.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+==
+        match escolha_str.trim().to_lowercase().as_str() {
+        };
+==
+
+    }
+}
+</code></pre>
+<p>Criamos a nossa linha como <code>match escolha.str.trim().to_lowercase()</code> usando a função <code>trim()</code> para removermos espaços em branco e agora usamos uma nova função chamada
+<code>to_lowercase()</code> que vai transformar nossa string caso tenha letras maiusculas em minúsculas.
+Outra função que usamomos foi o <code>as_str</code> pois quando usamos o <code>trim</code> e o <code>to_lowercase</code> eles voltam um &amp;str que é um tipo diferente do String então pra comparar vamos precisar
+reconverter novamente para String e ai usamos o <code>as_str</code>.</p>
+<p>Assim conseguimos agora colocar a comparação com a string "i" e a string "q".</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+==
+        match escolha_str.trim().to_lowercase().as_str() {
+            &quot;i&quot; =&gt; {
+                println!(&quot;Iniciar Jogo&quot;);
+                continue;
+            }
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+==
+
+    }
+}
+</code></pre>
+<p>Aqui colocamos o "i" para imprimir e usamos o <code>continue</code> para voltar ao inicio do loop. No caso o jogador use "q" o programa vai ser encerrado.
+Também usamos o coringa "_" caso seja dada outra opção que não seja "i" ou "q" nós colocamos a mensagem de erro e reiniciamos o loop.</p>
+<p>Agora podemos testar e verificar se nossa função está correta.</p>
+<h2 id="diferenca-entre-str-e-string">Diferença entre &amp;str e String</h2>
+<p>Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &amp;str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &amp;str e String em Rust.</p>
+<p>&amp;str - Referência para uma Sequência de Caracteres</p>
+<p>&amp;str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &amp;str:</p>
+<pre><code>Imutável: O &amp;str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
+
+Alocação Zero: O &amp;str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
+
+View (Visão): O &amp;str é uma visão de uma sequência de caracteres. Pode ser usado para referenciar substrings de uma String ou literais de string.
+
+Lifetime: O &amp;str tem um tempo de vida (lifetime) que está vinculado ao contexto em que é criado. Isso garante que a referência seja válida durante o tempo necessário.
+</code></pre>
+<p>Aqui está um exemplo de &amp;str:</p>
+<pre><code class="language-rust">fn main() {
+    let texto: &amp;str = &quot;Olá, Mundo!&quot;;
+    println!(&quot;{}&quot;, texto);
+}
+
+</code></pre>
+<p>String - Propriedade de uma Sequência de Caracteres</p>
+<p>String é uma estrutura de dados que representa uma sequência de caracteres alocada dinamicamente em Rust. Aqui estão algumas características importantes da String:</p>
+<pre><code>Mutável: A String é mutável, o que significa que você pode modificar seu conteúdo, adicionando ou removendo caracteres.
+
+Alocação Dinâmica: A String aloca memória dinamicamente para armazenar a sequência de caracteres. Isso permite que você ajuste o tamanho conforme necessário.
+
+Proprietária: A String é proprietária, o que significa que é responsável por gerenciar a memória da sequência de caracteres que ela contém.
+
+Conversão: Você pode converter um &amp;str em uma String usando a função to_string(), ou usar a função String::from().
+</code></pre>
+<p>Aqui está um exemplo de String:</p>
+<pre><code class="language-rust">fn main() {
+    let mut texto: String = String::from(&quot;Olá, &quot;);
+    texto.push_str(&quot;Mundo!&quot;);
+    println!(&quot;{}&quot;, texto);
+}
+</code></pre>
+<p>Quando Usar &amp;str e String</p>
+<p>A escolha entre &amp;str e String depende do contexto e dos requisitos do seu programa:</p>
+<pre><code>Use &amp;str quando precisar de uma referência imutável a uma sequência de caracteres existente. Por exemplo, ao passar argumentos de função ou realizar operações de leitura em uma sequência.
+
+Use String quando precisar de uma sequência de caracteres mutável que pode ser modificada. Por exemplo, para construir uma sequência de caracteres dinamicamente.
+
+Lembre-se de que &amp;str e String são intercambiáveis por meio de conversões quando necessário.
+</code></pre>
+<h2 id="alocacao-de-memoria-em-rust">Alocação de memória em Rust</h2>
+<p>Rust é uma linguagem de programação conhecida por seu controle rigoroso sobre a memória. Ela oferece diversos tipos de memória com comportamentos distintos, o que é fundamental para garantir a segurança e o desempenho dos programas. Vamos explorar os principais tipos de memória em Rust e como eles se comportam.</p>
+<h4 id="1-stack-pilha">1. Stack (Pilha)</h4>
+<p>A pilha, ou stack, é um local de armazenamento de memória de curto prazo e é usada para alocar variáveis locais e controlar a execução do programa. Aqui estão algumas características da pilha:</p>
+<ul>
+<li>Alcance Limitado: As variáveis alocadas na pilha têm um tempo de vida limitado e são desalocadas automaticamente quando saem do escopo.</li>
+<li>Alocação Rápida: A alocação e liberação de memória na pilha é rápida, pois segue uma ordem rigorosa de LIFO (último a entrar, primeiro a sair).</li>
+<li>Tamanho Conhecido em Tempo de Compilação: O tamanho das variáveis alocadas na pilha deve ser conhecido em tempo de compilação.</li>
+</ul>
+<p>Exemplo de alocação na pilha:</p>
+<pre><code class="language-rust">fn main() {
+    let x = 42; // Variável &quot;x&quot; alocada na pilha
+}
+</code></pre>
+<h4 id="2-heap">2. Heap</h4>
+<p>O heap é um local de armazenamento de memória de longo prazo, usado para alocar dados cujo tamanho não é conhecido em tempo de compilação e/ou que precisam de tempo de vida mais longo. Aqui estão algumas características do heap:</p>
+<ul>
+<li>Alcance Mais Amplo: Os dados alocados no heap podem ter um tempo de vida mais longo e persistir além do escopo atual.</li>
+<li>Alocação e Liberação Controladas: A alocação e liberação de memória no heap são controladas manualmente pelo programador, usando funções como Box::new, Vec::new, etc.</li>
+</ul>
+<p>Exemplo de alocação no heap:</p>
+<pre><code class="language-rust">fn main() {
+    let x = Box::new(42); // Variável &quot;x&quot; alocada no heap
+}
+</code></pre>
+<h4 id="3-memoria-estatica">3. Memória Estática</h4>
+<p>A memória estática é usada para armazenar dados que têm um tempo de vida durante toda a execução do programa. Ela é alocada em tempo de compilação e não pode ser liberada durante a execução.</p>
+<ul>
+<li>Tempo de Vida Global: Os dados estáticos têm um tempo de vida global e existem durante toda a execução do programa.</li>
+<li>Alocação em Tempo de Compilação: A memória estática é alocada em tempo de compilação e não pode ser liberada ou realocada.</li>
+</ul>
+<p>Exemplo de alocação de memória estática:</p>
+<pre><code class="language-rust">static HELLO: &amp;str = &quot;Hello, World!&quot;;
+</code></pre>
+<h4 id="4-string-vs-str">4. String vs &amp;str</h4>
+<p>Rust distingue entre String e &amp;str. String é uma sequência de caracteres alocada no heap, que permite modificações. &amp;str é uma referência a uma sequência de caracteres (geralmente String ou literal de string) e é imutável.</p>
+<ul>
+<li>Use String quando precisar de uma sequência de caracteres que pode ser modificada.</li>
+<li>Use &amp;str para referenciar sequências de caracteres imutáveis.</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let s1: String = String::from(&quot;Hello&quot;);
+    let s2: &amp;str = &quot;World&quot;;
+}
+</code></pre>
+<h2 id="criando-a-funcao-do-jogo">Criando a função do jogo</h2>
+<p>Agora vamos criar uma função onde vamos manter nossa lógica do jogo para isso vamos usar a palavra reservada fn</p>
+<pre><code class="language-rust">fn game() -&gt; () {
+    println!(&quot;Iniciar Jogo&quot;);
+}
+</code></pre>
+<p>Com isso movemos nosso print iniciar jogo para dentro da função e vamos ver que vai continuar funcionando vale notar que na função nós anotamos <code>()</code> que quer dizer que a função vai
+retornar uma Option vazia ou seja se for OK vão vai ter valor algum isso faz a função main que chama a função game saber que essa função não tem retorno se nós tentarmos receber
+algum valor de game nós vamos receber a Option porém ela vai ver sem nenhum valor, com isso nós nunca vamos receber um valor Nulo no máximo um Option com um Ok porém não existe um
+valor empty ou None isso é uma caracteristica do rust para trabalhar sem usar valores nulos.
+Agora quero que nosso jogo defina o número secreto, nesse momento vamos definir um número fixo, mais a frente vamos fazer esse número ser aleatório, também vamos receber a
+pontuação do jogador e vamos já contar um erro e o fim do jogo.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            &quot;i&quot; =&gt; {
+                ==
+                let mut _pontuacao: u16 = 1000;
+                let _numero_alvo: u8 = 42;
+                game(pontuacao=_pontuacao, numero=_numero_alvo);
+                ==
+                continue;
+            }
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+
+    }
+}
+
+
+fn game(pontuacao: u16, numero: u8) -&gt; () {
+    println!(&quot;Iniciar Jogo&quot;);
+    ==
+    pontuacao = pontuacao - 100;
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+    ==
+}
+</code></pre>
+<p>Se tentarmos compilar vamos receber o erro abaixo:</p>
+<pre><code class="language-bash">❮ cargo run
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+error[E0384]: cannot assign to immutable argument `pontuacao`
+  --&gt; src/main.rs:35:5
+   |
+33 | fn game(pontuacao: u16, numero: u8) -&gt; () {
+   |         --------- help: consider making this binding mutable: `mut pontuacao`
+34 |     println!(&quot;Iniciar Jogo&quot;);
+35 |     pontuacao = pontuacao - 100;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot assign to immutable argument
+
+For more information about this error, try `rustc --explain E0384`.
+error: could not compile `guessing_game` (bin &quot;guessing_game&quot;) due to previous error
+</code></pre>
+<p>Essa mensagem diz que pontuação dentro de game é um atributo imutável então precisamos deixar nosso parametro mutável. então simplesmente vamos usar um mut no cabeçalho da função
+game.</p>
+<pre><code class="language-rust">fn game(mut pontuacao: u16, numero: u8) -&gt; () {
+...
+</code></pre>
+<p>Agora se rodarmos vai voltar o resultado que gostariamos.</p>
+<pre><code class="language-bash">Bem vindo ao jogo da adivinhação escolha uma das opções abaixo
+i - Iniciar o jogo
+q - Fechar o jogo
+i
+Iniciar Jogo
+A sua pontuação foi 900, e o número era 42
+...
+</code></pre>
+<p>Agora vamos mudar um pouco queremos que nosso print do resultado também seja impresso depois que o loop do game acabar então vamos copia-lo pra fora da função.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            &quot;i&quot; =&gt; {
+                let mut _pontuacao: u16 = 1000;
+                let _numero_alvo: u8 = 42;
+                game(_pontuacao, _numero_alvo);
+                ==
+                println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
+                ==
+                continue;
+            }
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+
+    }
+}
+</code></pre>
+<p>Agora vamos receber essa saida</p>
+<pre><code class="language-bash">➜ cargo run
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target/debug/guessing_game`
+Bem vindo ao jogo da adivinhação escolha uma das opções abaixo
+i - Iniciar o jogo
+q - Fechar o jogo
+i
+Iniciar Jogo
+A sua pontuação foi 900, e o número era 42
+A sua pontuação foi 1000, e o número era 42
+</code></pre>
+<p>O que aconteceu?
+Acontece que do jeito que está a função game está recebendo uma cópia dos valores de _pontuacao e _numero_alvo ou seja o valor reduzido de 900 só existe dentro da função game
+quando a função termina o rust limpa as variáveis do escopo de game poderiamos facilmente resolver isso fazendo com que game retorne o valor de 900 para nossa variável _pontuacao
+mas, podemos resolver isso sem precisar duplicar os valores dentro da função passando a referência delas através de Borrowing que é o que vamos discutir a seguinte.</p>
+<h2 id="ownership-e-borrowing">Ownership e Borrowing</h2>
+<p>Rust introduz o conceito de "ownership" (propriedade) e "borrowing" (empréstimo) para gerenciar a memória de forma segura. Isso implica que, em Rust, você precisa seguir regras rigorosas para acessar e modificar a memória. A ideia principal é que um recurso só pode ser possuído por uma única parte do código em um determinado momento.</p>
+<ul>
+<li>Propriedade (Ownership): Uma variável é a "dona" de um recurso e é responsável por liberá-lo quando não for mais necessário.</li>
+<li>Empréstimo (Borrowing): Outras partes do código podem "emprestar" acesso à variável, mas não podem modificar a propriedade.</li>
+</ul>
+<p>Assim sendo no nosso caso particular podemos pedir pro rust nos dar as referências das variáveis _pontuacao e _numero_alvo assim sendo ele não cria uma nova variável <code>numero</code> e
+<code>pontuacao</code> ele vai simplesmente pegar a referencia onde está armazenado os valores de _pontuacao e _numero_alvo e começar a apontar para os parametros que existem na função assim
+quando a função terminar ela vai devolver as referências para os parametros originais.</p>
+<pre><code>use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            &quot;i&quot; =&gt; {
+                let mut _pontuacao: u16 = 1000;
+                let _numero_alvo: u8 = 42;
+                ==
+                game(&amp;mut _pontuacao, &amp;_numero_alvo);
+                ==
+                println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
+                continue;
+            }
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+
+    }
+}
+
+
+==
+fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+==
+    println!(&quot;Iniciar Jogo&quot;);
+    ==
+    *pontuacao -= 100;
+    ==
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+</code></pre>
+<p>Aqui fizemos algumas alterações a primeira é que passamos na variável o simbolo "&amp;" que indica que estamos emprestando a referência para a função ou seja ela vai ser
+temporáriamente a dona dos parametros passados e no caso de pontuação nós passamos como &amp;mut que quer dizer que ela pode ser modificada, caso fosse passado apenas om o &amp; comercial
+a função game só teria a permissão de ler o parametro e não modificalo.</p>
+<pre><code class="language-rust">fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+</code></pre>
+<p>No cabeçalho da função mudamos também indicando que pontuação é a referencia mutavel de um u16 e a referencia de u8 assim na compilação ele sabe que a função está trabalhando com
+referências e não vai criar uma cópia da função.</p>
+<p>Por ultimo vamos fazer uma alteração na nossa operação de subtração</p>
+<pre><code class="language-rust">    *pontuacao -= 100;
+</code></pre>
+<p>Usamos o simbilo "*" para indicar que não queremos mexer na referência onde está pontuacao mas, no valor que ele possui assim o valor que estava em _pontuacao mudou de 1000 para
+900.</p>
+<p>Agora com isso conseguimos compreender as linhas onde capturamos a entrada do teclado do jogador</p>
+<pre><code class="language-rust">        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+</code></pre>
+<p>Onde criamos uma variável escolha_str que é uma String vazia e mutável e quando chamamos a função read_line nós passamos a referência mutável de escolha_str e enquanto ela está em
+execução ela está alterando o valor do <code>escolha_str</code> para nós e quando termina conseguimos usar o valor de escolha_str com os valores modificados pela função <code>read_line</code> sem
+precisar duplicar a variável dentro da função. 
+É importante reforçar que em muitas linguagens não conseguimos fazer isso nós normalmente precisamos receber a copia modificada dentro da função para conseguir trabalhar. Essa
+característica do rust é muito importante para casos que trabalhamos com pouca memória ou mesmo um jogo onde quanto menos recursos usarmos mais leve será nosso jogo.</p>
+<h2 id="introduzindo-testes-ao-nosso-codigo">Introduzindo testes ao nosso código</h2>
+<h2 id="criando-nossa-funcao-do-jogo">Criando nossa função do jogo</h2>
+<h2 id="seguranca-de-memoria">Segurança de Memória</h2>
+<p>Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.</p>
+<ul>
+<li>Sem Referências Nulas: Rust garante que as referências não sejam nulas, eliminando muitos erros de acesso nulo.</li>
+<li>Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.</li>
+<li>Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.</li>
+</ul>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 30, 2023</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
