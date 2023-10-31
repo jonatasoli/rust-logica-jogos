@@ -1,4 +1,4 @@
-#  Jogo da adivinhação
+#  Jogo da adivinhação Raio-x
 
 Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatóriamente. O jogo inicia com 1000 pontos para o
 jogador e cada vez que ele erra o número é subtraido 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.
@@ -69,10 +69,10 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&mut escolha_str);
 
-{==
+==
         match escolha_str.trim().to_lowercase().as_str() {
         };
-==}
+==
 
     }
 }
@@ -97,7 +97,7 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&mut escolha_str);
 
-{==
+==
         match escolha_str.trim().to_lowercase().as_str() {
             "i" => {
                 println!("Iniciar Jogo");
@@ -112,7 +112,7 @@ fn main() {
                 continue;
             }
         };
-==}
+==
 
     }
 }
@@ -273,11 +273,11 @@ fn main() {
 
         match escolha_str.trim().to_lowercase().as_str() {
             "i" => {
-                {==
+                ==
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(pontuacao=_pontuacao, numero=_numero_alvo);
-                ==}
+                ==
                 continue;
             }
             "q" => {
@@ -296,10 +296,10 @@ fn main() {
 
 fn game(pontuacao: u16, numero: u8) -> () {
     println!("Iniciar Jogo");
-    {==
+    ==
     pontuacao = pontuacao - 100;
     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
-    ==}
+    ==
 }
 ```
 
@@ -360,9 +360,9 @@ fn main() {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(_pontuacao, _numero_alvo);
-                {==
+                ==
                 println!("A sua pontuação foi {}, e o número era {}", _pontuacao, _numero_alvo);
-                ==}
+                ==
                 continue;
             }
             "q" => {
@@ -428,9 +428,9 @@ fn main() {
             "i" => {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
-                {==
+                ==
                 game(&mut _pontuacao, &_numero_alvo);
-                ==}
+                ==
                 println!("A sua pontuação foi {}, e o número era {}", _pontuacao, _numero_alvo);
                 continue;
             }
@@ -448,13 +448,13 @@ fn main() {
 }
 
 
-{==
+==
 fn game(pontuacao: &mut u16, numero: &u8) -> () {
-==}
+==
     println!("Iniciar Jogo");
-    {==
+    ==
     *pontuacao -= 100;
-    ==}
+    ==
     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
 }
 ```
@@ -486,10 +486,221 @@ precisar duplicar a variável dentro da função.
 É importante reforçar que em muitas linguagens não conseguimos fazer isso nós normalmente precisamos receber a copia modificada dentro da função para conseguir trabalhar. Essa
 característica do rust é muito importante para casos que trabalhamos com pouca memória ou mesmo um jogo onde quanto menos recursos usarmos mais leve será nosso jogo.
 
+
+## Introdução sobre testes de software
+
+A programação é uma tarefa complexa que envolve a criação de software que seja confiável, eficiente e livre de erros. À medida que os projetos de desenvolvimento de software crescem em complexidade, torna-se cada vez mais crítico garantir a qualidade do código. Uma das abordagens mais eficazes para assegurar a qualidade do software é a prática de testes, especialmente o Desenvolvimento Orientado a Testes (TDD).
+
+Então vamos agora explorar sobre a importância dos testes na programação e como o TDD pode ser uma ferramenta valiosa para alcançar um código mais robusto e confiável. Vamos mergulhar no mundo dos testes e entender por que eles são essenciais para qualquer desenvolvedor de software.
+
+Os testes desempenham um papel fundamental no processo de desenvolvimento de software por várias razões:
+
+* Detecção Precoce de Erros: Os testes permitem que os desenvolvedores identifiquem e corrijam erros em um estágio inicial do desenvolvimento, economizando tempo e recursos no longo prazo.
+* Manutenção Simplificada: Um código bem testado é mais fácil de manter. Quando novos recursos são adicionados ou modificações são feitas, os testes garantem que as funcionalidades existentes continuem funcionando conforme o esperado.
+* Redução de Bugs em Produção: Testar seu código ajuda a evitar que bugs cheguem aos usuários finais, resultando em uma melhor experiência do cliente e economizando custos associados à correção de problemas em produção.
+* Documentação Automática: Testes bem escritos funcionam como documentação viva do seu código. Eles descrevem como as diferentes partes do software devem se comportar.
+* Confiança no Código: Testar seu código cria confiança tanto para os desenvolvedores quanto para os usuários. Saber que o software passou em uma bateria de testes proporciona tranquilidade.
+
+#### Desenvolvimento Orientado a Testes (TDD)
+
+O Desenvolvimento Orientado a Testes (TDD) é uma abordagem de desenvolvimento que enfatiza a escrita de testes antes de escrever o código real. O ciclo TDD segue três passos simples: "Red-Green-Refactor."
+
+* Red (Vermelho): Neste estágio, você escreve um teste que descreve a funcionalidade que deseja implementar. Como você ainda não escreveu o código, o teste falhará.
+* Green (Verde): Agora, você escreve o código mínimo necessário para fazer o teste passar. O objetivo é fazer o teste passar o mais rápido possível.
+* Refactor (Refatorar): Com o teste passando, você pode refatorar o código para torná-lo mais limpo, eficiente e legível.
+
+O TDD oferece inúmeras vantagens, incluindo:
+
+* Maior Qualidade do Código: TDD incentiva a escrita de código de alta qualidade desde o início.
+* Projeto Centrado no Usuário: Testes escritos com base nos requisitos do usuário garantem que o software atenda às expectativas.
+* Facilidade de Manutenção: O código resultante do TDD é mais fácil de manter, pois as mudanças não quebram as funcionalidades existentes.
+* Confiança nas Mudanças: TDD permite que os desenvolvedores façam alterações no código com confiança, sabendo que os testes irão detectar problemas.
+* Feedback Rápido: TDD fornece feedback imediato, acelerando o processo de desenvolvimento.
+
+A importância dos testes na programação não pode ser subestimada. Eles desempenham um papel crítico na criação de software de alta qualidade, confiável e seguro. O Desenvolvimento Orientado a Testes (TDD) é uma abordagem valiosa que torna os testes uma parte integrante do processo de desenvolvimento, resultando em um código mais robusto e confiável.
+
+Para os desenvolvedores, a prática de testes e o uso do TDD representam um investimento que se traduz em economia de tempo, redução de custos e satisfação do cliente. À medida que a indústria de software continua a evoluir, a cultura de testes se torna cada vez mais fundamental para o sucesso de projetos de desenvolvimento de software.
+
+Portanto, da próxima vez que você começar a escrever código, lembre-se da importância dos testes e considere adotar o Desenvolvimento Orientado a Testes como parte integrante do seu processo de desenvolvimento. A qualidade do seu software agradecerá.
+
 ## Introduzindo testes ao nosso código
 
+Agora vamos abrir nosso arquivo test_game_loop.rs, esse teste vai ser usado para testarmos nossas condições do jogo então vamos criar um primeiro teste para validar a condição que
+está fixa hoje.
+Vamos adicionar o código abaixo no final do nosso main.rs
 
-## Criando nossa função do jogo
+```rust
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+
+    // Act
+    game(&mut pontuacao, &numero)
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+
+```
+
+Inicialmente precisamos adicionar uma anotação _annotattion_ `#[test]` as anotações são colocadas no inicio de uma função/módulo/trait para adicionar alguma funcionalidade aquele
+bloco de código.
+NO nosso caso estamos adicionando uma funcionalidade de teste para nossa função de teste `test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral` assim podemos rodar o
+comando de teste `cargo test`.
+Nossa estrutura de testes é divida em 3 partes:
+- Arrange -> que é os dados que precisamos preparar para o teste
+- Act -> Execução do código que queremos testas
+- Assert -> Que é o que esperamos que aconteça depois do código sendo executado.
+
+No caso do assert executamos uma macro nova que é o `assert_eq!` sua função é comprar dois valores caso sejam iguais ele termina corretamente, caso sejam diferentes ele vai voltar
+um erro no nosso teste, vamos primeiro rodar o teste do jeito que está.
+
+```bash
+cargo test
+```
+Você deve ter um retorno parecido com esse:
+```bash
+➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Vale destacar alguns pontos:
+```bash
+➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+    {==
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+     ==}
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+Aqui mostra onde foi compilado o teste
+
+
+```bash
+➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+    {==
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+     ==}
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Nessas linhas mostram quantos testes rodaram, o nome do teste que rodou e se foi ok ou não
+
+```bash
+➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+    {==
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     ==}
+```
+
+Nessa linha temos um pequeno relatório dos testes quando passaram quantos derram erro e por ai vai, além de tudo mostra o tempo que demorou pra rodar os testes.
+
+Agora vamos mudar nosso teste para ele falhar
+
+```rust
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+
+    // Act
+    game(&mut pontuacao, &numero);
+
+    // Assert
+    ==assert_eq!(pontuacao, 0)==
+}
+```
+
+Agora temos uma saída diferente
+
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... FAILED
+
+failures:
+
+---- test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral stdout ----
+{==
+Iniciar Jogo
+A sua pontuação foi 900, e o número era 42
+thread 'test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral' panicked at src/main.rs:51:5:
+assertion `left == right` failed
+  left: 900
+ right: 0
+==}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+{==
+failures:
+    test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+==}
+
+error: test failed, to rerun pass `--bin guessing_game`
+
+```
+É importante não ter medo de ler toda a mensagem mesmo que seja grande pois com ela podemos ver o problema.
+
+Veja que agora ele mostra a saida da execução de game, no caso ele vai mostrar os dois prints que criamos depois ele vai mostrar o erro do assertion mostrando que o valor de
+pontuação foi 900 e o valor da direita foi 0 então sabemos quanto nossa variavel retornou e o valor da comparação.
+
+Também podemos ver que agora no nosso relatório temos um teste como failed pois o teste falhou.
+
+Vamos agora voltar nosso teste para passar novamente e rodar os testes.
+
+```bash
+❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Certo agora podemos continuar trabalhando no jogo.
+
+## Adicionando o chute do jogador
+
+
+## Adicionando condição de vitória
+
+
+## Adicionando condição de derrota
+
 
 ## Segurança de Memória
 
@@ -499,4 +710,6 @@ Rust fornece uma série de garantias de segurança de memória durante o tempo d
 * Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.
 * Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.
 
-
+## Conclusão
+Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
+funciona o conceito de borrow and ownership, como funciona o gerenciamento de memória do rust.
