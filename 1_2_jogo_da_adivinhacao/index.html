@@ -670,14 +670,14 @@ Também usamos o coringa "_" caso seja dada outra opção que não seja "i" ou "
 <p>Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &amp;str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &amp;str e String em Rust.</p>
 <p>&amp;str - Referência para uma Sequência de Caracteres</p>
 <p>&amp;str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &amp;str:</p>
-<pre><code>Imutável: O &amp;str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
+<div class="highlight"><pre><span></span><code>Imutável: O &amp;str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
 
 Alocação Zero: O &amp;str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
 
 View (Visão): O &amp;str é uma visão de uma sequência de caracteres. Pode ser usado para referenciar substrings de uma String ou literais de string.
 
 Lifetime: O &amp;str tem um tempo de vida (lifetime) que está vinculado ao contexto em que é criado. Isso garante que a referência seja válida durante o tempo necessário.
-</code></pre>
+</code></pre></div>
 <p>Aqui está um exemplo de &amp;str:</p>
 <pre><code class="language-rust">fn main() {
     let texto: &amp;str = &quot;Olá, Mundo!&quot;;
@@ -687,14 +687,14 @@ Lifetime: O &amp;str tem um tempo de vida (lifetime) que está vinculado ao cont
 </code></pre>
 <p>String - Propriedade de uma Sequência de Caracteres</p>
 <p>String é uma estrutura de dados que representa uma sequência de caracteres alocada dinamicamente em Rust. Aqui estão algumas características importantes da String:</p>
-<pre><code>Mutável: A String é mutável, o que significa que você pode modificar seu conteúdo, adicionando ou removendo caracteres.
+<div class="highlight"><pre><span></span><code>Mutável: A String é mutável, o que significa que você pode modificar seu conteúdo, adicionando ou removendo caracteres.
 
 Alocação Dinâmica: A String aloca memória dinamicamente para armazenar a sequência de caracteres. Isso permite que você ajuste o tamanho conforme necessário.
 
 Proprietária: A String é proprietária, o que significa que é responsável por gerenciar a memória da sequência de caracteres que ela contém.
 
 Conversão: Você pode converter um &amp;str em uma String usando a função to_string(), ou usar a função String::from().
-</code></pre>
+</code></pre></div>
 <p>Aqui está um exemplo de String:</p>
 <pre><code class="language-rust">fn main() {
     let mut texto: String = String::from(&quot;Olá, &quot;);
@@ -704,12 +704,12 @@ Conversão: Você pode converter um &amp;str em uma String usando a função to_
 </code></pre>
 <p>Quando Usar &amp;str e String</p>
 <p>A escolha entre &amp;str e String depende do contexto e dos requisitos do seu programa:</p>
-<pre><code>Use &amp;str quando precisar de uma referência imutável a uma sequência de caracteres existente. Por exemplo, ao passar argumentos de função ou realizar operações de leitura em uma sequência.
+<div class="highlight"><pre><span></span><code>Use &amp;str quando precisar de uma referência imutável a uma sequência de caracteres existente. Por exemplo, ao passar argumentos de função ou realizar operações de leitura em uma sequência.
 
 Use String quando precisar de uma sequência de caracteres mutável que pode ser modificada. Por exemplo, para construir uma sequência de caracteres dinamicamente.
 
 Lembre-se de que &amp;str e String são intercambiáveis por meio de conversões quando necessário.
-</code></pre>
+</code></pre></div>
 <h2 id="alocacao-de-memoria-em-rust">Alocação de memória em Rust</h2>
 <p>Rust é uma linguagem de programação conhecida por seu controle rigoroso sobre a memória. Ela oferece diversos tipos de memória com comportamentos distintos, o que é fundamental para garantir a segurança e o desempenho dos programas. Vamos explorar os principais tipos de memória em Rust e como eles se comportam.</p>
 <h4 id="1-stack-pilha">1. Stack (Pilha)</h4>
