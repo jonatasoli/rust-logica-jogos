@@ -69,10 +69,10 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&mut escolha_str);
 
-==
+{==
         match escolha_str.trim().to_lowercase().as_str() {
         };
-==
+==}
 
     }
 }
@@ -97,7 +97,7 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&mut escolha_str);
 
-==
+{==
         match escolha_str.trim().to_lowercase().as_str() {
             "i" => {
                 println!("Iniciar Jogo");
@@ -112,7 +112,7 @@ fn main() {
                 continue;
             }
         };
-==
+==}
 
     }
 }
@@ -273,11 +273,11 @@ fn main() {
 
         match escolha_str.trim().to_lowercase().as_str() {
             "i" => {
-                ==
+                {==
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(pontuacao=_pontuacao, numero=_numero_alvo);
-                ==
+                ==}
                 continue;
             }
             "q" => {
@@ -296,10 +296,10 @@ fn main() {
 
 fn game(pontuacao: u16, numero: u8) -> () {
     println!("Iniciar Jogo");
-    ==
+    {==
     pontuacao = pontuacao - 100;
     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
-    ==
+    ==}
 }
 ```
 
@@ -360,9 +360,9 @@ fn main() {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(_pontuacao, _numero_alvo);
-                ==
+                {==
                 println!("A sua pontuação foi {}, e o número era {}", _pontuacao, _numero_alvo);
-                ==
+                ==}
                 continue;
             }
             "q" => {
@@ -428,9 +428,9 @@ fn main() {
             "i" => {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
-                ==
+                {==
                 game(&mut _pontuacao, &_numero_alvo);
-                ==
+                ==}
                 println!("A sua pontuação foi {}, e o número era {}", _pontuacao, _numero_alvo);
                 continue;
             }
@@ -448,13 +448,13 @@ fn main() {
 }
 
 
-==
+{==
 fn game(pontuacao: &mut u16, numero: &u8) -> () {
-==
+==}
     println!("Iniciar Jogo");
-    ==
+    {==
     *pontuacao -= 100;
-    ==
+    ==}
     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
 }
 ```

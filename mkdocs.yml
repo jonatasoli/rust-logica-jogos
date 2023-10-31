@@ -7,6 +7,13 @@ edit_uri: tree/main/aulas
 
 theme:
   name: material
+markdown_extensions:
+  - abbr
+  - pymdownx.critic
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
 
 features:
   - content.tabs.link
