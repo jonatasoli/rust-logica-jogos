@@ -14,14 +14,14 @@
         <link rel="prev" href="../1_1_jogo_floresta_misteriosa/">
       
       
-        <link rel="next" href="../1_2_tipos_de_dados_e_funcoes/">
+        <link rel="next" href="../1_3_jogo_labirinto/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
-        <title>Jogo da adivinhação - Rust da Lógica aos Jogos</title>
+        <title>Jogo da adivinhação Raio-x - Rust da Lógica aos Jogos</title>
       
     
     
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jogo-da-adivinhacao" class="md-skip">
+        <a href="#jogo-da-adivinhacao-raio-x" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Jogo da adivinhação
+              Jogo da adivinhação Raio-x
             
           </span>
         </div>
@@ -263,12 +263,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Jogo da adivinhação
+          Jogo da adivinhação Raio-x
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Jogo da adivinhação
+        Jogo da adivinhação Raio-x
       </a>
       
         
@@ -363,6 +363,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#introducao-sobre-testes-de-software" class="md-nav__link">
+    Introdução sobre testes de software
+  </a>
+  
+    <nav class="md-nav" aria-label="Introdução sobre testes de software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvimento-orientado-a-testes-tdd" class="md-nav__link">
+    Desenvolvimento Orientado a Testes (TDD)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#introduzindo-testes-ao-nosso-codigo" class="md-nav__link">
     Introduzindo testes ao nosso código
   </a>
@@ -370,8 +390,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#criando-nossa-funcao-do-jogo" class="md-nav__link">
-    Criando nossa função do jogo
+  <a href="#adicionando-o-chute-do-jogador" class="md-nav__link">
+    Adicionando o chute do jogador
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-condicao-de-vitoria" class="md-nav__link">
+    Adicionando condição de vitória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-condicao-de-derrota" class="md-nav__link">
+    Adicionando condição de derrota
   </a>
   
 </li>
@@ -383,25 +417,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_2_tipos_de_dados_e_funcoes/" class="md-nav__link">
-        Jogo da adivinhação Raio-x
-      </a>
     </li>
   
 
@@ -539,6 +565,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#introducao-sobre-testes-de-software" class="md-nav__link">
+    Introdução sobre testes de software
+  </a>
+  
+    <nav class="md-nav" aria-label="Introdução sobre testes de software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvimento-orientado-a-testes-tdd" class="md-nav__link">
+    Desenvolvimento Orientado a Testes (TDD)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#introduzindo-testes-ao-nosso-codigo" class="md-nav__link">
     Introduzindo testes ao nosso código
   </a>
@@ -546,8 +592,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#criando-nossa-funcao-do-jogo" class="md-nav__link">
-    Criando nossa função do jogo
+  <a href="#adicionando-o-chute-do-jogador" class="md-nav__link">
+    Adicionando o chute do jogador
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-condicao-de-vitoria" class="md-nav__link">
+    Adicionando condição de vitória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-condicao-de-derrota" class="md-nav__link">
+    Adicionando condição de derrota
   </a>
   
 </li>
@@ -555,6 +615,13 @@
         <li class="md-nav__item">
   <a href="#seguranca-de-memoria" class="md-nav__link">
     Segurança de Memória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
   </a>
   
 </li>
@@ -577,7 +644,7 @@
   
 
 
-<h1 id="jogo-da-adivinhacao">Jogo da adivinhação</h1>
+<h1 id="jogo-da-adivinhacao-raio-x">Jogo da adivinhação Raio-x</h1>
 <p>Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatóriamente. O jogo inicia com 1000 pontos para o
 jogador e cada vez que ele erra o número é subtraido 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.</p>
 <h2 id="regras">Regras</h2>
@@ -634,10 +701,10 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&amp;mut escolha_str);
 
-<mark class="critic">
+==
         match escolha_str.trim().to_lowercase().as_str() {
         };
-</mark>
+==
 
     }
 }
@@ -658,7 +725,7 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&amp;mut escolha_str);
 
-<mark class="critic">
+==
         match escolha_str.trim().to_lowercase().as_str() {
             &quot;i&quot; =&gt; {
                 println!(&quot;Iniciar Jogo&quot;);
@@ -673,7 +740,7 @@ fn main() {
                 continue;
             }
         };
-</mark>
+==
 
     }
 }
@@ -795,11 +862,11 @@ fn main() {
 
         match escolha_str.trim().to_lowercase().as_str() {
             &quot;i&quot; =&gt; {
-                <mark class="critic">
+                ==
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(pontuacao=_pontuacao, numero=_numero_alvo);
-                </mark>
+                ==
                 continue;
             }
             &quot;q&quot; =&gt; {
@@ -818,10 +885,10 @@ fn main() {
 
 fn game(pontuacao: u16, numero: u8) -&gt; () {
     println!(&quot;Iniciar Jogo&quot;);
-    <mark class="critic">
+    ==
     pontuacao = pontuacao - 100;
     println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
-    </mark>
+    ==
 }
 </code></pre>
 <p>Se tentarmos compilar vamos receber o erro abaixo:</p>
@@ -870,9 +937,9 @@ fn main() {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(_pontuacao, _numero_alvo);
-                <mark class="critic">
+                ==
                 println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
-                </mark>
+                ==
                 continue;
             }
             &quot;q&quot; =&gt; {
@@ -929,9 +996,9 @@ fn main() {
             &quot;i&quot; =&gt; {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
-                <mark class="critic">
+                ==
                 game(&amp;mut _pontuacao, &amp;_numero_alvo);
-                </mark>
+                ==
                 println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
                 continue;
             }
@@ -949,13 +1016,13 @@ fn main() {
 }
 
 
-<mark class="critic">
+==
 fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
-</mark>
+==
     println!(&quot;Iniciar Jogo&quot;);
-    <mark class="critic">
+    ==
     *pontuacao -= 100;
-    </mark>
+    ==
     println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
 }
 </code></pre>
@@ -980,8 +1047,178 @@ execução ela está alterando o valor do <code>escolha_str</code> para nós e q
 precisar duplicar a variável dentro da função. 
 É importante reforçar que em muitas linguagens não conseguimos fazer isso nós normalmente precisamos receber a copia modificada dentro da função para conseguir trabalhar. Essa
 característica do rust é muito importante para casos que trabalhamos com pouca memória ou mesmo um jogo onde quanto menos recursos usarmos mais leve será nosso jogo.</p>
+<h2 id="introducao-sobre-testes-de-software">Introdução sobre testes de software</h2>
+<p>A programação é uma tarefa complexa que envolve a criação de software que seja confiável, eficiente e livre de erros. À medida que os projetos de desenvolvimento de software crescem em complexidade, torna-se cada vez mais crítico garantir a qualidade do código. Uma das abordagens mais eficazes para assegurar a qualidade do software é a prática de testes, especialmente o Desenvolvimento Orientado a Testes (TDD).</p>
+<p>Então vamos agora explorar sobre a importância dos testes na programação e como o TDD pode ser uma ferramenta valiosa para alcançar um código mais robusto e confiável. Vamos mergulhar no mundo dos testes e entender por que eles são essenciais para qualquer desenvolvedor de software.</p>
+<p>Os testes desempenham um papel fundamental no processo de desenvolvimento de software por várias razões:</p>
+<ul>
+<li>Detecção Precoce de Erros: Os testes permitem que os desenvolvedores identifiquem e corrijam erros em um estágio inicial do desenvolvimento, economizando tempo e recursos no longo prazo.</li>
+<li>Manutenção Simplificada: Um código bem testado é mais fácil de manter. Quando novos recursos são adicionados ou modificações são feitas, os testes garantem que as funcionalidades existentes continuem funcionando conforme o esperado.</li>
+<li>Redução de Bugs em Produção: Testar seu código ajuda a evitar que bugs cheguem aos usuários finais, resultando em uma melhor experiência do cliente e economizando custos associados à correção de problemas em produção.</li>
+<li>Documentação Automática: Testes bem escritos funcionam como documentação viva do seu código. Eles descrevem como as diferentes partes do software devem se comportar.</li>
+<li>Confiança no Código: Testar seu código cria confiança tanto para os desenvolvedores quanto para os usuários. Saber que o software passou em uma bateria de testes proporciona tranquilidade.</li>
+</ul>
+<h4 id="desenvolvimento-orientado-a-testes-tdd">Desenvolvimento Orientado a Testes (TDD)</h4>
+<p>O Desenvolvimento Orientado a Testes (TDD) é uma abordagem de desenvolvimento que enfatiza a escrita de testes antes de escrever o código real. O ciclo TDD segue três passos simples: "Red-Green-Refactor."</p>
+<ul>
+<li>Red (Vermelho): Neste estágio, você escreve um teste que descreve a funcionalidade que deseja implementar. Como você ainda não escreveu o código, o teste falhará.</li>
+<li>Green (Verde): Agora, você escreve o código mínimo necessário para fazer o teste passar. O objetivo é fazer o teste passar o mais rápido possível.</li>
+<li>Refactor (Refatorar): Com o teste passando, você pode refatorar o código para torná-lo mais limpo, eficiente e legível.</li>
+</ul>
+<p>O TDD oferece inúmeras vantagens, incluindo:</p>
+<ul>
+<li>Maior Qualidade do Código: TDD incentiva a escrita de código de alta qualidade desde o início.</li>
+<li>Projeto Centrado no Usuário: Testes escritos com base nos requisitos do usuário garantem que o software atenda às expectativas.</li>
+<li>Facilidade de Manutenção: O código resultante do TDD é mais fácil de manter, pois as mudanças não quebram as funcionalidades existentes.</li>
+<li>Confiança nas Mudanças: TDD permite que os desenvolvedores façam alterações no código com confiança, sabendo que os testes irão detectar problemas.</li>
+<li>Feedback Rápido: TDD fornece feedback imediato, acelerando o processo de desenvolvimento.</li>
+</ul>
+<p>A importância dos testes na programação não pode ser subestimada. Eles desempenham um papel crítico na criação de software de alta qualidade, confiável e seguro. O Desenvolvimento Orientado a Testes (TDD) é uma abordagem valiosa que torna os testes uma parte integrante do processo de desenvolvimento, resultando em um código mais robusto e confiável.</p>
+<p>Para os desenvolvedores, a prática de testes e o uso do TDD representam um investimento que se traduz em economia de tempo, redução de custos e satisfação do cliente. À medida que a indústria de software continua a evoluir, a cultura de testes se torna cada vez mais fundamental para o sucesso de projetos de desenvolvimento de software.</p>
+<p>Portanto, da próxima vez que você começar a escrever código, lembre-se da importância dos testes e considere adotar o Desenvolvimento Orientado a Testes como parte integrante do seu processo de desenvolvimento. A qualidade do seu software agradecerá.</p>
 <h2 id="introduzindo-testes-ao-nosso-codigo">Introduzindo testes ao nosso código</h2>
-<h2 id="criando-nossa-funcao-do-jogo">Criando nossa função do jogo</h2>
+<p>Agora vamos abrir nosso arquivo test_game_loop.rs, esse teste vai ser usado para testarmos nossas condições do jogo então vamos criar um primeiro teste para validar a condição que
+está fixa hoje.
+Vamos adicionar o código abaixo no final do nosso main.rs</p>
+<pre><code class="language-rust">#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+
+    // Act
+    game(&amp;mut pontuacao, &amp;numero)
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+
+</code></pre>
+<p>Inicialmente precisamos adicionar uma anotação <em>annotattion</em> <code>#[test]</code> as anotações são colocadas no inicio de uma função/módulo/trait para adicionar alguma funcionalidade aquele
+bloco de código.
+NO nosso caso estamos adicionando uma funcionalidade de teste para nossa função de teste <code>test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral</code> assim podemos rodar o
+comando de teste <code>cargo test</code>.
+Nossa estrutura de testes é divida em 3 partes:
+- Arrange -&gt; que é os dados que precisamos preparar para o teste
+- Act -&gt; Execução do código que queremos testas
+- Assert -&gt; Que é o que esperamos que aconteça depois do código sendo executado.</p>
+<p>No caso do assert executamos uma macro nova que é o <code>assert_eq!</code> sua função é comprar dois valores caso sejam iguais ele termina corretamente, caso sejam diferentes ele vai voltar
+um erro no nosso teste, vamos primeiro rodar o teste do jeito que está.</p>
+<pre><code class="language-bash">cargo test
+</code></pre>
+<p>Você deve ter um retorno parecido com esse:</p>
+<pre><code class="language-bash">➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Vale destacar alguns pontos:</p>
+<pre><code class="language-bash">➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+    <mark class="critic">
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+     </mark>
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Aqui mostra onde foi compilado o teste</p>
+<pre><code class="language-bash">➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+    <mark class="critic">
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+     </mark>
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Nessas linhas mostram quantos testes rodaram, o nome do teste que rodou e se foi ok ou não</p>
+<pre><code class="language-bash">➜ cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+    <mark class="critic">
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     </mark>
+</code></pre>
+<p>Nessa linha temos um pequeno relatório dos testes quando passaram quantos derram erro e por ai vai, além de tudo mostra o tempo que demorou pra rodar os testes.</p>
+<p>Agora vamos mudar nosso teste para ele falhar</p>
+<pre><code class="language-rust">#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+
+    // Act
+    game(&amp;mut pontuacao, &amp;numero);
+
+    // Assert
+    ==assert_eq!(pontuacao, 0)==
+}
+</code></pre>
+<p>Agora temos uma saída diferente</p>
+<pre><code class="language-bash">➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... FAILED
+
+failures:
+
+---- test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral stdout ----
+<mark class="critic">
+Iniciar Jogo
+A sua pontuação foi 900, e o número era 42
+thread 'test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral' panicked at src/main.rs:51:5:
+assertion `left == right` failed
+  left: 900
+ right: 0
+</mark>
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+<mark class="critic">
+failures:
+    test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</mark>
+
+error: test failed, to rerun pass `--bin guessing_game`
+
+</code></pre>
+<p>É importante não ter medo de ler toda a mensagem mesmo que seja grande pois com ela podemos ver o problema.</p>
+<p>Veja que agora ele mostra a saida da execução de game, no caso ele vai mostrar os dois prints que criamos depois ele vai mostrar o erro do assertion mostrando que o valor de
+pontuação foi 900 e o valor da direita foi 0 então sabemos quanto nossa variavel retornou e o valor da comparação.</p>
+<p>Também podemos ver que agora no nosso relatório temos um teste como failed pois o teste falhou.</p>
+<p>Vamos agora voltar nosso teste para passar novamente e rodar os testes.</p>
+<pre><code class="language-bash">❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Certo agora podemos continuar trabalhando no jogo.</p>
+<h2 id="adicionando-o-chute-do-jogador">Adicionando o chute do jogador</h2>
+<h2 id="adicionando-condicao-de-vitoria">Adicionando condição de vitória</h2>
+<h2 id="adicionando-condicao-de-derrota">Adicionando condição de derrota</h2>
 <h2 id="seguranca-de-memoria">Segurança de Memória</h2>
 <p>Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.</p>
 <ul>
@@ -989,6 +1226,9 @@ característica do rust é muito importante para casos que trabalhamos com pouca
 <li>Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.</li>
 <li>Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.</li>
 </ul>
+<h2 id="conclusao">Conclusão</h2>
+<p>Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
+funciona o conceito de borrow and ownership, como funciona o gerenciamento de memória do rust.</p>
 
   <hr>
 <div class="md-source-file">
