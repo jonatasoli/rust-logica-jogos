@@ -619,10 +619,10 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&amp;mut escolha_str);
 
-==
+<mark class="critic">
         match escolha_str.trim().to_lowercase().as_str() {
         };
-==
+</mark>
 
     }
 }
@@ -643,7 +643,7 @@ fn main() {
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&amp;mut escolha_str);
 
-==
+<mark class="critic">
         match escolha_str.trim().to_lowercase().as_str() {
             &quot;i&quot; =&gt; {
                 println!(&quot;Iniciar Jogo&quot;);
@@ -658,7 +658,7 @@ fn main() {
                 continue;
             }
         };
-==
+</mark>
 
     }
 }
@@ -780,11 +780,11 @@ fn main() {
 
         match escolha_str.trim().to_lowercase().as_str() {
             &quot;i&quot; =&gt; {
-                ==
+                <mark class="critic">
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(pontuacao=_pontuacao, numero=_numero_alvo);
-                ==
+                </mark>
                 continue;
             }
             &quot;q&quot; =&gt; {
@@ -803,10 +803,10 @@ fn main() {
 
 fn game(pontuacao: u16, numero: u8) -&gt; () {
     println!(&quot;Iniciar Jogo&quot;);
-    ==
+    <mark class="critic">
     pontuacao = pontuacao - 100;
     println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
-    ==
+    </mark>
 }
 </code></pre>
 <p>Se tentarmos compilar vamos receber o erro abaixo:</p>
@@ -855,9 +855,9 @@ fn main() {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
                 game(_pontuacao, _numero_alvo);
-                ==
+                <mark class="critic">
                 println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
-                ==
+                </mark>
                 continue;
             }
             &quot;q&quot; =&gt; {
@@ -914,9 +914,9 @@ fn main() {
             &quot;i&quot; =&gt; {
                 let mut _pontuacao: u16 = 1000;
                 let _numero_alvo: u8 = 42;
-                ==
+                <mark class="critic">
                 game(&amp;mut _pontuacao, &amp;_numero_alvo);
-                ==
+                </mark>
                 println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, _pontuacao, _numero_alvo);
                 continue;
             }
@@ -934,13 +934,13 @@ fn main() {
 }
 
 
-==
+<mark class="critic">
 fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
-==
+</mark>
     println!(&quot;Iniciar Jogo&quot;);
-    ==
+    <mark class="critic">
     *pontuacao -= 100;
-    ==
+    </mark>
     println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
 }
 </code></pre>
