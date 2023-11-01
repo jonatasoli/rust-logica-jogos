@@ -1217,6 +1217,307 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 </code></pre>
 <p>Certo agora podemos continuar trabalhando no jogo.</p>
 <h2 id="adicionando-o-chute-do-jogador">Adicionando o chute do jogador</h2>
+<p>Agora vamos adicionar a captura da entrada do jogador para e vamos passar o valor para nossa função game.</p>
+<pre><code class="language-rust">fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+    <mark class="critic">
+    println!(&quot;Por favor digite o número que você acredita ser&quot;);
+    let mut chute = String::new();
+    let _ = io::stdin().read_line(&amp;mut chute);
+    </mark>
+    *pontuacao -= 100;
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+</code></pre>
+<p>Se rodarmos nosso teste ele ainda vai passar.</p>
+<pre><code class="language-bash">➜  cargo test
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Agora vamos fazer algumas alterações vamos criar uma nova função que vai atualizar a pontuação. Mas primeiro vamos mudar nosso teste para verificar com a função
+<em>check_win_condition</em> e passar mais um parametro chamado chute que vai ser um inteiro também.</p>
+<pre><code class="language-rust">#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    check_win_conditition(&amp;mut pontuacao, &amp;numero);
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+</code></pre>
+<p>Vamos receber agora um erro de compilação</p>
+<pre><code class="language-bash">➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+error[E0425]: cannot find function `check_win_conditition` in this scope
+  --&gt; src/main.rs:55:5
+   |
+55 |     check_win_conditition(&amp;mut pontuacao, &amp;numero, &amp;chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^ not found in this scope
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `guessing_game` (bin &quot;guessing_game&quot; test) due to previous error
+</code></pre>
+<p>É importante sempre ler a mensagem de erro e tentar entender também sempre que quiser poder rodar o <code>--explain</code> para ver a descrição do erro.</p>
+<pre><code class="language-bash">rustc --explain E0425
+</code></pre>
+<p>Nesse caso o erro é que check_win_conditition não existe dentro  do escopo isso por que ele não foi criado, vamos então cria-lo e mover o código responsável por diminuir a
+pontuação.</p>
+<pre><code class="language-rust">fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+    println!(&quot;Por favor digite o número que você acredita ser&quot;);
+    let mut chute = String::new();
+    let _ = io::stdin().read_line(&amp;mut chute);
+}
+
+fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+    *pontuacao -= 100;
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+</code></pre>
+<p>Se rodarmos o teste ele vai funcionar com um warning que logo vamos remove-lo.</p>
+<pre><code class="language-bash">❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused variable: `pontuacao`
+  --&gt; src/main.rs:33:9
+   |
+33 | fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+   |         ^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_pontuacao`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `numero`
+  --&gt; src/main.rs:33:30
+   |
+33 | fn game(pontuacao: &amp;mut u16, numero: &amp;u8) -&gt; () {
+   |                              ^^^^^^ help: if this is intentional, prefix it with an underscore: `_numero`
+
+warning: unused variable: `chute`
+  --&gt; src/main.rs:39:59
+   |
+39 | fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+   |                                                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_chute`
+
+warning: `guessing_game` (bin &quot;guessing_game&quot; test) generated 3 warnings (run `cargo fix --bin &quot;guessing_game&quot; --tests` to apply 3 suggestions)
+    Finished test [unoptimized + debuginfo] target(s) in 0.15s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>O principal ponto desse warnings é que não estamos usando várias variaveis vamos ajusta-las. Primeiro precisamos converter nossa variavel chute para int.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            <mark class="critic">
+            &quot;i&quot; =&gt; {
+                game();
+                continue;
+            }
+            </mark>
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+
+    }
+}
+
+<mark class="critic">
+fn game() -&gt; () {
+    println!(&quot;Por favor digite o número que você acredita ser&quot;);
+    let mut pontuacao: u16 = 1000;
+    let numero_alvo: u8 = 42;
+    let mut chute = String::new();
+    let _ = io::stdin().read_line(&amp;mut chute);
+
+    let chute: u8 = match chute.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; { 
+            println!(&quot;Valor não é válido ou não está entre 0 e 255&quot;);
+            0
+        }
+    };
+    check_win_coditition(&amp;mut pontuacao, &amp;numero_alvo, &amp;chute);
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero_alvo);
+}
+
+fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+    *pontuacao -= 100;
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+</mark>
+
+
+
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    check_win_coditition(&amp;mut pontuacao, &amp;numero, &amp;chute);
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+
+</code></pre>
+<p>Temos algumas mudanças aqui, precisamos mover pontuacao e numero_alvo para dentro da função game, pois não podemos reimprestar  pontuacao para <em>verify_win_conditition</em> essa é uma
+caracteristica do rust então jogamos tudo para a função game deixando a main apenas para menu.
+Também fizemos o match abaixo para converter a entrada  string para u8 e com isso temos um efeito colateral que precisamos voltar um número que no caso é 0.</p>
+<pre><code class="language-rust">    let chute: u8 = match chute.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; { 
+            println!(&quot;Valor não é válido ou não está entre 0 e 255&quot;);
+            0
+        }
+    };
+</code></pre>
+<p>Agora vamos rodar nosso teste.</p>
+<pre><code class="language-bash">❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused variable: `chute`
+  --&gt; src/main.rs:48:59
+   |
+48 | fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+   |                                                           ^^^^^ help: if this is intentional, prefix it with an underscore: `_chute`
+   |
+   = note: `#[warn(unused_variables)]` on by default
+
+warning: `guessing_game` (bin &quot;guessing_game&quot; test) generated 1 warning (run `cargo fix --bin &quot;guessing_game&quot; --tests` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Vamos agora remover o ultimo warning e vamos começar a usar nosso parametro chute.</p>
+<pre><code class="language-rust">fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+    <mark class="critic">
+    if chute &lt; numero {
+        *pontuacao -= 100;
+    }
+    </mark>
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+</code></pre>
+<p>Assim agora apenas se o número for menor que o número a pontuação vai mudar. Vamos rodar o teste.</p>
+<pre><code class="language-rust">➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 1 test
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Agora vamos alterar nossa entrada para não receber o parametro "_", pois há uma forma melhor de fazer isso.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    loop {
+        println!(&quot;Bem vindo ao jogo da adivinhação escolha uma das opções abaixo&quot;);
+        println!(&quot;i - Iniciar o jogo&quot;);
+        println!(&quot;q - Fechar o jogo&quot;);
+
+        let mut escolha_str = String::new();
+        <mark class="critic">
+        io::stdin().read_line(&amp;mut escolha_str).expect(&quot;Erro ao receber sua escolha&quot;);
+        </mark>
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            &quot;i&quot; =&gt; {
+                game();
+                continue;
+            }
+            &quot;q&quot; =&gt; {
+                println!(&quot;Obrigado por jogar&quot;);
+                break;
+            }
+            _ =&gt; {
+                println!(&quot;Escolha inválida. Tente novamente.&quot;);
+                continue;
+            }
+        };
+
+    }
+}
+
+fn game() -&gt; () {
+    println!(&quot;Por favor digite o número que você acredita ser&quot;);
+    let mut pontuacao: u16 = 1000;
+    let numero_alvo: u8 = 42;
+    let mut chute = String::new();
+    <mark class="critic">
+    io::stdin().read_line(&amp;mut chute).expect(&quot;Erro ao receber o número&quot;);
+    </mark>
+
+    let chute: u8 = match chute.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; { 
+            println!(&quot;Valor não é válido ou não está entre 0 e 255&quot;);
+            0
+        }
+    };
+    check_win_coditition(&amp;mut pontuacao, &amp;numero_alvo, &amp;chute);
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero_alvo);
+}
+
+fn check_win_coditition(pontuacao: &amp;mut u16, numero: &amp;u8, chute: &amp;u8) -&gt; () {
+    if chute &lt; numero {
+        *pontuacao -= 100;
+    }
+    println!(&quot;A sua pontuação foi {}, e o número era {}&quot;, pontuacao, numero)
+}
+
+
+
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    check_win_coditition(&amp;mut pontuacao, &amp;numero, &amp;chute);
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+</code></pre>
+<p>Aqui retiramos o parametro não usado e colocamo no final um expect isso é uma captura de erro, vamos detalhar isso mais a frente mas, se pense que agora caso a option que esteja
+com algum dado é a <code>Err</code> ele vai printar no nosso console as mensagens que colocamos.</p>
 <h2 id="adicionando-condicao-de-vitoria">Adicionando condição de vitória</h2>
 <h2 id="adicionando-condicao-de-derrota">Adicionando condição de derrota</h2>
 <h2 id="seguranca-de-memoria">Segurança de Memória</h2>
@@ -1235,7 +1536,7 @@ funciona o conceito de borrow and ownership, como funciona o gerenciamento de me
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 31, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 1, 2023</span>
       
     
   </small>
