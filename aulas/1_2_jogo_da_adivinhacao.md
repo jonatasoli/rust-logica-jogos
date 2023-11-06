@@ -1032,6 +1032,352 @@ com algum dado é a `Err` ele vai printar no nosso console as mensagens que colo
 
 ## Adicionando condição de vitória
 
+Primeiro passo que vamos fazer é criar um teste para a condição de vitória:
+
+```rust
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+
+{==
+#[test]
+fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 42;
+    
+    //Act
+    check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(pontuacao, 1000)
+}
+==}
+```
+Aqui criamos uma função de teste _test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao_ onde simplesmente passamos o número correto e ele deve voltar a com a
+pontuação exata que passamos.
+Vamos rodar o teste:
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 2 tests
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Certo o teste está passando vamos fazer com que nossa função retorne que o jogador ganhou, normalmente em muitas linguagens trabalhariamos com um valor de verdadeiro ou falso
+poderiamos fazer isso aqui também, porém como o rust nos da a ferramenta do result vamos voltar um tipo Result::Win para dizer que o jogador ganhou, mas como vamos ter outras
+condições vamos criar uma estrutura de enumerador para representar os estados que jogo pode retornar:
+
+```
+#[derive(Debug, PartialEq)]
+enum GameResult {
+    Win,
+    Gaming,
+    Lose,
+}
+```
+
+Vamos primeiro entender o que é um enum:
+
+>! Enum
+Enum é um tipo de dado que representa um conjunto de valores que você quer relacionar no nosso caso estamos criando um conjunto relacionado com os estados que podemos representar
+sobre a nossa condição de vitória "WIN" para dizer que o jogador venceu, "GAMING" para dizer que o jogador continua jogando, "LOSE" para dizer que o jogador perdeu, nosso caso essa
+representação é um enum por isso precisamos passar o tipo de dado e o nome desse enum que no nosso caso é GameResult.
+Alguns pontos importantes sobre enums:
+* *Valores Variantes*: Em uma enumeração, você define os valores possíveis, chamados de "variantes". Cada variante representa um valor específico que o tipo de enumeração pode ter.
+* *Tipos Personalizados*: Enums permitem que você crie tipos personalizados com valores limitados. Por exemplo, você pode criar uma enumeração para representar os dias da semana ou os estados de um jogo.
+* *Padrão de Correspondência*: Enums são frequentemente usadas em combinação com o padrão de correspondência (match) para fazer escolhas com base no valor da enumeração. Isso torna as enums úteis para expressar a lógica condicional.
+* *Segurança de Tipos*: Enums ajudam a garantir a segurança de tipos, pois o compilador verifica se todas as variantes são tratadas nos padrões de correspondência. Isso evita erros em tempo de execução.
+* *Enumerações com Dados*: Enums podem ter dados associados a suas variantes. Isso permite que você armazene informações adicionais com uma variante. Por exemplo, uma enumeração de formas geométricas pode ter uma variante "Círculo" com um raio associado.
+* *Enums Genéricas*: Enums podem ser genéricas, o que significa que você pode parametrizá-las com tipos de dados, tornando-as versáteis e reutilizáveis.
+
+Enuns podem ter uma chave e um valor como no exemplo abaixo:
+```rust
+enum DiaDaSemana {
+    Segunda(u32),
+    Terca(u32),
+    Quarta(u32),
+    Quinta(u32),
+    Sexta(u32),
+    Sabado(u32),
+    Domingo(u32),
+}
+```
+
+Ou com multiplos valores para representar uma chave como abaixo:
+```rust
+enum Cor {
+    RGB(u8, u8, u8),
+    Nome(String),
+}
+```
+
+Há outras formas mas, vamos nos fixar em usa-lo apenas para que a chave e o valor sejam os mesmos que no caso é forma que criamos nosso enum sem passar nenhum tipo.
+
+Agora usamos uma anotação nova que é o  `#[derive(...)]
+A anotação #[derive(...)] em Rust é uma característica poderosa que gera automaticamente a implementação de certos traços (traits) para tipos de dados personalizados, como structs e enums. Isso ajuda a evitar a escrita repetitiva de código ao criar tipos de dados personalizados.
+
+#### Trait
+Em Rust, um trait é como um contrato ou um conjunto de regras que um tipo de dado deve seguir. É uma maneira de definir comportamentos que tipos diferentes podem compartilhar.
+
+Um trait especifica métodos que um tipo deve implementar, e outros tipos podem aderir a esse trait, implementando esses métodos. Isso permite que diferentes tipos de dados compartilhem funcionalidades comuns.
+
+Por exemplo, você pode ter um trait chamado "Imprimível" que especifica um método imprimir, e várias estruturas diferentes podem implementar esse trait para que possam ser impressas de maneira semelhante, mesmo que sejam tipos diferentes. Isso torna o código mais genérico e reutilizável.
+
+#### No nosso caso vamos passar duas traits
+Debug Trait (#[derive(Debug)]): Ao usar #[derive(Debug)] em uma estrutura ou enumeração, Rust gera automaticamente a implementação do trait Debug para esse tipo. O trait Debug permite que você formate o valor do tipo de forma legível por humanos quando você imprime um objeto desse tipo usando a função println!("{:?}", objeto). Isso é particularmente útil para fins de depuração, pois fornece informações detalhadas sobre o estado do objeto.
+
+PartialEq Trait (#[derive(PartialEq)]): Usando #[derive(PartialEq)], Rust gera a implementação do trait PartialEq para o tipo. O trait PartialEq permite que você compare objetos do tipo com operadores de igualdade (==) e desigualdade (!=). Isso significa que você pode verificar se dois objetos são iguais ou diferentes com facilidade, simplificando a lógica de comparação.
+
+Certo agora vamos ajustar o teste para nossa função:
+
+```rust
+#[test]
+fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 42;
+    
+    //Act
+    ==let result = check_win_coditition(&mut pontuacao, &numero, &chute);==
+
+    //Assert
+    ==assert_eq!(result, Ok(GameResult::Win));==
+    assert_eq!(pontuacao, 1000)
+}
+```
+
+ali colocamos uma variavel para receber o retorno da nossa função chamado result e também verificamos se essa variavél result retorna no seu ResultSet o valor do enum GameResult
+como Win que é o valor do enum que criamos.
+Agora vamos rodar o teste.
+
+```bash
+cargo test
+```
+Com o seguinte resultado
+
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+error[E0308]: mismatched types
+  --> src/main.rs:89:24
+   |
+89 |     assert_eq!(result, Ok(GameResult::Win));
+   |                        ^^^^^^^^^^^^^^^^^^^ expected `()`, found `Result<GameResult, _>`
+   |
+   = note: expected unit type `()`
+                   found enum `Result<GameResult, _>`
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `guessing_game` (bin "guessing_game" test) due to previous error
+```
+
+Isso ocorreu por que estamos voltando um ResultSet vazio e ele esperava um ResultSet com um GameResult, então vamos mudar o retorno da nossa função.
+```rust
+...
+fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<GameResult, GameResult> {
+...
+```
+Aqui falamos que o result tem o OK como  um `GameResult` e o Erro também como um `GameResult` vamos rodar o teste.
+
+```bash
+❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+error[E0308]: mismatched types
+  --> src/main.rs:59:5
+   |
+59 |     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Result<GameResult, ...>`, found `()`
+   |
+   = note:   expected enum `Result<GameResult, GameResult>`
+           found unit type `()`
+   = note: this error originates in the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `guessing_game` (bin "guessing_game" test) due to previous error
+
+```
+Aqui fala que o problema é que temos um print no final da função vamos colocar no final um `GameResult::Gaming` para mostrar a condição que o jogo ainda não terminou.
+
+```rust
+fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<GameResult, GameResult> {
+    if chute < numero {
+        *pontuacao -= 100;
+    }
+    println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero);
+    ==Ok(GameResult::Gaming)==
+}
+```
+
+Aqui colocamos de maneira explicita no final ele vai retornar um result do tipo `OK` com o valor _Gaming_ do nosso enum.
+Vale atentar que precisamos agora colocar um  ";" no nosso print.
+Agora vamos rodar os testes:
+
+```bash
+❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: variant `Lose` is never constructed
+ --> src/main.rs:7:5
+  |
+4 | enum GameResult {
+  |      ---------- variant in this enum
+...
+7 |     Lose,
+  |     ^^^^
+  |
+  = note: `GameResult` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+  = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Result` that must be used
+  --> src/main.rs:51:5
+   |
+51 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+51 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: unused `Result` that must be used
+  --> src/main.rs:73:5
+   |
+73 |     check_win_coditition(&mut pontuacao, &numero, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+help: use `let _ = ...` to ignore the resulting value
+   |
+73 |     let _ = check_win_coditition(&mut pontuacao, &numero, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 3 warnings
+    Finished test [unoptimized + debuginfo] target(s) in 0.15s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 2 tests
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... FAILED
+
+failures:
+
+---- test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao stdout ----
+A sua pontuação foi 1000, e o número era 42
+{==
+thread 'test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao' panicked at src/main.rs:90:5:
+assertion `left == right` failed
+  left: Ok(Gaming)
+ right: Ok(Win)
+==}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+
+failures:
+    test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin guessing_game`
+```
+
+Aqui vamos ter alguns warnings, mas no ponto de destaque mostra ainha que deu erro, no meu caso ainha 90 e mostra que ele espearava um `Ok(Win)` mas, recebeu um `Ok(Gaming)`.
+Então finalmente  podemos agora colocar nosso bloco de código que determina que o usuário venceu que nesse caso será um _if_.
+
+
+```rust
+fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<GameResult, GameResult> {
+    {==
+    if chute == numero {
+        return Ok(GameResult::Win)
+    }
+    ==}
+    if chute < numero {
+        *pontuacao -= 100;
+    }
+    println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero);
+    Ok(GameResult::Gaming)
+}
+```
+
+Aqui comparamos que o chute é igual ao número e caso essa comparação seja verdadeira precisamos colocar a palavra chave return com o  `Ok(GameResult::Win)` pois temos mais código
+que vai ser executado abaixo dele então estamos forçando um retorno prematuro.
+
+Agora vamos rodar os testes.
+
+```bash
+❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: variant `Lose` is never constructed
+ --> src/main.rs:7:5
+  |
+4 | enum GameResult {
+  |      ---------- variant in this enum
+...
+7 |     Lose,
+  |     ^^^^
+  |
+  = note: `GameResult` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+  = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Result` that must be used
+  --> src/main.rs:51:5
+   |
+51 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+51 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: unused `Result` that must be used
+  --> src/main.rs:76:5
+   |
+76 |     check_win_coditition(&mut pontuacao, &numero, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+help: use `let _ = ...` to ignore the resulting value
+   |
+76 |     let _ = check_win_coditition(&mut pontuacao, &numero, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 3 warnings
+    Finished test [unoptimized + debuginfo] target(s) in 0.14s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 2 tests
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Ainda temos alguns warnings mas, nossos testes voltaram a passar.
+
 
 ## Adicionando condição de derrota
 
