@@ -1381,6 +1381,387 @@ Ainda temos alguns warnings mas, nossos testes voltaram a passar.
 
 ## Adicionando condição de derrota
 
+Bom agora vamos criar uma condição pra nossa função registrar a derrota. Mas, primeiro vamos criar o teste.
+
+```rust
+#[test]
+fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    ==let _ = check_win_coditition(&mut pontuacao, &numero, &chute);==
+
+    // Assert
+    assert_eq!(pontuacao, 900)
+}
+
+#[test]
+fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 42;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Win));
+    assert_eq!(pontuacao, 1000)
+}
+
+{==
+#[test]
+fn test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo() {
+    // Arrange
+    let mut pontuacao: u16 = 100;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Lose));
+    assert_eq!(pontuacao, 0)
+}
+==}
+```
+Nesse teste diminuimos a pontuação e erramos pra baixo e ele deve voltar o rusult como Lose e a pontuação como 0. Então vamos testar.
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused `Result` that must be used
+  --> src/main.rs:54:5
+   |
+54 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+54 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 1 warning
+    Finished test [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 3 tests
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+test test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo ... FAILED
+
+failures:
+
+---- test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo stdout ----
+{==
+A sua pontuação foi 0, e o número era 42
+thread 'test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo' panicked at src/main.rs:119:5:
+assertion `left == right` failed
+  left: Ok(Gaming)
+ right: Ok(Lose)
+==}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin guessing_game`
+```
+
+Bom tivemos um erro por que voltou _Gaming_ ao invés de _Lose_, para arrumarmos isso vamos ajustar nossa função.
+
+```rust
+fn check_win_coditition(
+    pontuacao: &mut u16,
+    numero: &u8,
+    chute: &u8,
+) -> Result<GameResult, GameResult> {
+    if chute == numero {
+        return Ok(GameResult::Win);
+    }
+    if chute < numero {
+        *pontuacao -= 100;
+    }
+    {==
+    if *pontuacao <= 0 {
+        return Ok(GameResult::Lose);
+    }
+    ==}
+    println!(
+        "A sua pontuação foi {}, e o número era {}",
+        pontuacao, numero
+    );
+    Ok(GameResult::Gaming)
+}
+
+```
+Aqui adicionamos mais uma condição para que se a pontuação for menor ou igual a 0 retornamos `GameResult::Lose` pra função chamadora, agora vamos testar novamente.
+
+```rust
+❮ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused `Result` that must be used
+  --> src/main.rs:54:5
+   |
+54 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+54 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 1 warning
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 3 tests
+test test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Perfeito agora nosso teste passou mas, vamos criar outro teste passando nosso chute sendo um valor maior que o número alvo.
+
+```rust
+#[test]
+==fn test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo() { ==
+    // Arrange
+    let mut pontuacao: u16 = 100;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Lose));
+    assert_eq!(pontuacao, 0)
+}
+{==
+#[test]
+fn test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo() {
+    // Arrange
+    let mut pontuacao: u16 = 100;
+    let numero: u8 = 42;
+    let chute: u8 = 100;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Lose));
+    assert_eq!(pontuacao, 0)
+}
+==}
+```
+Aqui renomeamos o nosso teste anterior pra explicitar que estamos chutando um número baixo e criamos outro explicitando que estamos chutando um número altoi, agora rodando os testes teremos uma falha.
+
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused `Result` that must be used
+  --> src/main.rs:54:5
+   |
+54 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+54 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 1 warning
+    Finished test [unoptimized + debuginfo] target(s) in 0.14s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 4 tests
+test test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo ... FAILED
+test test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+
+failures:
+
+---- test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo stdout ----
+{==
+A sua pontuação foi 100, e o número era 42
+thread 'test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo' panicked at src/main.rs:137:5:
+assertion `left == right` failed
+  left: Ok(Gaming)
+ right: Ok(Lose)
+==}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo
+
+test result: FAILED. 3 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin guessing_game`
+
+```
+
+Como podemos ver ele voltou _Gaming_ ao invés de _Lose_ isso por que não implementamos a condição pra que o valor maior decremente então vamos cria-la.
+
+```rust
+ check_win_coditition(
+    pontuacao: &mut u16,
+    numero: &u8,
+    chute: &u8,
+) -> Result<GameResult, GameResult> {
+    {==
+    if chute < numero {
+        *pontuacao -= 100;
+    }
+    if chute > numero {
+        *pontuacao -= 100;
+    }
+    ==}
+    if chute == numero {
+        return Ok(GameResult::Win);
+    }
+    if *pontuacao <= 0 {
+        return Ok(GameResult::Lose);
+    }
+    println!(
+        "A sua pontuação foi {}, e o número era {}",
+        pontuacao, numero
+    );
+    Ok(GameResult::Gaming)
+}
+```
+Aqui colocamos nossa condição de decrementar a pontuação com um erro como a primeira coisa a ser verificada, para evitar qualquer problema de ser decrementado após verificar a condição de vitória, assim adicionamos mais um _if_ no nosso código e podemos rodar o teste para verificar se está passando.
+
+```bash
+❯ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unused `Result` that must be used
+  --> src/main.rs:54:5
+   |
+54 |     check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+54 |     let _ = check_win_coditition(&mut pontuacao, &numero_alvo, &chute);
+   |     +++++++
+
+warning: `guessing_game` (bin "guessing_game" test) generated 1 warning
+    Finished test [unoptimized + debuginfo] target(s) in 0.13s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 4 tests
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Bom agora conseguimos ter a condição de derrota no nosso jogo.
+
+## Criando mais testes
+
+Bom agora que temos nossa condição para decrementar a pontuação quando erramos pra cima ou pra baixo, precisamos ajustar nosso teste _test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral_ para receber a condição `GameResult::Gaming` e também criar um novo teste para explicitar o chute pra cima e o outro pra baixo.
+
+```rust
+ -> () {
+    println!("Por favor digite o número que você acredita ser");
+    let mut pontuacao: u16 = 1000;
+    let numero_alvo: u8 = 42;
+    let mut chute = String::new();
+    io::stdin()
+        .read_line(&mut chute)
+        .expect("Erro ao receber o número");
+
+    let chute: u8 = match chute.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Valor não é válido ou não está entre 0 e 255");
+            0
+        }
+    };
+    ==let _result = check_win_coditition(&mut pontuacao, &numero_alvo, &chute); ==
+    println!(
+        "A sua pontuação foi {}, e o número era {}",
+        pontuacao, numero_alvo
+    );
+}
+
+...
+#[test]
+{==fn test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral() { ==}
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    ==let result = check_win_coditition(&mut pontuacao, &numero, &chute);==
+
+    // Assert
+    assert_eq!(result, Ok(GameResult::Gaming));
+    assert_eq!(pontuacao, 900)
+}
+
+{==
+#[test]
+fn test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 100;
+
+    // Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    // Assert
+    assert_eq!(result, Ok(GameResult::Gaming));
+    assert_eq!(pontuacao, 900)
+}
+==}
+```
+
+Aqui mudamos o nome do teste anterior e criamos um novo além de adiconar o result para verificação e também pra nossa função game, o agora se rodarmos os testes os warnings vão desaparecer.
+
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 5 tests
+test test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+test test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+```
+
+## Criando testes de integração
 
 ## Segurança de Memória
 
