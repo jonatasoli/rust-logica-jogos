@@ -1761,7 +1761,357 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 ```
 
-## Criando testes de integração
+## Melhorando nossa função de condição e ajustando a função game.
+
+Bom poderiamos agora criar testes de integração pra nossa função game, mas vamos trabalhar isso mais a frente, agora vamos melhorar nossa função game, não importa se acertamos ou ▍erramos nós voltamos ao menu principal, então precisamos só voltar pro loop do menu quando perdemos ou ganharmos o jogo pra isso vamos criar um novo loop no nosso jogo.
+
+```rust
+{==
+fn game() -> () {
+    let mut pontuacao: u16 = 1000;
+    let numero_alvo: u8 = 42;
+    loop {
+        println!("Por favor digite o número que você acredita ser");
+        let mut chute = String::new();
+        io::stdin()
+            .read_line(&mut chute)
+            .expect("Erro ao receber o número");
+
+        let chute: u8 = match chute.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Valor não é válido ou não está entre 0 e 255");
+                0
+            }
+        };
+        match check_win_coditition(&mut pontuacao, &numero_alvo, &chute) {
+            Ok(result) => {
+                if result == GameResult::Win {
+                    println!("Parabéns você venceu! Sua pontuação foi {}", pontuacao);
+                    break;
+                } else if result == GameResult::Lose {
+                    println!("Que pena você perdeu!");
+                    break;
+                }
+            }
+            Err(_) => {
+                println!("Ocorreu um erro e o jogo será reiniciado!");
+                break;
+            }
+        };
+        println!("A sua pontuação está em {}", pontuacao);
+    }
+}
+==}
+
+fn check_win_coditition(
+    pontuacao: &mut u16,
+    numero: &u8,
+    chute: &u8,
+) -> Result<GameResult, GameResult> {
+    if chute < numero {
+        == println!("O número é maior!"); ==
+        *pontuacao -= 100;
+    }
+    if chute > numero {
+        == println!("O número é menor!"); ==
+        *pontuacao -= 100;
+    }
+    if chute == numero {
+        return Ok(GameResult::Win);
+    }
+    if *pontuacao <= 0 {
+        return Ok(GameResult::Lose);
+    }
+    {== ==}
+    Ok(GameResult::Gaming)
+}
+```
+
+Aqui criamos um loop dentro da nossa função game e só deixamos o número alvo e a pontuação fora pois sempre que iniciar um jogo vamos reiniciar o placar. Nossa função _check_win_condition_ nos retorna um `ResultGame`, por conta disso podemos fazer um match para caso entre na condição de vitória ou derrota o jogo é encerrado e volta no menu, também caso tenhamos algum erro de execução ele vai retornar o jogo pro menu.
+Também colocamos uma dica pro jogador saber se o número é maior ou menor para facilitar que ele.
+
+Para ter certeza que não quebramos nada vamos rodar nossos testes.
+
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.16s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-d4e6bf5f3d77f592)
+
+running 5 tests
+test test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+```
+
+Com isso agora já temos um jogo bem jogável.
+
+## Colocando aleatoriedade no nosso jogo
+
+Nosso jogo está bem interessante mas, nesse momento nosso número alvo está fixo e queremos que ele seja aleatório para isso vamos precisar de uma biblioteca que não está no padrão da linguagem rust que é o rand.
+
+### Introdução aos crates
+
+Rust é uma linguagem de programação que ganhou popularidade devido à sua segurança, desempenho e concorrência. Um dos conceitos fundamentais no ecossistema Rust é o de "crates". Vamos explorar o que são os crates em Rust e como eles funcionam para facilitar o desenvolvimento de software.
+
+#### O Que São Crates?
+
+Em Rust, um "crate" é a unidade de compilação de código. Um crate pode ser uma biblioteca, um aplicativo, um binário ou até mesmo um subconjunto menor de código. A ideia por trás dos crates é promover a modularidade e a reutilização de código, permitindo que você organize seu projeto de forma limpa e eficaz.
+
+#### Tipos de Crates
+
+Existem dois tipos principais de crates em Rust: crates binários e crates de biblioteca.
+
+* *Crates Binários:* Esses são os crates que criam um executável quando compilados. Eles são destinados a iniciar um programa e geralmente contêm a função main(). Um exemplo de crate binário é um aplicativo de linha de comando ou uma aplicação de servidor.
+
+* *Crates de Biblioteca:* Esses crates não têm uma função main() e são destinados a serem usados como bibliotecas por outros crates. Os crates de biblioteca podem conter funções, estruturas, enums e muito mais que podem ser usados por outros desenvolvedores para criar seus programas.
+
+#### Estrutura de Diretórios de um Crate
+
+Dentro do diretório do seu crate, você encontrará uma estrutura típica de diretórios:
+
+* src: Contém o código-fonte do seu crate.
+* Cargo.toml: Arquivo de configuração do seu crate, onde você especifica dependências e outras informações.
+* tests: Diretório para escrever testes para o seu crate.
+* examples: Diretório para incluir exemplos de código para demonstrar o uso do seu crate.
+
+#### Gerenciando Dependências
+
+Rust usa o gerenciador de pacotes Cargo para gerenciar dependências. Você pode especificar as dependências necessárias no arquivo Cargo.toml. Quando você compila seu crate, o Cargo se encarrega de baixar e compilar todas as dependências automaticamente.
+
+#### Usando Crates de Terceiros
+
+Um dos principais benefícios do ecossistema Rust é a facilidade de uso de crates de terceiros. Você pode pesquisar e encontrar uma vasta coleção de crates de alta qualidade no Rust's package registry, crates.io. Para adicionar uma dependência a um crate, basta adicionar a linha apropriada no seu arquivo Cargo.toml.
+
+```toml
+
+[dependencies]
+nome_do_pacote = "versao"
+```
+
+Após adicionar a dependência, execute cargo build para baixar e compilar os crates necessários.
+
+Também podemos instalar diratamente na linha de comando como abaixo:
+
+```bash
+cargo add lib
+```
+
+
+Crates são um componente fundamental do ecossistema Rust, permitindo que você desenvolva, compartilhe e reutilize código de maneira eficaz. A modularidade e a facilidade de gerenciamento de dependências tornam Rust uma linguagem poderosa para o desenvolvimento de software. Compreender o sistema de crates é essencial para qualquer desenvolvedor Rust, pois é uma parte integrante do processo de construção de aplicações robustas e seguras.
+
+Agora vamos entrar no site do [crates.io](https://crates.io) vamos buscar a biblioteca rand, aqui no crates.io podemos ver mais sobre a biblioteca, no nosso caso essa biblioteca serve para gerar números aleatório.
+Vamos instala-la.
+
+```bash
+cargo add rand
+```
+
+Agora vamos implementa-la no nosso código.
+
+```rust
+==use rand::{thread_rng, Rng};==
+use std::io;
+
+#[derive(Debug, PartialEq)]
+enum GameResult {
+    Win,
+    Gaming,
+    Lose,
+}
+
+fn main() {
+    loop {
+        println!("Bem vindo ao jogo da adivinhação escolha uma das opções abaixo");
+        println!("i - Iniciar o jogo");
+        println!("q - Fechar o jogo");
+
+        let mut escolha_str = String::new();
+        io::stdin()
+            .read_line(&mut escolha_str)
+            .expect("Erro ao receber sua escolha");
+
+        match escolha_str.trim().to_lowercase().as_str() {
+            "i" => {
+                game();
+                continue;
+            }
+            "q" => {
+                println!("Obrigado por jogar");
+                break;
+            }
+            _ => {
+                println!("Escolha inválida. Tente novamente.");
+                continue;
+            }
+        };
+    }
+}
+
+fn game() -> () {
+    let mut pontuacao: u16 = 1000;
+    ==let numero_alvo: u8 = thread_rng().gen_range(1..100);==
+    loop {
+        println!("Por favor digite o número que você acredita ser");
+        let mut chute = String::new();
+        io::stdin()
+            .read_line(&mut chute)
+            .expect("Erro ao receber o número");
+
+        let chute: u8 = match chute.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Valor não é válido ou não está entre 0 e 255");
+                0
+            }
+        };
+        match check_win_coditition(&mut pontuacao, &numero_alvo, &chute) {
+            Ok(result) => {
+                if result == GameResult::Win {
+                    println!("Parabéns você venceu! Sua pontuação foi {}", pontuacao);
+                    break;
+                } else if result == GameResult::Lose {
+                    println!("Que pena você perdeu!");
+                    break;
+                }
+            }
+            Err(_) => {
+                println!("Ocorreu um erro e o jogo será reiniciado!");
+                break;
+            }
+        };
+        println!("A sua pontuação está em {}", pontuacao);
+    }
+}
+
+fn check_win_coditition(
+    pontuacao: &mut u16,
+    numero: &u8,
+    chute: &u8,
+) -> Result<GameResult, GameResult> {
+    if chute < numero {
+        println!("O número é maior!");
+        *pontuacao -= 100;
+    }
+    if chute > numero {
+        println!("O número é menor!");
+        *pontuacao -= 100;
+    }
+    if chute == numero {
+        return Ok(GameResult::Win);
+    }
+    if *pontuacao <= 0 {
+        return Ok(GameResult::Lose);
+    }
+    Ok(GameResult::Gaming)
+}
+
+#[test]
+fn test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    // Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    // Assert
+    assert_eq!(result, Ok(GameResult::Gaming));
+    assert_eq!(pontuacao, 900)
+}
+
+#[test]
+fn test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 100;
+
+    // Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    // Assert
+    assert_eq!(result, Ok(GameResult::Gaming));
+    assert_eq!(pontuacao, 900)
+}
+
+#[test]
+fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
+    // Arrange
+    let mut pontuacao: u16 = 1000;
+    let numero: u8 = 42;
+    let chute: u8 = 42;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Win));
+    assert_eq!(pontuacao, 1000)
+}
+
+#[test]
+fn test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo() {
+    // Arrange
+    let mut pontuacao: u16 = 100;
+    let numero: u8 = 42;
+    let chute: u8 = 1;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Lose));
+    assert_eq!(pontuacao, 0)
+}
+
+#[test]
+fn test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo() {
+    // Arrange
+    let mut pontuacao: u16 = 100;
+    let numero: u8 = 42;
+    let chute: u8 = 100;
+
+    //Act
+    let result = check_win_coditition(&mut pontuacao, &numero, &chute);
+
+    //Asert
+    assert_eq!(result, Ok(GameResult::Lose));
+    assert_eq!(pontuacao, 0)
+}
+```
+
+No caso do rand gerar o número que queremos precisamos usar a função _gen_range_ olhando na documentação precisamos importar `use rand::{thread_rng, Rng};` que são as funções de base e simplemente removemos o número fixo por essa função na declaração da variável.
+
+```rust
+    let numero_alvo: u8 = thread_rng().gen_range(1..100);
+```
+
+Ai colocamos que queremos gerar um valor entre 1 e 100 e agora vamos rodar os testes para ver se nossa alteração quebrou alguma coisa.
+```bash
+➜ cargo test
+   Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+    Finished test [unoptimized + debuginfo] target(s) in 0.15s
+     Running unittests src/main.rs (target/debug/deps/guessing_game-1e17f810f8775677)
+
+running 5 tests
+test test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral ... ok
+test test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo ... ok
+test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... ok
+test test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Certo tudo funcionando.
 
 ## Segurança de Memória
 
@@ -1774,3 +2124,47 @@ Rust fornece uma série de garantias de segurança de memória durante o tempo d
 ## Conclusão
 Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
 funciona o conceito de borrow and ownership, como funciona o gerenciamento de memória do rust.
+
+## Exercicíos sugeridos
+
+Exercício 1: Jogo de Perguntas e Respostas
+
+Crie um jogo de perguntas e respostas em que o jogador deve responder a várias perguntas. O jogo deve incluir as seguintes funcionalidades:
+
+    O programa deve conter um conjunto de perguntas e respostas.
+    O jogador deve receber uma pergunta e fornecer uma resposta.
+    O programa deve verificar se a resposta está correta e atualizar a pontuação do jogador.
+    Use funções para organizar o código, armazenar perguntas e respostas, e verificar as respostas do jogador.
+    Escreva testes para garantir que o jogo funcione corretamente.
+
+Exercício 2: Jogo de Aventura com História Interativa
+
+Crie um jogo de aventura com uma história interativa em que o jogador toma decisões que afetam o desenrolar da história. O jogo deve incluir as seguintes funcionalidades:
+
+    Use enumerações para representar as diferentes escolhas e eventos na história.
+    Use variáveis mutáveis para rastrear o progresso da história e as decisões do jogador.
+    Use loops para permitir que o jogador faça escolhas ao longo da história.
+    Use if, if else e match para verificar as escolhas do jogador e os resultados na história.
+    Use a macro println! para exibir a narrativa da aventura.
+
+Exercício 3: Jogo da Forca
+
+Crie um jogo multiplayer alternativo da forca em que o jogador deve adivinhar uma palavra oculta. O jogo deve incluir as seguintes funcionalidades:
+
+    O programa deve receber uma palavra aleatória de um jogador e uma dica.
+    O outro jogador deve fazer tentativas para adivinhar a palavra escrevendo ela inteira.
+    O programa deve mostrar uma representação de quantas tentativas faltam.
+    O jogo deve ser encerrado quando o jogador adivinhar a palavra corretamente ou após um número máximo de tentativas.
+    Use funções para organizar o código.
+    Escreva testes para garantir que o jogo funcione corretamente.
+
+Exercício 4: Simulador de Compras com Crate Rust Money
+
+Crie um simulador de compras em que o jogador tem um orçamento limitado e deve fazer compras. Use o crate rust-money para representar valores monetários. O jogo deve incluir as seguintes funcionalidades:
+
+    Instale o crate rust-money para lidar com valores monetários.
+    Use variáveis mutáveis para rastrear o orçamento do jogador e o custo dos itens.
+    Use loops para permitir que o jogador faça várias compras.
+    Use if e match para verificar se o jogador pode pagar por um item e atualizar o orçamento.
+    Use a macro println! para exibir informações sobre as compras.
+
