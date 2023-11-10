@@ -80,8 +80,7 @@ fn main() {
 
 Criamos a nossa linha como `match escolha.str.trim().to_lowercase()` usando a função `trim()` para removermos espaços em branco e agora usamos uma nova função chamada
 `to_lowercase()` que vai transformar nossa string caso tenha letras maiusculas em minúsculas.
-Outra função que usamomos foi o `as_str` pois quando usamos o `trim` e o `to_lowercase` eles voltam um &str que é um tipo diferente do String então pra comparar vamos precisar
-reconverter novamente para String e ai usamos o `as_str`.
+Outra função que usamos foi o `as_str` pois quando usamos o `trim` e o `to_lowercase` eles voltam uma String que é um tipo diferente do str, e nesse caso vamos comparar com "i" e "q" e quando passamos esses valores com aspas eles são do tipo str então pra comparar vamos precisar reconverter novamente para str e ai usamos o `as_str`.
 
 Assim conseguimos agora colocar a comparação com a string "i" e a string "q".
 
