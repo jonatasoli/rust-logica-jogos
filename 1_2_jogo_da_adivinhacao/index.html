@@ -301,6 +301,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#seguranca-de-memoria" class="md-nav__link">
+    Segurança de Memória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#diferenca-entre-str-e-string" class="md-nav__link">
     Diferença entre &amp;str e String
   </a>
@@ -502,13 +509,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#seguranca-de-memoria" class="md-nav__link">
-    Segurança de Memória
-  </a>
   
 </li>
       
@@ -605,6 +605,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#seguranca-de-memoria" class="md-nav__link">
+    Segurança de Memória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#diferenca-entre-str-e-string" class="md-nav__link">
     Diferença entre &amp;str e String
   </a>
@@ -806,13 +813,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#seguranca-de-memoria" class="md-nav__link">
-    Segurança de Memória
-  </a>
   
 </li>
       
@@ -951,17 +951,26 @@ fn main() {
 <p>Aqui colocamos o "i" para imprimir e usamos o <code>continue</code> para voltar ao inicio do loop. No caso o jogador use "q" o programa vai ser encerrado.
 Também usamos o coringa "_" caso seja dada outra opção que não seja "i" ou "q" nós colocamos a mensagem de erro e reiniciamos o loop.</p>
 <p>Agora podemos testar e verificar se nossa função está correta.</p>
+<h2 id="seguranca-de-memoria">Segurança de Memória</h2>
+<p>Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.</p>
+<ul>
+<li>Sem Referências Nulas: Rust garante que as referências não sejam nulas, eliminando muitos erros de acesso nulo.</li>
+<li>Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.</li>
+<li>Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.</li>
+</ul>
+<p>Exitem 3 locais de memória que trabalhamos com rust que é a memória estática, stack e heap.</p>
 <h2 id="diferenca-entre-str-e-string">Diferença entre &amp;str e String</h2>
 <p>Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &amp;str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &amp;str e String em Rust.</p>
 <p>&amp;str - Referência para uma Sequência de Caracteres</p>
-<p>&amp;str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &amp;str:</p>
+<p>É importante reforçar que caratere representa um simbolo em Rust e ele é um tipo primitivo que acabamos não vendo ainda, o tipo str é uma sequência de caracteres que é o tipo primitivo.
+&amp;str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &amp;str:</p>
 <div class="highlight"><pre><span></span><code>Imutável: O &amp;str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
 
 Alocação Zero: O &amp;str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
 
-View (Visão): O &amp;str é uma visão de uma sequência de caracteres. Pode ser usado para referenciar substrings de uma String ou literais de string.
+View (Visão): O &amp;str é uma visão de uma sequência de caracteres (tipo primitivo). Pode ser usado para referenciar substrings de uma String ou literais de string.
 
-Lifetime: O &amp;str tem um tempo de vida (lifetime) que está vinculado ao contexto em que é criado. Isso garante que a referência seja válida durante o tempo necessário.
+Lifetime: O &amp;str é um tipo estático ou seja ele vai alocar a memória quando o programa é compilado e vai existir durante todo o tempo em que o programa for executado.
 </code></pre></div>
 <p>Aqui está um exemplo de &amp;str:</p>
 <pre><code class="language-rust">fn main() {
@@ -2692,13 +2701,6 @@ test test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral ... 
 test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 </code></pre>
 <p>Certo tudo funcionando.</p>
-<h2 id="seguranca-de-memoria">Segurança de Memória</h2>
-<p>Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.</p>
-<ul>
-<li>Sem Referências Nulas: Rust garante que as referências não sejam nulas, eliminando muitos erros de acesso nulo.</li>
-<li>Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.</li>
-<li>Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.</li>
-</ul>
 <h2 id="conclusao">Conclusão</h2>
 <p>Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
 funciona o conceito de borrow and ownership, como funciona o gerenciamento de memória do rust.</p>
@@ -2742,7 +2744,7 @@ Use a macro println! para exibir informações sobre as compras.
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 10, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 21, 2023</span>
       
     
   </small>
