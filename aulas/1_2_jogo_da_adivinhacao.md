@@ -122,20 +122,33 @@ Também usamos o coringa "_" caso seja dada outra opção que não seja "i" ou "
 
 Agora podemos testar e verificar se nossa função está correta.
 
+## Segurança de Memória
+
+Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.
+
+* Sem Referências Nulas: Rust garante que as referências não sejam nulas, eliminando muitos erros de acesso nulo.
+* Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.
+* Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.
+
+Exitem 3 locais de memória que trabalhamos com rust que é a memória estática, stack e heap.
+
+
 ## Diferença entre &str e String
 Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &str e String em Rust.
 
 &str - Referência para uma Sequência de Caracteres
 
+É importante reforçar que caratere representa um simbolo em Rust e ele é um tipo primitivo que acabamos não vendo ainda, o tipo str é uma sequência de caracteres que é o tipo primitivo.
 &str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &str:
 
     Imutável: O &str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
 
     Alocação Zero: O &str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
 
-    View (Visão): O &str é uma visão de uma sequência de caracteres. Pode ser usado para referenciar substrings de uma String ou literais de string.
+    View (Visão): O &str é uma visão de uma sequência de caracteres (tipo primitivo). Pode ser usado para referenciar substrings de uma String ou literais de string.
 
-    Lifetime: O &str tem um tempo de vida (lifetime) que está vinculado ao contexto em que é criado. Isso garante que a referência seja válida durante o tempo necessário.
+    Lifetime: O &str é um tipo estático ou seja ele vai alocar a memória quando o programa é compilado e vai existir durante todo o tempo em que o programa for executado.
+
 
 Aqui está um exemplo de &str:
 
@@ -2111,14 +2124,6 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 ```
 
 Certo tudo funcionando.
-
-## Segurança de Memória
-
-Rust fornece uma série de garantias de segurança de memória durante o tempo de compilação. Essas garantias são fundamentais para evitar erros comuns, como vazamentos de memória, referências nulas e acessos inválidos.
-
-* Sem Referências Nulas: Rust garante que as referências não sejam nulas, eliminando muitos erros de acesso nulo.
-* Sem Vazamentos de Memória: Rust controla rigorosamente o ciclo de vida dos recursos, o que impede vazamentos de memória.
-* Sem Concorrência de Dados Mutáveis: Rust impõe regras rigorosas para evitar a concorrência de dados mutáveis, garantindo a segurança em threads.
 
 ## Conclusão
 Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como

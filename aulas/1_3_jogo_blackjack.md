@@ -55,4 +55,10 @@ Essas são as regras básicas do Blackjack. Estratégias avançadas podem ser ap
 
 ## Iniciando o jogo
 
-Bom vamos criar o nosso jogo
+Bom vamos criar o nosso jogo.
+
+```bash
+cargo new blackjack
+```
+
+Agora vamos criar na nossa main o menu principal do jogo.
