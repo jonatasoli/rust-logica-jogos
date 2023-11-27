@@ -1,4 +1,4 @@
-#  Jogo da adivinhação Raio-x
+#  Jogo da adivinhação
 
 Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatóriamente. O jogo inicia com 1000 pontos para o
 jogador e cada vez que ele erra o número é subtraido 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.
