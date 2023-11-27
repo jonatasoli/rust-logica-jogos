@@ -258,9 +258,96 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Floresta Misteriosa
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Floresta Misteriosa
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regras" class="md-nav__link">
+    Regras
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-o-projeto" class="md-nav__link">
+    Criando o projeto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falando-de-tipagem" class="md-nav__link">
+    Falando de tipagem
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variaveis" class="md-nav__link">
+    Variáveis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controle-de-fluxo-condicional-com-if" class="md-nav__link">
+    Controle de fluxo condicional com if
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao-a-imutabilidade" class="md-nav__link">
+    Introdução a imutabilidade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recebendo-parametros-do-jogador-e-usando-a-condicional-match" class="md-nav__link">
+    Recebendo parametros do jogador e usando a condicional match
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trabalhando-com-loop" class="md-nav__link">
+    Trabalhando com loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-sugeridos" class="md-nav__link">
+    Exercicíos sugeridos
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -275,7 +362,7 @@
   
     <li class="md-nav__item">
       <a href="../1_2_jogo_da_adivinhacao/" class="md-nav__link">
-        Jogo da adivinhação Raio-x
+        Jogo da adivinhação
       </a>
     </li>
   
@@ -331,6 +418,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regras" class="md-nav__link">
+    Regras
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-o-projeto" class="md-nav__link">
+    Criando o projeto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falando-de-tipagem" class="md-nav__link">
+    Falando de tipagem
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variaveis" class="md-nav__link">
+    Variáveis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controle-de-fluxo-condicional-com-if" class="md-nav__link">
+    Controle de fluxo condicional com if
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao-a-imutabilidade" class="md-nav__link">
+    Introdução a imutabilidade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recebendo-parametros-do-jogador-e-usando-a-condicional-match" class="md-nav__link">
+    Recebendo parametros do jogador e usando a condicional match
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trabalhando-com-loop" class="md-nav__link">
+    Trabalhando com loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-sugeridos" class="md-nav__link">
+    Exercicíos sugeridos
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -348,13 +506,202 @@
 
 
 <h1 id="floresta-misteriosa">Floresta Misteriosa</h1>
+<p>Para iniciar vamos dar um raio-x sobre nosso primeiro jogo, em a floresta misteriosa o jogador assume um papel de um aventureiro corajoso  que se aventura por uma floresta misteriosa. A cada escolha que o jogador faz vão influenciar a sua jornada, dependendo da sua decisão você vai ganhar ou perder pontos se você alcançar 100 pontos você vence o jogo.</p>
+<h2 id="regras">Regras</h2>
+<p>Nosso jogo apresentará um menu ao nosso jogador com as opções que ele pode escolher. Como nosso escopo é pequeno vamos limitar em 4 escolhas.</p>
+<ul>
+<li>Ele pode beber agua no rio onde o jogador vai ganhar 10 pontos.</li>
+<li>Ele pode passar pela ponte frágil onde ele vai perder 20 pontos.</li>
+<li>Ele pode querer entrar na caverna escura ele vai ganhar 50 pontos.</li>
+<li>Ele pode passar pelo caminho iluminado onde vai perder 20 pontos.</li>
+</ul>
+<p>Essas escolhas vão aparecendo toda vez que o jogador faz uma escolha até ele ganhar ou perder o jogo. Caso ele consiga 100 pontos o jogador ganha e se o jogador chegar a 0 ele perde.</p>
+<h2 id="criando-o-projeto">Criando o projeto</h2>
+<p>Bom primeiro vamos criar um diretório onde vamos armazenar nossos projetos do curso, minha sugestão é criar um diretório chamado projects. Então vamos abrir um terminal primeiro vamos usar o comando <code>cd</code> para ir até o diretório <code>Home</code> do seu computador e depois vamos usar o comando <code>mkdir</code> para criar um diretório.</p>
+<pre><code class="language-bash">cd
+mkdir projects
+</code></pre>
+<p>Caso queria se aprofundar sobre os comandos via terminal minha sugestão é dar uma conferida no <a href="https://www.guiafoca.org/">guia focalinux</a> ele vai lhe ajudar a ter um entendimento melhor do funcionando dos comandos posix mas, vou explicando cada comando no terminal que vamos usar ao decorrer do curso.</p>
+<p>Bom agora vamos acessar o diretório que criamos.</p>
+<pre><code class="language-bash">cd projects
+</code></pre>
+<p>Agora que acessamos o diretório que vamos trabalho, o próximo passo é criarmos nosso projeto em rust, para criar um projeto em rust vamos usar o comando <code>cargo new</code> e o nome do nosso projeto é chamado <code>mysterious_forest</code>. Assim ele vai criar um diretório chamado <code>mysterious_forest</code> para confirmar-mos se a pasta foi criada vamos usar o comando <code>ls -la</code> onde o <code>-la</code> é um parametro apenas para listarmos também os arquivos ocultos.</p>
+<pre><code class="language-bash">cargo new mysterious_forest
+ls -la
+</code></pre>
+<p>Agora vamos acessar o direorio que criamos no qual podemos acessa-lo através do comando <code>cd mysterious_forest</code>.</p>
+<pre><code class="language-bash">cd mysterious_forest
+</code></pre>
+<p>Agora podemos usar novamente o comando <code>ls -la</code> para vermos o que o comando cargo criou no nosso projeto.</p>
+<pre><code class="language-bash">.git
+.gitignore
+Cargo.toml
+src
+</code></pre>
+<p>Uma observação os arquivos com o <code>.</code> na frente como o <code>.git</code> e o <code>.gitignore</code> são arquivos ocultos no linux.</p>
+<h2 id="falando-de-tipagem">Falando de tipagem</h2>
+<p>Introdução à Tipagem em Rust</p>
+<p>A tipagem em programação se refere à maneira como as linguagens de programação tratam os tipos de dados, ou seja, como elas definem e gerenciam os diferentes tipos de valores que podem ser usados em um programa. Rust é uma linguagem de programação que utiliza um sistema de tipagem estática, o que significa que os tipos de dados são verificados em tempo de compilação, tornando o código mais seguro e eficiente.
+Tipagem Estática</p>
+<p>Em Rust, você precisa declarar explicitamente o tipo de dado que uma variável pode armazenar. Isso é feito durante a declaração da variável, permitindo que o compilador verifique se o valor atribuído à variável é compatível com o tipo declarado. Se houver uma incompatibilidade de tipos, o código não será compilado, o que ajuda a evitar erros em tempo de execução.
+Tipos Primitivos em Rust</p>
+<p>Rust possui uma série de tipos primitivos que podem ser usados para representar diferentes tipos de dados. Vamos dar uma olhada nos tipos primitivos mais comuns em Rust:
+1. Integer Types (Tipos Inteiros)</p>
+<p>Os tipos inteiros em Rust representam números inteiros sem parte fracionária. Aqui estão alguns dos tipos inteiros mais comuns, junto com sua faixa de valores:</p>
+<div class="highlight"><pre><span></span><code>i8: Intervalo de -128 a 127.
+
+i16: Intervalo de -32,768 a 32,767.
+
+i32: Intervalo de -2,147,483,648 a 2,147,483,647.
+
+i64: Intervalo de -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807.
+
+i128: Intervalo extremamente grande de números inteiros com sinal.
+</code></pre></div>
+<p>Por exemplo, você pode declarar uma variável inteira em Rust da seguinte forma:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let numero: i32 = 42;
+</code></pre></div>
+<p>Os tipos inteiros sem sinal, representados com u, têm os mesmos tamanhos que os tipos inteiros com sinal e representam apenas valores não negativos. Por exemplo, u8 varia de 0 a 255, u16 varia de 0 a 65,535 e assim por diante.
+2. Floating-Point Types (Tipos de Ponto Flutuante)</p>
+<p>Os tipos de ponto flutuante em Rust representam números com parte fracionária. Os tipos mais comuns são:</p>
+<div class="highlight"><pre><span></span><code>f32: Representa números de ponto flutuante de precisão simples.
+
+f64: Representa números de ponto flutuante de dupla precisão (mais precisos).
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let pi: f64 = 3.14159;
+</code></pre></div>
+<ol>
+<li>Boolean Type (Tipo Booleano)</li>
+</ol>
+<p>O tipo booleano em Rust é usado para representar valores verdadeiro (true) ou falso (false). É frequentemente usado em expressões condicionais e lógicas.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let esta_chovendo: bool = true;
+</code></pre></div>
+<ol>
+<li>Character Type (Tipo de Caractere)</li>
+</ol>
+<p>Rust também possui um tipo de caractere chamado char, que representa um único caractere Unicode. Isso é útil para lidar com texto e caracteres especiais.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let letra: char = &#39;A&#39;;
+</code></pre></div>
+<ol>
+<li>String Type (Tipo de Texto)</li>
+</ol>
+<p>Rust diferencia entre dois tipos relacionados: str e String.</p>
+<div class="highlight"><pre><span></span><code>str: Representa uma sequência de caracteres imutável (não pode ser modificada após a criação) e é frequentemente usado com referências (&amp;str) para manipulação de texto eficiente.
+
+String: Representa uma sequência de caracteres mutável (pode ser modificada) e é mais flexível, geralmente alocada na memória de forma dinâmica.
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let texto_estatico: &amp;str = &quot;Isso é um texto imutável&quot;;
+let mut texto_mutavel: String = String::from(&quot;Isso é um texto mutável&quot;);
+</code></pre></div>
+<p>Essa é uma explicação mais abrangente sobre a tipagem em Rust, os tipos primitivos mais comuns e a diferença entre str e String. À medida que você se familiariza mais com Rust, poderá explorar tipos compostos, structs, enums e outros recursos poderosos que a linguagem oferece para lidar com problemas específicos de programação.</p>
+<h2 id="variaveis">Variáveis</h2>
+<h2 id="controle-de-fluxo-condicional-com-if">Controle de fluxo condicional com if</h2>
+<h2 id="introducao-a-imutabilidade">Introdução a imutabilidade</h2>
+<p>Introdução a variáveis e mutabilidade
+Variáveis e Constantes em Rust: Uma Introdução</p>
+<p>Se você está começando a aprender sobre programação, é importante entender o que são variáveis e constantes em Rust, uma linguagem de programação moderna e segura. Vamos explorar esses conceitos e suas implicações, incluindo exemplos de constantes.
+Variáveis em Rust</p>
+<p>Uma variável em Rust é uma forma de armazenar e manipular dados em um programa. É como uma caixa que você pode usar para guardar informações temporariamente. No entanto, Rust difere de muitas outras linguagens de programação em um aspecto fundamental: por padrão, as variáveis são imutáveis, o que significa que não podem ser alteradas após a primeira atribuição.</p>
+<p>Por exemplo, considere o seguinte código:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let nome = &quot;Alice&quot;;
+nome = &quot;Bob&quot;; // Isso geraria um erro de compilação!
+</code></pre></div>
+<p>Neste exemplo, a tentativa de mudar o valor de nome para "Bob" resultaria em um erro de compilação. Isso ocorre porque, por padrão, Rust preza pela segurança e evita que você modifique dados acidentalmente.
+A Palavra Reservada mut</p>
+<p>Mas e se você quiser que uma variável seja mutável, ou seja, que possa ser alterada? É aí que entra a palavra reservada mut. Quando você declara uma variável com a palavra-chave mut, você está indicando explicitamente que a variável pode ser modificada.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+let mut contador = 0;
+contador = contador + 1; // Isso é permitido, pois &#39;contador&#39; é mutável
+</code></pre></div>
+<p>Neste caso, contador é uma variável mutável, e você pode aumentar seu valor sem problemas.
+Constantes em Rust</p>
+<p>Além de variáveis, Rust também oferece o conceito de constantes. As constantes são valores imutáveis que são definidos em tempo de compilação. Elas são declaradas usando a palavra-chave const e sempre devem ter um tipo de dado específico.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>rust
+
+const PI: f64 = 3.14159;
+</code></pre></div>
+<p>Aqui, PI é uma constante que representa o valor de π (pi) com uma precisão de ponto flutuante de dupla precisão (f64). Essa constante não pode ser alterada após sua definição e é acessível em todo o escopo em que está definida.
+Vantagens e Desvantagens da Imutabilidade por Padrão</p>
+<p>A abordagem de imutabilidade por padrão em Rust oferece algumas vantagens importantes:
+1. Segurança:</p>
+<div class="highlight"><pre><span></span><code>Evita erros comuns relacionados à mutação de dados, como condições de corrida (race conditions) em programas concorrentes.
+
+Facilita a previsibilidade do código, uma vez que você não precisa se preocupar com efeitos colaterais inesperados.
+</code></pre></div>
+<ol>
+<li>
+<p>Melhora a Legibilidade:</p>
+<p>Torna o código mais fácil de entender, uma vez que você sabe que uma variável não será alterada em lugares inesperados.</p>
+</li>
+<li>
+<p>Facilita a Concorrência:</p>
+<p>Permite que Rust garanta a segurança na concorrência, pois a imutabilidade reduz o risco de acesso concorrente a dados mutáveis.</p>
+</li>
+</ol>
+<p>No entanto, essa abordagem também pode ter desvantagens, como:
+1. Mais Digitação:</p>
+<div class="highlight"><pre><span></span><code>Pode ser necessário digitar mais código para criar variáveis mutáveis quando necessário.
+</code></pre></div>
+<ol>
+<li>
+<p>Curva de Aprendizado:</p>
+<p>Pode levar algum tempo para se acostumar com a imutabilidade por padrão, especialmente se você está familiarizado com linguagens que não a adotam.</p>
+</li>
+</ol>
+<p>Outras Linguagens com Características Semelhantes</p>
+<p>Algumas outras linguagens de programação também adotam a imutabilidade por padrão ou oferecem suporte a variáveis imutáveis:</p>
+<div class="highlight"><pre><span></span><code>Haskell
+
+Elm
+
+Clojure
+</code></pre></div>
+<p>Em resumo, variáveis e constantes em Rust têm a característica única de serem imutáveis por padrão, proporcionando segurança e legibilidade. A palavra-chave mut permite que você torne variáveis mutáveis quando necessário, mantendo o controle sobre a mutabilidade dos dados em seu código. Rust também suporta constantes, que são valores imutáveis definidos em tempo de compilação. Essa abordagem pode ser diferente de outras linguagens, mas traz benefícios significativos em termos de segurança e concorrência.</p>
+<p>É importante reforçar que com isso você pode usar uma variável imutável durante a maior parte da execução e quando ela precisar ser alterada redeclarar ela como mutável mais a frente vamos falar do conceito de como funciona o gerenciamente de memória do rust e isso vai acabar ficando mais claro.</p>
+<h2 id="recebendo-parametros-do-jogador-e-usando-a-condicional-match">Recebendo parametros do jogador e usando a condicional match</h2>
+<h2 id="trabalhando-com-loop">Trabalhando com loop</h2>
+<h2 id="exercicios-sugeridos">Exercicíos sugeridos</h2>
+<p>Aqui vou colocar os projetos para você fazer suas revisões, muitas vezes os desafios poderão não ser jogos infelizmente, mas estarei disponível no forum ou no Revolt para tirar dúvidas.</p>
+<p>Revisão 1</p>
+<ul>
+<li>Crie um programa em Rust que simule o controle de estoque de uma loja, faça simples só com um unico produto utilizando variáveis para armazenar a quantidade do produto e permitindo a atualização dos valores de estoque de forma mutável.</li>
+</ul>
+<p>Revisão 2</p>
+<ul>
+<li>Desenvolva um programa que calcule o fatorial de um número inserido pelo usuário. Utilize uma variável mutável para armazenar o resultado parcial do cálculo.</li>
+</ul>
+<p>Revisão 3</p>
+<ul>
+<li>Crie um programa que simule uma calculadora simples em Rust, permitindo que o usuário realize operações de adição, subtração, multiplicação e divisão. Utilize variáveis mutáveis para armazenar os valores inseridos pelo usuário e o resultado das operações.</li>
+</ul>
+<p>Revisão 4
+- Implemente um programa em Rust que converta temperaturas entre Celsius e Fahrenheit. Utilize variáveis mutáveis para armazenar os valores e permitir que o usuário escolha a conversão desejada.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 30, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 27, 2023</span>
       
     
   </small>
