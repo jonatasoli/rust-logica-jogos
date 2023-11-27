@@ -8,6 +8,8 @@ edit_uri: tree/main/aulas
 theme:
   name: material
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - abbr
   - pymdownx.critic
   - pymdownx.highlight:
@@ -29,3 +31,4 @@ plugins:
       show_email_address: false
       show_line_count: true
   - git-revision-date-localized
+  - glightbox

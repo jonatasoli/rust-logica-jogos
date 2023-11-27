@@ -132,6 +132,33 @@ Rust fornece uma série de garantias de segurança de memória durante o tempo d
 
 Exitem 3 locais de memória que trabalhamos com rust que é a memória estática, stack e heap.
 
+![Estrutura da memória](./images/memory.png)
+
+### Memória Estática
+
+![Estática](./images/static-memory.png)
+
+A memória estática é onde fica o binário do nosso programa, variáveis estáticas, strings literais. Nós conhecemos ela em tempo de compilação pois o rust vai reservar a memória necessária para acomodar os recursos criados aqui.
+Ela possui um tamanho fixo e essa memória existe durante o tempo de alocação do programa e é liberada assim que o programa é encerrado e a forma mais rápida de acessar um recurso.
+
+### Memória Stack
+
+![Stack](./images/stack-memory.png)
+
+A memória stack armazena argumentos de funções e variaveis locais ou seja recursos dentro de um bloco de função quando trabalhamos com várias threads cada thread vai ter uma stack especifica e ele é conhecido em tempo de compilação porém ele tem um tamanho dinâmico dentro de um limite especifico, quando esse limite é estourado recebemos o famoso erro _stack overflow_.
+Como é uma memória dinâmica o gatilho pra liberar a memória é quando uma função é encerrada.
+
+### Memória Heap
+
+![Heap](./images/heap-memory.png)
+
+A memória heap é um tipo de memória onde armazenamos valores dinâmicos ou seja que durante a execução de um programa pode variar, por exemplo num jogo onde recebemos o nome do jogador nós não vamos saber previamente o tamanho do nome do mesmo então ele será armazenado na memória heap. Ele é usado sempre que tivermos variáveis que são muito grandes ou qual eu não conheça o valor previamente.
+Quanto trabalhamos com threads esse valor é compartilhado e não sabemos em tempo de compilação onde o valor disponível normalmente é fornecido pelo sistema operacional.
+O tempo de vida dessas variáveis serão determinados pelo programador ou pela linguagem usada e no caso do Rust ela é liberada usando RAII.
+
+### O que é RAII?
+RAII significa "Resource Acquisition Is Initialization". É um princípio de programação utilizado em linguagens como C++ e Rust. A ideia principal por trás do RAII é associar a aquisição de recursos à inicialização de objetos.
+
 
 ## Diferença entre &str e String
 Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &str e String em Rust.
