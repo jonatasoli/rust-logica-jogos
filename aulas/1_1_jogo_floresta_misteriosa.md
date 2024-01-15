@@ -54,9 +54,41 @@ src
 
 Uma observação os arquivos com o `.` na frente como o `.git` e o `.gitignore` são arquivos ocultos no linux.
 
+Bom agora vou dar o comando `cargo run` para executar meu projeto.
+
+Assim vamos ter a saída.
+
+```rust
+➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Hello, world!
+```
+
+Uma coisa interessante de notar quando executamos um projeto rust é que na primeira linha:
+`Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)`
+Nós temos o nome do nosso executável, no caso `mysterious_forest` e a versão do nosso executável no caso `v0.1.0`.
+
+Na segunda linha temos:
+`Finished dev [unoptimized + debuginfo] target(s) in 0.12s`
+Aqui temos a informação que nosso executável foi compilado em modo dev e o tempo de compilação no caso `0.12`
+
+Na terceira linha temos:
+`Running target/debug/mysterious_forest`
+Essa linha nos mostra onde fica nosso executável ele que vamos dar a para que as pessoas possam jogar nosso jogo.
+
+Certo agora vamos entrar no projeto no arquivo no caminho `src/main.rs`
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+Isso é um "Hello, world!" padrão de um projeto rust, então nesse caso não começamos com um "Hello, world!" no projeto pois ele já vem no momento da criação.
 
 ## Falando de tipagem
-Introdução à Tipagem em Rust
 
 A tipagem em programação se refere à maneira como as linguagens de programação tratam os tipos de dados, ou seja, como elas definem e gerenciam os diferentes tipos de valores que podem ser usados em um programa. Rust é uma linguagem de programação que utiliza um sistema de tipagem estática, o que significa que os tipos de dados são verificados em tempo de compilação, tornando o código mais seguro e eficiente.
 Tipagem Estática
@@ -137,13 +169,87 @@ Exemplo:
 
 Essa é uma explicação mais abrangente sobre a tipagem em Rust, os tipos primitivos mais comuns e a diferença entre str e String. À medida que você se familiariza mais com Rust, poderá explorar tipos compostos, structs, enums e outros recursos poderosos que a linguagem oferece para lidar com problemas específicos de programação.
 
-## Variáveis
+## Variaveis
+
+Bom para começar nosso jogo precisamos definir algumas estruturas de dados que vão armazenar a pontuação do nosso jogador e o qual escolha ele vai fazer em seguida, pra isso vamos precisar criar variáveis.
+
+As variáveis em rust são declarados usando a palavra reservada `let` o nome da variável e o tipo dela além do seu valor de inicialização.
+Uma váriavel em rust é diferente de outras linguagens pois ela é imutável ou seja quando inicializamos ela, a mesma não altera seu valor, há uma forma de informar explicitamente que queremos que a variável receba valores dinamicamente mas, vamos ver mais a frente.
+
+Então agora dentro do nosso main vamos declarar a primeira variável do nosso projeto.
+
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+}
+ ```
+
+Vamos da uma olhada mais de perto no nosso código:
+`fn` é a palavra reservada para declarar uma função
+`main` é o nome da nossa função e os parenteses `()` é a estrutura que usamos para declarar os parametros da nossa função que no caso não temos nenhum então ela está vazia.
+Para simplificar um pouco as coisas parametros nada mais é que as variáveis que uma função vai receber quando ela for executada, mas não tema em um outor momento vamos falar mais de funções e parametros.
+`{}` determina um bloco de código então o que estiver ali dentro vai ser o código que será executado pela nossa função main.
+`let pontuacao: i32 = 0;` aqui declaramos nossa variável começando com a palavra reservada `let` depois o nome da variável que no caso é `pontuacao` o tipo dela que no nosso caso é um `i32` ai temos o `=` que o nosso simbulo de atribuição ou seja, que `pontuacao` vai receber um valor, na sequencia temos o valor que estamos inicializando que no caso é o valor `0` e finalmente temos o simbulo `;` que indica pro compilador que a linha de execução foi encerrada finalizando a instrução.
+
+Com isso podemos criar nossa segunda variável:
+
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+}
+```
+
+Então criamos uma variavel escolha que também é uma `i32` só que agora colocamos como valor incial `1`.
+
+Para dar sequência no nosso projeto vamos criar uma mensagem de boas-vindas, pra isso vamos usar uma macro no rust que nada mais é que uma sequência de instruções que vão rodar internamente quando ela for executada que no nosso caso é o `println!` o  `!` no final nos indica que ela é uma macro.
+
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    ==println!("Bem-vindo à floresta misteriosa")==
+}
+
+```
+Um ponto importante pra se observar nós não usamos o simbolo `;` no final da nossa macro `println!` isso por que em rust dentro de um bloco de código a ultima linha não precisa ter esse simbolo pois ele interpreta essa última linha como o valor a se retornar da função no nosso caso porém estamos executando uma macro que vai imprimir valores na tela então ele basicamente não está retornando nada.
+Você pode observar que dentro dos parenteses da nossa macro temos os simbolos de aspas `""` e dentro delas colocamos nosso texto com acentos. Como o rust usa o padrão unicode para caracteres podemos usar qualquer simbolo ou diagrama representado pela tabela unicode. Mas, no nosso código em si nós evitamos usar acentos e caracteres especiais.
+
+Agora vamos imprimir na tela o valor da nossa escolha e a pontuação pra isso vamos usar novamente a macro `println!`.
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    println!("Bem-vindo à floresta misteriosa");
+    ==
+    println!("A sua escolha foi {}", escolha);
+    println!("A sua pontuação foi {}", pontuacao)
+    ==
+}
+
+```
+Observe que só deixamos sem o `;` a ultima linha por isso no nosso primeiro `println!` agora tem a pontuação. Outra coisa é que nosso código está usando a macro de uma forma diferente.
+Temos o simbolo das chaves `{}` dentro das aspas, isso indica que queremos imprimir o valor de uma variável que no nosso caso são as variáveis `escolha` e `pontuacao`. No caso se quisermos colocar mais variáveis dentro de uma string que é o caso do nosso `println!` podemos usar mais chaves que ele vai entender.
+
+Agora podemos rodar novamente  o `cargo run` para ver o retorno da nossa função.
+
+```bash
+➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+A sua escolha foi 1
+A sua pontuação foi 0
+```
+
+Perfeito tudo funcionando!
 
 ## Controle de fluxo condicional com if
 
-## Introdução a imutabilidade
-Introdução a variáveis e mutabilidade
-Variáveis e Constantes em Rust: Uma Introdução
+## Introdução a váriaveis e imutabilidade
 
 Se você está começando a aprender sobre programação, é importante entender o que são variáveis e constantes em Rust, uma linguagem de programação moderna e segura. Vamos explorar esses conceitos e suas implicações, incluindo exemplos de constantes.
 Variáveis em Rust
