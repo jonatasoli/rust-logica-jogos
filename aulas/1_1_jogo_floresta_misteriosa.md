@@ -249,6 +249,84 @@ Perfeito tudo funcionando!
 
 ## Controle de fluxo condicional com if
 
+Vamos da uma olhada agora em como dar escolhas para nosso jogador. Primeiro vamos colocar um `println!` pedindo a escolha e 4 opções númericas para ele escolher.
+
+```rust
+\\ código
+    println!("Bem-vindo à floresta misteriosa");
+
+    println!("Por favor escolha uma opção:");
+    println!("1 - Entrar na caverna escura");
+    println!("2 - Seguir no caminho iluminado");
+    println!("3 - Cruzar a ponte frágil");
+    println!("4 - Descansar na beira do riacho");
+\\código
+```
+
+Agora precisamos de um recurso que nos mostre que quando digitarmos no teclado a opção 1 ele faça a ação `Entrar na caverna escura` e assim com as demais opções e quando ele escolher a opção faça a soma ou a subtração dos pontos. Pra isso vamos usar o `if` ele é nosso primeiro condicional e com ele podemos fazer que com determinada escolha ele faça uma sequencia de ações no nosso caso se o jogador escolher a opção 1 precisa realizar a ação de somar 50 pontos na pontuação atual.
+
+```rust
+\\código
+    println!("4 - Descansar na beira do riacho");
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    }
+\\código
+```
+
+Vamos ter um erro mas, vamos ignora-lo por enquanto, agora precisamos colocar as outras condições então usamos a palavra reservada `if` e poderiamos ficar usando ela para as demais opções mas, há um problema, nosso código usando 4 `if's` nesse caso ele vai verificar todas 4 vezes em todos os casos. Então podemos usar um outro recurso que é o _senão se_  que basicamente vai verificar a primeira condição e se ela não for verdade e vai verificar a próxima condição e assim sucessivamente.  
+O código ficaria assim:
+
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    println!("Bem-vindo à floresta misteriosa");
+
+    println!("Por favor escolha uma opção:");
+    println!("1 - Entrar na caverna escura");
+    println!("2 - Seguir no caminho iluminado");
+    println!("3 - Cruzar a ponte frágil");
+    println!("4 - Descansar na beira do riacho");
+
+==
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+==
+
+    println!("A sua escolha foi {}", escolha);
+    println!("A sua pontuação foi {}", pontuacao)
+}
+```
+
+Agora vamos rodar nosso código ele vai receber um erro igual o abaixo:
+
+```bash
+error[E0384]: cannot assign twice to immutable variable `pontuacao`
+  --> src/main.rs:20:9
+   |
+2  |     let pontuacao: i32 = 0;
+   |         ---------
+   |         |
+   |         first assignment to `pontuacao`
+   |         help: consider making this binding mutable: `mut pontuacao`
+...
+20 |         pontuacao = pontuacao + 10;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable
+
+```
+
+Aqui ele está dizendo que não pode mudar uma variável imutável e é isso que vamos explorar a seguinte.
+
+
 ## Introdução a váriaveis e imutabilidade
 
 Se você está começando a aprender sobre programação, é importante entender o que são variáveis e constantes em Rust, uma linguagem de programação moderna e segura. Vamos explorar esses conceitos e suas implicações, incluindo exemplos de constantes.
@@ -327,7 +405,180 @@ Em resumo, variáveis e constantes em Rust têm a característica única de sere
 
 É importante reforçar que com isso você pode usar uma variável imutável durante a maior parte da execução e quando ela precisar ser alterada redeclarar ela como mutável mais a frente vamos falar do conceito de como funciona o gerenciamente de memória do rust e isso vai acabar ficando mais claro.
 
+## Variáveis e mutabilidade
+
+Bom conforme vimos anteriormente nosso código estava dando erro pois o rust acusava que estavamos tentando mudar uma variável imutável. Isso acontece por que em rust todas as variáveis por padrão são imutáveis, então não podemos modifica-la depois inicializar ela.
+Para isso vamos precisamos indicar pro rust que nossa variável é mutável usando a palavra reservada `mut` depois do `let`.
+
+```rust
+fn main() {
+    ==let mut pontuacao: i32 = 0;== 
+    let escolha: i32 = 1;
+
+    // código
+}
+
+```
+
+Agora você pode ver que seu editor deve parar de dar algum aviso de erro. Vamos tentar rodar nosso código.
+
+```bash
+mysterious_forest on  main [?] is 📦 v0.1.0 via 🦀 v1.73.0 on ☁️  (eu-west-2) took 4m4s
+➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+A sua escolha foi 1
+A sua pontuação foi 50
+
+```
+
+Certo agora nosso código foi executado com sucesso mostrando que nossa pontuação foi 50.
+
 ## Recebendo parametros do jogador e usando a condicional match
+
+Bom nosso jogo está nos devolvendo a pontuação da nossa escolha, mas nosso jogador ainda não consegue nos passar a opção que ele quer, então pra isso vamos precisar receber os dados do usuário isso quer dizer que precisamos pedir pro rust pedir o _input_ do teclado do usuário.
+Pra isso vamos importar uma biblioteca que existe dentro do _built in_ do rust ou seja uma biblioteca que ele já nos fornece por padrão pra ser usada.
+
+Para importa-la precisamos usar a palavra reservada `use` chamar a biblioteca que queremos que no caso é a `std` que á biblioteca _standard_ do rust, e no caso eu quero um módulo especifico da biblioteca e não ela toda pra chamar o módulo precisamos usar o simbolo `::` para indicar que vamos selecionar um módulo e escolhe-lo que no caso é o módulo `io`.
+
+Nosso código ficaria assim:
+```rust
+use std::io;
+```
+
+Agora vamos precisar criar uma variável mutavel para receber a escolha do nosso usuário, no caso a escolha de um usuário sempre será uma sequencia de caracteres no caso podemos incializa-la com uma `String` vazia conforme abaixo:
+
+```rust
+    //código
+    println!("4 - Descansar na beira do riacho");
+
+    ==let mut escolha_str: String = String::new();==
+
+    if escolha == 1 {
+    //código
+```
+
+Aqui usamos o simbolo `::` para chamar um método associado chamado `new` dentro da `Struct` chamada `String` que é uma sequência de caracteres.
+
+Agora vamos usar o módulo `io` e chamar duas funções a `stdin` e a `read_line`, nesse primeiro momento não precisa se preocupar muito com a chamada que vou fazer, mas atente-se que vou colocar como parametro de `read_line` nossa variável `escolha_str` mais a frente vamos explicar com mais detalhes como funciona essa chamada que vamos fazer.
+
+```rust
+    // código
+    let mut escolha_str: String = String::new();
+
+    ==io::stdin().read_line(&mut escolha_str);==
+
+    if escolha == 1 {
+    // código
+
+```
+
+Agora vamos fazer um `println!` para imprimir o que o usuário escolheu no meu caso vou escolha a opção `4`.
+
+```rust
+    // código
+    io::stdin().read_line(&mut escolha_str);
+
+    ==println!("Escolha str é {}", escolha_str);==
+
+    if escolha == 1 {
+    // código
+```
+
+Com a saída:
+
+```rust
+warning: `mysterious_forest` (bin "mysterious_forest") generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.13s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+5
+Escolha str é 4
+
+A sua escolha foi 1
+A sua pontuação foi 50
+```
+
+Atente-se que a escolha é ainda 1 mas, a escolha str foi 4.
+
+Agora quero que meu escolha receba o valor de escolha_str, porém o escolha_str é uma `String` e o escolha é um `i32`. Então pra conseguir fazer o que quero vou mudar minha variável escolha para `u32` para não receber número negativos e vou converter minha `String` para isso preciso remover espaços e quebras de linha e pra isso uso a função `trim` e depois chamo a função `parse` que vai tentar converter pro tipo da variável que quero.
+
+É importante ressalta que a função `parse` vai me voltar um `Rusult` que é uma estrutura no formato abaixo:
+
+```
+    (OK, Err)
+```
+
+Onde `OK` vai ter o valor do parse caso de certo e em `Err` vai voltar o erro caso ocorra um erro. Essa estrutura nunca vai voltar os dois valores. Pois ele ou vai retornar um valor do tipo `OK` ou um valor do tipo `Err` assim não precisando ter recursos como o null de algumas linguagens.
+
+Então vamos mover nosso escolha para abaixo de escolha_str e fazer o parse.
+
+```rust
+    println!("Escolha str é {}", escolha_str);
+    ==let escolha: i32 = escolha_str.trim().parse();==
+
+    if escolha == 1 {
+
+```
+
+No caso como o `parse` vai nos retornar ou `OK` ou `Err` eu quero que quando vier um erro nossa escolha receba o valor `0`.
+Poderiamos fazer isso com um `if` que nossa estrutura condicional que já conhecemos, mas, nesse momento quero lhe mostrar outra estrutura que no caso é o `match`.
+
+```rust
+    //código
+    println!("Escolha str é {}", escolha_str);
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) => num,
+        Err(_) => 0,
+    };
+
+    if escolha == 1 {
+```
+
+Sua estrutura é:
+```
+    match <condição> {
+        possivel retorno => retorno do código,
+        possivel retorno 2 => retorno do código,
+        ...
+        possível retorno n => retorno do código
+    }
+```
+
+Outro ponto é o simbolo `_` que é um coringa o que quer dizer que não importa o valor que vir ele vai considerar ele um valor válido é como uma condição "Se tudo que foi verificado antes não deu certo me use".
+Tudo certo agora vamos rodar nosso código.
+
+Agora nossa saída fica assim:
+ ```bash
+warning: `mysterious_forest` (bin "mysterious_forest") generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.14s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+4
+Escolha str é 4
+
+A sua escolha foi 4
+A sua pontuação foi 10
+
+```
+
 
 ## Trabalhando com loop
 
