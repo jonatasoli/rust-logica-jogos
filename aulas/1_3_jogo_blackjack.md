@@ -53,6 +53,43 @@ O empate é uma ocorrência comum no Blackjack e faz parte do jogo. É important
 
 Essas são as regras básicas do Blackjack. Estratégias avançadas podem ser aplicadas, considerando as cartas já distribuídas, mas essas são as regras fundamentais para começar a jogar.
 
+
+# Raio X - Jogo Blackjack
+Guia de Design de Jogo (GDD) - Blackjack
+
+1. Visão Geral do Jogo:
+
+O jogo de Blackjack é uma versão digital do popular jogo de cartas de cassino, também conhecido como 21. Os jogadores competem contra o dealer (a casa) para alcançar uma mão de cartas com um valor total próximo de 21, sem ultrapassá-lo. O objetivo é vencer o dealer sem estourar, o que resultaria em uma perda imediata.
+
+2. Mecânicas de Jogo:
+
+    Distribuição de Cartas: Os jogadores recebem duas cartas viradas para cima, enquanto o dealer recebe uma carta virada para cima e uma carta virada para baixo.
+
+    Tomada de Decisão: Os jogadores têm a opção de "bater" (receber outra carta), "ficar" (manter sua mão atual), "dobrar" (dobrar sua aposta e receber exatamente uma carta adicional) ou "dividir" (dividir sua mão em duas mãos separadas, se as duas primeiras cartas tiverem o mesmo valor).
+
+    Regras de Vitória e Derrota: O jogador ganha se sua mão totalizar mais perto de 21 do que a do dealer sem ultrapassar. Se o jogador ultrapassar 21, ele perde automaticamente. Se a mão do dealer ultrapassar 21 e a do jogador não, o jogador vence.
+
+3. Elementos do Jogo:
+
+    Baralho de Cartas: Um baralho padrão de 52 cartas é usado, sem coringas.
+
+    Aposta: Os jogadores podem apostar uma quantidade de fichas antes do início de cada rodada.
+
+    Interface do Usuário: Uma interface de usuário intuitiva permitirá que os jogadores interajam com o jogo, fazendo escolhas de jogo e visualizando suas mãos e a mão do dealer.
+
+4. Arte e Design Visual:
+
+    Design da Tela: O layout da tela será simples e feito via terminal mostrando a informação das cartas usando seus respectivos caracteres.
+
+    Estilo Visual: Estilo de jogos feitos unicamente para terminal sem nenhum arte especifica.
+
+6. Considerações Técnicas:
+
+    Plataforma: O jogo será desenvolvido para funcionar em desktops, dispositivos móveis e navegadores da web.
+
+    Tecnologia: Será utilizado o framework de desenvolvimento de jogos Bevy, que oferece suporte robusto para gráficos 2D e áudio.
+
+
 ## Iniciando o jogo
 
 Bom vamos criar o nosso jogo.
