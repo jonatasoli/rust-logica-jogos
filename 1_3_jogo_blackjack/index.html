@@ -288,40 +288,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Jogo Blackjack
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         Jogo Blackjack
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#iniciando-o-jogo" class="md-nav__link">
-    Iniciando o jogo
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -376,21 +345,6 @@
   
     
   
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#iniciando-o-jogo" class="md-nav__link">
-    Iniciando o jogo
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -486,6 +440,36 @@
 </ul>
 <p>O empate é uma ocorrência comum no Blackjack e faz parte do jogo. É importante observar que, em alguns casos, as regras do cassino podem variar, e algumas variações do jogo podem ter regras específicas para empates. Ao jogar em um cassino ou seguir regras específicas, é sempre bom estar ciente das políticas e procedimentos locais.</p>
 <p>Essas são as regras básicas do Blackjack. Estratégias avançadas podem ser aplicadas, considerando as cartas já distribuídas, mas essas são as regras fundamentais para começar a jogar.</p>
+<h1 id="raio-x-jogo-blackjack">Raio X - Jogo Blackjack</h1>
+<p>Guia de Design de Jogo (GDD) - Blackjack</p>
+<ol>
+<li>Visão Geral do Jogo:</li>
+</ol>
+<p>O jogo de Blackjack é uma versão digital do popular jogo de cartas de cassino, também conhecido como 21. Os jogadores competem contra o dealer (a casa) para alcançar uma mão de cartas com um valor total próximo de 21, sem ultrapassá-lo. O objetivo é vencer o dealer sem estourar, o que resultaria em uma perda imediata.</p>
+<ol>
+<li>
+<p>Mecânicas de Jogo:</p>
+<p>Distribuição de Cartas: Os jogadores recebem duas cartas viradas para cima, enquanto o dealer recebe uma carta virada para cima e uma carta virada para baixo.</p>
+<p>Tomada de Decisão: Os jogadores têm a opção de "bater" (receber outra carta), "ficar" (manter sua mão atual), "dobrar" (dobrar sua aposta e receber exatamente uma carta adicional) ou "dividir" (dividir sua mão em duas mãos separadas, se as duas primeiras cartas tiverem o mesmo valor).</p>
+<p>Regras de Vitória e Derrota: O jogador ganha se sua mão totalizar mais perto de 21 do que a do dealer sem ultrapassar. Se o jogador ultrapassar 21, ele perde automaticamente. Se a mão do dealer ultrapassar 21 e a do jogador não, o jogador vence.</p>
+</li>
+<li>
+<p>Elementos do Jogo:</p>
+<p>Baralho de Cartas: Um baralho padrão de 52 cartas é usado, sem coringas.</p>
+<p>Aposta: Os jogadores podem apostar uma quantidade de fichas antes do início de cada rodada.</p>
+<p>Interface do Usuário: Uma interface de usuário intuitiva permitirá que os jogadores interajam com o jogo, fazendo escolhas de jogo e visualizando suas mãos e a mão do dealer.</p>
+</li>
+<li>
+<p>Arte e Design Visual:</p>
+<p>Design da Tela: O layout da tela será simples e feito via terminal mostrando a informação das cartas usando seus respectivos caracteres.</p>
+<p>Estilo Visual: Estilo de jogos feitos unicamente para terminal sem nenhum arte especifica.</p>
+</li>
+<li>
+<p>Considerações Técnicas:</p>
+<p>Plataforma: O jogo será desenvolvido para funcionar em desktops, dispositivos móveis e navegadores da web.</p>
+<p>Tecnologia: Será utilizado o framework de desenvolvimento de jogos Bevy, que oferece suporte robusto para gráficos 2D e áudio.</p>
+</li>
+</ol>
 <h2 id="iniciando-o-jogo">Iniciando o jogo</h2>
 <p>Bom vamos criar o nosso jogo.</p>
 <pre><code class="language-bash">cargo new blackjack
@@ -497,7 +481,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 21, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 10, 2024</span>
       
     
   </small>
