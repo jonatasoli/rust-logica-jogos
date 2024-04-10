@@ -35,7 +35,9 @@ Não, mesmo que seja abordados alguns principios do desenvolvimento de jogos, es
 ainda recomenda buscar outros materiais para se aprofundar no tema.
 
 ## Quem vai ministrar essas aulas?
-Sou um profissional com 17 anos de experiência no desenvolvimento de sistemas e websites, meu foco principal está sistemas web. Comecei a aprender Rust em 2020 e estou trabalhando no meu primeiro jogo profissionalmente.
+Olá eu sou o Jônatas sou um profissional com 17 anos de experiência no desenvolvimento de sistemas e websites, meu foco principal está sistemas web. Comecei a aprender Rust em 2020 e estou trabalhando no meu primeiro jogo profissionalmente.
+Também tenho um [canal no Youtube](https://www.youtube.com/@devjonatas)
+Faço lives na [Twitch](https://www.twitch.tv/devjonatas)
 
 ## O que você precisa para acompanhar o curso?
 
