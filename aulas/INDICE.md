@@ -6,7 +6,7 @@
 - [Introdução](./1_0_introducao.md)
 - [Jogo a Floresta Misteriosa](./1_1_jogo_floresta_misteriosa.md)
 - [Tipos de Dados e Funções](./1_2_jogo_da_adivinhacao.md)
-- [Controle de Fluxo e Propriedade (Ownership)](./1_3_jogo_labirinto.md)
+- [Controle de Fluxo e Propriedade (Ownership)](./1_2_jogo_da_adivinhacao.md)
 ### Tópico 2: Introdução à Arte ASCII
 - [Manipulação de Strings e Caracteres ASCII]
 - [Saída para o Terminal e Interface do Usuário]

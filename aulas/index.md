@@ -13,7 +13,7 @@ Durante esse curso você vai aprender o básico de Rust como fluxos condicionais
 
 
 ## Esse curso é gratuito?
-Essa wiki é gratuita assim como os exercícios, porém estou criando um [curso em vídeo que no momento está em preço promocional](https://www.udemy.com/course/rust-da-logica-aos-jogos/?couponCode=FAC5A652FBFFA4850D59) e esse será pago. E caso o estudando desejar poderá me ajudar também através do github sponsor o valor arrecadado vai me ajudar a me manter durante a produção do curso.
+Essa wiki é gratuita assim como os exercícios, porém também há um [curso em vídeo que no momento está em preço promocional](https://www.udemy.com/course/rust-da-logica-aos-jogos/?couponCode=06B9685422839914F1F5) e esse será pago.
 
 ## Onde ele será disponibilizado?
 O curso vai ser disponibilizado através da plataforma Udemy.
@@ -27,7 +27,8 @@ Para fazer esse curso é importante ter noções básicas de informática como:
 
 Obs: O curso será desenvolvido totalmente em linux, caso queira usar Windows é interessante usar WSL2 devo colocar no curso posteriormente um tutorial para configurar o ubuntu com wsl2 mas, por hora recomendo verem o [vídeo do Fábio Akita criando um ambiente](https://www.youtube.com/watch?v=sjrW74Hx5Po).
 
-## [Ementa](./SUMMARY.md)
+## [Ementa](./INDICE.md)
+## [Jogos](./Jogos.md)
 
 ## Após esse curso vou estar capacitado a fazer jogos profissionalmente?
 Não, mesmo que seja abordados alguns principios do desenvolvimento de jogos, esse curso não tem como objetivo ajudar o aluno a fazer jogos profissionais, nesse caso o instrutor
@@ -44,3 +45,7 @@ Sou um profissional com 17 anos de experiência no desenvolvimento de sistemas e
 Todas os exemplos criados para o curso assim como exercicíos estarão no repositório abaixo.
 [https://github.com/jonatasoli/rust-logica-jogos--exercicios](https://github.com/jonatasoli/rust-logica-jogos--exercicios)
 
+# Como posso ajudar?
+Em primeiro lugar fazendo o curso e dando feedback do que gostou e o que não gostou me ajuda muito. Sugestões de melhoria e correções são sempre bem vindas.
+
+Caso desejar poderá me ajudar também através do [github sponsor](https://github.com/sponsors/jonatasoli) ou por pix `contact@jonatasoliveira.dev` valor arrecadado vai me ajudar a me manter durante a produção do curso.
