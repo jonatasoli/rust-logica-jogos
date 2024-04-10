@@ -305,7 +305,7 @@
       
         <li class="md-nav__item">
   <a href="#variaveis" class="md-nav__link">
-    Variáveis
+    Variaveis
   </a>
   
 </li>
@@ -318,8 +318,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#introducao-a-imutabilidade" class="md-nav__link">
-    Introdução a imutabilidade
+  <a href="#introducao-a-variaveis-e-imutabilidade" class="md-nav__link">
+    Introdução a váriaveis e imutabilidade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variaveis-e-mutabilidade" class="md-nav__link">
+    Variáveis e mutabilidade
   </a>
   
 </li>
@@ -329,12 +336,18 @@
     Recebendo parametros do jogador e usando a condicional match
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#trabalhando-com-loop" class="md-nav__link">
-    Trabalhando com loop
+    <nav class="md-nav" aria-label="Recebendo parametros do jogador e usando a condicional match">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alguns-ajustes" class="md-nav__link">
+    Alguns ajustes
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -447,7 +460,7 @@
       
         <li class="md-nav__item">
   <a href="#variaveis" class="md-nav__link">
-    Variáveis
+    Variaveis
   </a>
   
 </li>
@@ -460,8 +473,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#introducao-a-imutabilidade" class="md-nav__link">
-    Introdução a imutabilidade
+  <a href="#introducao-a-variaveis-e-imutabilidade" class="md-nav__link">
+    Introdução a váriaveis e imutabilidade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variaveis-e-mutabilidade" class="md-nav__link">
+    Variáveis e mutabilidade
   </a>
   
 </li>
@@ -471,12 +491,18 @@
     Recebendo parametros do jogador e usando a condicional match
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#trabalhando-com-loop" class="md-nav__link">
-    Trabalhando com loop
+    <nav class="md-nav" aria-label="Recebendo parametros do jogador e usando a condicional match">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alguns-ajustes" class="md-nav__link">
+    Alguns ajustes
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -539,8 +565,30 @@ Cargo.toml
 src
 </code></pre>
 <p>Uma observação os arquivos com o <code>.</code> na frente como o <code>.git</code> e o <code>.gitignore</code> são arquivos ocultos no linux.</p>
+<p>Bom agora vou dar o comando <code>cargo run</code> para executar meu projeto.</p>
+<p>Assim vamos ter a saída.</p>
+<pre><code class="language-rust">➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Hello, world!
+</code></pre>
+<p>Uma coisa interessante de notar quando executamos um projeto rust é que na primeira linha:
+<code>Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)</code>
+Nós temos o nome do nosso executável, no caso <code>mysterious_forest</code> e a versão do nosso executável no caso <code>v0.1.0</code>.</p>
+<p>Na segunda linha temos:
+<code>Finished dev [unoptimized + debuginfo] target(s) in 0.12s</code>
+Aqui temos a informação que nosso executável foi compilado em modo dev e o tempo de compilação no caso <code>0.12</code></p>
+<p>Na terceira linha temos:
+<code>Running target/debug/mysterious_forest</code>
+Essa linha nos mostra onde fica nosso executável ele que vamos dar a para que as pessoas possam jogar nosso jogo.</p>
+<p>Certo agora vamos entrar no projeto no arquivo no caminho <code>src/main.rs</code></p>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre>
+<p>Isso é um "Hello, world!" padrão de um projeto rust, então nesse caso não começamos com um "Hello, world!" no projeto pois ele já vem no momento da criação.</p>
 <h2 id="falando-de-tipagem">Falando de tipagem</h2>
-<p>Introdução à Tipagem em Rust</p>
 <p>A tipagem em programação se refere à maneira como as linguagens de programação tratam os tipos de dados, ou seja, como elas definem e gerenciam os diferentes tipos de valores que podem ser usados em um programa. Rust é uma linguagem de programação que utiliza um sistema de tipagem estática, o que significa que os tipos de dados são verificados em tempo de compilação, tornando o código mais seguro e eficiente.
 Tipagem Estática</p>
 <p>Em Rust, você precisa declarar explicitamente o tipo de dado que uma variável pode armazenar. Isso é feito durante a declaração da variável, permitindo que o compilador verifique se o valor atribuído à variável é compatível com o tipo declarado. Se houver uma incompatibilidade de tipos, o código não será compilado, o que ajuda a evitar erros em tempo de execução.
@@ -608,11 +656,134 @@ let texto_estatico: &amp;str = &quot;Isso é um texto imutável&quot;;
 let mut texto_mutavel: String = String::from(&quot;Isso é um texto mutável&quot;);
 </code></pre></div>
 <p>Essa é uma explicação mais abrangente sobre a tipagem em Rust, os tipos primitivos mais comuns e a diferença entre str e String. À medida que você se familiariza mais com Rust, poderá explorar tipos compostos, structs, enums e outros recursos poderosos que a linguagem oferece para lidar com problemas específicos de programação.</p>
-<h2 id="variaveis">Variáveis</h2>
+<h2 id="variaveis">Variaveis</h2>
+<p>Bom para começar nosso jogo precisamos definir algumas estruturas de dados que vão armazenar a pontuação do nosso jogador e o qual escolha ele vai fazer em seguida, pra isso vamos precisar criar variáveis.</p>
+<p>As variáveis em rust são declarados usando a palavra reservada <code>let</code> o nome da variável e o tipo dela além do seu valor de inicialização.
+Uma váriavel em rust é diferente de outras linguagens pois ela é imutável ou seja quando inicializamos ela, a mesma não altera seu valor, há uma forma de informar explicitamente que queremos que a variável receba valores dinamicamente mas, vamos ver mais a frente.</p>
+<p>Então agora dentro do nosso main vamos declarar a primeira variável do nosso projeto.</p>
+<pre><code class="language-rust">fn main() {
+    let pontuacao: i32 = 0;
+}
+ ```
+
+Vamos da uma olhada mais de perto no nosso código:
+`fn` é a palavra reservada para declarar uma função
+`main` é o nome da nossa função e os parenteses `()` é a estrutura que usamos para declarar os parametros da nossa função que no caso não temos nenhum então ela está vazia.
+Para simplificar um pouco as coisas parametros nada mais é que as variáveis que uma função vai receber quando ela for executada, mas não tema em um outor momento vamos falar mais de funções e parametros.
+`{}` determina um bloco de código então o que estiver ali dentro vai ser o código que será executado pela nossa função main.
+`let pontuacao: i32 = 0;` aqui declaramos nossa variável começando com a palavra reservada `let` depois o nome da variável que no caso é `pontuacao` o tipo dela que no nosso caso é um `i32` ai temos o `=` que o nosso simbulo de atribuição ou seja, que `pontuacao` vai receber um valor, na sequencia temos o valor que estamos inicializando que no caso é o valor `0` e finalmente temos o simbulo `;` que indica pro compilador que a linha de execução foi encerrada finalizando a instrução.
+
+Com isso podemos criar nossa segunda variável:
+
+```rust
+fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+}
+</code></pre>
+<p>Então criamos uma variavel escolha que também é uma <code>i32</code> só que agora colocamos como valor incial <code>1</code>.</p>
+<p>Para dar sequência no nosso projeto vamos criar uma mensagem de boas-vindas, pra isso vamos usar uma macro no rust que nada mais é que uma sequência de instruções que vão rodar internamente quando ela for executada que no nosso caso é o <code>println!</code> o  <code>!</code> no final nos indica que ela é uma macro.</p>
+<pre><code class="language-rust">fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    ==println!(&quot;Bem-vindo à floresta misteriosa&quot;)==
+}
+
+</code></pre>
+<p>Um ponto importante pra se observar nós não usamos o simbolo <code>;</code> no final da nossa macro <code>println!</code> isso por que em rust dentro de um bloco de código a ultima linha não precisa ter esse simbolo pois ele interpreta essa última linha como o valor a se retornar da função no nosso caso porém estamos executando uma macro que vai imprimir valores na tela então ele basicamente não está retornando nada.
+Você pode observar que dentro dos parenteses da nossa macro temos os simbolos de aspas <code>""</code> e dentro delas colocamos nosso texto com acentos. Como o rust usa o padrão unicode para caracteres podemos usar qualquer simbolo ou diagrama representado pela tabela unicode. Mas, no nosso código em si nós evitamos usar acentos e caracteres especiais.</p>
+<p>Agora vamos imprimir na tela o valor da nossa escolha e a pontuação pra isso vamos usar novamente a macro <code>println!</code>.</p>
+<pre><code class="language-rust">fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+    ==
+    println!(&quot;A sua escolha foi {}&quot;, escolha);
+    println!(&quot;A sua pontuação foi {}&quot;, pontuacao)
+    ==
+}
+
+</code></pre>
+<p>Observe que só deixamos sem o <code>;</code> a ultima linha por isso no nosso primeiro <code>println!</code> agora tem a pontuação. Outra coisa é que nosso código está usando a macro de uma forma diferente.
+Temos o simbolo das chaves <code>{}</code> dentro das aspas, isso indica que queremos imprimir o valor de uma variável que no nosso caso são as variáveis <code>escolha</code> e <code>pontuacao</code>. No caso se quisermos colocar mais variáveis dentro de uma string que é o caso do nosso <code>println!</code> podemos usar mais chaves que ele vai entender.</p>
+<p>Agora podemos rodar novamente  o <code>cargo run</code> para ver o retorno da nossa função.</p>
+<pre><code class="language-bash">➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+A sua escolha foi 1
+A sua pontuação foi 0
+</code></pre>
+<p>Perfeito tudo funcionando!</p>
 <h2 id="controle-de-fluxo-condicional-com-if">Controle de fluxo condicional com if</h2>
-<h2 id="introducao-a-imutabilidade">Introdução a imutabilidade</h2>
-<p>Introdução a variáveis e mutabilidade
-Variáveis e Constantes em Rust: Uma Introdução</p>
+<p>Vamos da uma olhada agora em como dar escolhas para nosso jogador. Primeiro vamos colocar um <code>println!</code> pedindo a escolha e 4 opções númericas para ele escolher.</p>
+<pre><code class="language-rust">\\ código
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+
+    println!(&quot;Por favor escolha uma opção:&quot;);
+    println!(&quot;1 - Entrar na caverna escura&quot;);
+    println!(&quot;2 - Seguir no caminho iluminado&quot;);
+    println!(&quot;3 - Cruzar a ponte frágil&quot;);
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+\\código
+</code></pre>
+<p>Agora precisamos de um recurso que nos mostre que quando digitarmos no teclado a opção 1 ele faça a ação <code>Entrar na caverna escura</code> e assim com as demais opções e quando ele escolher a opção faça a soma ou a subtração dos pontos. Pra isso vamos usar o <code>if</code> ele é nosso primeiro condicional e com ele podemos fazer que com determinada escolha ele faça uma sequencia de ações no nosso caso se o jogador escolher a opção 1 precisa realizar a ação de somar 50 pontos na pontuação atual.</p>
+<pre><code class="language-rust">\\código
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    }
+\\código
+</code></pre>
+<p>Vamos ter um erro mas, vamos ignora-lo por enquanto, agora precisamos colocar as outras condições então usamos a palavra reservada <code>if</code> e poderiamos ficar usando ela para as demais opções mas, há um problema, nosso código usando 4 <code>if's</code> nesse caso ele vai verificar todas 4 vezes em todos os casos. Então podemos usar um outro recurso que é o <em>senão se</em>  que basicamente vai verificar a primeira condição e se ela não for verdade e vai verificar a próxima condição e assim sucessivamente.<br />
+O código ficaria assim:</p>
+<pre><code class="language-rust">fn main() {
+    let pontuacao: i32 = 0;
+    let escolha: i32 = 1;
+
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+
+    println!(&quot;Por favor escolha uma opção:&quot;);
+    println!(&quot;1 - Entrar na caverna escura&quot;);
+    println!(&quot;2 - Seguir no caminho iluminado&quot;);
+    println!(&quot;3 - Cruzar a ponte frágil&quot;);
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+
+==
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+==
+
+    println!(&quot;A sua escolha foi {}&quot;, escolha);
+    println!(&quot;A sua pontuação foi {}&quot;, pontuacao)
+}
+</code></pre>
+<p>Agora vamos rodar nosso código ele vai receber um erro igual o abaixo:</p>
+<pre><code class="language-bash">error[E0384]: cannot assign twice to immutable variable `pontuacao`
+  --&gt; src/main.rs:20:9
+   |
+2  |     let pontuacao: i32 = 0;
+   |         ---------
+   |         |
+   |         first assignment to `pontuacao`
+   |         help: consider making this binding mutable: `mut pontuacao`
+...
+20 |         pontuacao = pontuacao + 10;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable
+
+</code></pre>
+<p>Aqui ele está dizendo que não pode mudar uma variável imutável e é isso que vamos explorar a seguinte.</p>
+<h2 id="introducao-a-variaveis-e-imutabilidade">Introdução a váriaveis e imutabilidade</h2>
 <p>Se você está começando a aprender sobre programação, é importante entender o que são variáveis e constantes em Rust, uma linguagem de programação moderna e segura. Vamos explorar esses conceitos e suas implicações, incluindo exemplos de constantes.
 Variáveis em Rust</p>
 <p>Uma variável em Rust é uma forma de armazenar e manipular dados em um programa. É como uma caixa que você pode usar para guardar informações temporariamente. No entanto, Rust difere de muitas outras linguagens de programação em um aspecto fundamental: por padrão, as variáveis são imutáveis, o que significa que não podem ser alteradas após a primeira atribuição.</p>
@@ -677,8 +848,358 @@ Clojure
 </code></pre></div>
 <p>Em resumo, variáveis e constantes em Rust têm a característica única de serem imutáveis por padrão, proporcionando segurança e legibilidade. A palavra-chave mut permite que você torne variáveis mutáveis quando necessário, mantendo o controle sobre a mutabilidade dos dados em seu código. Rust também suporta constantes, que são valores imutáveis definidos em tempo de compilação. Essa abordagem pode ser diferente de outras linguagens, mas traz benefícios significativos em termos de segurança e concorrência.</p>
 <p>É importante reforçar que com isso você pode usar uma variável imutável durante a maior parte da execução e quando ela precisar ser alterada redeclarar ela como mutável mais a frente vamos falar do conceito de como funciona o gerenciamente de memória do rust e isso vai acabar ficando mais claro.</p>
+<h2 id="variaveis-e-mutabilidade">Variáveis e mutabilidade</h2>
+<p>Bom conforme vimos anteriormente nosso código estava dando erro pois o rust acusava que estavamos tentando mudar uma variável imutável. Isso acontece por que em rust todas as variáveis por padrão são imutáveis, então não podemos modifica-la depois inicializar ela.
+Para isso vamos precisamos indicar pro rust que nossa variável é mutável usando a palavra reservada <code>mut</code> depois do <code>let</code>.</p>
+<pre><code class="language-rust">fn main() {
+    ==let mut pontuacao: i32 = 0;== 
+    let escolha: i32 = 1;
+
+    // código
+}
+
+</code></pre>
+<p>Agora você pode ver que seu editor deve parar de dar algum aviso de erro. Vamos tentar rodar nosso código.</p>
+<pre><code class="language-bash">mysterious_forest on  main [?] is 📦 v0.1.0 via 🦀 v1.73.0 on ☁️  (eu-west-2) took 4m4s
+➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+A sua escolha foi 1
+A sua pontuação foi 50
+
+</code></pre>
+<p>Certo agora nosso código foi executado com sucesso mostrando que nossa pontuação foi 50.</p>
 <h2 id="recebendo-parametros-do-jogador-e-usando-a-condicional-match">Recebendo parametros do jogador e usando a condicional match</h2>
-<h2 id="trabalhando-com-loop">Trabalhando com loop</h2>
+<p>Bom nosso jogo está nos devolvendo a pontuação da nossa escolha, mas nosso jogador ainda não consegue nos passar a opção que ele quer, então pra isso vamos precisar receber os dados do usuário isso quer dizer que precisamos pedir pro rust pedir o <em>input</em> do teclado do usuário.
+Pra isso vamos importar uma biblioteca que existe dentro do <em>built in</em> do rust ou seja uma biblioteca que ele já nos fornece por padrão pra ser usada.</p>
+<p>Para importa-la precisamos usar a palavra reservada <code>use</code> chamar a biblioteca que queremos que no caso é a <code>std</code> que á biblioteca <em>standard</em> do rust, e no caso eu quero um módulo especifico da biblioteca e não ela toda pra chamar o módulo precisamos usar o simbolo <code>::</code> para indicar que vamos selecionar um módulo e escolhe-lo que no caso é o módulo <code>io</code>.</p>
+<p>Nosso código ficaria assim:</p>
+<pre><code class="language-rust">use std::io;
+</code></pre>
+<p>Agora vamos precisar criar uma variável mutavel para receber a escolha do nosso usuário, no caso a escolha de um usuário sempre será uma sequencia de caracteres no caso podemos incializa-la com uma <code>String</code> vazia conforme abaixo:</p>
+<pre><code class="language-rust">    //código
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+
+    ==let mut escolha_str: String = String::new();==
+
+    if escolha == 1 {
+    //código
+</code></pre>
+<p>Aqui usamos o simbolo <code>::</code> para chamar um método associado chamado <code>new</code> dentro da <code>Struct</code> chamada <code>String</code> que é uma sequência de caracteres.</p>
+<p>Agora vamos usar o módulo <code>io</code> e chamar duas funções a <code>stdin</code> e a <code>read_line</code>, nesse primeiro momento não precisa se preocupar muito com a chamada que vou fazer, mas atente-se que vou colocar como parametro de <code>read_line</code> nossa variável <code>escolha_str</code> mais a frente vamos explicar com mais detalhes como funciona essa chamada que vamos fazer.</p>
+<pre><code class="language-rust">    // código
+    let mut escolha_str: String = String::new();
+
+    ==io::stdin().read_line(&amp;mut escolha_str);==
+
+    if escolha == 1 {
+    // código
+
+</code></pre>
+<p>Agora vamos fazer um <code>println!</code> para imprimir o que o usuário escolheu no meu caso vou escolha a opção <code>4</code>.</p>
+<pre><code class="language-rust">    // código
+    io::stdin().read_line(&amp;mut escolha_str);
+
+    ==println!(&quot;Escolha str é {}&quot;, escolha_str);==
+
+    if escolha == 1 {
+    // código
+</code></pre>
+<p>Com a saída:</p>
+<pre><code class="language-rust">warning: `mysterious_forest` (bin &quot;mysterious_forest&quot;) generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.13s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+5
+Escolha str é 4
+
+A sua escolha foi 1
+A sua pontuação foi 50
+</code></pre>
+<p>Atente-se que a escolha é ainda 1 mas, a escolha str foi 4.</p>
+<p>Agora quero que meu escolha receba o valor de escolha_str, porém o escolha_str é uma <code>String</code> e o escolha é um <code>i32</code>. Então pra conseguir fazer o que quero vou mudar minha variável escolha para <code>u32</code> para não receber número negativos e vou converter minha <code>String</code> para isso preciso remover espaços e quebras de linha e pra isso uso a função <code>trim</code> e depois chamo a função <code>parse</code> que vai tentar converter pro tipo da variável que quero.</p>
+<p>É importante ressalta que a função <code>parse</code> vai me voltar um <code>Rusult</code> que é uma estrutura no formato abaixo:</p>
+<pre><code>    (OK, Err)
+</code></pre>
+<p>Onde <code>OK</code> vai ter o valor do parse caso de certo e em <code>Err</code> vai voltar o erro caso ocorra um erro. Essa estrutura nunca vai voltar os dois valores. Pois ele ou vai retornar um valor do tipo <code>OK</code> ou um valor do tipo <code>Err</code> assim não precisando ter recursos como o null de algumas linguagens.</p>
+<p>Então vamos mover nosso escolha para abaixo de escolha_str e fazer o parse.</p>
+<pre><code class="language-rust">    println!(&quot;Escolha str é {}&quot;, escolha_str);
+    ==let escolha: i32 = escolha_str.trim().parse();==
+
+    if escolha == 1 {
+
+</code></pre>
+<p>No caso como o <code>parse</code> vai nos retornar ou <code>OK</code> ou <code>Err</code> eu quero que quando vier um erro nossa escolha receba o valor <code>0</code>.
+Poderiamos fazer isso com um <code>if</code> que nossa estrutura condicional que já conhecemos, mas, nesse momento quero lhe mostrar outra estrutura que no caso é o <code>match</code>.</p>
+<pre><code class="language-rust">    //código
+    println!(&quot;Escolha str é {}&quot;, escolha_str);
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; 0,
+    };
+
+    if escolha == 1 {
+</code></pre>
+<p>Sua estrutura é:</p>
+<pre><code>    match &lt;condição&gt; {
+        possivel retorno =&gt; retorno do código,
+        possivel retorno 2 =&gt; retorno do código,
+        ...
+        possível retorno n =&gt; retorno do código
+    }
+</code></pre>
+<p>Outro ponto é o simbolo <code>_</code> que é um coringa o que quer dizer que não importa o valor que vir ele vai considerar ele um valor válido é como uma condição "Se tudo que foi verificado antes não deu certo me use".
+Tudo certo agora vamos rodar nosso código.</p>
+<p>Agora nossa saída fica assim:
+ <code>``bash
+warning:</code>mysterious_forest<code>(bin "mysterious_forest") generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.14s
+     Running</code>target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+4
+Escolha str é 4</p>
+<p>A sua escolha foi 4
+A sua pontuação foi 10</p>
+<pre><code>
+## Trabalhando com loop
+
+Bom agora a primeira coisa que quero fazer é parar de dar o warning na linha onde capturamos a entrada do jogador pra isso vamos fazer uma alteração no código:
+
+```rust
+
+    let _ = io::stdin().read_line(&amp;mut escolha_str);
+</code></pre>
+<p>Há outras formas de resolver isso mas, nesse momento vamos fazer esse que é o mais simples. Agora vamos fazer nossa condição de vitória e derrota.</p>
+<p>// main.rs</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 0;
+
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+
+    println!(&quot;Por favor escolha uma opção:&quot;);
+    println!(&quot;1 - Entrar na caverna escura&quot;);
+    println!(&quot;2 - Seguir no caminho iluminado&quot;);
+    println!(&quot;3 - Cruzar a ponte frágil&quot;);
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+
+    let mut escolha_str: String = String::new();
+
+    let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; 0,
+    };
+
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+    ==
+    if pontuacao &gt;= 100 {
+        println!(&quot;Parabéns você é um verdadeiro aventureiro!&quot;);
+    } else if pontuacao &lt;= 0 {
+        println!(&quot;Que pena você perdeu&quot;);
+    }
+
+    println!(&quot;Obrigado por jogar 'A floresta misteriosa!'&quot;)
+    ==
+}
+
+</code></pre>
+<p>Aqui eu fiz um if verificando se a pontuação é maior ou igual a 100 coloco um print parabenizando pela vitória ou se a pontuação for menor ou igual a zero informando a derrota.
+Há também mais um print para informar o fim do jogo além de ter tirado nosso println! para escolha str.</p>
+<p>Agora podemos rodar nosso jogo e ver a condição de derrota já que a de vitória ainda não vamos conseguir por conta da pontuação.</p>
+<pre><code class="language-bash">✦ ➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.17s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+3
+Obrigado por jogar 'A floresta misteriosa!'
+
+</code></pre>
+<blockquote>
+<p>[!info] Condicionais</p>
+<p>Vale ressaltar que podemos usar <code>==</code> para verificar igualdades, <code>!=</code> para verificar &gt;diferenças, <code>&lt;=</code> para verificar se é menor ou igual, <code>&gt;=</code> para verificar se é maior ou igual assim como <code>&lt;</code> e <code>&gt;</code> para verificar se é menor e igual respectivamente.
+</p>
+</blockquote>
+<p>Agora vamos por 100 na ultima opção para conseguirmos testar nossa condição de vitória.</p>
+<pre><code class="language-rust">    } else if escolha == 4 {
+        pontuacao = pontuacao + 100;
+    }
+
+</code></pre>
+<p>Agora podemos testar.</p>
+<pre><code class="language-bash">mysterious_forest on  main [?] is 📦 v0.1.0 via 🦀 v1.76.0 on ☁️   (eu-west-2) took 11s
+✦ ➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+4
+Parabéns você é um verdadeiro aventureiro!
+Obrigado por jogar 'A floresta misteriosa!'
+
+</code></pre>
+<p>Certo agora temos nossa condição de vitória e derrota funcionando, mas basicamente nosso jogo por enquanto só podemos escolher uma opção e o jogo acaba. Então precisamos de uma forma de pode escolher repetidas vezes. 
+Primeiro vamos ajustar nossa pontuação inicial e o ganho e perda da pontuação do jogo.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 50;
+
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+
+    println!(&quot;Por favor escolha uma opção:&quot;);
+    println!(&quot;1 - Entrar na caverna escura&quot;);
+    println!(&quot;2 - Seguir no caminho iluminado&quot;);
+    println!(&quot;3 - Cruzar a ponte frágil&quot;);
+    println!(&quot;4 - Descansar na beira do riacho&quot;);
+
+    let mut escolha_str: String = String::new();
+
+    let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; 0,
+    };
+
+    if escolha == 1 {
+        pontuacao = pontuacao + 30;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+
+    if pontuacao &gt;= 100 {
+        println!(&quot;Parabéns você é um verdadeiro aventureiro!&quot;);
+    } else if pontuacao &lt;= 0 {
+        println!(&quot;Que pena você perdeu&quot;);
+    }
+
+    println!(&quot;Obrigado por jogar 'A floresta misteriosa!'&quot;)
+}
+
+</code></pre>
+<p>Agora não conseguimos chegar nem a 100 e nem a 0 na primeira escolha, agora precisamos de algo que ajude nosso jogo a se repetir para isso vamos usar uma estrutura chamada <code>loop</code>.</p>
+<pre><code class="language-rust">use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 50;
+
+    println!(&quot;Bem-vindo à floresta misteriosa&quot;);
+
+    ==loop <mark class="critic">
+        println!(&quot;Por favor escolha uma opção:&quot;);
+        println!(&quot;1 - Entrar na caverna escura&quot;);
+        println!(&quot;2 - Seguir no caminho iluminado&quot;);
+        println!(&quot;3 - Cruzar a ponte frágil&quot;);
+        println!(&quot;4 - Descansar na beira do riacho&quot;);
+
+        let mut escolha_str: String = String::new();
+
+        let _ = io::stdin().read_line(&amp;mut escolha_str);
+
+        let escolha: i32 = match escolha_str.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; 0,
+        };
+
+        if escolha == 1 {
+            pontuacao = pontuacao + 30;
+        } else if escolha == 2 {
+            pontuacao = pontuacao - 20;
+        } else if escolha == 3 {
+            pontuacao = pontuacao - 20;
+        } else if escolha == 4 {
+            pontuacao = pontuacao + 10;
+        }
+
+        if pontuacao &gt;= 100 {
+            println!(&quot;Parabéns você é um verdadeiro aventureiro!&quot;);
+            ==break;==
+        } else if pontuacao &lt;= 0 {
+            println!(&quot;Que pena você perdeu&quot;);
+            ==break;==
+        }
+    </mark>==
+    println!(&quot;Obrigado por jogar 'A floresta misteriosa!'&quot;)
+}
+</code></pre>
+<p>No código acima envolvelmos a lógica do nosso jogo dentro do <code>loop</code> com o bloco de código <code>{}</code> evitando as mensagens de vitória e derrota.
+Se deixarmos só o <code>loop</code> nosso código iria rodar infinitamente, então precisamos definir uam condição para ele parar e no nosso caso podemos usar nossa condição de vitória/derrota, para isso depois da mensagens usamos a palavra reservada <code>break</code>.</p>
+<p>Agora se rodarmos nosso jogo com <code>cargo run</code> nosso jogo já está funcionando perfeitamente.</p>
+<h3 id="alguns-ajustes">Alguns ajustes</h3>
+<p>Vamos fazer algumas melhorias no código, primeiro vou simplicicar a soma e subtração da nossa pontuação usando a expressão <code>+=</code> e <code>-=</code>.</p>
+<pre><code class="language-rust">        if escolha == 1 {
+            pontuacao += 30;
+        } else if escolha == 2 {
+            pontuacao -= 20;
+        } else if escolha == 3 {
+            pontuacao += 20;
+        } else if escolha == 4 {
+            pontuacao += 10;
+        }
+
+</code></pre>
+<p>Agora vamos por alguma mensagem de feedback pro jogador saber se ele está fazendo uma ação correta ou não.</p>
+<pre><code class="language-rust">        if escolha == 1 {
+            ==println!(&quot;Você entrou na caverna escura e econtrou um tesouro parabéns!&quot;);==
+            pontuacao += 30;
+        } else if escolha == 2 {
+            ==println!(&quot;Você encontrou um Ogro poderoso, mas com sorte conseguiu escapar!&quot;);==
+            pontuacao -= 20;
+        } else if escolha == 3 {
+            ==println!(&quot;A ponte se quebrou com sorte você conseguiu nadar de volta para a margem!&quot;);==
+            pontuacao += 20;
+        } else if escolha == 4 {
+            ==println!(&quot;Você conseguiu recuperar um pouco das suas forças!&quot;);==
+            pontuacao += 10;
+        }
+
+</code></pre>
+<p>Agora se rodarmos o feedback ficou muito mais fácil pro jogador.</p>
+<p>Como desafio tente colocar uma opção de jogar novamente o jogo com a opção S/N.</p>
+<p>Com isso finalizamos nosso primeiro jogo em Rust, agora você pode tentar fazer os desafios abaixo.</p>
 <h2 id="exercicios-sugeridos">Exercicíos sugeridos</h2>
 <p>Aqui vou colocar os projetos para você fazer suas revisões, muitas vezes os desafios poderão não ser jogos infelizmente, mas estarei disponível no forum ou no Revolt para tirar dúvidas.</p>
 <p>Revisão 1</p>
@@ -701,7 +1222,7 @@ Clojure
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 27, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 10, 2024</span>
       
     
   </small>
