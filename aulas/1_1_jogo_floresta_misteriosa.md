@@ -579,8 +579,259 @@ A sua pontuação foi 10
 
 ```
 
-
 ## Trabalhando com loop
+
+Bom agora a primeira coisa que quero fazer é parar de dar o warning na linha onde capturamos a entrada do jogador pra isso vamos fazer uma alteração no código:
+
+```rust
+
+    let _ = io::stdin().read_line(&mut escolha_str);
+```
+
+Há outras formas de resolver isso mas, nesse momento vamos fazer esse que é o mais simples. Agora vamos fazer nossa condição de vitória e derrota.
+
+// main.rs
+```rust
+use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 0;
+
+    println!("Bem-vindo à floresta misteriosa");
+
+    println!("Por favor escolha uma opção:");
+    println!("1 - Entrar na caverna escura");
+    println!("2 - Seguir no caminho iluminado");
+    println!("3 - Cruzar a ponte frágil");
+    println!("4 - Descansar na beira do riacho");
+
+    let mut escolha_str: String = String::new();
+
+    let _ = io::stdin().read_line(&mut escolha_str);
+
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) => num,
+        Err(_) => 0,
+    };
+
+    if escolha == 1 {
+        pontuacao = pontuacao + 50;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+    ==
+    if pontuacao >= 100 {
+        println!("Parabéns você é um verdadeiro aventureiro!");
+    } else if pontuacao <= 0 {
+        println!("Que pena você perdeu");
+    }
+
+    println!("Obrigado por jogar 'A floresta misteriosa!'")
+    ==
+}
+
+```
+
+Aqui eu fiz um if verificando se a pontuação é maior ou igual a 100 coloco um print parabenizando pela vitória ou se a pontuação for menor ou igual a zero informando a derrota.
+Há também mais um print para informar o fim do jogo além de ter tirado nosso println! para escolha str.
+
+Agora podemos rodar nosso jogo e ver a condição de derrota já que a de vitória ainda não vamos conseguir por conta da pontuação.
+
+```bash
+✦ ➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.17s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+3
+Obrigado por jogar 'A floresta misteriosa!'
+
+```
+
+>[!info] Condicionais
+>
+>Vale ressaltar que podemos usar `==` para verificar igualdades, `!=` para verificar >diferenças, `<=` para verificar se é menor ou igual, `>=` para verificar se é maior ou igual assim como `<` e `>` para verificar se é menor e igual respectivamente.
+> 
+
+Agora vamos por 100 na ultima opção para conseguirmos testar nossa condição de vitória.
+
+```rust
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 100;
+    }
+
+```
+
+Agora podemos testar.
+
+```bash
+mysterious_forest on  main [?] is 📦 v0.1.0 via 🦀 v1.76.0 on ☁️   (eu-west-2) took 11s
+✦ ➜ cargo run
+   Compiling mysterious_forest v0.1.0 (/home/feanor/projects/mysterious_forest)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+     Running `target/debug/mysterious_forest`
+Bem-vindo à floresta misteriosa
+Por favor escolha uma opção:
+1 - Entrar na caverna escura
+2 - Seguir no caminho iluminado
+3 - Cruzar a ponte frágil
+4 - Descansar na beira do riacho
+4
+Parabéns você é um verdadeiro aventureiro!
+Obrigado por jogar 'A floresta misteriosa!'
+
+```
+
+Certo agora temos nossa condição de vitória e derrota funcionando, mas basicamente nosso jogo por enquanto só podemos escolher uma opção e o jogo acaba. Então precisamos de uma forma de pode escolher repetidas vezes. 
+Primeiro vamos ajustar nossa pontuação inicial e o ganho e perda da pontuação do jogo.
+
+```rust
+use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 50;
+
+    println!("Bem-vindo à floresta misteriosa");
+
+    println!("Por favor escolha uma opção:");
+    println!("1 - Entrar na caverna escura");
+    println!("2 - Seguir no caminho iluminado");
+    println!("3 - Cruzar a ponte frágil");
+    println!("4 - Descansar na beira do riacho");
+
+    let mut escolha_str: String = String::new();
+
+    let _ = io::stdin().read_line(&mut escolha_str);
+
+    let escolha: i32 = match escolha_str.trim().parse() {
+        Ok(num) => num,
+        Err(_) => 0,
+    };
+
+    if escolha == 1 {
+        pontuacao = pontuacao + 30;
+    } else if escolha == 2 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 3 {
+        pontuacao = pontuacao - 20;
+    } else if escolha == 4 {
+        pontuacao = pontuacao + 10;
+    }
+
+    if pontuacao >= 100 {
+        println!("Parabéns você é um verdadeiro aventureiro!");
+    } else if pontuacao <= 0 {
+        println!("Que pena você perdeu");
+    }
+
+    println!("Obrigado por jogar 'A floresta misteriosa!'")
+}
+
+```
+
+Agora não conseguimos chegar nem a 100 e nem a 0 na primeira escolha, agora precisamos de algo que ajude nosso jogo a se repetir para isso vamos usar uma estrutura chamada `loop`.
+
+```rust
+use std::io;
+
+fn main() {
+    let mut pontuacao: i32 = 50;
+
+    println!("Bem-vindo à floresta misteriosa");
+
+    ==loop {==
+        println!("Por favor escolha uma opção:");
+        println!("1 - Entrar na caverna escura");
+        println!("2 - Seguir no caminho iluminado");
+        println!("3 - Cruzar a ponte frágil");
+        println!("4 - Descansar na beira do riacho");
+
+        let mut escolha_str: String = String::new();
+
+        let _ = io::stdin().read_line(&mut escolha_str);
+
+        let escolha: i32 = match escolha_str.trim().parse() {
+            Ok(num) => num,
+            Err(_) => 0,
+        };
+
+        if escolha == 1 {
+            pontuacao = pontuacao + 30;
+        } else if escolha == 2 {
+            pontuacao = pontuacao - 20;
+        } else if escolha == 3 {
+            pontuacao = pontuacao - 20;
+        } else if escolha == 4 {
+            pontuacao = pontuacao + 10;
+        }
+
+        if pontuacao >= 100 {
+            println!("Parabéns você é um verdadeiro aventureiro!");
+            ==break;==
+        } else if pontuacao <= 0 {
+            println!("Que pena você perdeu");
+            ==break;==
+        }
+    ==}==
+    println!("Obrigado por jogar 'A floresta misteriosa!'")
+}
+```
+
+No código acima envolvelmos a lógica do nosso jogo dentro do `loop` com o bloco de código `{}` evitando as mensagens de vitória e derrota.
+Se deixarmos só o `loop` nosso código iria rodar infinitamente, então precisamos definir uam condição para ele parar e no nosso caso podemos usar nossa condição de vitória/derrota, para isso depois da mensagens usamos a palavra reservada `break`.
+
+Agora se rodarmos nosso jogo com `cargo run` nosso jogo já está funcionando perfeitamente.
+### Alguns ajustes
+
+Vamos fazer algumas melhorias no código, primeiro vou simplicicar a soma e subtração da nossa pontuação usando a expressão `+=` e `-=`.
+
+```rust
+        if escolha == 1 {
+            pontuacao += 30;
+        } else if escolha == 2 {
+            pontuacao -= 20;
+        } else if escolha == 3 {
+            pontuacao += 20;
+        } else if escolha == 4 {
+            pontuacao += 10;
+        }
+
+```
+
+Agora vamos por alguma mensagem de feedback pro jogador saber se ele está fazendo uma ação correta ou não.
+
+```rust
+        if escolha == 1 {
+            ==println!("Você entrou na caverna escura e econtrou um tesouro parabéns!");==
+            pontuacao += 30;
+        } else if escolha == 2 {
+            ==println!("Você encontrou um Ogro poderoso, mas com sorte conseguiu escapar!");==
+            pontuacao -= 20;
+        } else if escolha == 3 {
+            ==println!("A ponte se quebrou com sorte você conseguiu nadar de volta para a margem!");==
+            pontuacao += 20;
+        } else if escolha == 4 {
+            ==println!("Você conseguiu recuperar um pouco das suas forças!");==
+            pontuacao += 10;
+        }
+
+```
+
+Agora se rodarmos o feedback ficou muito mais fácil pro jogador.
+
+Como desafio tente colocar uma opção de jogar novamente o jogo com a opção S/N.
+
+Com isso finalizamos nosso primeiro jogo em Rust, agora você pode tentar fazer os desafios abaixo.
+
 
 ## Exercicíos sugeridos
 Aqui vou colocar os projetos para você fazer suas revisões, muitas vezes os desafios poderão não ser jogos infelizmente, mas estarei disponível no forum ou no Revolt para tirar dúvidas.
