@@ -1180,10 +1180,44 @@ Um trait especifica métodos que um tipo deve implementar, e outros tipos podem 
 
 Por exemplo, você pode ter um trait chamado "Imprimível" que especifica um método imprimir, e várias estruturas diferentes podem implementar esse trait para que possam ser impressas de maneira semelhante, mesmo que sejam tipos diferentes. Isso torna o código mais genérico e reutilizável.
 
-#### No nosso caso vamos passar duas traits
-Debug Trait (#[derive(Debug)]): Ao usar #[derive(Debug)] em uma estrutura ou enumeração, Rust gera automaticamente a implementação do trait Debug para esse tipo. O trait Debug permite que você formate o valor do tipo de forma legível por humanos quando você imprime um objeto desse tipo usando a função println!("{:?}", objeto). Isso é particularmente útil para fins de depuração, pois fornece informações detalhadas sobre o estado do objeto.
+Traits usam conceito de polimorfismo.
 
-PartialEq Trait (#[derive(PartialEq)]): Usando #[derive(PartialEq)], Rust gera a implementação do trait PartialEq para o tipo. O trait PartialEq permite que você compare objetos do tipo com operadores de igualdade (==) e desigualdade (!=). Isso significa que você pode verificar se dois objetos são iguais ou diferentes com facilidade, simplificando a lógica de comparação.
+Polimorfismo permite que objetos de diferentes tipos sejam tratados de maneira uniforme, permitindo o uso de métodos ou funções comuns a esses objetos, independentemente de seus tipos específicos.
+
+#### Derive
+
+A atribuição #[derive] em Rust permite que os programadores gerem automaticamente a implementação de certos traços para suas estruturas de dados, enums ou uniões. Ele é usado para derivar a implementação de traços comuns, como Clone, Debug, Eq, PartialEq, Hash, entre outros, com base na estrutura da sua estrutura de dados.
+
+Elas podem ser implementadas diretamente no código caso precise de um código mais complexo.
+
+- Traits de comparação: Eq, PartialEq, Ord, PartialOrd.
+- Clone, para criar um novo objeto a partir de outro via copia.
+- Copy, para copiar o elemento ao invés de mover.
+- Hash, para computar um hast a partir &T.
+- Default, para criar um objeto padrão do tipo especificado.
+- Debug, para formatar a partir de {:?} formatter.
+
+#### Vantagens do Derive
+
+Facilita a implementação de traços comuns para tipos de dados personalizados.
+Reduz a necessidade de escrever código manualmente para cada traço.
+Permite que o compilador Rust gere automaticamente código de implementação eficiente para os traços derivados.
+Simplifica a manutenção e o desenvolvimento de código, tornando-o mais conciso e legível.
+Você pode criar um código com `#[derive]` usando `procedural macros`
+
+#### Procedural macros
+
+As macros procedurais são uma característica avançada do Rust que permite que os desenvolvedores escrevam código que manipula a representação de código Rust em tempo de compilação. Essas macros permitem que você escreva código que gera código, o que pode ser útil para automatizar tarefas repetitivas, criar DSLs específicas do domínio ou realizar transformações complexas no código Rust.
+
+- Permitem a geração de código personalizado em tempo de compilação.
+- Podem ser usadas para automatizar tarefas tediosas ou repetitivas.
+- Permitem a criação de DSLs específicas do domínio para tornar o código mais expressivo e legível.
+- Podem ser usadas para realizar transformações complexas no código, como otimizações de desempenho ou análise estática avançada.
+
+#### No nosso caso vamos passar algumas implementações básicas no derive
+Debug `derive` (#[derive(Debug)]): Ao usar #[derive(Debug)] em uma estrutura ou enumeração, Rust gera automaticamente a implementação do Debug para esse tipo. O `derive` Debug permite que você formate o valor do tipo de forma legível por humanos quando você imprime um objeto desse tipo usando a função println!("{:?}", objeto). Isso é particularmente útil para fins de depuração, pois fornece informações detalhadas sobre o estado do objeto.
+
+PartialEq derive (#[derive(PartialEq)]): Usando #[derive(PartialEq)], Rust gera a implementação do trait PartialEq para o tipo. O PartialEq permite que você compare objetos do tipo com operadores de igualdade (==) e desigualdade (!=). Isso significa que você pode verificar se dois objetos são iguais ou diferentes com facilidade, simplificando a lógica de comparação.
 
 Certo agora vamos ajustar o teste para nossa função:
 
@@ -1204,7 +1238,7 @@ fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
 }
 ```
 
-ali colocamos uma variavel para receber o retorno da nossa função chamado result e também verificamos se essa variavél result retorna no seu ResultSet o valor do enum GameResult
+Ali colocamos uma variavel para receber o retorno da nossa função chamado result e também verificamos se essa variavél result retorna no seu ResultSet o valor do enum GameResult
 como Win que é o valor do enum que criamos.
 Agora vamos rodar o teste.
 
@@ -1431,7 +1465,7 @@ fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
     let chute: u8 = 1;
 
     // Act
-    ==let _ = check_win_coditition(&mut pontuacao, &numero, &chute);==
+    == let _ = check_win_coditition(&mut pontuacao, &numero, &chute); ==
 
     // Assert
     assert_eq!(pontuacao, 900)
@@ -1577,7 +1611,7 @@ Perfeito agora nosso teste passou mas, vamos criar outro teste passando nosso ch
 
 ```rust
 #[test]
-==fn test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo() { ==
+== fn test_jogador_deu_numero_errado_baixo_deve_finalizar_jogo_perdendo() { ==
     // Arrange
     let mut pontuacao: u16 = 100;
     let numero: u8 = 42;
@@ -1749,14 +1783,14 @@ Bom agora que temos nossa condição para decrementar a pontuação quando erram
 
 ...
 #[test]
-{==fn test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral() { ==}
+{== fn test_jogador_deu_numero_errado_pra_baixo_deve_diminuir_pontuacao_geral() { ==}
     // Arrange
     let mut pontuacao: u16 = 1000;
     let numero: u8 = 42;
     let chute: u8 = 1;
 
     // Act
-    ==let result = check_win_coditition(&mut pontuacao, &numero, &chute);==
+    == let result = check_win_coditition(&mut pontuacao, &numero, &chute); ==
 
     // Assert
     assert_eq!(result, Ok(GameResult::Gaming));
@@ -1955,7 +1989,7 @@ cargo add rand
 Agora vamos implementa-la no nosso código.
 
 ```rust
-==use rand::{thread_rng, Rng};==
+== use rand::{thread_rng, Rng}; ==
 use std::io;
 
 #[derive(Debug, PartialEq)]
@@ -1995,7 +2029,7 @@ fn main() {
 
 fn game() -> () {
     let mut pontuacao: u16 = 1000;
-    ==let numero_alvo: u8 = thread_rng().gen_range(1..100);==
+    == let numero_alvo: u8 = thread_rng().gen_range(1..100); ==
     loop {
         println!("Por favor digite o número que você acredita ser");
         let mut chute = String::new();
@@ -2151,6 +2185,102 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 ```
 
 Certo tudo funcionando.
+
+#### Usando o cargo fmt
+
+Nesse módulo eu usei o editor helix e nele eu configurei para ajustar a formatação do meu código automaticamente, mas, há um comando no `cargo` que é possível fazer a formatação do seu código que é o fmt podemos roda-lo com o comando abaixo:
+
+```bash
+cargo fmt
+```
+
+Com isso pode ajustar nosso código pra já trabalhar com o `clippy`.
+
+#### Usando Clippy
+
+Clippy é uma ferramenta de análise estática para o Rust, desenvolvida pela comunidade. Ele fornece sugestões e avisos sobre possíveis problemas de código, seguindo as melhores práticas e convenções da linguagem Rust.
+
+Para rodar o cargo clippy é só executar o comando abaixo:
+
+```rust
+cargo clippy
+```
+
+Vamos ter uma saída parecida com essa:
+```bash
+guessing_game on  main [?] is 📦 v0.1.0 via 🦀 v1.76.0 on ☁️   (eu-west-2)
+➜ cargo clippy
+    Checking guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
+warning: unneeded unit return type
+  --> src/main.rs:39:10
+   |
+39 | fn game() -> () {
+   |          ^^^^^^ help: remove the `-> ()`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unused_unit
+   = note: `#[warn(clippy::unused_unit)]` on by default
+
+error: this comparison involving the minimum or maximum element for this type contains a case that is always true or always false
+  --> src/main.rs:91:8
+   |
+91 |     if *pontuacao <= 0 {
+   |        ^^^^^^^^^^^^^^^
+   |
+   = help: because `0` is the minimum value for this type, the case where the two sides are not equal never occurs, consider using `*pontuacao == 0` instead
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#absurd_extreme_comparisons
+   = note: `#[deny(clippy::absurd_extreme_comparisons)]` on by default
+
+warning: `guessing_game` (bin "guessing_game") generated 1 warning
+error: could not compile `guessing_game` (bin "guessing_game") due to 1 previous error; 1 warning emitted
+```
+
+Primeiro ponto vamos ver esse warning:
+```bash
+warning: unneeded unit return type
+  --> src/main.rs:39:10
+   |
+39 | fn game() -> () {
+   |          ^^^^^^ help: remove the `-> ()`
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unused_unit
+   = note: `#[warn(clippy::unused_unit)]` on by default
+```
+
+Aqui colocamos nossa saída como uma option vazia `-> ()` então podemos remover conforme ele está indicando, é importnte ver que também ele coloca uma documentação do clippy informando por que é uma má prática. Caso você queira ignorar o erro você pode colocar a anotação que ele recomenda que no caso é `#[warn(clippy::unused_unit)]`.
+
+Agora vamos ver o outro warning:
+
+```bash
+error: this comparison involving the minimum or maximum element for this type contains a case that is always true or always false
+  --> src/main.rs:91:8
+   |
+91 |     if *pontuacao <= 0 {
+   |        ^^^^^^^^^^^^^^^
+   |
+   = help: because `0` is the minimum value for this type, the case where the two sides are not equal never occurs, consider using `*pontuacao == 0` instead
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#absurd_extreme_comparisons
+   = note: `#[deny(clippy::absurd_extreme_comparisons)]` on by default
+```
+
+Esse warning fala que estamos querendo ver um valor menor que zero, porém estamos usando na pontuação um tipo `u` que não aceita sinal, temos duas formas de resolver isso, mudar nosso prametro pra o tipo `i` que aceita sinal ou ainda como nossa pontuação não deveria nunca ser menor que zero, podemos apenas seguir a instrução do clippy e deixar o sinal de igualdade `==`.
+
+Rodando agora o clippy novamente temos a saída abaixo:
+
+```bash
+✦ ➜ cargo clippy
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+```
+
+Quer dizer que nosso código está sem erros no momento.
+
+## Update Rust
+
+O rust vem sendo atualizado com o tempo, no caso do curso começamos com a versão 1.73 então vamos atualizar o nosso código agora simplemente precisamos rodar o comando abaixo:
+```bash
+rustup update
+```
+
+Com isso agora vamos pra ultima versão do rust disponível.
 
 ## Conclusão
 Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
