@@ -54,7 +54,7 @@ brew install rustup
 
 ## Configuração do editor
 Isso varia de acordo com o editor que você quer usar vou por aqui algumas sugestões:
-- NeoVim (WIP)
+- [NeoVim](https://youtu.be/ll6UKVNxPXo?si=BD59DrUwB9gEfx78)
 - [Helix](https://youtu.be/MURMkIlCHRg)
 - [Emacs](https://www.youtube.com/watch?v=CvKywSV3fiI&list=PLOQgLBuj2-3I7w8JQvCY8lbbrUZL-gf4m)
 
