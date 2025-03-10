@@ -7,6 +7,15 @@ edit_uri: tree/main/aulas
 
 theme:
   name: material
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Mudar para o tema claro
+    - scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Mudar para o tema escuro
 markdown_extensions:
   - attr_list
   - md_in_html
