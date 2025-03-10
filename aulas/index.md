@@ -51,3 +51,10 @@ Todas os exemplos criados para o curso assim como exercicíos estarão no reposi
 Em primeiro lugar fazendo o curso e dando feedback do que gostou e o que não gostou me ajuda muito. Sugestões de melhoria e correções são sempre bem vindas.
 
 Caso desejar poderá me ajudar também através do [github sponsor](https://github.com/sponsors/jonatasoli) ou por pix `contact@jonatasoliveira.dev` valor arrecadado vai me ajudar a me manter durante a produção do curso.
+
+
+# Agradecimentos
+[Reinaldo](https://github.com/oloko64) por fazer revisões pontuais no material
+[Henrique Sebastião](https://github.com/henriquesebastiao) por adicionar a possibilidade de alternar o tema entre claro e escuro
+
+
