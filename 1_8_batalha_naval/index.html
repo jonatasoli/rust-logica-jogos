@@ -8,21 +8,27 @@
       
       
       
+        <link rel="canonical" href="https://rustlogicajogos.jonatasoliveira.dev/1_8_batalha_naval/">
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+        <link rel="prev" href="../1_7_rpg_tatico_text/">
+      
+      
+        <link rel="next" href="../1_9_aprimorando_rpg_tatico/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
-        <title>Rust da Lógica aos Jogos</title>
+        <title>WIP - Rust da Lógica aos Jogos</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.eebd395e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ecc896b0.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -38,14 +44,25 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -66,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#wip" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,7 +100,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Rust da Lógica aos Jogos" class="md-header__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
+    <a href=".." title="Rust da Lógica aos Jogos" class="md-header__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -97,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              WIP
             
           </span>
         </div>
@@ -202,7 +224,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Rust da Lógica aos Jogos" class="md-nav__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
+    <a href=".." title="Rust da Lógica aos Jogos" class="md-nav__button md-logo" aria-label="Rust da Lógica aos Jogos" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -233,7 +255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Bem vindo ao curso Rust lógica com jogos
       </a>
     </li>
@@ -248,7 +270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_0_introducao/" class="md-nav__link">
+      <a href="../1_0_introducao/" class="md-nav__link">
         Introdução
       </a>
     </li>
@@ -263,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_10_rogue/" class="md-nav__link">
+      <a href="../1_10_rogue/" class="md-nav__link">
         WIP
       </a>
     </li>
@@ -278,7 +300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_1_jogo_floresta_misteriosa/" class="md-nav__link">
+      <a href="../1_1_jogo_floresta_misteriosa/" class="md-nav__link">
         Floresta Misteriosa
       </a>
     </li>
@@ -293,7 +315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_2_jogo_da_adivinhacao/" class="md-nav__link">
+      <a href="../1_2_jogo_da_adivinhacao/" class="md-nav__link">
         Jogo da adivinhação
       </a>
     </li>
@@ -308,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_3_jogo_blackjack/" class="md-nav__link">
+      <a href="../1_3_jogo_blackjack/" class="md-nav__link">
         Blackjack
       </a>
     </li>
@@ -323,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_4_caca_palavras/" class="md-nav__link">
+      <a href="../1_4_caca_palavras/" class="md-nav__link">
         WIP
       </a>
     </li>
@@ -338,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_5_pong/" class="md-nav__link">
+      <a href="../1_5_pong/" class="md-nav__link">
         WIP
       </a>
     </li>
@@ -353,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_6_labirinto/" class="md-nav__link">
+      <a href="../1_6_labirinto/" class="md-nav__link">
         WIP
       </a>
     </li>
@@ -368,7 +390,47 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_7_rpg_tatico_text/" class="md-nav__link">
+      <a href="../1_7_rpg_tatico_text/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        WIP
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_9_aprimorando_rpg_tatico/" class="md-nav__link">
         WIP
       </a>
     </li>
@@ -383,37 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/1_8_batalha_naval/" class="md-nav__link">
-        WIP
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/1_9_aprimorando_rpg_tatico/" class="md-nav__link">
-        WIP
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="/INDICE/" class="md-nav__link">
+      <a href="../INDICE/" class="md-nav__link">
         Summary
       </a>
     </li>
@@ -428,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Jogos/" class="md-nav__link">
+      <a href="../Jogos/" class="md-nav__link">
         Jogos
       </a>
     </li>
@@ -443,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/topicos-explicacao/" class="md-nav__link">
+      <a href="../topicos-explicacao/" class="md-nav__link">
         Topicos explicacao
       </a>
     </li>
@@ -467,6 +499,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -478,8 +512,30 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+  
+  
+
+
+<h1 id="wip">WIP</h1>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 1, 2025</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -511,11 +567,11 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.220ee61c.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

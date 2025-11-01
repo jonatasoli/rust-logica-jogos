@@ -14,14 +14,14 @@
         <link rel="prev" href="../1_2_jogo_da_adivinhacao/">
       
       
-        <link rel="next" href="../INDICE/">
+        <link rel="next" href="../1_4_caca_palavras/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
-        <title>Jogo Blackjack - Rust da Lógica aos Jogos</title>
+        <title>Blackjack - Rust da Lógica aos Jogos</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jogo-blackjack" class="md-skip">
+        <a href="#blackjack" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Jogo Blackjack
+              Blackjack
             
           </span>
         </div>
@@ -285,6 +285,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../1_10_rogue/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../1_1_jogo_floresta_misteriosa/" class="md-nav__link">
         Floresta Misteriosa
       </a>
@@ -324,10 +339,671 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Blackjack
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
-        Jogo Blackjack
+        Blackjack
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#raio-x-blackjack" class="md-nav__link">
+    Raio X Blackjack
+  </a>
+  
+    <nav class="md-nav" aria-label="Raio X Blackjack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecanicas-do-jogo" class="md-nav__link">
+    Mecânicas do jogo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atualizando-o-rust" class="md-nav__link">
+    Atualizando o rust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estruturando-o-blackjack" class="md-nav__link">
+    Estruturando o blackjack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos" class="md-nav__link">
+    Módulos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visibilidade-de-codigo" class="md-nav__link">
+    Visibilidade de código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casinha" class="md-nav__link">
+    Casinha
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acesso-a-casinha" class="md-nav__link">
+    Acesso a casinha
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-o-looping-principal-do-jogo" class="md-nav__link">
+    Criando o looping principal do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representando-uma-carta-com-naipes-e-valores" class="md-nav__link">
+    Representando uma carta com naipes e valores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structs" class="md-nav__link">
+    Structs
+  </a>
+  
+    <nav class="md-nav" aria-label="Structs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definindo-uma-struct" class="md-nav__link">
+    Definindo uma struct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naipes" class="md-nav__link">
+    Naipes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construindo-um-baralho" class="md-nav__link">
+    Construindo um baralho
+  </a>
+  
+    <nav class="md-nav" aria-label="Construindo um baralho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-basicos-de-dados" class="md-nav__link">
+    Tipos básicos de dados
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-escalares" class="md-nav__link">
+    Tipos escalares
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos escalares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integer-types" class="md-nav__link">
+    Integer Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Integer Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integer-overflow" class="md-nav__link">
+    Integer Overflow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floating-point-types" class="md-nav__link">
+    Floating-Point Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacoes-numericas" class="md-nav__link">
+    Operações numéricas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-boolean-type" class="md-nav__link">
+    The Boolean Type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-charactere" class="md-nav__link">
+    Tipo Charactere
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-compostos" class="md-nav__link">
+    Tipos compostos
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos compostos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-tupla" class="md-nav__link">
+    Tipo tupla
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-tipo-array" class="md-nav__link">
+    O tipo array
+  </a>
+  
+    <nav class="md-nav" aria-label="O tipo array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acessando-elementos-de-um-array" class="md-nav__link">
+    Acessando elementos de um array
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-vetores" class="md-nav__link">
+    Usando vetores
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atualizando-um-vetor" class="md-nav__link">
+    Atualizando um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lendo-elementos-de-um-vetor" class="md-nav__link">
+    Lendo Elementos de um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tentando-acessar-um-indice-inexistente" class="md-nav__link">
+    Tentando Acessar um Índice Inexistente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterando-sobre-os-elementos-do-vetor" class="md-nav__link">
+    Iterando sobre os Elementos do Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-um-enum-para-armazenar-tipos-diferentes-em-um-vetor" class="md-nav__link">
+    Usando um Enum para Armazenar Tipos Diferentes em um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destruindo-um-vetor-ao-finalizar-o-jogo" class="md-nav__link">
+    Destruindo um Vetor ao Finalizar o Jogo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definindo-o-baralho" class="md-nav__link">
+    Definindo o baralho
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-cartas-ao-deck" class="md-nav__link">
+    Adicionando cartas ao deck
+  </a>
+  
+    <nav class="md-nav" aria-label="Adicionando cartas ao deck">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-vec" class="md-nav__link">
+    Usando Vec
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-o-deck" class="md-nav__link">
+    Criando o deck
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-a-mao-do-jogador" class="md-nav__link">
+    Criando a mão do jogador
+  </a>
+  
+    <nav class="md-nav" aria-label="Criando a mão do jogador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sintaxe-de-metodo" class="md-nav__link">
+    Sintaxe de Método
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-inicializador" class="md-nav__link">
+    Método inicializador
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-para-adicionar-a-carta-a-mao" class="md-nav__link">
+    Método para adicionar a carta a mão
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-a-mao-do-jogador_1" class="md-nav__link">
+    Criando a mão do jogador
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-a-mao-do-dealer" class="md-nav__link">
+    Criando a mão do dealer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falando-sobre-arte-ascii" class="md-nav__link">
+    Falando sobre Arte ASCII
+  </a>
+  
+    <nav class="md-nav" aria-label="Falando sobre Arte ASCII">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-e-ascii" class="md-nav__link">
+    O que é ASCII?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-o-ascii-e-importante" class="md-nav__link">
+    Por que o ASCII é importante?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitacoes-do-ascii" class="md-nav__link">
+    Limitações do ASCII:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-ascii" class="md-nav__link">
+    Tabela ASCII
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#um-breve-historico" class="md-nav__link">
+    Um breve histórico
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplos" class="md-nav__link">
+    Exemplos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arte-ascii-em-jogos" class="md-nav__link">
+    Arte ASCII em jogos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construindo-a-representacao-do-baralho-em-ascii" class="md-nav__link">
+    Construindo a representação do baralho em ASCII
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-um-sistema-de-turnos" class="md-nav__link">
+    Criando um sistema de turnos
+  </a>
+  
+    <nav class="md-nav" aria-label="Criando um sistema de turnos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closures" class="md-nav__link">
+    Closures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vec-iter-map-filter-e-sum" class="md-nav__link">
+    Vec - iter, map, filter e sum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocando-a-dinamica-do-jogo" class="md-nav__link">
+    Colocando  a dinâmica do jogo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quebrando-nosso-jogo-e-funcoes-testaveis" class="md-nav__link">
+    Quebrando nosso jogo e funções testáveis
+  </a>
+  
+    <nav class="md-nav" aria-label="Quebrando nosso jogo e funções testáveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    Cards
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorando-o-deckrs" class="md-nav__link">
+    Melhorando o deck.rs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorando-o-handrs" class="md-nav__link">
+    Melhorando o hand.rs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicao-de-derrota" class="md-nav__link">
+    Condição de derrota
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicao-de-vitoria" class="md-nav__link">
+    Condição de vitória
+  </a>
+  
+    <nav class="md-nav" aria-label="Condição de vitória">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-do-gamers" class="md-nav__link">
+    Testes do game.rs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-sugeridos" class="md-nav__link">
+    Exercicíos sugeridos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-do-sistema" class="md-nav__link">
+    * Regras do Sistema:**
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-de-pagamento" class="md-nav__link">
+    * Regras de Pagamento:**
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_4_caca_palavras/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_5_pong/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_6_labirinto/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_7_rpg_tatico_text/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_8_batalha_naval/" class="md-nav__link">
+        WIP
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_9_aprimorando_rpg_tatico/" class="md-nav__link">
+        WIP
+      </a>
     </li>
   
 
@@ -362,6 +1038,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topicos-explicacao/" class="md-nav__link">
+        Topicos explicacao
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -382,6 +1073,561 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#raio-x-blackjack" class="md-nav__link">
+    Raio X Blackjack
+  </a>
+  
+    <nav class="md-nav" aria-label="Raio X Blackjack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mecanicas-do-jogo" class="md-nav__link">
+    Mecânicas do jogo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atualizando-o-rust" class="md-nav__link">
+    Atualizando o rust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estruturando-o-blackjack" class="md-nav__link">
+    Estruturando o blackjack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modulos" class="md-nav__link">
+    Módulos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visibilidade-de-codigo" class="md-nav__link">
+    Visibilidade de código
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casinha" class="md-nav__link">
+    Casinha
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acesso-a-casinha" class="md-nav__link">
+    Acesso a casinha
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-o-looping-principal-do-jogo" class="md-nav__link">
+    Criando o looping principal do jogo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representando-uma-carta-com-naipes-e-valores" class="md-nav__link">
+    Representando uma carta com naipes e valores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structs" class="md-nav__link">
+    Structs
+  </a>
+  
+    <nav class="md-nav" aria-label="Structs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definindo-uma-struct" class="md-nav__link">
+    Definindo uma struct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naipes" class="md-nav__link">
+    Naipes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construindo-um-baralho" class="md-nav__link">
+    Construindo um baralho
+  </a>
+  
+    <nav class="md-nav" aria-label="Construindo um baralho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-basicos-de-dados" class="md-nav__link">
+    Tipos básicos de dados
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-escalares" class="md-nav__link">
+    Tipos escalares
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos escalares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integer-types" class="md-nav__link">
+    Integer Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Integer Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integer-overflow" class="md-nav__link">
+    Integer Overflow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#floating-point-types" class="md-nav__link">
+    Floating-Point Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacoes-numericas" class="md-nav__link">
+    Operações numéricas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-boolean-type" class="md-nav__link">
+    The Boolean Type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-charactere" class="md-nav__link">
+    Tipo Charactere
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-compostos" class="md-nav__link">
+    Tipos compostos
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos compostos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-tupla" class="md-nav__link">
+    Tipo tupla
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-tipo-array" class="md-nav__link">
+    O tipo array
+  </a>
+  
+    <nav class="md-nav" aria-label="O tipo array">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acessando-elementos-de-um-array" class="md-nav__link">
+    Acessando elementos de um array
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-vetores" class="md-nav__link">
+    Usando vetores
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atualizando-um-vetor" class="md-nav__link">
+    Atualizando um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lendo-elementos-de-um-vetor" class="md-nav__link">
+    Lendo Elementos de um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tentando-acessar-um-indice-inexistente" class="md-nav__link">
+    Tentando Acessar um Índice Inexistente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterando-sobre-os-elementos-do-vetor" class="md-nav__link">
+    Iterando sobre os Elementos do Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usando-um-enum-para-armazenar-tipos-diferentes-em-um-vetor" class="md-nav__link">
+    Usando um Enum para Armazenar Tipos Diferentes em um Vetor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destruindo-um-vetor-ao-finalizar-o-jogo" class="md-nav__link">
+    Destruindo um Vetor ao Finalizar o Jogo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definindo-o-baralho" class="md-nav__link">
+    Definindo o baralho
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-cartas-ao-deck" class="md-nav__link">
+    Adicionando cartas ao deck
+  </a>
+  
+    <nav class="md-nav" aria-label="Adicionando cartas ao deck">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-vec" class="md-nav__link">
+    Usando Vec
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-o-deck" class="md-nav__link">
+    Criando o deck
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-a-mao-do-jogador" class="md-nav__link">
+    Criando a mão do jogador
+  </a>
+  
+    <nav class="md-nav" aria-label="Criando a mão do jogador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sintaxe-de-metodo" class="md-nav__link">
+    Sintaxe de Método
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-inicializador" class="md-nav__link">
+    Método inicializador
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-para-adicionar-a-carta-a-mao" class="md-nav__link">
+    Método para adicionar a carta a mão
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-a-mao-do-jogador_1" class="md-nav__link">
+    Criando a mão do jogador
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-a-mao-do-dealer" class="md-nav__link">
+    Criando a mão do dealer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falando-sobre-arte-ascii" class="md-nav__link">
+    Falando sobre Arte ASCII
+  </a>
+  
+    <nav class="md-nav" aria-label="Falando sobre Arte ASCII">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-e-ascii" class="md-nav__link">
+    O que é ASCII?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-o-ascii-e-importante" class="md-nav__link">
+    Por que o ASCII é importante?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitacoes-do-ascii" class="md-nav__link">
+    Limitações do ASCII:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabela-ascii" class="md-nav__link">
+    Tabela ASCII
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#um-breve-historico" class="md-nav__link">
+    Um breve histórico
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplos" class="md-nav__link">
+    Exemplos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arte-ascii-em-jogos" class="md-nav__link">
+    Arte ASCII em jogos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construindo-a-representacao-do-baralho-em-ascii" class="md-nav__link">
+    Construindo a representação do baralho em ASCII
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criando-um-sistema-de-turnos" class="md-nav__link">
+    Criando um sistema de turnos
+  </a>
+  
+    <nav class="md-nav" aria-label="Criando um sistema de turnos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closures" class="md-nav__link">
+    Closures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vec-iter-map-filter-e-sum" class="md-nav__link">
+    Vec - iter, map, filter e sum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocando-a-dinamica-do-jogo" class="md-nav__link">
+    Colocando  a dinâmica do jogo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quebrando-nosso-jogo-e-funcoes-testaveis" class="md-nav__link">
+    Quebrando nosso jogo e funções testáveis
+  </a>
+  
+    <nav class="md-nav" aria-label="Quebrando nosso jogo e funções testáveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    Cards
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorando-o-deckrs" class="md-nav__link">
+    Melhorando o deck.rs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#melhorando-o-handrs" class="md-nav__link">
+    Melhorando o hand.rs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicao-de-derrota" class="md-nav__link">
+    Condição de derrota
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicao-de-vitoria" class="md-nav__link">
+    Condição de vitória
+  </a>
+  
+    <nav class="md-nav" aria-label="Condição de vitória">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-do-gamers" class="md-nav__link">
+    Testes do game.rs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios-sugeridos" class="md-nav__link">
+    Exercicíos sugeridos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-do-sistema" class="md-nav__link">
+    * Regras do Sistema:**
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-de-pagamento" class="md-nav__link">
+    * Regras de Pagamento:**
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -398,126 +1644,2756 @@
   
 
 
-<h1 id="jogo-blackjack">Jogo Blackjack</h1>
-<p>Bom hoje vamos começar analisando sobre o jogo do blackjack.</p>
-<p>O Blackjack, também conhecido como 21, é um jogo de cartas popular jogado em cassinos. Aqui estão as regras básicas:</p>
-<ul>
-<li>Objetivo do Jogo:</li>
-<li>
-<p>O objetivo é obter uma mão com um valor total mais próximo possível de 21, sem ultrapassar esse valor.</p>
-</li>
-<li>
-<p>Cartas e Valores:</p>
-</li>
-<li>As cartas de 2 a 10 valem seu valor nominal.</li>
-<li>Valetes(J), Damas(Q) e Reis(K) valem cada um 10 pontos.</li>
-<li>
-<p>As cartas de Ás(A) podem valer 1 ou 11, dependendo da situação.</p>
-</li>
-<li>
-<p>Início do Jogo:</p>
-</li>
-<li>O jogador e o dealer recebem duas cartas no início.</li>
-<li>
-<p>O jogador vê uma das cartas do dealer.</p>
-</li>
-<li>
-<p>Jogada do Jogador:</p>
-</li>
-<li>O jogador decide entre "pedir" (receber uma carta) ou "ficar" (manter a mão atual).</li>
-<li>
-<p>Se o valor da mão do jogador ultrapassar 21, ele perde automaticamente.</p>
-</li>
-<li>
-<p>Jogada do Dealer:</p>
-</li>
-<li>Após a vez do jogador, o dealer revela sua segunda carta.</li>
-<li>
-<p>O dealer deve continuar a pedir cartas até que a mão alcance pelo menos 17 pontos.</p>
-</li>
-<li>
-<p>Determinação do Vencedor:</p>
-</li>
-<li>Se a mão do jogador ultrapassar 21, ele perde automaticamente.</li>
-<li>Se o dealer ultrapassar 21, o jogador vence.</li>
-<li>
-<p>Se nenhum dos jogadores ultrapassar 21, o vencedor é aquele com a mão mais próxima de 21.</p>
-</li>
-<li>
-<p>Blackjack:</p>
-</li>
-<li>
-<p>Se um jogador receber um Ás e uma carta de 10 pontos no início (um Blackjack), ele geralmente vence automaticamente, a menos que o dealer também tenha um Blackjack.</p>
-</li>
-<li>
-<p>Empate:</p>
-</li>
-<li>Se o jogador e o dealer tiverem o mesmo valor de mão, o jogo é um empate ("push").</li>
-</ul>
-<p>Em um empate (ou "push") no Blackjack, significa que a pontuação total da mão do jogador é a mesma que a pontuação total da mão do dealer. Nesse cenário:</p>
-<ul>
-<li>Nenhum Vencedor ou Perdedor:</li>
-<li>Como as pontuações são iguais, nenhum jogador ganha ou perde.</li>
-<li>
-<p>O dinheiro apostado geralmente é devolvido aos jogadores.</p>
-</li>
-<li>
-<p>Mão Empurrada (Push):</p>
-</li>
-<li>Às vezes, é chamado de "push" quando não há vencedor ou perdedor.</li>
-<li>
-<p>Isso não afeta a pontuação ou saldo dos jogadores.</p>
-</li>
-<li>
-<p>Nova Rodada:</p>
-</li>
-<li>Após um empate, o jogo geralmente avança para uma nova rodada.</li>
-<li>Os jogadores podem fazer novas apostas e iniciar uma nova mão.</li>
-</ul>
-<p>O empate é uma ocorrência comum no Blackjack e faz parte do jogo. É importante observar que, em alguns casos, as regras do cassino podem variar, e algumas variações do jogo podem ter regras específicas para empates. Ao jogar em um cassino ou seguir regras específicas, é sempre bom estar ciente das políticas e procedimentos locais.</p>
-<p>Essas são as regras básicas do Blackjack. Estratégias avançadas podem ser aplicadas, considerando as cartas já distribuídas, mas essas são as regras fundamentais para começar a jogar.</p>
-<h1 id="raio-x-jogo-blackjack">Raio X - Jogo Blackjack</h1>
-<p>Guia de Design de Jogo (GDD) - Blackjack</p>
-<ol>
-<li>Visão Geral do Jogo:</li>
-</ol>
-<p>O jogo de Blackjack é uma versão digital do popular jogo de cartas de cassino, também conhecido como 21. Os jogadores competem contra o dealer (a casa) para alcançar uma mão de cartas com um valor total próximo de 21, sem ultrapassá-lo. O objetivo é vencer o dealer sem estourar, o que resultaria em uma perda imediata.</p>
-<ol>
-<li>
-<p>Mecânicas de Jogo:</p>
-<p>Distribuição de Cartas: Os jogadores recebem duas cartas viradas para cima, enquanto o dealer recebe uma carta virada para cima e uma carta virada para baixo.</p>
-<p>Tomada de Decisão: Os jogadores têm a opção de "bater" (receber outra carta), "ficar" (manter sua mão atual), "dobrar" (dobrar sua aposta e receber exatamente uma carta adicional) ou "dividir" (dividir sua mão em duas mãos separadas, se as duas primeiras cartas tiverem o mesmo valor).</p>
-<p>Regras de Vitória e Derrota: O jogador ganha se sua mão totalizar mais perto de 21 do que a do dealer sem ultrapassar. Se o jogador ultrapassar 21, ele perde automaticamente. Se a mão do dealer ultrapassar 21 e a do jogador não, o jogador vence.</p>
-</li>
-<li>
-<p>Elementos do Jogo:</p>
-<p>Baralho de Cartas: Um baralho padrão de 52 cartas é usado, sem coringas.</p>
-<p>Aposta: Os jogadores podem apostar uma quantidade de fichas antes do início de cada rodada.</p>
-<p>Interface do Usuário: Uma interface de usuário intuitiva permitirá que os jogadores interajam com o jogo, fazendo escolhas de jogo e visualizando suas mãos e a mão do dealer.</p>
-</li>
-<li>
-<p>Arte e Design Visual:</p>
-<p>Design da Tela: O layout da tela será simples e feito via terminal mostrando a informação das cartas usando seus respectivos caracteres.</p>
-<p>Estilo Visual: Estilo de jogos feitos unicamente para terminal sem nenhum arte especifica.</p>
-</li>
-<li>
-<p>Considerações Técnicas:</p>
-<p>Plataforma: O jogo será desenvolvido para funcionar em desktops, dispositivos móveis e navegadores da web.</p>
-<p>Tecnologia: Será utilizado o framework de desenvolvimento de jogos Bevy, que oferece suporte robusto para gráficos 2D e áudio.</p>
-</li>
-</ol>
-<h2 id="iniciando-o-jogo">Iniciando o jogo</h2>
-<p>Bom vamos criar o nosso jogo.</p>
-<pre><code class="language-bash">cargo new blackjack
+<h1 id="blackjack">Blackjack</h1>
+<h2 id="raio-x-blackjack">Raio X Blackjack</h2>
+<p><a class="glightbox" href="../images/raio-x-blackjack.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Raio X" src="../images/raio-x-blackjack.png" /></a></p>
+<h3 id="mecanicas-do-jogo">Mecânicas do jogo:</h3>
+<p>Obter uma mão com um valor total mais próximo possível de 21, sem ultrapassar esse valor.
+O Jogador e o dealer recebem duas cartas no início.
+O jogador decide entre "pedir" (receber uma carta) ou "ficar" (manter a mão atual).
+Se o valor da mão do jogador ultrapassar 21, ele perde automaticamente.
+Após a vez do jogador, o dealer revela sua segunda carta.
+O dealer deve continuar a pedir cartas até que a mão alcance pelo menos 17 pontos.
+Se a mão do jogador ultrapassar 21, ele perde automaticamente.
+Se o dealer ultrapassar 21, o jogador vence.
+Se nenhum dos jogadores ultrapassar 21, o vencedor é aquele com a mão mais próxima de 21.</p>
+<h2 id="atualizando-o-rust">Atualizando o rust</h2>
+<p>Bom antes de começarmos nosso jogo vamos fazer novamente a atualização do rust:</p>
+<pre><code class="language-bash">rustup update stable
 </code></pre>
-<p>Agora vamos criar na nossa main o menu principal do jogo.</p>
+<p>Criando projeto</p>
+<p>Bom vamos criar nosso novo projeto em projects:</p>
+<pre><code class="language-bash">cargo new blackjack
+cd blackjack
+</code></pre>
+<p>Para criar esse projeto vamos entender melhor como vamos estruturar nosso jogo.</p>
+<h2 id="estruturando-o-blackjack">Estruturando o blackjack</h2>
+<p>Para esse jogo queremos fazer uma mudança em como nosso jogo vai se comportar:
+- main.rs vai ter nosso loop básico do jogo e vamos iniciar nossa função game.
+- Nossa função game vai ser responsável por administrar todos os elementos do jogo e a
+  lógica do jogo em si
+- Vamos ter uma função para criar uma carta
+- Vamos ter que ter uma estrutura para criar um baralho
+- Vamos ter que ter uma estrutura para gerenciar a hierarquias das cartas Ex: Valete, Rainha e Rei valém 10 pontos e às vale 1 ou 11.</p>
+<p>Assim para manter o código mais organizado vamos separar algumas responsabilidades em arquivos separados para isso vamos ter que começar a usar módulos.</p>
+<h2 id="modulos">Módulos</h2>
+<p>Módulos são estruturas que usamos para agrupar funções, variáveis, contantes e outras estruturas de dados em um bloco e você deve se perguntar por que deveríamos fazer isso?
+Respondendo sua pergunta nós normalmente criamos módulos para:
+- Melhorar a organização do nosso código seja por funcionalidades ou pelo fato da base de código ser muito grande.
+- Se nossa base de código pode ser reutilizado em outros pontos do seu projeto
+- Separar responsabilidade por exemplo podemos criar módulos específicos para testes da nossa base de código.</p>
+<p>Para criar um módulo usamos a palavra reservada <code>mod</code></p>
+<pre><code class="language-rust">mod meu_modulo {
+    fn imprime_nome(nome: &amp;str) -&gt; String {
+        format!(&quot;Olá, {}!&quot;, name)
+    }
+}
+</code></pre>
+<h2 id="visibilidade-de-codigo">Visibilidade de código</h2>
+<p>Quando trabalhamos com código em determinas linguagens podemos atribuir quando determinadas funções e atributos são possíveis ou não de serem lidos, assim como quem pode visualizar. Para facilitar o entendimento vamos fazer uma analogia.</p>
+<h2 id="casinha">Casinha</h2>
+<p>Pense numa casa, ela pode ser uma casinha no interior, ou um casarão numa grande cidade não importa, normalmente uma casa é composta por cômodos umas tem muitos outras tem poucos.</p>
+<p>No mundo do código uma biblioteca a qual chamamos de crates, mas também pensando num contexto maior nossa casa pode ser nosso projeto como esse blackjack que estamos desenvolvendo.</p>
+<p>Cada cômodo dessa casa será nossos módulos dependendo da biblioteca ou projeto pode ter muitos ou poucos.</p>
+<p>Todas as nossas estruturas, variáveis, constantes, funções e etc. Serão os itens que temos no nosso módulo, assim como uma casa comum a cozinha vai ter itens que correspondem a cozinha e no banheiro vão ter itens que correspondem a um banheiro. Nessa mesma linha vamos ter itens no nosso módulo que correspondem ao que aquele módulo representa.</p>
+<h2 id="acesso-a-casinha">Acesso a casinha</h2>
+<p>Pensando em visibilidade você pode ser a única pessoa na casa que tem a chave do banheiro da casa, se por padrão nessa casa quem tem a chave sempre a mantém trancada por padrão, isso quer dizer que ninguém além de você vai ter acesso aquele cômodo. Levando isso pro Rust cada módulo por padrão terá todos os seus itens privados então ninguém de outros cômodos poderá acessar o banheiro. Isso quer dizer que se criarmos um módulo no nosso arquivo <code>main.rs</code> quem está dentro do arquivo ainda consegue acessar o módulo pois estão no mesmo "cômodo".</p>
+<p>Mas, temos uma pegadinha nesse exemplo, pois mesmo vendo que está dentro do banheiro ele não pode usar! Pense que você tem um amigo que precisa usar o banheiro mas, há um poder maior impedindo seu amigo de usa-lo e caso ele precise fazer o número 2 no assento sanitário e mesmo que ele enxergue o banheiro (módulo) não consegue fazer a ação de usar o assento (função) um cenário terrível não? Mas isso tem solução você pode deixa-lo como público usando a palavra reservada <code>pub</code> e assim ele ficará feliz e aliviado.</p>
+<pre><code class="language-rust">//casinha.rs
+
+mod banheiro {
+     pub const ROLO_PAPEL_INICIAL: i16 = 5; 
+     const MINHA_ESCOVA: String = String::new();
+
+    pub fn usa_assento_sanitario() -&gt; i16 {
+        let mut rolo_papel: i16 = ROLO_PAPEL_INICIAL;
+        println!(&quot;Usando rolo!&quot;);
+        rolo_papel -= 1;
+        rolo_papel
+    }
+
+
+}
+
+fn main() {
+    println!(&quot;{}&quot;, banheiro::ROLO_PAPEL_INICIAL);
+    banheiro::usa_assento_sanitario();
+}
+</code></pre>
+<p>Deixando de lado a inutilidade do código, se seu amigo for a representação da função main, ele consegue ver o rolo de papel e consegue usar o <code>assento_sanitário</code>, porém ele não consegue acessar a sua escova de dentes por que ela não é pública.</p>
+<p>Mas e se caso eu queira que pessoas de outros cômodos possam usar o banheiro? Fácil só deixar ele aberto, ou seja, deixar o módulo público assim todos podem usa-lo.</p>
+<pre><code class="language-rust">
+// banheiro.rs
+
+pub mod banheiro {
+     pub const ROLO_PAPEL_INICIAL: i16 = 5; 
+     const MINHA_ESCOVA: String = String::new();
+
+    pub fn usa_assento_sanitario() -&gt; i16 {
+        let mut rolo_papel: i16 = ROLO_PAPEL_INICIAL;
+        println!(&quot;Usando rolo!&quot;);
+        rolo_papel -= 1;
+        rolo_papel
+    }
+
+}
+
+</code></pre>
+<p>Assim se a sala for nosso cômodo principal (main).</p>
+<pre><code class="language-rust">mod banheiro;
+
+fn main() {
+    println!(&quot;{}&quot;, banheiro::banheiro::ROLO_PAPEL_INICIAL);
+    banheiro::banheiro::usa_assento_sanitario();
+}
+</code></pre>
+<p>Importante ressaltar que nesse caso <code>mod banheiro</code> eu faço referência ao arquivo <code>banheiro.rs</code> assim para acessar o módulo dentro do arquivo (que também é um módulo) preciso chama-lo novamente ou seja <code>banheiro::banheiro</code>.
+Para facilitar o entendimento vamos pensar que nesse exemplo o assento vai ser um módulo também já o papel vai ser um item que está fora assim para usar o banheiro preciso acessar o papel que está no banheiro e depois acessar o assento e a função dele de usar.</p>
+<pre><code class="language-rust">
+//banheiro.rs
+
+pub const ROLO_PAPEL_INICIAL: i16 = 5; 
+const MINHA_ESCOVA: String = String::new();
+
+pub mod assento_sanitario {
+
+    pub fn usar(rolo_inicial: i16) -&gt; i16 {
+        let mut rolo_papel: i16 = rolo_inicial;
+        println!(&quot;Usando rolo!&quot;);
+        rolo_papel -= 1;
+        rolo_papel
+    }
+
+}
+</code></pre>
+<pre><code class="language-rust">//main.rs
+mod banheiro;
+
+fn main() {
+    println!(&quot;{}&quot;, banheiro::ROLO_PAPEL_INICIAL);
+    banheiro::assento_sanitario::usar(banheiro::ROLO_PAPEL_INICIAL);
+}
+</code></pre>
+<p>Acredito que agora ficou mais claro, dentro do meu arquivo <code>banheiro.rs</code> que é um módulo eu acesso o outro módulo que é o <code>assento_sanitario</code>, perceba que nesse exemplo você tem acesso ao módulo banheiro e assento e tem acesso ao rolo de papel mas, ainda não tem acesso a escova pois ela ainda é privada.</p>
+<p>Também poderia ter usado a função usar direto no banheiro não preciso forçar a criar um módulo dentro do arquivo, ai vai muito da sua necessidade.</p>
+<p>Esse exemplo do banheiro era o melhor? Talvez não, mas acredito que com isso eu consiga te dar uma clareza de como funciona a dinâmica dos módulos dentro do rust. Agora finalmente
+podemos continuar nosso jogo.</p>
+<h2 id="criando-o-looping-principal-do-jogo">Criando o looping principal do jogo</h2>
+<p>Bom agora vamos criar nossa main para isso vamos criar um loop.</p>
+<pre><code class="language-rust">fn main() {
+    loop {
+        game::game_start()
+    }
+}
+</code></pre>
+<p>Ainda não temos o nosso módulo game então vamos criar em no nosso diretório <code>src</code> o módulo game.</p>
+<pre><code class="language-bash">touch src/game.rs
+</code></pre>
+<p>Agora dentro de game vamos criar alguns prints para mostrar o total da mão do jogador e do dealer.</p>
+<pre><code class="language-rust">//game.rust
+
+pub fn game_start() {
+    println!(&quot;Dealer's hand:&quot;);
+    println!(&quot;Total value: 0&quot;);
+
+    println!(&quot;Your hand:&quot;);
+    println!(&quot;Total value: 0&quot;)
+
+}
+</code></pre>
+<p>Ainda precisamos importar o módulo no nosso <code>main.rs</code>.</p>
+<pre><code class="language-rust">mod game;
+
+fn main() {
+    loop {
+        game::game_start()
+    }
+}
+</code></pre>
+<p>Vamos rodar nosso projeto. Percebemos que ele vai rodar infinitamente então vamos aprimorar nosso menu para iniciar um jogo.</p>
+<pre><code class="language-rust">mod game;
+
+fn main() {
+    loop {
+        println!(&quot;Start game? (y)es or (n)o&quot;);
+        let mut option = String::new();
+        std::io::stdin().read_line(&amp;mut option).unwrap();
+        match option.trim().to_lowercase().as_str() {
+            &quot;y&quot; =&gt; {
+                game::game_start();
+                continue;
+            }
+            &quot;n&quot; =&gt; {
+                println!(&quot;Thank you playing.&quot;);
+                break;
+            }
+            _ =&gt; {
+                continue;
+            }
+
+        }
+
+    }
+}
+</code></pre>
+<p>Certo agora nosso jogo tem um loop básico e toda vez que o nosso jogo acabar <code>game_start</code> se encerra e assim votamos ao menu principal do jogo.</p>
+<h2 id="representando-uma-carta-com-naipes-e-valores">Representando uma carta com naipes e valores</h2>
+<p>Vamos criar um novo módulo chamado card, esse módulo vai ser responsável em criar uma representação do card no nosso código. Então vamos criar um arquivo chamado <code>card.rs</code>.</p>
+<pre><code class="language-bash">touch src/card.rs
+</code></pre>
+<p>Dentro do nosso arquivo <code>card.rs</code> vamos criar um módulo chamado test.</p>
+<pre><code class="language-rust">
+#[cfg(test)]
+mod test {
+    use super::*;
+
+}
+
+</code></pre>
+<p><code>#[cfg(test)]</code> chamamos de anotações (<em>annotation</em>) no caso essa em especifico estou especificando para o compilador do rust que esse módulo só precisa ser executado em teste.</p>
+<p>Agora dentro do nosso módulo usamos o <code>use super::*;</code> que é necessário para pode usar as estruturas dentro do nosso módulo <code>card.rs</code>.</p>
+<p>Agora vamos criar nosso primeiro teste. Onde vamos passar uma carta e verificar se o valor da carta. Sendo que nossa carta precisa ter seu valor e seu naipe. Onde o valor vamos chamar de <em>rank</em> e o naipe vamos chamar de <em>suit</em>. Ou seja nosso card tem 2 valores por hora vamos só anotar aqui.
+Um ponto importante é que para realizar o teste vamos criar uma string para corresponder o naipe de "coração" para isso vamos precisar criar uma String <code>hearts</code>.</p>
+<pre><code class="language-rust">
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_card_rank() {
+        let hearts = String::from(&quot;Hearts&quot;);
+        let value = Card {rank: 10, suit: hearts.clone() };
+
+        assert_eq!(value.rank, 10);
+        assert_eq!(value.suit, hearts)
+    }
+}
+</code></pre>
+<p>Estou usando em hearts a palavra reservada clone, pois nesse contexto quando crio o <code>Card</code> eu preciso usar o <code>clone</code>, por que senão eu passo a referência do hearts para o card, então o clone é necessário para poder testarmos abaixo. Agora vamos rodar nosso teste.</p>
+<pre><code class="language-bash">cargo test
+</code></pre>
+<p>Nosso resultado mostra que não teve nenhum teste executado, por que isso aconteceu?</p>
+<p>Para que nosso teste seja executado precisamos chamar nosso modulo card no main.</p>
+<pre><code class="language-rust">mod game;
+mod card;
+
+</code></pre>
+<p>Agora nosso teste roda porém temos o erro abaixo:</p>
+<pre><code class="language-bash">error[E0425]: cannot find function, tuple struct or tuple variant `Card` in this scope
+ --&gt; src/card.rs:8:21
+  |
+8 |         let value = Card { rank: 10, suit: hearts.clone() };
+  |                     ^^^^ not found in this scope
+
+For more information about this error, try `rustc --explain E0425`.
+</code></pre>
+<p>Card não existe ainda então precisamos criar, e como criar uma estrutura pra representar <em>rank</em> e <em>suit</em> ? Precisamos criar uma <code>struct</code>.</p>
+<h2 id="structs">Structs</h2>
+<p>Anteriormente falamos dos tipos primitivos, caso não se lembre volte na parte de [[tipos primitivos em rust]]. Há formas de criarmos nossos próprios tipos em rust que chamamos de [[tipos customizados - avançados]], porém nesse momento o valor de Card vai ser a composição de 2 tipos primitivos que é o <em>rank</em> que é o valor da carta e o <em>suit</em> que será o naipe da carta.</p>
+<p>Se precisarmos de uma variável composta por 2 ou mais valores vamos usar um tipo de dados chamado <code>_Struct_</code>.</p>
+<p><code>**Struct**</code> ou <em>structure</em> é um tipo de dado customizado onde ele é composto de vários tipos de dados, ou seja é uma representação de agrupamentos de dados.</p>
+<h3 id="definindo-uma-struct">Definindo uma <code>struct</code></h3>
+<p>Para definir uma <code>struct</code> precisamos apenas usar a palavra reserva <code>struct</code>.</p>
+<pre><code class="language-rust">struct Card;
+</code></pre>
+<p>Agora inicialmente vamos colocar os campos <code>rank</code> e <code>suit</code>.</p>
+<pre><code class="language-rust">struct Card {
+    rank: i32,
+    suit: String,
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_card_rank() {
+        let hearts = String::from(&quot;Hearts&quot;);
+        let value = Card { rank: 10, suit: hearts.clone() };
+
+        assert_eq!(value.rank, 10);
+        assert_eq!(value.suit, hearts)
+    }
+}
+</code></pre>
+<p>Agora vamos rodar ele.</p>
+<pre><code class="language-bash">➜ cargo test
+   Compiling blackjack v0.1.0 (/home/feanor/projects/blackjack)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.20s
+     Running unittests src/main.rs (target/debug/deps/blackjack-eab3321ecfe99072)
+
+running 1 test
+test card::test::test_get_card_rank ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Tudo certo agora passou.</p>
+<h3 id="naipes">Naipes</h3>
+<p>Agora vamos mudar um pouco, nosso naipe é uma <code>String</code> simples, mas teremos repetidamente os 4 naipes: espadas, ouros, copas e paus.</p>
+<p>Então vamos mudar nosso naipe para se tornar um <code>enum</code>.</p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+enum Suit {
+    Hearts,
+    Diamonds,
+    Clubs,
+    Spades,
+}
+
+struct Card {
+    rank: i32,
+    suit: Suit,
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_card_rank_and_suit() {
+        let value = Card { rank: 10, suit: Suit::Hearts };
+
+        assert_eq!(value.rank, 10);
+        assert_eq!(value.suit, Suit::Hearts )
+    }
+}
+</code></pre>
+<p>Importante como estamos usando uma <code>Struct</code>com um  <code>enum</code> ele não implementa algumas coisas, por isso inicialmente precisamos usar duas trait a <code>Debug</code> e a <code>PartialEq</code>.
+Isso é necessário para podermos fazer a comparação no nosso teste com a macro <code>assert_eq!</code>. Agora temos a representação dos valores do Naipe e do Valor.</p>
+<h2 id="construindo-um-baralho">Construindo um baralho</h2>
+<p>Certo agora que temos como representar o valor e o naipe da nossa carta vamos criar um módulo chamado <code>Deck</code> onde vai representar nosso baralho.</p>
+<pre><code class="language-bash">touch deck.rs
+</code></pre>
+<p>Agora vamos criar um tipo de variável que ainda não tínhamos usados que é o Vetor <code>Vec</code>.</p>
+<h3 id="tipos-basicos-de-dados">Tipos básicos de dados</h3>
+<p>[[tipos primitivos em rust]]</p>
+<p>Bom reforçando a parte que falamos de tipos de rust no nosso primeiro jogo, agora vamos aprofundar um pouco mais.
+Cada valor em rust tem um tipo especifico, as vezes preciso anotar diretamente, as vezes ele consegue saber o tipo diretamente o que chamamos de inferência.
+Mesmo assim, rust é uma linguagem de <code>tipagem estática</code> ou seja ele precisa saber todos os tipos em tempo de compilação.</p>
+<h3 id="tipos-escalares">Tipos escalares</h3>
+<p>São os tipos que representam um valor único, já falamos sobre eles no primeiro jogo da [[Misterious Forest]] e são eles: inteiros, float, <code>booleans</code> e <code>characteres</code>.</p>
+<h4 id="integer-types"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types">Integer Types</a></h4>
+<p>Um <em>integer</em> a grosso modo é um número sem casas decimais ou seja um numero INTEIRO. Sendo que o tamanho do número que ele comporta varia de acordo com seu tipo e se ele aceita números negativos (<strong>Signed</strong>) conforme a tabela abaixo:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length</th>
+<th>Signed</th>
+<th style="text-align: center;">range</th>
+<th>Unsigned</th>
+<th>range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">8-bit</td>
+<td><code>i8</code></td>
+<td style="text-align: center;">-128 a 127</td>
+<td><code>u8</code></td>
+<td>0 a 255</td>
+</tr>
+<tr>
+<td style="text-align: center;">16-bit</td>
+<td><code>i16</code></td>
+<td style="text-align: center;">-32.768 a 32.767</td>
+<td><code>u16</code></td>
+<td>0 a 65.535</td>
+</tr>
+<tr>
+<td style="text-align: center;">32-bit</td>
+<td><code>i32</code></td>
+<td style="text-align: center;">-2.147.483.648 a 2.147.483.647</td>
+<td><code>u32</code></td>
+<td>0 a 4.294.967.295</td>
+</tr>
+<tr>
+<td style="text-align: center;">64-bit</td>
+<td><code>i64</code></td>
+<td style="text-align: center;">-9.223.372.036.854.775.808 a 9.223.372.036.775.807</td>
+<td><code>u64</code></td>
+<td>0 a 18.446.744.073.709.551.615</td>
+</tr>
+<tr>
+<td style="text-align: center;">128-bit</td>
+<td><code>i128</code></td>
+<td style="text-align: center;">-170.141.183.460.469.231.731.687.303.715.884.105.728 a 170.141.183.460.469.231.731.687.303.715.884.105.727</td>
+<td><code>u128</code></td>
+<td>0 a 340.282.366.920.938.463.463.374.607.431.768.211.455</td>
+</tr>
+<tr>
+<td style="text-align: center;">arch</td>
+<td><code>isize</code></td>
+<td style="text-align: center;">-</td>
+<td><code>usize</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td style="text-align: center;">Reforçando que quando criamos um inteiro com sinal (Signed) ele vai aceitar números negativos e números sem sinal (Unsigned) vai aceitar apenas números positivos, porém poderá representar números maiores.</td>
+<td></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>No caso dos tipos <code>isize</code> e <code>usize</code> são tipos especiais pois eles vão depender da arquitetura do computador sendo 64 bits se for uma <code>arch-64</code> e 32 bits se for uma <code>arch-32</code>.</p>
+<p>Há outras formas também de escrever inteiros literais. Conforme a tabela abaixo só quero destacar que números muito grandes podemos separar com underscore <code>_</code> para facilitar a visualização.</p>
+<table>
+<thead>
+<tr>
+<th>Number literals</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decimal</td>
+<td><code>98_222</code></td>
+</tr>
+<tr>
+<td>Hex</td>
+<td><code>0xff</code></td>
+</tr>
+<tr>
+<td>Octal</td>
+<td><code>0o77</code></td>
+</tr>
+<tr>
+<td>Binary</td>
+<td><code>0b1111_0000</code></td>
+</tr>
+<tr>
+<td>Byte (<code>u8</code> only)</td>
+<td><code>b'A'</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="integer-overflow"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow">Integer Overflow</a></h5>
+<p>Se você criar uma variável do tipo <code>u8</code> que tem uma range de 0 a 255 e tentar atribuir a ela o número 256, você terá um integer overflow, o Rust durante a compilação fará a verificação dos tipos e identificará que esse atributo está recebendo um valor não comportado e dará um erro.
+No caso de tempo de execução se isso ocorrer ele lançara um erro chamado <code>panic</code> do qual veremos com mais detalhe mais a frente.</p>
+<pre><code class="language-rust">fn main() {
+
+    let fuel: i32 = 1_000_000_000;
+    let oxygen: u32 = 2_000_000_000;unidades.
+    let mut food: i16 = 32_767;
+    let auxiliary_ships: u8 = 255;
+    let crew_size: isize = 128;
+    let galactic_resources: u128 = 10_000_000_000_000_000; 
+}
+</code></pre>
+<h4 id="floating-point-types"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#floating-point-types">Floating-Point Types</a></h4>
+<p>Como já vimos temos dois primitivos de ponto flutuante o <code>f32</code> e o <code>f64</code> com 32 bits e 64 bits respectivamente.</p>
+<p>Aqui temos um exemplo usando um <code>f32</code>:</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let mut distance_to_target: f64 = 0.5;
+    let mut speed: f32 = 0.01;
+    let gravity: f64 = 3.711;
+    let mut fuel: f32 = 100.0;
+    let fuel_consumption_rate: f32 = 0.5;
+}
+</code></pre>
+<p>Números de ponto flutuante seguem o padrão <code>IEEE-754</code>. Sendo o <code>f32</code> de precisão simples e o <code>f64</code> de precisão dupla.</p>
+<h4 id="operacoes-numericas"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#numeric-operations">Operações numéricas</a></h4>
+<p>O Rust suporta todas as operações mais elementares da matemática, além disso podemos atribuir uma variável let com o valor de uma operação matemática.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    // Adição
+    let sword_damage = 25;
+    let fire_spell_damage = 50;
+    let total_damage = sword_damage + fire_spell_damage;
+    println!(&quot;Dano total causado ao inimigo: {}&quot;, total_damage);
+
+    // Subtração
+    let player_health = 100.0;
+    let enemy_attack_damage = 34.5;
+    let remaining_health = player_health - enemy_attack_damage;
+    println!(&quot;Vida restante do jogador: {:.1}&quot;, remaining_health);
+
+    // Multiplicação
+    let experience_per_enemy = 200;
+    let enemies_defeated = 3;
+    let total_experience = experience_per_enemy * enemies_defeated;
+    println!(&quot;Experiência total obtida: {}&quot;, total_experience);
+
+    // Divisão
+    let total_gold = 120.0;
+    let party_members = 4.0;
+    let gold_per_member = total_gold / party_members;
+    println!(&quot;Cada membro recebeu {:.2} moedas de ouro.&quot;, gold_per_member);
+
+    // Módulo
+    let potions = 17;
+    let potions_per_member = 4;
+    let leftover_potions = potions % potions_per_member;
+    println!(&quot;Poções restantes após a divisão: {}&quot;, leftover_potions);
+}
+
+</code></pre>
+<h4 id="the-boolean-type"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-boolean-type">The Boolean Type</a></h4>
+<p>Temos o tipo primitivo boolean que serve para verificarmos se a expressão ou variável é verdadeira ou falsa.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+
+    let is_door_locked: bool = false;
+    println!(&quot;A porta está trancada? {}&quot;, is_door_locked);
+
+    let has_key = true;
+    let can_open_door = is_door_locked &amp;&amp; has_key;
+
+    println!(&quot;O jogador pode abrir a porta? {}&quot;, can_open_door);
+}
+</code></pre>
+<p>Booleano são boas escolhas quando queremos validar uma condição de uma estrutura condicional como os <code>if</code>e <code>match</code>.</p>
+<h4 id="tipo-charactere"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-character-type">Tipo <code>Charactere</code></a></h4>
+<p>O char é o tipo primitivo mais simples para representar um <code>caracter</code>  em rust.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let player_initial = 'A';
+
+    let rare_item: char = '⚔';
+    let clan_emblem = '🐉';
+    let clan_name = '龍';
+    let enemy = '👾';
+}
+
+</code></pre>
+<p>Uma coisa importante é que char representamos com aspas simples, sendo aspas duplas para representar um conjunto de caracteres ou strings se preferir.</p>
+<p>Em rust um caractere consegue representar um character da tabela Unicode dando muita flexibilidade pois podemos representar caracteres como emojis e caracteres em línguas como o Japonês e o Coreano.</p>
+<h3 id="tipos-compostos"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#compound-types">Tipos compostos</a></h3>
+<p>Tipos compostos podem agrupar um conjunto de elementos de um tipo (ou vários) no caso de rust temos dois primitivos que ainda não vimos que são os arrays e tuplas.</p>
+<h4 id="tipo-tupla"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type">Tipo tupla</a></h4>
+<p>A tupla é um agrupamento especial pois uma vez declarada ela não muda seu tamanho ou seus elementos.</p>
+<p>Para criar uma tupla nós colocamos valores entre parenteses e separados por virgula.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let item: (i32, f64, u8) = (500, 6.4, 1);
+}
+</code></pre>
+<p>A variável <code>tup</code> foi declarado os tipos dentro dela, mas a tupla também consegue fazer a inferência do tipo sozinha pois a tupla em si é considerada um elemento já. Se quisermos pegar os valores fora da tupla podemos usar a desestruturação conforme o exemplo abaixo.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let item: (i32, f64, u8) = (500, 6.4, 1);
+
+    // Desestruturação para obter os valores
+    let (price, weight, rarity) = item;
+
+    println!(&quot;Detalhes do item:&quot;);
+    println!(&quot;Preço: {} moedas&quot;, price);
+    println!(&quot;Peso: {:.1} kg&quot;, weight);
+    println!(&quot;Raridade: {} (quanto menor, mais raro)&quot;, rarity);            
+}
+</code></pre>
+<p>No exemplo acima declaramos nossa tupla <code>tup</code> e desestruturamos ela em 3 variáveis para representar os 3 elementos dentro da tupla.</p>
+<p>Podemos também acessar diretamente da tupla, passando o índice do elemento que queremos conforme abaixo:</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let item: (i32, f64, u8) = (500, 6.4, 1);
+
+    let (price, weight, rarity) = item;
+
+    println!(&quot;Detalhes do item:&quot;);
+    println!(&quot;Preço: {} moedas&quot;, price);
+    println!(&quot;Peso: {:.1} kg&quot;, weight);
+    println!(&quot;Raridade: {} (quanto menor, mais raro)&quot;, rarity);
+
+    println!(
+        &quot;Resumo: {} moedas, {:.1} kg, raridade {}.&quot;,
+        item.0, item.1, item.2
+    );
+}
+</code></pre>
+<h4 id="o-tipo-array"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type">O tipo array</a></h4>
+<p>Outro tipo que podemos ter uma representação de vários elementos é o <code>array</code>. Ao contrário da tupla um <code>array</code> precisa que todos os elementos sejam do mesmo tipo, e também um array tem um tamanho fixo.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let recursos_planetas: [i32; 4] = [500, 700, 300, 450];
+}
+
+</code></pre>
+<p>Arrays são úteis quando você quer elementos que não vão mudar com o tempo. Por exemplo podemos fazer um array para representar os meses do ano.</p>
+<pre><code class="language-rust">let months = [&quot;January&quot;, &quot;February&quot;, &quot;March&quot;, &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;, &quot;August&quot;, &quot;September&quot;, &quot;October&quot;, &quot;November&quot;, &quot;December&quot;];
+</code></pre>
+<p>Você escreve um array usando colchetes com o tipo do elemento + ponto e virgula + número de elementos.</p>
+<pre><code class="language-rust">let recursos_planetas: [i32; 5] = [500, 700, 300, 450, 900];
+</code></pre>
+<p>Aqui representamos um array do tipo <code>i32</code> com 5 elementos.</p>
+<p>Também podemos inciar um array com um valor inicial como abaixo.</p>
+<pre><code class="language-rust">let energia_inicial = [100; 6];
+</code></pre>
+<p>Aqui o array a tem 6 elementos e todos começam com o valor 3 ou seja seria a mesma coisa que fazer <code>let energia_inicial = [100, 100, 100, 100, 100, 100];</code> mas, de uma forma mais concisa.</p>
+<h5 id="acessando-elementos-de-um-array"><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#accessing-array-elements">Acessando elementos de um array</a></h5>
+<p>Um array é um elemento que tem seu tamo fixo e conhecido e pode ser alocado na memória stack, podemos acessar um array pelo seu índice entre colchetes como o exemplo abaixo.</p>
+<pre><code class="language-rust">// src/main.rs
+fn main() {
+    let pontuacoes = [1000, 2000, 1500, 2500];
+
+    let maior_pontuacao = pontuacoes[3];
+    let segunda_pontuacao = pontuacoes[1];
+
+    println!(&quot;A maior pontuação foi {}!&quot;, maior_pontuacao);
+}
+
+</code></pre>
+<p>I##### <a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#invalid-array-element-access">Tentando acessar um elemento não existente</a></p>
+<p>O índice em rust começa com 0 então no exemplo anterior temos um índice que vai de 0 até 4 então se tentarmos acessar o índice 5 ou 10 nesse array vamos ter o erro baixo:</p>
+<pre><code class="language-console">thread 'main' panicked at src/main.rs:19:19:
+index out of bounds: the len is 5 but the index is 10
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Como falado anteriormente quando acessamos um elemento que não existe o programa vai lançar um <code>panic</code> informando o erro.</p>
+<h4 id="usando-vetores">Usando vetores</h4>
+<p>O primeiro tipo de coleção que vamos explorar é o <code>Vec&lt;T&gt;</code>, também conhecido como vetor. Vetores permitem armazenar mais de um valor em uma única estrutura de dados, colocando todos os valores em sequência na memória. Os vetores podem armazenar apenas valores do mesmo tipo, e são úteis quando você tem uma lista de itens, como os pontos de vida de jogadores, armas ou inimigos em um jogo.
+Criando um Novo Vetor</p>
+<p>Para criar um novo vetor vazio, usamos a função <code>Vec::new</code>, como mostrado no exemplo abaixo.</p>
+<pre><code class="language-rust">let v: Vec&lt;i32&gt; = Vec::new();
+</code></pre>
+<p><strong>Exemplo:</strong> Criando um vetor vazio para armazenar valores do tipo <code>i32</code>, que podem representar, por exemplo, pontos de vida dos personagens.</p>
+<p>Note que adicionamos uma anotação de tipo aqui. Como não estamos inserindo valores no vetor, o Rust não sabe que tipo de elementos pretendemos armazenar. Este é um ponto importante. Vetores são implementados usando generics, e o tipo <code>**Vec&lt;T&gt;**</code> pode armazenar qualquer tipo. Neste exemplo, o <code>**Vec&lt;i32&gt;**</code> irá armazenar elementos do tipo inteiro <code>**i32**</code>.</p>
+<p>Na maioria das vezes, você criará um <code>**Vec&lt;T&gt;**</code> com valores iniciais, e o Rust pode inferir automaticamente o tipo dos valores que você quer armazenar, então não é necessário fazer a anotação de tipo. O Rust fornece o macro <code>**vec!**</code> que cria um vetor com os valores fornecidos. Veja o exemplo abaixo:</p>
+<pre><code class="language-rust">let v = vec![1, 2, 3];  // Criando um novo vetor com os valores 1, 2 e 3
+</code></pre>
+<p>Neste caso, como já fornecemos valores iniciais de tipo <code>i32</code>, o Rust pode inferir que o tipo do vetor é <code>Vec&lt;i32&gt;</code>, e não é necessário adicionar a anotação de tipo.</p>
+<h4 id="atualizando-um-vetor">Atualizando um Vetor</h4>
+<p>Para criar um vetor e adicionar elementos a ele, podemos usar o método push, como mostrado no exemplo abaixo.</p>
+<pre><code class="language-rust">let mut v = Vec::new();  // Vetor mutável
+
+v.push(100);  // Adicionando pontos de vida
+v.push(150);  // Adicionando pontos de vida
+v.push(200);  // Adicionando pontos de vida
+
+</code></pre>
+<p>Aqui, como o vetor é mutável <code>mut</code>, podemos adicionar novos elementos a ele. Se o vetor armazenasse as <strong>vidas de personagens</strong> em um jogo, poderíamos adicionar os pontos de vida de diferentes inimigos ou heróis.</p>
+<h4 id="lendo-elementos-de-um-vetor">Lendo Elementos de um Vetor</h4>
+<p>Existem duas formas de acessar os valores armazenados em um vetor: via indexação ou utilizando o método get. Vamos ver ambos os métodos de acesso no código abaixo.</p>
+<pre><code class="language-rust">let v = vec![10, 20, 30, 40, 50];
+
+// Usando indexação
+let terceiro: &amp;i32 = &amp;v[2];  // Acessando o 3o valor (começando do índice 0)
+println!(&quot;O terceiro valor é {terceiro}&quot;);
+
+// Usando o método get
+let terceiro = v.get(2);
+match terceiro {
+    Some(valor) =&gt; println!(&quot;O terceiro valor é {valor}&quot;),
+    None =&gt; println!(&quot;Não existe um terceiro valor.&quot;),
+}
+
+</code></pre>
+<p>Aqui, acessamos o terceiro elemento do vetor <strong><code>v</code></strong> de duas formas: via <strong>indexação</strong> e pelo método <strong><code>get</code></strong>. A indexação começa do 0, por isso <strong><code>v[2]</code></strong> nos dá o terceiro valor (30). Já o método <strong><code>get</code></strong> retorna um <strong><code>Option&lt;&amp;T&gt;</code></strong>, permitindo tratar casos em que o índice pode estar fora dos limites.</p>
+<h4 id="tentando-acessar-um-indice-inexistente">Tentando Acessar um Índice Inexistente</h4>
+<p>O código abaixo tenta acessar um índice fora dos limites do vetor, o que pode gerar diferentes comportamentos dependendo do método utilizado:</p>
+<pre><code class="language-rust">let v = vec![10, 20, 30, 40, 50];
+
+// Tentando acessar o índice 100
+let nao_existe = &amp;v[100];  // Isso vai gerar um &quot;panic!&quot;
+let nao_existe = v.get(100);  // Isso retorna &quot;None&quot;
+</code></pre>
+<p>Se você usar a indexação <strong><code>v[100]</code></strong>, o programa irá gerar um <strong>panic</strong> porque o índice 100 está fora dos limites do vetor. No entanto, se usar o método <strong><code>get</code></strong>, ele retornará <strong>None</strong>, e você pode tratar isso sem que o programa falhe.</p>
+<h4 id="iterando-sobre-os-elementos-do-vetor">Iterando sobre os Elementos do Vetor</h4>
+<p>Para acessar cada elemento do vetor, você pode iterar sobre os valores. Veja um exemplo de como imprimir todos os elementos de um vetor:</p>
+<pre><code class="language-rust">let v = vec![100, 200, 300];
+for i in &amp;v {
+    println!(&quot;{i}&quot;);
+}
+
+</code></pre>
+<p>Se você quiser modificar os elementos durante a iteração, pode usar referências mutáveis, como no exemplo abaixo:</p>
+<pre><code class="language-rust">let mut v = vec![100, 200, 300];
+for i in &amp;mut v {
+    *i += 50;  // Aumentando a vida de cada personagem
+}
+</code></pre>
+<h4 id="usando-um-enum-para-armazenar-tipos-diferentes-em-um-vetor">Usando um Enum para Armazenar Tipos Diferentes em um Vetor</h4>
+<p>Os vetores em Rust podem armazenar apenas valores do mesmo tipo. No entanto, pode ser necessário armazenar elementos de tipos diferentes, como vidas de inimigos e itens no mesmo vetor. Para isso, podemos usar um <code>enum</code>. Por exemplo:</p>
+<pre><code class="language-rust">enum ItemJogo {
+    Vida(i32),
+    Arma(String),
+    Ouro(f64),
+}
+
+let itens = vec![
+    ItemJogo::Vida(100),
+    ItemJogo::Arma(String::from(&quot;Espada&quot;)),
+    ItemJogo::Ouro(500.75),
+];
+
+</code></pre>
+<p>Aqui, usamos um <code>enum</code> chamado <code>ItemJogo</code> para representar diferentes tipos de itens no jogo, como <strong>vida</strong> (um inteiro), <strong>arma</strong> (uma string) e <strong>ouro</strong> (um número decimal). Esse vetor pode agora armazenar diferentes tipos de valores dentro de um mesmo vetor, desde que todos sejam variantes do <code>enum</code>.</p>
+<h4 id="destruindo-um-vetor-ao-finalizar-o-jogo">Destruindo um Vetor ao Finalizar o Jogo</h4>
+<p>Assim como qualquer outro <code>struct</code>, um vetor é liberado da memória quando sai de escopo. Isso significa que seus valores também são "destruídos" quando o vetor é descartado.</p>
+<pre><code class="language-rust">{
+    let v = vec![10, 20, 30, 40];
+    // Ações no jogo com o vetor
+} // &lt;- O vetor v sai de escopo aqui e é descartado
+
+</code></pre>
+<p>Quando o vetor sai de escopo, ele libera todos os valores que estava armazenando, permitindo que a memória seja limpa.</p>
+<p>Referência:
+<a href="https://doc.rust-lang.org/book/ch03-02-data-types.html">Data Types</a></p>
+<h3 id="definindo-o-baralho">Definindo o baralho</h3>
+<p>Para criar o baralho precisamos usar um vetor <code>Vec</code> de cartas. Para isso precisamos criar uma função que retorne um baralho para o jogo.
+Vamos criar um teste que receba um baralho.<a href=""></a></p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_create_deck() {
+
+        // Act
+        let mut deck = create_deck();
+
+    }
+
+}
+
+</code></pre>
+<p>Precisamos importar o módulo deck no nosso módulo main.</p>
+<pre><code class="language-rust">mod game;
+mod card;
+mod deck;
+
+</code></pre>
+<p>Agora rodamos e ter e recebemo o erro abaixo:</p>
+<pre><code class="language-bash">error[E0425]: cannot find function `create_deck` in this scope
+ --&gt; src/deck.rs:9:24
+  |
+9 |         let mut deck = create_deck();
+  |                        ^^^^^^^^^^^ not found in this scope
+
+For more information about this error, try `rustc --explain E0425`.
+
+</code></pre>
+<p>Agora vamos criar a função <code>create_deck</code>. Nesse momento vamos fazer ela retornar um vetor <code>Vec</code> de Strings, não vamos colocar nossa <code>Struct</code> por que nosso objetivo é fazer nosso teste passar.</p>
+<pre><code class="language-rust">fn create_deck() -&gt; Vec&lt;String&gt; {
+    let mut deck = Vec::new();
+    deck
+}
+
+</code></pre>
+<p>Agora vamos criar um setup e um assert pro nosso teste funcionar.</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_create_deck() {
+        // Setup
+        let deck_compare: Vec&lt;String&gt; = Vec::new();
+
+        // Act
+        let mut deck = create_deck();
+
+        // Assert
+        assert_eq!(deck, deck_compare)
+
+    }
+
+}
+
+</code></pre>
+<p>Agora vamos rodar os testes.</p>
+<pre><code class="language-bash">running 2 tests
+test card::test::test_get_card_rank_and_suit ... ok
+test deck::test::test_create_deck ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Certo agora que o teste passou, nós precisamos fazer com que o <em>deck</em> receba todas as cartas e naipes por conta disso vamos precisar voltar no nosso módulo <em>card</em> e criar uma sequência dos valores para facilitar a construção automática do <em>deck</em>.
+Para isso vamos dar um nome (em inglês) para cada carta e usa-la na nossa <code>struct</code>.</p>
+<pre><code class="language-rust">enum Rank {
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace,
+}
+</code></pre>
+<p>Vamos adicionar agora Rank na nossa <code>struct</code> <em>Card</em>.</p>
+<pre><code class="language-rust">struct Card {
+    rank: Rank,
+    suit: Suit,
+}
+</code></pre>
+<p>Agora precisamos alterar nosso teste para receber um valor de <em>Rank</em>.</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_get_card_rank_and_suit() {
+        let value = Card { rank: Rank::Ten, suit: Suit::Hearts };
+
+        assert_eq!(value.rank, Rank::Ten);
+        assert_eq!(value.suit, Suit::Hearts)
+    }
+}
+</code></pre>
+<p>Agora precisamos adicionar algumas <em>traits</em> no nosso <em>Rank</em> assim como fizemos no <em>Suit</em></p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+enum Rank {
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace,
+}
+</code></pre>
+<p>Vamos rodar nosso teste novamente.</p>
+<pre><code class="language-bash">--tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.23s
+     Running unittests src/main.rs (target/debug/deps/blackjack-eab3321ecfe99072)
+
+running 2 tests
+test card::test::test_get_card_rank_and_suit ... ok
+test deck::test::test_create_deck ... ok
+</code></pre>
+<p>Certo nossos testes estão rodando e agora temos uma estrutura para representar o valor da carta.</p>
+<h3 id="adicionando-cartas-ao-deck">Adicionando cartas ao deck</h3>
+<p>Próximo passo agora é adicionarmos as cartas ao baralho. Como revisamos anteriormente os tipos primitivos sabemos que pro baralho tanto a tupla quanto o array não vão ajudar, então vamos usar um novo tipo que é o <code>Vec</code>.</p>
+<h4 id="usando-vec">Usando Vec</h4>
+<p>O tipo <code>Vec</code> em Rust representa um vetor, que é uma estrutura de dados flexível, muito útil no desenvolvimento de jogos para armazenar coleções de elementos de maneira eficiente e ordenada. Em jogos, precisamos frequentemente manipular conjuntos de dados que mudam dinamicamente, como listas de inimigos, projéteis, ou até os elementos de interface gráfica. É aqui que o<code>Vec</code> brilha.</p>
+<p>O <code>Vec</code> não possui tamanho fixo então podemos adicionar, remover e modificar os valores dentro dele, porém ele também só pode receber valores do mesmo tipo, no nosso caso podemos usar nossa <code>struct</code> Card como o tipo.</p>
+<h4 id="criando-o-deck">Criando o deck</h4>
+<p>Vamos alterar nosso teste para receber agora um <code>Vec&lt;Card&gt;</code>e testar se ele vai ter o tamanho do baralho. Para isso vamos modificar o nosso teste para ao invés de comparar um deck ele compare o tamanho do deck.</p>
+<pre><code class="language-rust">// deck.rs
+    #[test]
+    fn test_create_deck_length() {
+        // Act
+        let deck = create_deck();
+
+        // Assert: Verifica se o deck contém exatamente 52 cartas
+        assert_eq!(deck.len(), 52, &quot;O deck deve conter 52 cartas&quot;);
+    }
+
+</code></pre>
+<p>Precisamos fazer algumas modificações, nossa <code>struct Card</code> e os <code>enums</code> <code>Rank</code> e <code>Suit</code> precisam ser públicos. Além disso preciso agora dar algumas características para eles então vamos anotar em cada um com <code>#[derive(Debug, Copy, Clone, PartialEq)]</code> assim podemos copiar, clonar e comparar esses elementos. Debug estamos colocando para nos ajudar caso precisemos de alguma log.</p>
+<pre><code class="language-rust">//card.rs
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub enum Rank {
+    Two,
+...
+}
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub enum Suit {
+    Hearts,
+..
+}
+#[derive(Debug, Copy, Clone, PartialEq)]
+struct Card {
+...
+}
+</code></pre>
+<p>Outra alteração na <code>struct Card</code> é que precisamos deixar seus atributos como públicos também.</p>
+<pre><code class="language-rust">#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Card {
+    pub rank: Rank,
+    pub suit: Suit,
+}
+</code></pre>
+<p>Agora precisamos percorrer por todos os naipes e a cada naipe precisamos adicionar todas as cartas do mesmo. Para isso vamos precisar ter 2 laços então vamos percorrer um array de naipes e outro de valores de cartas.
+Também precisamos alterar o retorno da nossa função <code>create_deck</code> para ser <code>Vec&lt;Card&gt;</code> já que criamos agora nossa <code>struct Card</code>.</p>
+<pre><code class="language-rust">use crate::card::{Card, Rank, Suit};
+
+fn create_deck() -&gt; Vec&lt;Card&gt; {
+    let mut deck = Vec::new();
+    for &amp;suit in &amp;[Suit::Hearts, Suit::Diamonds, Suit::Clubs, Suit::Spades] {
+        for &amp;rank in &amp;[
+            Rank::Two,
+            Rank::Three,
+            Rank::Four,
+            Rank::Five,
+            Rank::Six,
+            Rank::Seven,
+            Rank::Eight,
+            Rank::Nine,
+            Rank::Ten,
+            Rank::Jack,
+            Rank::Queen,
+            Rank::King,
+            Rank::Ace,
+        ] {
+            deck.push(Card { rank, suit });
+        }
+    }
+    deck
+}
+
+</code></pre>
+<p>Com isso também precisamos alterar nosso teste <code>deck_compare</code> para usar nossa <code>struct</code>.</p>
+<pre><code class="language-rust">//deck.rs
+    #[test]
+    fn test_create_deck() {
+        //Setup
+        let deck_compare: Vec&lt;Card&gt; = Vec::new();
+        // Act
+        let mut deck = create_deck();
+
+        //Assert
+        assert_eq!(deck, deck_compare)
+    }
+</code></pre>
+<p>Esse teste ainda não vai rodar pois agora precisamos implementar a <em>trait</em> <code>Debug</code> e <code>PartialEq</code> em <code>Card</code>.</p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+pub struct Card {
+    pub rank: Rank,
+    pub suit: Suit,
+}
+</code></pre>
+<p>Agora rodando nosso teste temos:</p>
+<pre><code class="language-bash">✦ ➜ cargo test
+failures:
+    deck::test::test_create_deck
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--bin blackjack`
+</code></pre>
+<p>O teste que está falhando é o próprio <code>test_create_deck</code> por que agora nós não criamos um <code>Vec</code> Vazio. Pra isso por hora vamos fazer a mesma estrutura de repetição da função <code>create_deck</code> no nosso teste, não é o ideal, mas por hora vamos fazer essa implementação.</p>
+<pre><code class="language-rust">    #[test]
+    fn test_create_deck() {
+        //Setup
+        let mut deck_compare: Vec&lt;Card&gt; = Vec::new();
+        for &amp;suit in &amp;[Suit::Hearts, Suit::Diamonds, Suit::Clubs, Suit::Spades] {
+            for &amp;rank in &amp;[
+                Rank::Two,
+                Rank::Three,
+                Rank::Four,
+                Rank::Five,
+                Rank::Six,
+                Rank::Seven,
+                Rank::Eight,
+                Rank::Nine,
+                Rank::Ten,
+                Rank::Jack,
+                Rank::Queen,
+                Rank::King,
+                Rank::Ace,
+            ] {
+                deck_compare.push(Card { rank, suit });
+            }
+        }
+        // Act
+        let mut deck = create_deck();
+
+        //Assert
+        assert_eq!(deck, deck_compare)
+    }
+</code></pre>
+<p>Agora vamos rodar nosso teste.</p>
+<pre><code class="language-bash">running 3 tests
+test card::test::test_get_card_rank ... ok
+test deck::test::test_create_deck ... ok
+test deck::test::test_create_deck_length ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Certo funcionando! Agora vamos verificar se o nosso deck contem todos os naipes e cartas.  Para isso vamos declarar um <em>vetor</em> com os Naipes e outro para o valores das cartas. Então precisamos fazer uma estrutura similar a que usamos para preencher o baralho porém o que queremos fazer é apenas verificar se aquela carta (Naipe, Valor) existe dentro do baralho.</p>
+<pre><code class="language-rust">//deck.rs
+    #[test]
+    fn test_create_deck_contains_all_suits_and_ranks() {
+        // Act
+        let deck = create_deck();
+
+        // Define os naipes e valores esperados
+        let expected_suits = vec![Suit::Hearts, Suit::Diamonds, Suit::Clubs, Suit::Spades];
+        let expected_ranks = vec![
+            Rank::Two, Rank::Three, Rank::Four, Rank::Five, Rank::Six, Rank::Seven,
+            Rank::Eight, Rank::Nine, Rank::Ten, Rank::Jack, Rank::Queen, Rank::King, Rank::Ace,
+        ];
+
+        // Verifica se todas as combinações de naipes e valores estão presentes no deck
+        for &amp;suit in &amp;expected_suits {
+            for &amp;rank in &amp;expected_ranks {
+                let card = Card { suit, rank };
+                assert!(
+                    deck.contains(&amp;card),
+                    &quot;O deck deve conter a carta {:?} de {:?}&quot;, rank, suit
+                );
+            }
+        }
+    }
+</code></pre>
+<p>Rodamos o teste.</p>
+<pre><code class="language-bash">✦ ➜ cargo test
+   Compiling blackjack v0.1.0 (/home/feanor/projects/blackjack)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.20s
+     Running unittests src/main.rs (target/debug/deps/blackjack-eab3321ecfe99072)
+
+running 3 tests
+test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
+test card::test::test_get_card_rank_and_suit ... ok
+test deck::test::test_create_deck_length ... ok
+
+</code></pre>
+<p>Certo tudo funcionando, poderíamos agora criar outros tipos de teste como ver se não tem duplicadas, mas, pra isso precisaríamos usar um <code>HashSet</code> mas, não vamos mexer com isso agora, fica como desafio para você.</p>
+<h2 id="criando-a-mao-do-jogador">Criando a mão do jogador</h2>
+<p>Vamos fazer por hora um ajuste no nosso código que na hora de criar nosso baralho ele já seja embaralhado para isso vamos adicionar a biblioteca rand.</p>
+<pre><code class="language-bash">cargo add rand
+</code></pre>
+<p>Agora criamos uma variável com o método randômico e chamamos a função <code>shuffle</code> que existe dentro do da biblioteca <code>rand</code> para ele embaralhar as cartas.</p>
+<pre><code class="language-rust">//deck.rs
+use crate::card::{Card, Rank, Suit};
+use rand::thread_rng;
+use rand::seq::SliceRandom;
+
+
+pub fn create_deck() -&gt; Vec&lt;Card&gt; {
+    let mut deck = Vec::new();
+    for &amp;suit in &amp;[Suit::Hearts, Suit::Diamonds, Suit::Clubs, Suit::Spades] {
+        for &amp;rank in &amp;[
+            Rank::Two,
+            Rank::Three,
+            Rank::Four,
+            Rank::Five,
+            Rank::Six,
+            Rank::Seven,
+            Rank::Eight,
+            Rank::Nine,
+            Rank::Ten,
+            Rank::Jack,
+            Rank::Queen,
+            Rank::King,
+            Rank::Ace,
+        ] {
+            deck.push(Card { rank, suit });
+        }
+    }
+    let mut rng = thread_rng();
+    deck.shuffle(&amp;mut rng);
+    deck
+}
+</code></pre>
+<p>É importante aqui que usemos o import <code>SliceRandom</code> por que o método shuffle faz parte da trait <code>SliceRandom</code> da biblioteca rand, e esta trait precisa ser importada explicitamente para que o método seja acessível no seu código.</p>
+<p>Agora vamos criar outro módulo chamado <code>hand.rs</code> para ser a estrutura que vai organizar tanto a mão do jogador quanto a mão do dealer do jogo.</p>
+<pre><code class="language-bash">touch src/hand.rs
+</code></pre>
+<p>Agora vamos criar nossa <code>struct</code>para representar a mão de cartas.</p>
+<pre><code class="language-rust">#[derive(Debug)]
+pub struct Hand {
+    cards: Vec&lt;Card&gt;,
+}
+</code></pre>
+<p>Vamos deixar a <code>struct Hand</code> pública para podermos acessa em outros módulos do nosso jogo. Agora precisamos dar mais recursos para nossa <code>struct</code> para isso precisamos ter uma forma de quando o nosso jogador criar uma mão sem cartas e uma forma de adicionar uma carta do nosso deck a mão do jogador, para isso vamos aprender a criar métodos a nossa <code>struct</code> usando a palavra reservada <code>impl</code>.</p>
+<h4 id="sintaxe-de-metodo">Sintaxe de Método</h4>
+<p>Métodos são muito parecidos como funções, eles possuem a mesma estrutura, usam a mesma palavra reservada para serem declarados <code>fn</code>, podem receber parâmetros e retornar valores. Porém métodos são criados dentro de uma <code>struct</code> e pode manipular o comportamento da <code>struct</code>.</p>
+<p>Métodos podem ser implementados dentro de outras estruturas também os <code>enums</code> do qual já vimos por aqui e em <code>traits</code> que ainda vamos ver.</p>
+<p>A principal vantagem de criarmos métodos para nossa <code>struct</code> ao invés de uma função é que podemos alterar seu comportamento diretamente dentro da <code>struct</code> isso é útil para centralizarmos tudo que seja relacionado a nossa <code>struct Hand</code> fique apenas limitado aos métodos da sua própria <code>struct</code> assim além de ajudar nos testes facilita a reutilização desses métodos e também evita ficar emprestando nossas variáveis o tempo todo.</p>
+<p>Para criar métodos para uma <code>struct</code> precisamos usar a palavra reservada <code>impl</code> e o nome da nossa <code>struct</code> então no caso do nossa <code>struct Hand</code> fica assim:</p>
+<pre><code class="language-rust">impl Hand {
+
+}
+</code></pre>
+<p>Com a estrutura acima podemos agora criar nossa "funções" dentro desse bloco de código.</p>
+<h4 id="metodo-inicializador">Método inicializador</h4>
+<p>O primeiro método que vamos criar é um método para inicializar nossa mão com um vetor vazio de cartas, então vamos chama-lo  de <code>new</code> podemos criar a estrutura conforme abaixo.</p>
+<pre><code class="language-rust">impl Hand {
+    fn new() -&gt; Self {
+        Hand { cards: Vec::new() }
+    }
+}
+</code></pre>
+<p>Bom agora que você entendeu a dinâmica de um método dentro da <code>struct</code> vamos criar um teste para checar que a mão existe. Mas, primeiro vamos importar nosso módulo hand na main para os testes funcionarem.
+ ```rust
+ //main.rs
+mod card;
+mod deck;
+mod game;
+mod hand;</p>
+<pre><code>
+Agora criamos o teste.
+
+```rust
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_hand_should_created() {
+        // Setup
+        let hand: Hand = Hand::new();
+
+
+        //Assert /Act
+
+        assert_eq!(hand, Hand::new());
+    }
+}
+</code></pre>
+<p>Vale ressaltar aqui que estamos criando uma variável chamada <code>hand</code> ela vai receber uma instância do nosso método <code>new</code> que nós criamos, mas me diga que diabos é uma instância?</p>
+<blockquote>
+<p>[!tip]
+Uma <strong>instância</strong> é uma ocorrência concreta de uma estrutura ou objeto definida por uma <code>_struct_</code> (ou classe, em linguagens orientadas a objetos). Em outras palavras, quando você chama um método como <code>Hand::new()</code>, você está criando um novo exemplo (ou instância) da estrutura <code>Hand</code> com seus valores iniciais definidos. Essa instância contém os dados (neste caso, um vetor vazio de cartas) e pode ser utilizada para acessar métodos e manipular os dados conforme necessário.</p>
+</blockquote>
+<p>Definição da Estrutura: Aqui, Hand é como um molde que define como uma "mão de cartas" deve ser. Ela possui um campo cards que é um vetor de cartas.
+Método <code>new</code>: O método <code>new</code> é um construtor que cria uma nova instância da estrutura Hand com um vetor vazio.</p>
+<p>Logo quando fazemos isso</p>
+<pre><code class="language-rust">let hand: Hand = Hand::new();
+</code></pre>
+<p>Você está criando uma instância de <code>Hand</code>. Essa instância é um objeto real que vive na memória do computador, contendo seus próprios dados (no caso, o vetor vazio de cartas). A partir dessa instância, você pode chamar outros métodos para manipular os dados contidos nela. Mas, nós não criamos eles ainda.</p>
+<p>Agora antes de rodar os testes, vamos comentar o shuffle do deck pois, vai quebrar o teste, vamos lidar com isso um pouco mais a frente.</p>
+<pre><code class="language-rust">    //let mut rng = thread_rng();
+    //deck.shuffle(&amp;mut rng);
+</code></pre>
+<p>Agora executando os teste todos devem continuar passando.</p>
+<pre><code class="language-rust">warning: `blackjack` (bin &quot;blackjack&quot; test) generated 3 warnings (run `cargo fix --bin &quot;blackjack&quot; --tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests src/main.rs (target/debug/deps/blackjack-10500accf0b94805)
+
+running 5 tests
+test card::test::test_get_card_rank_and_suit ... ok
+test deck::test::test_create_deck ... ok
+test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
+test hand::test::test_hand_should_created ... ok
+test deck::test::test_create_deck_length ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<h4 id="metodo-para-adicionar-a-carta-a-mao">Método para adicionar a carta a mão</h4>
+<p>Certo agora já temos uma representação de uma mão, porém precisamos ter formas de adicionar cartas a essa mão, pra isso precisamos criar um método <code>add_card</code>, então primeiro vamos criar um teste que adiciona uma carta a mão.</p>
+<pre><code class="language-rust">    #[test]
+    fn test_add_card_in_hand() {
+        // Setup
+        let mut hand: Hand = Hand::new();
+        let card: Card= Card {
+            rank: Rank::Two,
+            suit: Suit::Diamonds,
+        };
+        let mut hand_compare: Vec&lt;Card&gt; = Vec::new();
+        hand_compare.push(card);
+
+
+        // Act
+        hand.add_card(card);
+
+        // Assert
+        assert_eq!(hand.cards, hand_compare)
+    }
+</code></pre>
+<p>Agora vamos rodar nosso teste e vamos receber esse erro:</p>
+<pre><code class="language-bash">error[E0599]: no method named `add_card` found for struct `hand::Hand` in the current scope
+  --&gt; src/hand.rs:44:14
+   |
+4  | pub struct Hand {
+   | --------------- method `add_card` not found for this struct
+...
+44 |         hand.add_card(card);
+   |              ^^^^^^^^ method not found in `hand::Hand`
+</code></pre>
+<p>O erro é claro não temos um método chamado <code>add_card</code> então vamos criado agora:</p>
+<pre><code class="language-rust">    fn add_card(&amp;mut self, card: Card) {
+        self.cards.push(card);
+    }
+</code></pre>
+<p>Agora vamos rodar os testes novamente:</p>
+<pre><code class="language-rust">warning: `blackjack` (bin &quot;blackjack&quot; test) generated 3 warnings (run `cargo fix --bin &quot;blackjack&quot; --tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests src/main.rs (target/debug/deps/blackjack-10500accf0b94805)
+
+running 6 tests
+test hand::test::test_hand_should_created ... ok
+test card::test::test_get_card_rank_and_suit ... ok
+test hand::test::test_add_card_in_hand ... ok
+test deck::test::test_create_deck_length ... ok
+test deck::test::test_create_deck ... ok
+test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
+
+</code></pre>
+<p>Maravilha tudo funcionando!</p>
+<h4 id="criando-a-mao-do-jogador_1">Criando a mão do jogador</h4>
+<p>Agora que temos uma forma de ter um baralho e criar uma mão, vamos criar a primeira lógica pro nosso jogo no loop de <em>gameplay</em>, dentro do loop vamos criar a mão do jogador usando <code>player_hand</code>. </p>
+<pre><code class="language-rust">//game.rs
+pub fn game_start() {
+    loop {
+        let deck = create_deck();
+        let mut player_hand = Hand::new();
+        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;Total value: 0&quot;);
+
+        println!(&quot;Your hand:&quot;);
+        println!(&quot;Total value: 0&quot;)
+
+    }
+}
+</code></pre>
+<h4 id="criando-a-mao-do-dealer">Criando a mão do dealer</h4>
+<p>Vamos aproveitar e criar a mão do dealer, como vamos só adicionar uma nova variável chamada dealer_hand, vamos também já adicionar mais uma lógica do jogo que é dar as duas primeiras cartas para cada jogador.</p>
+<pre><code class="language-rust">use crate::{deck::create_deck, hand::Hand};
+
+pub fn game_start() {
+    loop {
+        let deck = create_deck();
+        let mut player_hand = Hand::new();
+        let mut dealer_hand = Hand::new();
+
+        // Initial deal
+        player_hand.add_card(deck.pop().unwrap());
+        dealer_hand.add_card(deck.pop().unwrap());
+        player_hand.add_card(deck.pop().unwrap());
+        dealer_hand.add_card(deck.pop().unwrap());
+
+        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;Total value: 0&quot;);
+
+        println!(&quot;Your hand:&quot;);
+        println!(&quot;Total value: 0&quot;)
+
+    }
+}
+</code></pre>
+<p>No código, usamos <code>pop().unwrap()</code> para retirar a última carta do deck e obter o valor dela. Vamos dividir essa operação em duas partes:</p>
+<ol>
+<li>
+<p><strong><code>pop()</code></strong>:</p>
+<ul>
+<li>Esse método é chamado em um <code>Vec&lt;T&gt;</code> e remove (pop) o último elemento do vetor, retornando-o como um valor do tipo <code>Option&lt;T&gt;</code>.</li>
+<li>Se o vetor não estiver vazio, <code>pop()</code> retorna <code>Some(elemento)</code>.</li>
+<li>Se o vetor estiver vazio, ele retorna <code>None</code>.</li>
+<li>
+<p><strong><code>unwrap()</code></strong>:</p>
+</li>
+<li>
+<p>Esse método é usado para extrair o valor dentro de um <code>Option&lt;T&gt;</code> quando temos certeza de que ele é <code>Some(valor)</code>.</p>
+</li>
+<li>Se for <code>Some(valor)</code>, <code>unwrap()</code> retorna o <code>valor</code>.</li>
+<li>Se for <code>None</code>, <code>unwrap()</code> causará um <strong>panic</strong>, interrompendo a execução do programa.</li>
+</ul>
+</li>
+</ol>
+<p>No contexto do jogo, assumimos que o deck sempre possui cartas suficientes para distribuir (por isso usamos <code>unwrap()</code> com confiança). Assim, a chamada:</p>
+<pre><code class="language-rust">player_hand.add_card(deck.pop().unwrap());
+</code></pre>
+<ul>
+<li><strong><code>deck.pop()</code></strong> retira a última carta do vetor <code>deck</code> e a retorna como <code>Some(carta)</code>.</li>
+<li><strong><code>unwrap()</code></strong> extrai a carta de dentro do <code>Some</code> e a passa para o método <code>add_card</code>.</li>
+</ul>
+<p>Se, por algum motivo, o deck estiver vazio, <code>pop()</code> retornará <code>None</code> e o <code>unwrap()</code> causará um panic, interrompendo o jogo.</p>
+<p>Essa combinação de <code>pop().unwrap()</code> é comum em situações onde se tem certeza que a coleção não estará vazia, mas deve ser usada com cuidado para evitar panics inesperados.</p>
+<p>Agora vamos fazer alguns ajustes, o primeiro é que nossa variável deck precisar ser mutável.</p>
+<pre><code class="language-rust">pub fn game_start() {
+    loop {
+        let mut deck = create_deck();
+        let mut player_hand = Hand::new();
+        let mut dealer_hand = Hand::new();
+
+</code></pre>
+<p>O próximo passo é deixar nossos métodos dentro <code>Hand</code> públicos, isso é um ponto de atenção muito importante pra você, pois não basta a <code>Struct</code> ser publica, se nossos módulos não forem, eles não funcionarão em outros módulos. Voltando a questão da casa, é como você pudesse entrar no cômodo mas, não pode mexer em nada. Então vamos deixa-los públicos.</p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+pub struct Hand {
+    cards: Vec&lt;Card&gt;,
+}
+impl Hand {
+    pub fn new() -&gt; Self {
+        Hand { cards: Vec::new() }
+    }
+
+    pub fn add_card(&amp;mut self, card: Card) {
+        self.cards.push(card);
+    }
+}
+</code></pre>
+<p>Ainda, não criamos nenhum teste no nosso módulo game, mas vamos cria-lo mais adiante, agora vamos testar nosso jogo executando ele.</p>
+<pre><code class="language-bash">ons)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/blackjack`
+Start game? (y)es or (n)o
+</code></pre>
+<p>Se executarmos vamos ver que ele não vai dar erro, porém está num loop infinito. Bom uma ultima coisa que podemos fazer ainda é mover por hora nosso método de embaralhar o baralho para nossa função <code>game</code>, logo mais vamos melhorar essa organização.</p>
+<pre><code class="language-rust">use rand::{seq::SliceRandom, thread_rng};
+
+use crate::{deck::create_deck, hand::Hand};
+
+pub fn game_start() {
+    loop {
+        let mut deck = create_deck();
+        let mut rng = thread_rng();
+        deck.shuffle(&amp;mut rng);
+        let mut player_hand = Hand::new();
+        let mut dealer_hand = Hand::new();
+
+        // Initial deal
+        player_hand.add_card(deck.pop().unwrap());
+        dealer_hand.add_card(deck.pop().unwrap());
+        player_hand.add_card(deck.pop().unwrap());
+        dealer_hand.add_card(deck.pop().unwrap());
+
+        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;Total value: 0&quot;);
+
+        println!(&quot;Your hand:&quot;);
+        println!(&quot;Total value: 0&quot;)
+
+    }
+}
+</code></pre>
+<p>Agora se testarmos vamos ver que continua a mesma coisa, fora o ajuste do loop temos um grande problema que é como vamos representar nossas cartas? Simples vamos começar a trabalhar com a artes <code>ascii</code> neles!</p>
+<h2 id="falando-sobre-arte-ascii">Falando sobre Arte ASCII</h2>
+<p>Bom vamos falar um pouco sobre a forma de arte que vamos usar nos nossos jogos que é a arte ASCII.</p>
+<h3 id="o-que-e-ascii">O que é ASCII?</h3>
+<p>ASCII (American Standard Code for Information Interchange) é um padrão de codificação de caracteres para comunicação digital. Ele representa texto em computadores, equipamentos de comunicação e outros dispositivos que trabalham com texto.</p>
+<p>Em essência, cada letra, número, símbolo de pontuação e outros caracteres (como espaços e novas linhas) recebem um código numérico único. Por exemplo, a letra "A" maiúscula é representada pelo número 65 em ASCII.</p>
+<h3 id="por-que-o-ascii-e-importante">Por que o ASCII é importante?</h3>
+<p>Permite que diferentes dispositivos e softwares interpretem texto da mesma forma, facilitando a troca de informações.
+Base para outras codificações: Muitas codificações modernas, como o UTF-8, são baseadas no ASCII para os caracteres mais comuns.
+O conjunto original do ASCII é pequeno e fácil de entender, o que o torna ideal para aplicações básicas de texto.</p>
+<h3 id="limitacoes-do-ascii">Limitações do ASCII:</h3>
+<p>O ASCII original suporta apenas 128 caracteres, o que é insuficiente para representar todos os caracteres de muitos idiomas, incluindo acentos e símbolos especiais.</p>
+<h3 id="tabela-ascii">Tabela ASCII</h3>
+<p><a class="glightbox" href="../images/ascii-table.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Um exemplo de tabela ASCII" src="../images/ascii-table.png" /></a></p>
+<h3 id="um-breve-historico">Um breve histórico</h3>
+<p>1963: O padrão ASCII (American Standard Code for Information Interchange) é estabelecido, atribuindo códigos numéricos a caracteres alfanuméricos, símbolos de pontuação e caracteres de controle. Essa codificação universal torna-se a base para a comunicação digital de texto.</p>
+<p>Década de 1960: Surgem as primeiras manifestações da Arte ASCII, com artistas como <a href="http://www.kenknowlton.com/">Kenneth Knowlton</a> utilizando impressoras para criar padrões visuais com caracteres. A limitação dos primeiros computadores, com telas de baixa resolução e sem capacidade gráfica avançada, impulsiona a criatividade em ASCII.</p>
+<p>Década de 1970: Com o aumento da popularidade dos computadores pessoais, a arte ASCII começou a surgir nos terminais de texto. Artistas usavam os caracteres disponíveis no teclado para criar imagens, logotipos e representações gráficas.</p>
+<p>Décadas de 1980: A popularização dos BBS (Bulletin Board Systems) impulsiona a Arte ASCII, com a criação de comunidades online dedicadas à prática e ao compartilhamento de obras. Artistas exploram diferentes técnicas e estilos, desde o minimalismo até a complexidade de detalhes.</p>
+<p>Atualmente: A Arte ASCII transcende suas origens e se torna uma forma de expressão artística por direito próprio. Ela influencia a cultura digital, a estética de jogos eletrônicos e até mesmo a comunicação online. A comunidade de entusiastas da Arte ASCII continua ativa, mantendo viva essa forma única de arte digital.</p>
+<h3 id="exemplos">Exemplos</h3>
+<p>A arte ASCII pode ser simples:
+<a class="glightbox" href="./elefante.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="um simples elefante" src="./elefante.jpg" /></a></p>
+<p>Como mais complexa:</p>
+<p><a class="glightbox" href="../images/venus.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="new venus" src="../images/venus.png" /></a></p>
+<p>E aqui um exemplo da arte do Kenneth Knowlton:</p>
+<p><a class="glightbox" href="../images/mc2.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="einstein" src="../images/mc2.jpg" /></a></p>
+<h2 id="arte-ascii-em-jogos">Arte ASCII em jogos</h2>
+<p>Os primeiros jogos de computador, como "Rogue" (1980) e "Moria" (1975), utilizavam arte ASCII para representar masmorras, monstros e tesouros. A falta de recursos gráficos não impediu a criação de mundos imersivos e aventuras épicas.</p>
+<p>A era de ouro dos jogos de texto e aventura viu a arte ASCII florescer. Jogos como "Zork" (1977) e "The Hitchhiker's Guide to the Galaxy" (1984) utilizavam descrições textuais detalhadas e mapas em ASCII para transportar os jogadores para mundos imaginários.</p>
+<p>Mesmo com o avanço dos gráficos, a arte ASCII manteve seu espaço. Jogos como "Dwarf Fortress" (2006) e "Linley's Dungeon Crawl" (1997) continuaram a usar a arte ASCII para criar mundos complexos e desafiadores.</p>
+<p>Atualmente: A arte ASCII vive um renascimento nos jogos independentes e retrô. Jogos como "Cataclysm: Dark Days Ahead" (2010) e "Cogmind" (2017) celebram a estética clássica da arte ASCII, mostrando que a simplicidade pode ser tão cativante quanto os gráficos modernos.</p>
+<p><a class="glightbox" href="../images/moria.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Moria" src="../images/moria.jpg" /></a>
+<a class="glightbox" href="../images/dwarf-fortress.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Dwarf Fortress" src="../images/dwarf-fortress.jpg" /></a>
+<a class="glightbox" href="../images/cogmind.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="cogmind" src="../images/cogmind.png" /></a></p>
+<h2 id="construindo-a-representacao-do-baralho-em-ascii">Construindo a representação do baralho em ASCII</h2>
+<p>Para representar nossa carta vamos implementar um método no elementos que precisam ser exibidos na tela, ou seja, vamos criar um método em <code>CARD</code>, <code>RANK</code> e <code>Suit</code>, vamos chamar esse método de <code>to_asci</code> seu objetivo será criar uma <code>String</code> que representa a carta.</p>
+<p>Paus: Club Suit (♣)
+Ouros: Diamond Suit (♦)
+Copas: Heart Suit (♥)
+Espadas: Spade Suit (♠)</p>
+<p>Então o primeiro ponto será criar uma <code>String</code>que represente nosso naipe. Como temos um <code>enum</code> nós podemos implementar um método a ele, assim como fizemos com <code>struct</code>. Usando a palavra reservada <code>impl</code> e o nome do nosso <code>enum</code> que no caso é <code>Suit</code>. Nós vamos chamar nosso método de <code>to_ascii</code> que precisa ser público:</p>
+<pre><code class="language-rust">pub enum Suit {
+    Hearts,
+    Diamonds,
+    Clubs,
+    Spades,
+}
+
+impl Suit {
+    pub fn to_ascii(&amp;self) {
+
+    }
+}
+</code></pre>
+<p>Então por hora só vamos receber como parâmetro <code>&amp;self</code> que é o contexto do nosso objeto. Agora precisamos selecionar o naipe e devolver o simbolo que o representa no caso: ♥ ♦♣♠</p>
+<p>Como essa é uma <code>String</code> que não vai variar nós podemos retornar no nosso método um <code>str</code>.</p>
+<pre><code class="language-rust">impl Suit {
+    pub fn to_ascii(&amp;self) -&gt; &amp;'static str {
+        match *self {
+            Suit::Hearts =&gt; &quot;♥&quot;,
+            Suit::Diamonds =&gt; &quot;♦&quot;,
+            Suit::Clubs =&gt; &quot;♣&quot;,
+            Suit::Spades =&gt; &quot;♠&quot;,
+        }
+    }
+}
+</code></pre>
+<p>Então criamos um <code>pattern match</code> pra selecionar qual é o naipe correto e ele já nos retorna o naipe.</p>
+<p>Você percebeu que nosso retorno está usando o <code>str</code> porém especificamos como <code>&amp;'static str</code>, isso nós indicamos um lifetime do nosso retorno que é um <code>Static Lifetime</code>, nós não vamos entrar a fundo em <code>lifetimes</code>agora mas, para você entender o <code>lifetime</code>nós damos uma "sobrevida" aos objetos da função ou seja quando o bloco terminar ele não vai destruir os objetos. Pois se você se lembrar no fim de um bloco de código Rust remove os objetos da memória, assim que ele trabalha fazendo que ele não precise nem gerenciar a memória e nem usar um <code>Garbage Colector</code>.
+No caso do <code>lifetime 'static</code> nós dizemos pro compilador que aquele retorno vai durar até o fim da execução do programa, mas no nosso caso em especial ele está dizendo que o valor que vamos retornar não é um valor que vem do objeto mas, um objeto estático.</p>
+<p>Certo agora vamos fazer a mesma coisa para os valores das cartas.</p>
+<pre><code class="language-rust">#[derive(Debug, Copy, Clone, PartialEq)]
+enum Rank {
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace,
+}
+
+impl Rank {
+    pub fn to_ascii(&amp;self) -&gt; &amp;'static str {
+        match *self {
+            Rank::Two =&gt; &quot;2&quot;,
+            Rank::Three =&gt; &quot;3&quot;,
+            Rank::Four =&gt; &quot;4&quot;,
+            Rank::Five =&gt; &quot;5&quot;,
+            Rank::Six =&gt; &quot;6&quot;,
+            Rank::Seven =&gt; &quot;7&quot;,
+            Rank::Eight =&gt; &quot;8&quot;,
+            Rank::Nine =&gt; &quot;9&quot;,
+            Rank::Ten =&gt; &quot;10&quot;,
+            Rank::Jack =&gt; &quot;J&quot;,
+            Rank::Queen =&gt; &quot;Q&quot;,
+            Rank::King =&gt; &quot;K&quot;,
+            Rank::Ace =&gt; &quot;A&quot;,
+        }
+    }
+}
+
+</code></pre>
+<p>Esse método é muito parecido com o anterior com a diferença que precisamos representar o nome das cartas com seus símbolos seja eles um número ou uma letra "J, Q, K  e A".</p>
+<p>E agora fazemos a representação da carta para isso vamos desenha usando apenas os símbolos "-" "|" e vamos concatenar as representações de naipes e valores.</p>
+<p>Agora vamos trabalhar com uma <code>String</code> e vamos esculpir a carta inserindo símbolos e quebras de linhas "\n". Para isso usamos uma função da instância de <code>String</code> chamada <code>push_str</code>.</p>
+<p>Também para concatenar um <code>str</code> numa <code>String</code> vamos usar a macro <code>format!</code> da qual passamos a <code>String</code> e dentro das chaves "{}" ele vai inserir a nossa <code>str</code>.  Porém a macro vai retornar uma <code>String</code>e nós queremos mandar um <code>str</code>, podemos usar uma função da instância de <code>String</code> que é o <code>as_str()</code> isso vai converter uma <code>S
+tring</code> em <code>str</code>. 
+Vamos ter algo assim:</p>
+<pre><code class="language-rust">let mut nome: String = String::new();
+let jonatas = &quot;Jonatas&quot;;
+
+nome.push_str(format!(&quot;Meu nome é {}&quot;, jonatas).as_str();
+</code></pre>
+<pre><code class="language-rust">impl Card {
+    pub fn to_ascii(&amp;self) -&gt; String {
+        let mut ascii_card = String::new();
+        ascii_card.push_str(&quot; _____\n&quot;);
+        ascii_card.push_str(format!(&quot;|{}    |\n&quot;, self.rank.to_ascii()).as_str());
+        ascii_card.push_str(format!(&quot;|  {}  |\n&quot;, self.suit.to_ascii()).as_str());
+        ascii_card.push_str(&quot;|_____|\n&quot;);
+        ascii_card
+    }
+}
+
+</code></pre>
+<p>Agora precisamos fazer um teste com a carta pra isso vamos inserir em <code>game.rs</code> a representação da segunda carta do <em>dealer</em>.</p>
+<pre><code class="language-rust">...
+        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;{}&quot;, dealer_hand.cards[1].to_ascii());
+...
+break;
+</code></pre>
+<p>Vamos criar um break no final do nosso loop só pra poder visualizar o teste, agora se rodarmos vamos ter um erro, pois precisamo transformar <code>cards</code> em publico na <code>struct Hand</code>.</p>
+<pre><code class="language-rust">pub struct Hand {
+    pub cards: Vec&lt;Card&gt;,
+}
+
+</code></pre>
+<p>Agora se rodarmos vamos ver algo assim no nosso termina:</p>
+<pre><code class="language-bash">Start game? (y)es or (n)o
+y
+Dealers hand:
+ _____
+|9    |
+|  ♣  |
+|_____|
+
+Total value: 0
+Your hand:
+Total value: 0
+Start game? (y)es or (n)o
+n
+Thank you playing.
+
+</code></pre>
+<p>Agora que funcionou vamos representar tanto as cartas do <em>dealer</em> quanto do <em>player</em>.</p>
+<p>Para mostrar toda a mão player precisamos fazer um loop, como atributo <code>cards</code> em <code>Hand</code> é um <code>Vec</code> queremos percorrer cada elemento, para isso podemos usar a função <code>.iter()</code> que vai nos possibilitar acessar cada elemento do <code>Vec</code> dentro do <code>for</code>.</p>
+<pre><code class="language-rust">        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;{}&quot;, dealer_hand.cards[1].to_ascii());
+        println!(&quot;Total value: 0&quot;);
+
+        println!(&quot;Your hand:&quot;);
+        for card in player_hand.cards.iter() {
+            println!(&quot;{}&quot;, card.to_ascii());
+        }
+</code></pre>
+<p>Agora ainda vamos testar usando o <code>break</code>.</p>
+<pre><code class="language-rust">Start game? (y)es or (n)o
+y
+Dealer's hand:
+ _____
+|6    |
+|  ♠  |
+|_____|
+
+Total value: 0
+Your hand:
+ _____
+|A    |
+|  ♦  |
+|_____|
+
+ _____
+|7    |
+|  ♥  |
+|_____|
+
+Total value: 0
+Start game? (y)es or (n)o
+</code></pre>
+<p>Tudo certo, temos a representação da nossa carta.</p>
+<h2 id="criando-um-sistema-de-turnos">Criando um sistema de turnos</h2>
+<p>No blackjack temos um sistema de turnos no jogo, uma vez o dealer pega uma carta no outro escolhemos se vamos pegar ou não uma carta. Então precisamos simular esse sistema no nosso jogo.
+Só que há um detalhe o <em>dealer</em> depois que o jogador para continua pegando cartas até ter um valor maior que o jogador, então precisamos primeiro somar as cartas de cada mão, pra isso vamos ter que criar um método para somar a mão e dar o valor de cada carta.</p>
+<p>Primeiro vamos definir o valor de cada carta, usando um <code>pattern matching</code> no nosso <code>enum Rank</code>.</p>
+<pre><code class="language-rust">    fn value(&amp;self) -&gt; u32 {
+        match *self {
+            Rank::Two =&gt; 2,
+            Rank::Three =&gt; 3,
+            Rank::Four =&gt; 4,
+            Rank::Five =&gt; 5,
+            Rank::Six =&gt; 6,
+            Rank::Seven =&gt; 7,
+            Rank::Eight =&gt; 8,
+            Rank::Nine =&gt; 9,
+            Rank::Ten | Rank::Jack | Rank::Queen | Rank::King =&gt; 10,
+            Rank::Ace =&gt; 11,
+        }
+    }
+</code></pre>
+<p>Dentro do <code>pattern maching</code> precisamos usar um <em>or</em> "|" pois o reis, dama e valete possuem valor 10 e o Às pode ser 11 ou 1, por hora vamos deixar ele com o valor 11.</p>
+<p>Agora a nossa<code>struct Card</code> precisa ter um método para representar o valor da carta, que é simplesmente chamar o método dentro de <code>Rank</code>.</p>
+<pre><code class="language-rust">    pub fn value(&amp;self) -&gt; u32 {
+        self.rank.value()
+    }
+</code></pre>
+<p>Agora precisamos somar os valores da mão do <em>dealer</em> e do jogador. Pra isso vamos usar nossa <code>struct Hand</code> para somar a sua própria mão.</p>
+<p>Para fazermos essa soma vamos entrar em algumas possibilidades que temos quando trabalhamos com <code>Vec</code>.</p>
+<h4 id="closures">Closures</h4>
+<h4 id="vec-iter-map-filter-e-sum">Vec - iter, map, filter e sum</h4>
+<p>Quando trabalhos com algumas estruturas no rust que podem ser iteráveis como o <code>Vec</code> podemos usar funções especiais.</p>
+<p><code>iter</code> que é um iterador de referências ou seja, dentro de um loop podemos navegar pelos elementos dentro de uma estrutura sem ser necessário consumi-la. Pois se usamos um for precisaríamos consumir o elemento ou ficar usando <code>copy</code>ou <code>clone</code>. </p>
+<p><code>map</code> é uma função dentro de um <code>Iterator</code> que transforma cada elemento em uma <code>closure</code>.</p>
+<p><code>sum</code> é uma função que consegue acumular valores dentro do <code>Iterator</code>.</p>
+<p><code>filter</code> basicamente é como o nome já diz é um filtro onde colocamos uma condição da qual queremos, onde também é possível usar uma <code>closure</code>.</p>
+<p>No nosso caso é um <code>Vec</code> por isso precisamos somar cada valor dentro dele sem consumi-lo. Então usando o <code>map</code>definimos a <code>closure</code> que seria o valor de cada carta e no retorno somamos os elementos que foram iterados.</p>
+<pre><code class="language-rust">let mut total = self.cards.iter().map(|card| card.value()).sum::&lt;u32&gt;();
+</code></pre>
+<p>Com isso podemos somar os elementos sem precisar consumir os elementos dentro do <code>Vec</code> Outro ponto que é importante reforçar é que no 21 o A vale 11 porém se o valor total for maior que 21 o às muda pra 1, ou seja, se você tirar duas cartas de valor 10 e um às o valor é 21 ou se você parar com um 9 e um às seu valor vai ser 20.</p>
+<pre><code class="language-rust">impl Hand {
+    pub fn new() -&gt; Self {
+        Hand { cards: Vec::new() }
+    }
+
+    pub fn add_card(&amp;mut self, card: Card) {
+        self.cards.push(card);
+    }
+
+    pub fn value(&amp;self) -&gt; u32 {
+        let mut total = self.cards.iter().map(|card| card.value()).sum::&lt;u32&gt;();
+
+        let num_aces = self
+            .cards
+            .iter()
+            .filter(|&amp;&amp;card| card.rank == Rank::Ace)
+            .count();
+        for _ in 0..num_aces {
+            if total &gt; 21 {
+                total -= 10; // Convert Ace from 11 to 1
+            }
+        }
+        total
+    }
+}
+</code></pre>
+<h4 id="colocando-a-dinamica-do-jogo">Colocando  a dinâmica do jogo</h4>
+<p>Agora vamos fazer o jogo funcionar dentro dessa lógica para adicionar o valor as cartas.</p>
+<pre><code class="language-rust">        println!(&quot;Dealer's hand:&quot;);
+        println!(&quot;{}&quot;, dealer_hand.cards[1].to_ascii());
+        println!(&quot;Total value: {}&quot;, dealer_hand.cards[1].value());
+
+        println!(&quot;Your hand:&quot;);
+        for card in player_hand.cards.iter() {
+            println!(&quot;{}&quot;, card.to_ascii());
+        }
+        println!(&quot;Total value: {}&quot;, player_hand.value());
+        break
+
+</code></pre>
+<p>Agora nosso jogo consegue mostrar os valores da mão.
+O próximo passo é preparar nosso ambiente pra ter mais testes.</p>
+<h2 id="quebrando-nosso-jogo-e-funcoes-testaveis">Quebrando nosso jogo e funções testáveis</h2>
+<h5 id="cards">Cards</h5>
+<p>Vamos fazer agora um parenteses e começar a usar novas ferramentas para melhorar nossos testes vamos instalar algumas ferramentas:</p>
+<ul>
+<li>
+<p><strong><code>test_case</code></strong> — parametrização simples baseada em atributos: criar vários casos de teste com pouco boilerplate.</p>
+</li>
+<li>
+<p><strong><code>rstest</code></strong> — fixtures reutilizáveis e parametrização avançada (casos com <code>#[case]</code>, fixtures com <code>#[fixture]</code>).</p>
+</li>
+<li>
+<p><strong><code>fake</code></strong> — geração de dados “realistas” pseudo-aleatórios para testes (útil em simulações e testes de integração).
+Vamos instalar e durante o uso vamos aprofundando:</p>
+</li>
+</ul>
+<pre><code class="language-bash">cargo add rstest test-case --dev &amp;&amp; cargo add fake --features derive --dev
+</code></pre>
+<p>Tudo bem pra começar vamos executar um teste para verificar o método <code>suit.to_ascii()</code> aceita todos os naipes.</p>
+<pre><code class="language-rust">fn test_suit_to_ascii_parametrized(suit: Suit, expected: &amp;str) { 
+    assert_eq!(suit.to_ascii(), expected); 
+}
+</code></pre>
+<p>Agora vamos usar primeiro o <a href="https://crates.io/crates/test-case"><code>test_case</code></a></p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use test_case::test_case;
+    use super::*;
+
+    #[test_case(Suit::Spades, &quot;♠&quot;; &quot;spades symbol&quot;)]
+    fn test_suit_to_ascii_parametrized(suit: Suit, expected: &amp;str) {
+        assert_eq!(suit.to_ascii(), expected);
+    }
+
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test card::test::test_get_card_rank ... ok
+test card::test::test_suit_to_ascii_parametrized::spades_symbol ... ok
+test deck::test::test_create_deck ... ok
+test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
+test hand::test::test_add_card_in_hand ... ok
+test hand::test::test_hand_should_created ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Agora o teste passou vamos adicionar outros casos de testes.</p>
+<pre><code class="language-rust">use test_case::test_case;
+...
+#[test_case(Suit::Hearts, &quot;♥&quot;; &quot;hearts symbol&quot;)] 
+#[test_case(Suit::Diamonds, &quot;♦&quot;; &quot;diamonds symbol&quot;)] 
+#[test_case(Suit::Clubs, &quot;♣&quot;; &quot;clubs symbol&quot;)] 
+#[test_case(Suit::Spades, &quot;♠&quot;; &quot;spades symbol&quot;)]
+fn test_suit_to_ascii_parametrized(suit: Suit, expected: &amp;str) {
+    assert_eq!(suit.to_ascii(), expected); 
+}
+</code></pre>
+<p>O que o test_case faz? Permite que possamos escrever testes parametrizados com uma sintaxe mais simples. Nesse caso podemos testar todos os naipes.
+<strong>Vantagens</strong></p>
+<ul>
+<li>Sintaxe enxuta e legível.</li>
+<li>Cada caso é mostrado com um nome (útil em relatórios de CI).</li>
+<li>Muito simples de adotar quando você tem pequenas variações de entrada.</li>
+</ul>
+<p><strong>Cuidados</strong></p>
+<ul>
+<li>Não é para propriedades infinitas — apenas para casos enumeráveis/pequenos.</li>
+<li>Mantém testes rápidos — bom para unit tests.</li>
+</ul>
+<p>Vamos agora fazer a mesma coisa pra testar os valores das cartas:</p>
+<pre><code class="language-rust">    #[test_case(Rank::Two, &quot;2&quot;, 2; &quot;rank two&quot;)]
+    #[test_case(Rank::Three, &quot;3&quot;, 3; &quot;rank three&quot;)]
+    #[test_case(Rank::Four, &quot;4&quot;, 4; &quot;rank four&quot;)]
+    #[test_case(Rank::Five, &quot;5&quot;, 5; &quot;rank five&quot;)]
+    #[test_case(Rank::Six, &quot;6&quot;, 6; &quot;rank six&quot;)]
+    #[test_case(Rank::Seven, &quot;7&quot;, 7; &quot;rank seven&quot;)]
+    #[test_case(Rank::Eight, &quot;8&quot;, 8; &quot;rank eight&quot;)]
+    #[test_case(Rank::Nine, &quot;9&quot;, 9; &quot;rank nine&quot;)]
+    #[test_case(Rank::Ten, &quot;10&quot;, 10; &quot;rank ten&quot;)]
+    #[test_case(Rank::Jack, &quot;J&quot;, 10; &quot;rank jack&quot;)]
+    #[test_case(Rank::Queen, &quot;Q&quot;, 10; &quot;rank queen&quot;)]
+    #[test_case(Rank::King, &quot;K&quot;, 10; &quot;rank king&quot;)]
+    #[test_case(Rank::Ace, &quot;A&quot;, 11; &quot;rank ace&quot;)]
+    fn test_rank_ascii_and_value(rank: Rank, expected_ascii: &amp;str, expected_value: u32) {
+        assert_eq!(rank.to_ascii(), expected_ascii);
+        assert_eq!(rank.value(), expected_value);
+    }
+
+</code></pre>
+<pre><code class="language-rust">    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests src/main.rs (target/debug/deps/blackjack-29f7206e07c21b4b)
+
+running 22 tests
+test card::test::test_get_card_rank ... ok
+test card::test::test_rank_ascii_and_value::rank_ace ... ok
+test card::test::test_rank_ascii_and_value::rank_four ... ok
+test card::test::test_rank_ascii_and_value::rank_jack ... ok
+test card::test::test_rank_ascii_and_value::rank_eight ... ok
+test card::test::test_rank_ascii_and_value::rank_king ... ok
+test card::test::test_rank_ascii_and_value::rank_five ... ok
+test card::test::test_rank_ascii_and_value::rank_nine ... ok
+test card::test::test_rank_ascii_and_value::rank_seven ... ok
+test card::test::test_rank_ascii_and_value::rank_six ... ok
+test card::test::test_rank_ascii_and_value::rank_ten ... ok
+test card::test::test_rank_ascii_and_value::rank_queen ... ok
+test card::test::test_rank_ascii_and_value::rank_three ... ok
+test card::test::test_rank_ascii_and_value::rank_two ... ok
+test card::test::test_suit_to_ascii_parametrized::diamonds_symbol ... ok
+test card::test::test_suit_to_ascii_parametrized::hearts_symbol ... ok
+test card::test::test_suit_to_ascii_parametrized::clubs_symbol ... ok
+test card::test::test_suit_to_ascii_parametrized::spades_symbol ... ok
+test deck::test::test_create_deck ... ok
+test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
+test hand::test::test_add_card_in_hand ... ok
+test hand::test::test_hand_should_created ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Agora vamos testar as propriedades para algumas cartas como o às e reis individualmente, pra isso vamos criar uma configuração padrão usando a lib do <a href="https://crates.io/crates/rstest">rtest</a>.</p>
+<p>Antes de montar as fixture vamos criar  um método new nosso <code>struct Card</code>.</p>
+<pre><code class="language-rust">impl Card {
+
+    pub fn new(rank: Rank, suit: Suit) -&gt; Self {
+        Card { rank, suit }
+    }
+
+</code></pre>
+<p>Agora vamos montar as fixtures, que nada mais são um objeto pré pronto para usarmos no nosso teste:</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use test_case::test_case;
+    use rstest::*;
+    use super::*;
+
+    #[fixture]
+    fn ace_of_spades() -&gt; Card {
+        Card::new(Rank::Ace, Suit::Spades)
+    }
+
+    #[fixture]
+    fn king_of_hearts() -&gt; Card {
+        Card::new(Rank::King, Suit::Hearts)
+    }
+</code></pre>
+<p>Agora vamos criar os testes:</p>
+<pre><code class="language-rust">    #[rstest]
+    fn test_ace_properties(ace_of_spades: Card) {
+        assert_eq!(ace_of_spades.rank, Rank::Ace);
+        assert_eq!(ace_of_spades.suit, Suit::Spades);
+        assert_eq!(ace_of_spades.value(), 11);
+    }
+
+    #[rstest]
+    fn test_king_properties(king_of_hearts: Card) {
+        assert_eq!(king_of_hearts.rank, Rank::King);
+        assert_eq!(king_of_hearts.suit, Suit::Hearts);
+        assert_eq!(king_of_hearts.value(), 10);
+    }
+
+</code></pre>
+<p>```bash
+ test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s</p>
+<pre><code>
+Falando um pouco mais do [rtest](https://crates.io/crates/rstest) ele nos dá a trait `#[fixture]` e  `#[case]`
+Ele é bom usar quando:
+
+- Várias funções de teste precisam de _setup_ semelhante (ex.: montar um deck padrão). 
+- Quer parametrizar com casos e ainda reutilizar fixtures.
+
+**Vantagens**
+
+- Reduz duplicação de setup em muitos testes.
+- Combina bem com `#[case]` para cenários complexos (por exemplo: testar várias combinações de rank/suit com diferentes fixtures).
+- Aumenta legibilidade (nome do fixture / caso no teste).
+
+**Cuidados**
+
+- É uma dependência extra — evite mixar _tudo_ sem necessidade.
+- Para testes simples `test_case` às vezes é mais direto.
+
+Agora vamos criar uma nova fixture que gera um deck padrão pra nós, e gerar um teste, pra isso vamos fazer mais um refactor  no nosso módulo e gerar um método que já nos dê todos os suit e todos os rank:
+
+```rust
+impl Suit {
+    pub fn all() -&gt; Vec&lt;Suit&gt; {
+        vec![Suit::Hearts, Suit::Diamonds, Suit::Clubs, Suit::Spades]
+    }
+
+    pub fn to_ascii(&amp;self) -&gt; &amp;'static str {
+        match *self {
+            Suit::Hearts =&gt; &quot;♥&quot;,
+            Suit::Diamonds =&gt; &quot;♦&quot;,
+            Suit::Clubs =&gt; &quot;♣&quot;,
+            Suit::Spades =&gt; &quot;♠&quot;,
+        }
+    }
+}
+
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub enum Rank {
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace,
+}
+impl Rank {
+
+    ...
+
+    pub fn all() -&gt; Vec&lt;Rank&gt; {
+        vec![
+            Rank::Two,
+            Rank::Three,
+            Rank::Four,
+            Rank::Five,
+            Rank::Six,
+            Rank::Seven,
+            Rank::Eight,
+            Rank::Nine,
+            Rank::Ten,
+            Rank::Jack,
+            Rank::Queen,
+            Rank::King,
+            Rank::Ace,
+        ]
+    }
+}
+
+</code></pre>
+<p>Agora geramos a fixture  e o teste.</p>
+<pre><code class="language-rust">    #[fixture]
+    fn standard_deck() -&gt; Vec&lt;Card&gt; {
+        let mut deck = Vec::new();
+        for suit in Suit::all() {
+            for rank in Rank::all() {
+                deck.push(Card::new(rank, suit));
+            }
+        }
+        deck
+    }
+
+    #[rstest]
+    fn test_standard_deck_size(standard_deck: Vec&lt;Card&gt;) {
+        assert_eq!(standard_deck.len(), 52);
+    }
+
+</code></pre>
+<pre><code class="language-bash">test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Vamos agora usar a trait <code>case</code> do <code>rstest</code> para gerar cartas especificas, essa trait é interessante sempre que precisamos criar um cenário especifico. No nosso caso vamos especificar alguns naipes e testar algumas cartas e também testar as cartas que possuem valor 10.</p>
+<pre><code class="language-rust">    #[rstest]
+    #[case(Rank::Two, Suit::Hearts)]
+    #[case(Rank::Ace, Suit::Spades)]
+    #[case(Rank::King, Suit::Diamonds)]
+    #[case(Rank::Ten, Suit::Clubs)]
+    fn test_card_creation_with_cases(#[case] rank: Rank, #[case] suit: Suit) {
+        let card = Card::new(rank, suit);
+        assert_eq!(card.rank, rank);
+        assert_eq!(card.suit, suit);
+    }
+
+    #[rstest]
+    #[case(Rank::Jack, 10)]
+    #[case(Rank::Queen, 10)]
+    #[case(Rank::King, 10)]
+    #[case(Rank::Ten, 10)]
+    fn test_face_cards_value_10(#[case] rank: Rank, #[case] expected_value: u32) {
+        assert_eq!(rank.value(), expected_value);
+    }
+</code></pre>
+<pre><code class="language-bash">test result: ok. 33 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>E se eu quiser fazer testes com casos aleatórios? Pra isso vamos usar agora o <code>fake</code> e gerar alguns casos mais realistas.
+Vamos tentar gerar alguns dados e vamos precisar gerar dados pseudo-realistas (strings, números, índices) de forma simples. Ex.: <code>(0..13).fake()</code>  para gerar um número aleatório no intervalo. Pode ajudar a simular embaralhamento/inputs variados sem construir estratégias do zero.</p>
+<p><strong>No seu código:</strong> você usou <code>fake</code> para:</p>
+<ul>
+<li>criar índices aleatórios de rank/suit em testes de “embaralhamento simulado”.</li>
+<li>gerar múltiplos decks aleatórios para validar invariantes.</li>
+</ul>
+<p><strong>Vantagens</strong></p>
+<ul>
+<li>Fácil de usar: sintaxe curta para gerar valores.</li>
+<li>Útil em testes de integração/simulação quando não precisa do poder do <code>proptest</code>.</li>
+<li>Mais “realístico” pra testes que querem variação simples, não necessariamente exaustiva.</li>
+</ul>
+<p><strong>Cuidados</strong></p>
+<ul>
+<li>É pseudo-aleatório: se precisar reproduzir uma falha, capture a seed ou imprima os inputs.</li>
+<li>Não substitui proptest para encontrar casos limite.</li>
+</ul>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use test_case::test_case;
+    use rstest::*;
+    use fake::{Fake, Faker};
+    use super::*;
+
+ ...
+
+    #[test]
+    fn test_card_ascii_with_fake_data() {
+        for _ in 0..10 {
+            // Setup
+            let rank_index: usize = (0..13).fake();
+            let suit_index: usize = (0..4).fake();
+
+            let rank = Rank::all()[rank_index];
+            let suit = Suit::all()[suit_index];
+
+            // Act
+            let card = Card::new(rank, suit);
+            let ascii = card.to_ascii();
+
+            // Assert
+            assert!(ascii.contains(&quot; _____&quot;));
+            assert!(ascii.contains(&quot;|_____|&quot;));
+            assert!(ascii.contains(rank.to_ascii()));
+            assert!(ascii.contains(suit.to_ascii()));
+        }
+    }
+
+}
+
+</code></pre>
+<p>Agora vamos remover o primeiro teste que já temos outros testes que cobrem melhor nosso módulo e falta mais um teste que é verificar  a quebra de linha da nossa carta ASCII.</p>
+<pre><code class="language-rust">    #[test]
+    fn test_ascii_line_endings_consistent() {
+        // Setup
+        let card = Card::new(Rank::King, Suit::Hearts);
+
+        //Act
+        let ascii = card.to_ascii();
+
+        // Assert
+        let lines: Vec&lt;&amp;str&gt; = ascii.split('\n').collect();
+        assert_eq!(lines.len(), 5);
+        assert_eq!(lines[4], &quot;&quot;);
+    }
+</code></pre>
+<p>Aqui verificamos em lines se todas as linhas exceto a ultima terminam com "\n" depois verificamos se temos 4 linhas + 1 string vazia após o último "\n" e por ultimo se a ultima linha está vazia.</p>
+<p>Rodando nossos testes vemos que tudo passou:</p>
+<pre><code class="language-bash">test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<h5 id="melhorando-o-deckrs">Melhorando o deck.rs</h5>
+<p>Agora vamos melhorar nosso <code>deck.rs</code> primeira coisa que vamos fazer é  voltar o deck pra uma função em deck e criar os testes. Também vamos criar um método que já crie e embaralhe o nosso deck sua função vai ser apenas agregar as duas funções e usar apenas uma função no nosso game.</p>
+<pre><code class="language-rust">pub fn shuffle_deck(deck: &amp;mut Vec&lt;Card&gt;) {
+    let mut rng = thread_rng();
+    deck.shuffle(&amp;mut rng);
+}
+
+pub fn create_and_shuffle_deck() -&gt; Vec&lt;Card&gt; {
+    let mut deck = create_deck();
+    shuffle_deck(&amp;mut deck);
+    deck
+}
+</code></pre>
+<p>Agora vamos criar uma fixture pra representar o deck para usarmos em nossos testes:</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
+
+    #[fixture]
+    fn full_deck() -&gt; Vec&lt;Card&gt; {
+        create_deck()
+    }
+</code></pre>
+<p>O primeiro teste que vamos fazer é verificar se em nosso deck depois de embaralhar se ele mantem o mesmo tamanho e rodamos nosso teste:</p>
+<pre><code class="language-deck">    #[rstest]
+    fn test_shuffle_deck_preserves_size(mut full_deck: Vec&lt;Card&gt;) {
+        // Setup
+        let original_size = full_deck.len();
+
+        // Act
+        shuffle_deck(&amp;mut full_deck);
+
+        // Assert
+        assert_eq!(full_deck.len(), original_size);
+    }
+
+</code></pre>
+<p>O próximo vai ser se depois de embaralhar o deck ainda temos todas as caras ou seja se nenhuma foi duplicada e rodar os testes.</p>
+<pre><code class="language-rust">    #[rstest]
+    fn test_shuffle_deck_preserves_all_cards(mut full_deck: Vec&lt;Card&gt;) {
+        // Setup
+        let original_deck = full_deck.clone();
+
+        // Act
+        shuffle_deck(&amp;mut full_deck);
+
+        // Assert
+        for card in &amp;original_deck {
+            assert!(full_deck.contains(card), &quot;Card {:?} should still be in shuffled deck&quot;, card);
+        }
+
+        // Assert
+        for card in &amp;full_deck {
+            assert!(original_deck.contains(card), &quot;Shuffled deck should not contain new cards&quot;);
+        }
+    }
+</code></pre>
+<p>Precisamos garantir que se as cartas forem embaralhadas mais de uma vez que a ordem mude então vamos criar mais um teste pra garantir isso.</p>
+<pre><code class="language-rust">    #[test]
+    fn test_multiple_shuffles_produce_different_results() {
+        // Setup - Create multiple shuffled decks
+        let mut shuffled_decks = Vec::new();
+        for _ in 0..5 {
+            let mut deck = create_deck();
+            shuffle_deck(&amp;mut deck);
+            shuffled_decks.push(deck);
+        }
+
+        // Assert - Very unlikely that any two shuffles are identical
+        for i in 0..shuffled_decks.len() {
+            for j in i + 1..shuffled_decks.len() {
+                assert_ne!(shuffled_decks[i], shuffled_decks[j], 
+                    &quot;Two different shuffles should not produce identical results&quot;);
+            }
+        }
+    }
+
+</code></pre>
+<p>Pra finalizar a bateria de testes das nossas novas funções vamos testar se o nossa função que cria e embaralha um deck e também uma condição em que foi tentado criar um embaralhamento de um deck vazio.</p>
+<pre><code class="language-rust">    #[rstest]
+    fn test_create_and_shuffle_deck_function() {
+        // Act
+        let shuffled_deck = create_and_shuffle_deck();
+
+        // Assert
+        assert_eq!(shuffled_deck.len(), 52);
+
+        // Verify all cards are present
+        for suit in Suit::all() {
+            for rank in Rank::all() {
+                let card = Card::new(rank, suit);
+                assert!(shuffled_deck.contains(&amp;card), &quot;Shuffled deck should contain {:?} of {:?}&quot;, rank, suit);
+            }
+        }
+    }
+
+    #[test]
+    fn test_shuffle_empty_deck() {
+        // Setup
+        let mut empty_deck: Vec&lt;Card&gt; = Vec::new();
+
+        // Act - Should not panic
+        shuffle_deck(&amp;mut empty_deck);
+
+        // Assert
+        assert!(empty_deck.is_empty());
+    }
+
+</code></pre>
+<pre><code class="language-rust">test result: ok. 40 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Vamos melhorar agora nosso teste que analisa todos os naipes e valores pra isso vamos criar fixtures para validar.</p>
+<pre><code class="language-rust">    #[fixture]
+    fn expected_suits() -&gt; Vec&lt;Suit&gt; {
+        Suit::all()
+    }
+
+    #[fixture]
+    fn expected_ranks() -&gt; Vec&lt;Rank&gt; {
+        Rank::all()
+    }
+</code></pre>
+<p>Agora vamos refatorar nosso teste com o <code>rstest</code> e as <code>fixtures</code>.</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
+...
+
+    #[rstest]
+    fn test_create_deck_contains_all_suits_and_ranks(
+        full_deck: Vec&lt;Card&gt;,
+        expected_suits: Vec&lt;Suit&gt;,
+        expected_ranks: Vec&lt;Rank&gt;
+    ) {
+        for &amp;suit in &amp;expected_suits {
+            for &amp;rank in &amp;expected_ranks {
+                let card = Card { suit, rank };
+                assert!(
+                    full_deck.contains(&amp;card),
+                    &quot;O deck deve conter a carta {:?} de {:?}&quot;,
+                    rank,
+                    suit
+                );
+            }
+        }
+    }
+
+</code></pre>
+<p>No <code>test_create_deck</code> podemos remover por que ele está dentro da nossa fixture. E podemos agora criar um deck para verificar see temos o total correto de cartas que no caso a soma de todas as cartas deve dar 380.</p>
+<pre><code class="language-rust">    #[rstest]
+    fn test_total_deck_value(full_deck: Vec&lt;Card&gt;) {
+        // Setup &amp; Act
+        let total_value: u32 = full_deck.iter().map(|card| card.value()).sum();
+
+        // Assert
+        // Expected: 4 suits × (2+3+4+5+6+7+8+9+10+10+10+10+11) = 4 × 95 = 380
+        assert_eq!(total_value, 380);
+    }
+
+</code></pre>
+<p>Poderíamos criar mais casos de teste mas, vamos por hora modificar nosso <code>game.rs</code> para continuar funcionando agora com nossa função.</p>
+<pre><code class="language-rust">use crate::{deck::create_deck, hand::Hand};
+
+pub fn game_start() {
+    loop {
+        let mut deck = create_and_shuffle_deck();
+
+</code></pre>
+<h5 id="melhorando-o-handrs">Melhorando o hand.rs</h5>
+<p>No nosso módulo <code>hand.rs</code> vamos criar mais alguns testes, primeiro vamos fazer um teste para calcular os valores de uma mão, pra isso vamos criar algumas features para alguns casos de teste depois rodamos os testes.</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod test {
+    use crate::card::{Rank, Suit};
+    use test_case::test_case;
+    use rstest::*;
+
+    use super::*;
+
+
+    #[fixture]
+    fn empty_hand() -&gt; Hand {
+        Hand::new()
+    }
+
+    #[test_case(vec![], 0; &quot;empty hand&quot;)]
+    #[test_case(vec![Card::new(Rank::Five, Suit::Hearts)], 5; &quot;single card&quot;)]
+    #[test_case(vec![Card::new(Rank::King, Suit::Hearts), Card::new(Rank::Five, Suit::Spades)], 15; &quot;king and five&quot;)]
+    #[test_case(vec![Card::new(Rank::Ace, Suit::Hearts), Card::new(Rank::Nine, Suit::Spades)], 20; &quot;ace and nine&quot;)]
+    #[test_case(vec![Card::new(Rank::Ace, Suit::Hearts), Card::new(Rank::King, Suit::Spades)], 21; &quot;blackjack&quot;)]
+    fn test_hand_value_calculation(cards: Vec&lt;Card&gt;, expected_value: u32) {
+        // Setup
+        let mut hand = Hand::new();
+        for card in cards {
+            hand.add_card(card);
+        }
+
+        // Assert
+        assert_eq!(hand.value(), expected_value);
+    }
+</code></pre>
+<p>Vamos agora criar um testes para testar as condições onde o às muda de valor.</p>
+<p>```rust
+     #[test_case(vec![], 0; "empty hand")]
+    #[test_case(vec![Card::new(Rank::Five, Suit::Hearts)], 5; "single card")]
+    #[test_case(vec![Card::new(Rank::King, Suit::Hearts), Card::new(Rank::Five, Suit::Spades)], 15; "king and five")]
+    #[test_case(vec![Card::new(Rank::Ace, Suit::Hearts), Card::new(Rank::Nine, Suit::Spades)], 20; "ace and nine")]
+    #[test_case(vec![Card::new(Rank::Ace, Suit::Hearts), Card::new(Rank::King, Suit::Spades)], 21; "blackjack")]
+    fn test_hand_value_calculation(cards: Vec<Card>, expected_value: u32) {
+        // Setup
+        let mut hand = Hand::new();
+        for card in cards {
+            hand.add_card(card);
+        }</p>
+<div class="highlight"><pre><span></span><code>    // Assert
+    assert_eq!(hand.value(), expected_value);
+}
+</code></pre></div>
+<pre><code>
+Agora vamos refatorar nosso teste `test_hand_should_created` para verificar se uma mão vazia permanece com o valor 0 e vamos também usar o `rstest` nesse caso pra usar nossa feature `hand_empty`.
+
+```rust
+    #[rstest]
+    fn test_hand_should_created(empty_hand: Hand) {
+        // Assert
+        assert_eq!(empty_hand, Hand::new());
+        assert_eq!(empty_hand.cards.len(), 0);
+        assert!(empty_hand.cards.is_empty());
+        assert_eq!(empty_hand.value(), 0);
+    }
+
+</code></pre>
+<p>Agora vamos refatorar nosso teste  de adicionar uma carta na mão usando o <code>rstest</code> e nossa fixture.</p>
+<pre><code class="language-rust">    #[rstest]
+    fn test_add_card_in_hand(mut empty_hand: Hand) {
+        // Setup
+        let card = Card::new(Rank::Two, Suit::Diamonds);
+
+        // Act
+        empty_hand.add_card(card);
+
+        // Assert
+        assert_eq!(empty_hand.cards.len(), 1);
+        assert!(!empty_hand.cards.is_empty());
+        assert!(empty_hand.cards.contains(&amp;card));
+        assert_eq!(empty_hand.value(), 2);
+    }
+</code></pre>
+<p>Agora vamos rodar nossos testes mais uma vez:</p>
+<pre><code class="language-bash">test result: ok. 45 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Com nossos testes rodando podemos trabalhar na nossa condição de vitória e derrota.</p>
+<h2 id="condicao-de-derrota">Condição de derrota</h2>
+<p>Para a condição de derrota vamos criar duas variáveis que vão ser o score do nosso dealer e do jogador, eles vão ser o retorno do nosso método <code>value</code> da nossa hand.</p>
+<pre><code class="language-rust">    println!(&quot;Total value: {}&quot;, player_hand.value());
+
+    // Determine winner
+    let player_score = player_hand.value();
+    let dealer_score = dealer_hand.value();
+
+</code></pre>
+<p>Agora vamos fazer um <code>condicional</code> com as nossas condições de derrota onde nós estouramos o valor da nossa mão ou seja ela foi maior que 21 ou a mão do dealer é maior que a nossa.</p>
+<pre><code class="language-rust">        if player_score &gt; 21 {
+            println!(&quot;Bust! You lose.&quot;);
+        } else if player_score &lt; dealer_score {
+            println!(&quot;Dealer wins.&quot;);
+        } else {
+            println!(&quot;It's a tie.&quot;);
+        }
+</code></pre>
+<p>O nosso ultimo else é apenas para analisarmos durante o jogo se houve algum problema a frase "It's a tie" é um status http que é uma piada mas, está dentro da documentação oficial, então não leve a sério, poderíamos lançar um erro, mas nesse projeto vamos seguir assim mesmo.</p>
+<p>Agora precisamos fazer um refactor no nosso jogo o dealer e o jogador vão receber cartas até o jogador parar ou o valor for maior que 21. </p>
+<pre><code class="language-rust">        while player_hand.value() &lt; 21 {
+    }
+</code></pre>
+<p>Agora precisamos capturar uma opção do nosso jogador se ele quer mais uma carta <em>hit</em> ou se quer parar <em>stand</em>.</p>
+<pre><code class="language-rust">        while player_hand.value() &lt; 21 {
+            println!(&quot;Do you want to hit or stand? (h/s)&quot;);
+            let mut input = String::new();
+            std::io::stdin().read_line(&amp;mut input).unwrap();
+}
+</code></pre>
+<p>Com isso agora devemos caso o nosso jogador de um <em>hit</em> que uma carta seja retirada do baralho e colocada na mão do nosso jogador.</p>
+<p>Caso o jogador peça <em>stand</em> nos apenas vamos parar o loop com um  <em>break</em>.</p>
+<pre><code class="language-rust">        while player_hand.value() &lt; 21 {
+            println!(&quot;Do you want to hit or stand? (h/s)&quot;);
+            let mut input = String::new();
+            std::io::stdin().read_line(&amp;mut input).unwrap();
+            let input = input.trim();
+            if input == &quot;h&quot; {
+                player_hand.add_card(deck.pop().unwrap());
+                println!(&quot;Your hand:&quot;);
+                for card in player_hand.cards.iter() {
+                    println!(&quot;{}&quot;, card.to_ascii());
+                }
+                println!(&quot;Total value: {}&quot;, player_hand.value());
+            } else if input == &quot;s&quot; {
+                break;
+            }
+        }
+</code></pre>
+<p>Agora o próximo passo é definir os turnos do dealer, nossa regra vai ser que se o dealer tiver menos de 17 pontos ele vai continuar pegando cartas.</p>
+<pre><code class="language-rust">        // Dealer's turn
+        while dealer_hand.value() &lt; 17 {
+            dealer_hand.add_card(deck.pop().unwrap());
+        }
+
+        println!(&quot;Dealer's hand:&quot;);
+        for card in dealer_hand.cards.iter() {
+            println!(&quot;{}&quot;, card.to_ascii());
+        }
+        println!(&quot;Total value: {}&quot;, dealer_hand.value());
+</code></pre>
+<p>Agora se jogador nosso jogo vemos que somos derrotados sempre, porém as vezes o dealer perdeu e mesmo assim perdemos, então agora vamos criar nossa condição de vitória.</p>
+<h2 id="condicao-de-vitoria">Condição de vitória</h2>
+<p>Bom a condição de vitória é bem simples nós vamos colocar uma condição onde já foi verificado que temos um valor menor ou igual a 21 e nossa mão é maior que a do dealer ou que a mão do dealer é menor que a nossa.</p>
+<p>Outro ponto é que no blackjack o empate ninguém perde e nosso else vai servir pra esse propósito também.</p>
+<pre><code class="language-rust">        if player_score &gt; 21 {
+            println!(&quot;Bust! You lose.&quot;);
+        } else if dealer_score &gt; 21 || player_score &gt; dealer_score {
+            println!(&quot;You win!&quot;);
+        } else if player_score &lt; dealer_score {
+            println!(&quot;Dealer wins.&quot;);
+        } else {
+            println!(&quot;It's a tie.&quot;);
+        }
+
+</code></pre>
+<p>Agora quando o jogo terminar vamos verificar se o jogador quer jogar novamente. Pra isso vamos capturar um se o usuário quer ou não continuar se não continuar nós damos o break e se quiser continuar só seguimos o jogo.</p>
+<p>Mais um refactor que vamos fazer agora é tirar o loop do nosso game já que o loop está só quando estamos tirando cartas.</p>
+<pre><code class="language-rust">pub fn game_start() {
+    let mut deck = create_deck();
+
+    let mut rng = thread_rng();
+    deck.shuffle(&amp;mut rng);
+
+    let mut player_hand = Hand::new();
+    let mut dealer_hand = Hand::new();
+
+    // Initial deal
+    player_hand.add_card(deck.pop().unwrap());
+    dealer_hand.add_card(deck.pop().unwrap());
+    player_hand.add_card(deck.pop().unwrap());
+    dealer_hand.add_card(deck.pop().unwrap());
+
+    println!(&quot;Dealer's hand:&quot;);
+    println!(&quot;{}&quot;, dealer_hand.cards[1].to_ascii());
+    println!(&quot;Total value: {}&quot;, dealer_hand.cards[1].value());
+
+    println!(&quot;Your hand:&quot;);
+    for card in player_hand.cards.iter() {
+        println!(&quot;{}&quot;, card.to_ascii());
+    }
+    println!(&quot;Total value: {}&quot;, player_hand.value());
+
+    // Player Turn
+    while player_hand.value() &lt;= 21 {
+        println!(&quot;Do you want to hit or stand? (h/s)&quot;);
+        let mut input = String::new();
+        std::io::stdin().read_line(&amp;mut input).unwrap();
+        let input = input.trim();
+        if input == &quot;h&quot; {
+            player_hand.add_card(deck.pop().unwrap());
+            println!(&quot;Your hand:&quot;);
+            for card in player_hand.cards.iter() {
+                println!(&quot;{}&quot;, card.to_ascii());
+            }
+            println!(&quot;Total value: {}&quot;, player_hand.value());
+        } else if input == &quot;s&quot; {
+            break;
+        }
+    }
+
+    // Dealer's turn
+    while dealer_hand.value() &lt; 17 {
+        dealer_hand.add_card(deck.pop().unwrap());
+    }
+
+    println!(&quot;Dealer's hand:&quot;);
+    for card in dealer_hand.cards.iter() {
+        println!(&quot;{}&quot;, card.to_ascii());
+    }
+    println!(&quot;Total value: {}&quot;, dealer_hand.value());
+
+    // Determine winner
+    let player_score = player_hand.value();
+    let dealer_score = dealer_hand.value();
+
+
+    // Determine winner
+    let player_score = player_hand.value();
+    let dealer_score = dealer_hand.value();
+    if player_score &gt; 21 {
+        println!(&quot;Bust! You lose.&quot;);
+    } else if dealer_score &gt; 21 || player_score &gt; dealer_score {
+        println!(&quot;You win!&quot;);
+    } else if player_score &lt; dealer_score {
+        println!(&quot;Dealer wins.&quot;);
+    } else {
+        println!(&quot;It's a tie.&quot;);
+    }
+
+}
+</code></pre>
+<p>Agora indo para o nosso <code>main.rs</code> vamos melhorar um pouco ele.</p>
+<p>O nosso jogo vai ficar embolado se não limparmos a tela então agora vamos limpar a tela do  toda vez que iniciamos ele.
+Pra isso vamos instalar uma nova biblioteca no nosso jogo chamada <code>crossterm</code>.</p>
+<pre><code class="language-bash">cargo add crossterm
+</code></pre>
+<p>Então vamos criar uma função chamada <code>clear_terminal</code>.  Chamando uma macro do <code>crossterm</code> chamada <code>execute!</code> que vai executar comandos no terminal. Essa recebe dois parâmetros a primeira é a saída que no nosso caso é a saída padrão e a segunda é o comando que no caso do <code>crossterm</code> usamos o  comando  <code>Clear</code>.</p>
+<pre><code class="language-rust">//main.rs
+use crossterm::execute;
+use crossterm::terminal::{Clear, ClearType};
+use std::io;
+...
+
+fn clear_terminal() -&gt; io::Result&lt;()&gt; {
+    execute!(io::stdout(), Clear(ClearType::All))?;
+    Ok(())
+}
+</code></pre>
+<p>Observamos que para apontar a saída usamos <code>io::stdout()</code> que é a saída padrão do nosso terminal e dentro do comando clear usamos o parâmetro <code>ClearType::All)</code> para dizer que queremos limpar todo o terminal.</p>
+<p>No final colocamos um <code>?</code> é uma forma de dizermos que se essa macro der um erro ele já vai lançar o erro imediatamente.</p>
+<p>Por conta disso agora quando formos colocar essa função na condição de reinicio de jogo vamos colocar um <code>expected</code> com uma mensagem de erro em caso de falha.</p>
+<pre><code class="language-rust">fn main() {
+    loop {
+        println!(&quot;Start game? (y)es or (n)o&quot;);
+        let mut option = String::new();
+        std::io::stdin().read_line(&amp;mut option).unwrap();
+        match option.trim().to_lowercase().as_str() {
+            &quot;y&quot; =&gt; {
+                clear_terminal().expect(&quot;Failed to clear terminal&quot;);
+                game_start();
+            }
+            &quot;n&quot; =&gt; {
+                println!(&quot;Thank you playing.&quot;);
+                break;
+            }
+            _ =&gt; {
+                continue;
+            }
+        }
+    }
+}
+
+</code></pre>
+<p>Agora se testarmos nosso jogo no terminal temos um jogo totalmente funcional.</p>
+<h4 id="testes-do-gamers">Testes do game.rs</h4>
+<p>Para começar queremos fazer um teste com todas as condições de vitória e derrota do nosso jogo isso é um cenário perfeito para criarmos fixtures com cada condição e usar o <code>test-case</code> para testa-los. Só que nossa função game_start tem muitas responsabilidades, então quando estivemos criando os testes vamos pensar que esse teste vai verificar uma função e ela vai retornar a condição de vitória ou derrota.
+Outro ponto tanto no nosso jogo quanto pro teste seria melhor termos um <code>enum</code> com todas as condições possíveis sendo que agora podemos colocar nossa condição <code>draw</code>.</p>
+<p>Vamos criar agora o nosso <code>enum</code> e a função vazia.</p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+pub enum GameResult {
+    PlayerWins,
+    DealerWins,
+    Draw,
+    Tie,
+    PlayerBust,
+}
+
+pub fn determine_winner(player_score: u32, dealer_score: u32) -&gt; GameResult {
+}
+</code></pre>
+<p>Vamos manter o Tie por hora como uma condição adversa do nosso jogo.  E criamos o teste com todas as condições que esperamos no jogo.</p>
+<pre><code class="language-rust">#[cfg(test)]
+mod tests {
+    use super::*;
+    use test_case::test_case;
+
+    #[test_case(20, 19, GameResult::PlayerWins; &quot;player wins with higher score&quot;)]
+    #[test_case(18, 20, GameResult::DealerWins; &quot;dealer wins with higher score&quot;)]
+    #[test_case(19, 19, GameResult::Draw; &quot;tie with same score&quot;)]
+    #[test_case(22, 20, GameResult::PlayerBust; &quot;player busts&quot;)]
+    #[test_case(20, 22, GameResult::PlayerWins; &quot;dealer busts&quot;)]
+    #[test_case(21, 21, GameResult::Draw; &quot;blackjack tie&quot;)]
+    #[test_case(15, 25, GameResult::PlayerWins; &quot;dealer busts with high score&quot;)]
+    fn test_determine_winner(player_score: u32, dealer_score: u32, exp
+    ected: GameResult) {
+        // Act
+        let result = determine_winner(player_score, dealer_score);
+
+        // Assert
+        assert_eq!(result, expected);
+    }
+}
+</code></pre>
+<p>Agora precisamos extrair a função que determina o vencedor pra função <code>determine_winner</code>. Além disso vamos retornar o <code>GameResult</code>.</p>
+<pre><code class="language-rust">
+pub fn determine_winner(player_score: u32, dealer_score: u32) -&gt; GameResult {
+    if player_score &gt; 21 {
+        println!(&quot;Bust! You lose.&quot;);
+        GameResult::PlayerBust
+    } else if dealer_score &gt; 21 || player_score &gt; dealer_score {
+        println!(&quot;You win!&quot;);
+        GameResult::PlayerWins
+    } else if player_score &lt; dealer_score {
+        println!(&quot;Dealer wins.&quot;);
+        GameResult::DealerWins
+    } else if player_score == dealer_score {
+        println!(&quot;This game draw!&quot;);
+        GameResult::Draw
+    } else {
+        println!(&quot;It's a tie.&quot;);
+        GameResult::Tie
+    }
+}
+
+pub fn game_start() {
+...
+    // Determine winner
+    let player_score = player_hand.value();
+    let dealer_score = dealer_hand.value();
+    determine_winner(player_score, dealer_score);
+}
+</code></pre>
+<p>Vamos deixar o <code>Tie</code> ele vai ser nossa condição não esperada pro jogo. Agora se rodarmos os testes tudo continuar funcionando.</p>
+<pre><code class="language-bash">test result: ok. 52 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<p>Outro trecho que é facilmente testável é a mão inicial, vamos extrair ele pra uma função.</p>
+<pre><code class="language-rust">
+pub fn initial_deal(deck: &amp;mut Vec&lt;Card&gt;) -&gt; (Hand, Hand) {
+    let mut player_hand = Hand::new();
+    let mut dealer_hand = Hand::new();
+
+    player_hand.add_card(deck.pop().unwrap());
+    dealer_hand.add_card(deck.pop().unwrap());
+    player_hand.add_card(deck.pop().unwrap());
+    dealer_hand.add_card(deck.pop().unwrap());
+
+    (player_hand, dealer_hand)
+}
+</code></pre>
+<p>Agora criamos o teste que verifique que o player e o dealer tem duas cartas e também que o nosso baralho agora tem 48 cartas, pra isso precisamos criar um fixture:</p>
+<pre><code class="language-rust">    #[fixture]
+    fn sample_deck() -&gt; Vec&lt;Card&gt; {
+        create_deck()
+    }
+
+</code></pre>
+<p>E agora criamos o teste: </p>
+<pre><code class="language-rust">#[cfg(test)]
+mod tests {
+    use super::*;
+    use rstest::*;
+
+    #[rstest]
+    fn test_initial_deal_creates_hands_with_two_cards(mut sample_deck: Vec&lt;Card&gt;) {
+        // Act
+        let (player_hand, dealer_hand) = initial_deal(&amp;mut sample_deck);
+
+        // Assert
+        assert_eq!(player_hand.cards.len(), 2);
+        assert_eq!(dealer_hand.cards.len(), 2);
+        assert_eq!(sample_deck.len(), 48); // 52 - 4 cards dealt
+    }
+
+}
+</code></pre>
+<p>Aqui vamos fazer uma modificação vamos iniciar a mão na função e por conta disso na função principal vamos precisar criar duas variáveis mutáveis.</p>
+<pre><code class="language-rust">pub fn game_start() {
+    let mut deck = create_deck();
+
+    let mut rng = thread_rng();
+    deck.shuffle(&amp;mut rng);
+
+    let (mut player_hand, mut dealer_hand) = initial_deal(&amp;mut deck);
+</code></pre>
+<p>Não tínhamos ainda criado uma função assim, mas nela nós retornamos na função (initial_deal) uma tupla com duas mãos, na nossa função game nós recebemos a tupla no formato de desestruturação onde cada elemento da tupla é uma variável mutável.</p>
+<p>O próximo passo que podemos fazer é testar  se  removidas do nosso baralho, pra isso vamos também extrair nossa mão inicial.</p>
+<p>Agora rodando nossos testes está tudo perfeito.</p>
+<pre><code class="language-rust">test result: ok. 54 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>Com esse jogo vimos como criar uma módulos em rust, criar testes para essa função usando a suite nativa de testes do rust e também acrescentando novas bibliotecas de testes,  revemos os tipos básicos de rust e vimos alguns tipos mais complexos como o vetor.</p>
+<p>Poderíamos agora melhorar ainda mais nossa cobertura de testes extraindo o sistema de retirar as cartas da mão do dealer e do jogador e também  criar testes de integração no<code>game_start</code> mas, deixaremos isso para os nossos próximos jogos. Porém nesse momento você pode criar esses testes de forma de desafio.</p>
+<p>Também nosso jogo não tem o sistema de apostas mas, isso vai ficar como exercício sugerido.</p>
+<h2 id="exercicios-sugeridos">Exercicíos sugeridos</h2>
+<p>1 - Você está desenvolvendo um RPG de texto onde o jogador digita comandos como "atacar goblin", "pegar espada", "ir norte". Implemente um parser que processe esses comandos.</p>
+<pre><code class="language-rust">#[derive(Debug, PartialEq)]
+pub enum GameCommand {
+    Attack(String),      // &quot;atacar goblin&quot;
+    Take(String),        // &quot;pegar espada&quot;
+    Go(Direction),       // &quot;ir norte&quot;
+    Look,               // &quot;olhar&quot;
+    Inventory,          // &quot;inventario&quot;
+    Invalid(String),    // comando inválido
+}
+
+#[derive(Debug, PartialEq)]
+pub enum Direction {
+    North, South, East, West
+}
+
+
+// Converte input do usuário em comando
+pub fn parse_command(input: &amp;str) -&gt; GameCommand {}
+
+// Limpa e normaliza string (remove acentos, espaços extras, etc.)
+pub fn normalize_input(input: &amp;str) -&gt; String {}
+
+// Valida se palavra é uma direção válida
+pub fn parse_direction(word: &amp;str) -&gt; Option&lt;Direction&gt; {}
+
+// Gera mensagem de ajuda com comandos disponíveis
+pub fn help_message() -&gt; String {}
+
+// Converte comando de volta para string amigável
+pub fn command_to_string(cmd: &amp;GameCommand) -&gt; string {}
+
+//exemplos de testes
+
+assert_eq!(parse_command(&quot;atacar dragão&quot;), GameCommand::Attack(&quot;dragão&quot;.to_string()));
+assert_eq!(parse_command(&quot;IR NORTE&quot;), GameCommand::Go(Direction::North));
+assert_eq!(parse_command(&quot;  olhar  &quot;), GameCommand::Look);
+assert_eq!(parse_command(&quot;xyz123&quot;), GameCommand::Invalid(&quot;xyz123&quot;.to_string()));
+</code></pre>
+<p>2 - Criar um sistema de inventário para RPG usando módulos organizados. Aqui não precisa criar um jogo inteiro só chamar criar as estruturas e chamar na main.</p>
+<pre><code class="language-bash">src/
+├── item.rs          // Definições de itens
+├── inventory.rs     // Sistema de inventário  
+├── equipment.rs     // Sistema de equipamentos
+└── main.rs
+</code></pre>
+<p>No main.rs chamar uma função <code>create_item</code>, <code>create_inventory</code>, <code>create_equipament</code>. Pode ser apenas um println! simples, o objetivo é usar os módulos no nosso main.</p>
+<p>3 - Criar um jogo de puzzle onde o jogador decifra 4 segredos codificados em diferentes formatos (char, ASCII, bytes), usando dicas em Unicode e um sistema de pontuação. Você descobriu um <strong>manuscrito antigo</strong> com 4 segredos codificados. Cada segredo está representado de forma diferente e você pode pedir dicas, mas cada dica custa 100 pontos. Comece com 1000 pontos e tente descobrir todos os segredos!</p>
+<p>Estrutura base</p>
+<pre><code class="language-rust">
+#[derive(Debug, Clone)]
+pub struct Secret {
+    pub id: u8,
+    pub encoded_data: EncodedData,
+    pub answer: String,
+    pub hints: Vec&lt;String&gt;,
+    pub description: String,
+}
+
+#[derive(Debug, Clone)]
+pub enum EncodedData {
+    Chars(Vec&lt;char&gt;),           // ['H', 'e', 'l', 'l', 'o']
+    Ascii(Vec&lt;u8&gt;),             // [72, 101, 108, 108, 111]
+    Bytes(Vec&lt;u8&gt;),             // Dados em bytes brutos
+}
+
+#[derive(Debug)]
+pub struct GameState {
+    pub secrets: Vec&lt;Secret&gt;,
+    pub current_secret: usize,
+    pub score: i32,
+    pub hints_used: u32,
+    pub attempts: u32,
+    pub solved_secrets: Vec&lt;bool&gt;,
+}
+
+</code></pre>
+<p>Funções básicas de conversão de formatos:</p>
+<p>```rust
+ /// Converte string para array de caracteres
+pub fn string_to_chars(text: &amp;str) -&gt; Vec<char> {
+    // TODO: Converter string em Vec<char>
+    // "Hello" -&gt; ['H', 'e', 'l', 'l', 'o']
+}</p>
+<p>/// Converte string para valores ASCII
+pub fn string_to_ascii(text: &amp;str) -&gt; Vec<u8> {
+    // TODO: Converter cada char para seu valor ASCII
+    // "Hi" -&gt; [72, 105]
+}</p>
+<p>/// Converte string para bytes UTF-8
+pub fn string_to_bytes(text: &amp;str) -&gt; Vec<u8> {
+    // TODO: Converter string para bytes
+    // Use .as_bytes() ou .bytes()
+}</p>
+<p>/// Converte array de chars de volta para string
+pub fn chars_to_string(chars: &amp;[char]) -&gt; String {
+    // TODO: Reunir chars em string
+    // ['H', 'i'] -&gt; "Hi"
+}</p>
+<p>/// Converte valores ASCII de volta para string
+pub fn ascii_to_string(ascii_values: &amp;[u8]) -&gt; Result<String, String> {
+    // TODO: Converter ASCII para string
+    // Verificar se todos os valores são ASCII válidos (0-127)
+    // [72, 105] -&gt; "Hi"
+}</p>
+<p>/// Converte bytes de volta para string UTF-8
+pub fn bytes_to_string(bytes: &amp;[u8]) -&gt; Result<String, String> {
+    // TODO: Converter bytes para string UTF-8
+    // Usar String::from_utf8() e tratar erros
+}</p>
+<p>// Testes:
+assert_eq!(string_to_chars("ABC"), vec!['A', 'B', 'C']);
+assert_eq!(string_to_ascii("Hi"), vec![72, 105]);
+assert_eq!(chars_to_string(&amp;['A', 'B']), "AB");
+assert_eq!(ascii_to_string(&amp;[72, 105]).unwrap(), "Hi");</p>
+<pre><code>
+Funções básicas de condificação:
+
+ ```
+ /// Gera dica formatada com caracteres Unicode especiais
+pub fn format_hint(hint_text: &amp;str, hint_number: u32) -&gt; String {
+    // TODO: Formatar dica com emojis e Unicode
+    // &quot;💡 Dica #1: [HINT_TEXT] 🔍&quot;
+    // Usar caracteres Unicode: 💡 🔍 🎯 ⭐ 🌟 📝 🔮
+}
+
+/// Insere símbolos Unicode em string baseado na posição
+pub fn insert_unicode_clues(base_text: &amp;str, positions: &amp;[usize], symbols: &amp;[char]) -&gt; String {
+    // TODO: Inserir símbolos Unicode em posições específicas
+    // &quot;hello&quot; + posições [1,3] + símbolos ['★','♦'] -&gt; &quot;h★el♦lo&quot;
+}
+
+/// Remove ou substitui caracteres não-ASCII para normalização
+pub fn normalize_answer(answer: &amp;str) -&gt; String {
+    // TODO: 
+    // 1. Converter para lowercase
+    // 2. Remover espaços extras (trim + múltiplos espaços)
+    // 3. Remover acentos: ç-&gt;c, á-&gt;a, ê-&gt;e, etc.
+    // 4. Manter apenas letras e espaços únicos
+}
+
+/// Trunca dica se muito longa e adiciona &quot;...&quot;
+pub fn truncate_hint(hint: &amp;mut String, max_length: usize) {
+    // TODO: 
+    // 1. Se hint.len() &gt; max_length, truncar
+    // 2. Adicionar &quot;...&quot; no final se truncado
+    // 3. Usar String::truncate()
+}
+
+// Testes:
+assert_eq!(format_hint(&quot;Pense em animais&quot;, 1), &quot;💡 Dica #1: Pense em animais 🔍&quot;);
+assert_eq!(normalize_answer(&quot;  Gato Preto  &quot;), &quot;gato preto&quot;);
+</code></pre>
+<p>Loop principal</p>
+<pre><code class="language-rust">/// Função principal do jogo
+pub fn play_puzzle_game() {
+    println!(&quot;🔍 BEM-VINDO AO JOGO DE DECIFRAGEM DE SEGREDOS! 🔍&quot;);
+    println!(&quot;📜 Você encontrou um manuscrito com 4 segredos antigos...&quot;);
+    println!(&quot;💰 Você tem 1000 pontos. Cada dica custa 100 pontos!&quot;);
+
+    let mut game = GameState::new();
+
+    // TODO: Implementar loop principal do jogo:
+    // 1. Exibir segredo atual
+    // 2. Mostrar menu de opções
+    // 3. Processar input do jogador
+    // 4. Executar ação (dica, tentativa, status)
+    // 5. Verificar se jogo terminou
+    // 6. Mostrar pontuação final
+}
+
+/// Exibe segredo atual formatado
+pub fn display_current_secret(game: &amp;GameState) {
+    let secret = &amp;game.secrets[game.current_secret];
+
+    println!(&quot;\n🗝️ SEGREDO #{}&quot;, secret.id);
+    println!(&quot;📝 {}&quot;, secret.description);
+    println!(&quot;🔢 Dados codificados: {}&quot;, format_encoded_display(&amp;secret.encoded_data));
+    println!(&quot;🎯 Análise: {}&quot;, analyze_encoded_data(&amp;secret.encoded_data));
+    println!(&quot;{}&quot;, format_progress_report(game));
+}
+
+/// Exibe resultado final do jogo
+pub fn display_final_results(final_score: &amp;FinalScore) {
+    // TODO: Criar tela final bonita com:
+    // - Pontuação total
+    // - Segredos resolvidos
+    // - Rating de eficiência
+    // - Mensagem de parabéns/encorajamento
+}
+
+/// Demonstra todas as conversões de formato
+pub fn demo_format_conversions() {
+    let test_word = &quot;Hi! 👋&quot;;
+
+    println!(&quot;🔍 DEMONSTRAÇÃO DE CONVERSÕES:&quot;);
+    println!(&quot;Texto original: '{}'&quot;, test_word);
+
+    // TODO: Mostrar todas as conversões:
+    // - Para chars
+    // - Para ASCII (se possível)
+    // - Para bytes
+    // - De volta para string
+    // - Análise completa
+}
+</code></pre>
+<p>Dicas:</p>
+<p>SEGREDO #1
+ - Um animal doméstico felino
+ -  Dados codificados: Chars: ['G', 'A', 'T', 'O']
+ -  Análise: 4 caracteres ASCII que formam uma palavra</p>
+<p>SEGREDO #2
+ - A estrela do nosso sistema solar
+ - Dados codificados: ASCII: [83, 79, 76]
+ - Análise: 3 valores ASCII (S=83, O=79, L=76)</p>
+<p>4 - Implementar um sistema de apostas completo no jogo de Blackjack existente, onde o jogador gerencia suas fichas e tenta duplicar seu dinheiro.</p>
+<h2 id="regras-do-sistema">* Regras do Sistema:**</h2>
+<ul>
+<li><strong>Fichas iniciais</strong>: 1000 fichas</li>
+<li><strong>Condição de vitória</strong>: Atingir 2000 fichas</li>
+<li><strong>Condição de derrota</strong>: Ficar com 0 fichas</li>
+<li><strong>Valores de aposta disponíveis</strong>: 5, 10, 15, 30, 50, 100, 250, 500 fichas</li>
+</ul>
+<h2 id="regras-de-pagamento">* Regras de Pagamento:**</h2>
+<ul>
+<li><strong>Blackjack</strong>: Paga 3:1 (Ex: aposta 100 → ganha 300)</li>
+<li><strong>Vitória normal</strong>: Paga 3:2 (Ex: aposta 100 → ganha 150)</li>
+<li><strong>Empate</strong>: Devolve a aposta</li>
+<li><strong>Derrota</strong>: Perde a aposta</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 10, 2024</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 1, 2025</span>
       
     
   </small>
