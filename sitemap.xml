@@ -11,11 +11,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://rustlogicajogos.jonatasoliveira.dev/1_10_rogue/</loc>
-         <lastmod>2025-11-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://rustlogicajogos.jonatasoliveira.dev/1_1_jogo_floresta_misteriosa/</loc>
          <lastmod>2025-11-01</lastmod>
          <changefreq>daily</changefreq>
@@ -57,6 +52,11 @@
     </url>
     <url>
          <loc>https://rustlogicajogos.jonatasoliveira.dev/1_9_aprimorando_rpg_tatico/</loc>
+         <lastmod>2025-11-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rustlogicajogos.jonatasoliveira.dev/2_0_rogue/</loc>
          <lastmod>2025-11-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
