@@ -6,6 +6,8 @@ authors = ["Jônatas Luiz de Oliveira <contact@jonatasoliveira.dev>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "curso_logica_jogos_rust"}]
+package-mode = false
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -20,5 +22,5 @@ mkdocs-glightbox = "^0.3.5"
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
