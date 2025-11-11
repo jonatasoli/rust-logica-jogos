@@ -74,6 +74,7 @@ Para os slides:
 
 
 ### 📁 Repositório
+[Materiais do curso e projetos](https://forgejo.singularjourney.host/devjonatas/material-curso-rust)
 
 ### 🚀 Deploy
 
