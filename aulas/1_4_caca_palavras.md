@@ -1,8 +1,5 @@
 # Caça palavras - WIP
 
-
-# Caça Palavras
-
 ## Raio X
 ![](./images/M4/raiox-caca-palavras.jpg)
 
