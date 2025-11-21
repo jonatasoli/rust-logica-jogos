@@ -21,7 +21,7 @@
     
     
       
-        <title>Caça palavras - Rust da Lógica aos Jogos</title>
+        <title>Caça palavras - WIP - Rust da Lógica aos Jogos</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#caca-palavras" class="md-skip">
+        <a href="#caca-palavras-wip" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Caça palavras
+              Caça palavras - WIP
             
           </span>
         </div>
@@ -339,40 +339,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Caça palavras
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
-        Caça palavras
+        Caça palavras - WIP
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#wip" class="md-nav__link">
-    [WIP]
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -533,21 +502,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#wip" class="md-nav__link">
-    [WIP]
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -564,15 +518,2329 @@
   
 
 
-<h1 id="caca-palavras">Caça palavras</h1>
-<h2 id="wip">[WIP]</h2>
+<h1 id="caca-palavras-wip">Caça palavras - WIP</h1>
+<h1 id="caca-palavras">Caça Palavras</h1>
+<h2 id="raio-x">Raio X</h2>
+<p><a class="glightbox" href="../images/M4/raiox-caca-palavras.jpg" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/M4/raiox-caca-palavras.jpg" /></a></p>
+<h3 id="mecanicas-do-jogo">Mecânicas do Jogo:</h3>
+<p>A tela apresentará uma lista de palavras pra serem buscadas.
+O jogo terá 20 palavras para serem buscadas.
+Palavras podem estar na horizontal, vertical ou diagonal.
+Uma palavra encontrada deve aparecer riscada para indicar que já foi achada.
+Precisa ter um timer para indicar o tempo até encontrar todas as palavras.
+Precisa ter um marcador quando tenta encontrar uma palavra.
+Palavras encontradas devem aparecer destacadas.O jogo termina quando forem encontradas as 20 palavras.</p>
+<h2 id="tui">TUI</h2>
+<p>Tui é <em>Terminal User Interface</em> e é usado amplamente na computação tanto corporativa quanto pessoal, é basicamente uma forma de termos um programa com uma interface com botões, menus e etc só que rodando no terminal é bem útil em várias situações e podemos fazer várias coisas com esse tipo de interface.</p>
+<h2 id="ratatui">Ratatui</h2>
+<p>Ratatui é uma biblioteca para criação de interfaces de usuário baseadas em texto (TUI) na linguagem de programação Rust. Ela é uma versão aprimorada e mantida da biblioteca TUI-rs, com o objetivo de fornecer uma maneira eficiente e fácil de construir TUIs no terminal.
+Principais Recursos:
+    Flexibilidade e Composição:
+        O Ratatui oferece layout flexível e ferramentas para organizar componentes como painéis, caixas de texto, tabelas, gráficos, e barras de progresso, com base nas suas necessidades.
+        Ele usa um sistema de layouts declarativos, permitindo que você divida sua interface em blocos reutilizáveis e bem organizados.
+    Estilização e Temas:
+        A biblioteca suporta estilos customizáveis para textos e widgets, permitindo a aplicação de cores, modificadores como negrito, sublinhado e itálico, além de temas personalizados.
+        Com isso, você pode criar interfaces que se adaptam à estética desejada para a aplicação no terminal.
+    Performance:
+        Escrito em Rust, o Ratatui é muito eficiente em termos de uso de memória e processamento, o que o torna adequado para aplicações de linha de comando rápidas e reativas.
+    Integração com Crossterm:
+        O Ratatui funciona em conjunto com o Crossterm, uma biblioteca que oferece controle sobre o terminal (como captura de eventos de teclado e controle de entrada/saída de terminal) de maneira cross-platform (suporta Windows, Linux e macOS).
+    Suporte a Eventos:
+        Além do controle de layout e estilo, o Ratatui permite a captura de eventos de teclado e mouse, tornando possível a criação de interfaces interativas, como editores de texto, navegadores de arquivos, e clientes de chat.</p>
+<pre><code class="language-mermaid">graph TB
+    subgraph &quot;Aplicação do Usuário&quot;
+        App[Estado da Aplicação]
+        EventLoop[Loop de Eventos]
+        DrawFn[Função de Desenho]
+    end
+
+    subgraph &quot;Ratatui Core&quot;
+        Terminal[Terminal]
+        Frame[Frame]
+        Buffer1[Buffer Atual]
+        Buffer2[Buffer Anterior]
+        Layout[Sistema de Layout]
+    end
+
+    subgraph &quot;Widgets&quot;
+        Block[Block]
+        Paragraph[Paragraph]
+        List[List]
+        Table[Table]
+        Chart[Chart]
+        Custom[Widgets Customizados]
+    end
+
+    subgraph &quot;Backend Layer&quot;
+        Backend[Backend&lt;br/&gt;Crossterm/Termion/Termwiz]
+        TerminalIO[I/O do Terminal]
+    end
+
+    EventLoop --&gt;|1. Captura eventos| Backend
+    Backend --&gt;|2. Retorna eventos| EventLoop
+    EventLoop --&gt;|3. Atualiza| App
+    EventLoop --&gt;|4. Chama draw| Terminal
+    Terminal --&gt;|5. Fornece Frame| DrawFn
+    DrawFn --&gt;|6. Calcula espaço| Layout
+    Layout --&gt;|7. Retorna Rect| DrawFn
+    DrawFn --&gt;|8. Renderiza widgets| Frame
+    Frame --&gt;|9. Desenha em| Buffer1
+
+    Block -.-&gt;|implementa Widget| Frame
+    Paragraph -.-&gt;|implementa Widget| Frame
+    List -.-&gt;|implementa StatefulWidget| Frame
+    Table -.-&gt;|implementa StatefulWidget| Frame
+    Chart -.-&gt;|implementa Widget| Frame
+    Custom -.-&gt;|implementa Widget/StatefulWidget| Frame
+
+    Terminal --&gt;|10. Compara| Buffer2
+    Terminal --&gt;|11. Calcula diff| Buffer1
+    Terminal --&gt;|12. Envia mudanças| Backend
+    Backend --&gt;|13. Escreve na tela| TerminalIO
+
+    Buffer1 -.-&gt;|Se torna próximo| Buffer2
+
+    style App fill:#e1f5ff
+    style Terminal fill:#ffe1e1
+    style Backend fill:#e1ffe1
+    style Frame fill:#fff4e1
+    style Layout fill:#f0e1ff
+</code></pre>
+<p>O diagrama acima ilustra como os componentes do Ratatui se conectam e como a informação flui pelo sistema. Vou destacar alguns pontos importantes que você vê no diagrama:</p>
+<p>O <strong>ciclo numerado</strong> (1-13) mostra o fluxo completo de uma iteração do loop de renderização. Você pode ver como começa com a captura de eventos do teclado, passa pela atualização do estado, depois pela renderização dos widgets, e finalmente termina com a escrita eficiente no terminal usando o sistema de diff.</p>
+<p>As <strong>linhas sólidas</strong> representam o fluxo principal de dados e controle, enquanto as <strong>linhas pontilhadas</strong> mostram as relações de implementação entre os widgets e o sistema de renderização.</p>
+<p>O <strong>sistema de buffer duplo</strong> é especialmente importante para performance: ao manter dois buffers e comparar apenas as diferenças, o Ratatui evita redesenhar toda a tela a cada frame, resultando em interfaces muito mais fluidas e responsivas.</p>
+<h2 id="atualizando-o-rust">Atualizando o rust</h2>
+<p>Bom antes de começarmos nosso jogo vamos fazer novamente a atualização do rust:</p>
+<pre><code class="language-bash">rustup update stable
+</code></pre>
+<p>Criando projeto</p>
+<p>Bom vamos criar nosso novo projeto em projects:</p>
+<pre><code class="language-bash">cargo new wordsearch
+cd wordsearch
+</code></pre>
+<p>Para criar esse projeto vamos entender melhor como vamos estruturar nosso jogo.</p>
+<h2 id="iniciando-o-nosso-projeto">Iniciando o nosso projeto</h2>
+<p>Vamos agora adicionar algumas bibliotecas no nosso projeto.</p>
+<pre><code class="language-bash">cargo add ratatui crossterm color-eyre
+</code></pre>
+<p>Explicando as libs com o <code>ratatui</code> que é nossa lib base e o <code>crossterm</code> que como usamos no jogo anterior ele vai executar comandos no nosso terminal e finalmente o <code>color-eyre</code> que é apenas para colorir nossa saída do terminal quando houver erro no nosso programa.</p>
+<p>Agora vamos colar o exemplo do site do <a href="https://ratatui.rs/tutorials/hello-ratatui/">ratatui</a></p>
+<pre><code class="language-rust">use color_eyre::Result;
+use crossterm::event::{self, Event};
+use ratatui::{DefaultTerminal, Frame};
+
+fn main() -&gt; Result&lt;()&gt; {
+    color_eyre::install()?;
+    let terminal = ratatui::init();
+    let result = run(terminal);
+    ratatui::restore();
+    result
+}
+
+fn run(mut terminal: DefaultTerminal) -&gt; Result&lt;()&gt; {
+    loop {
+        terminal.draw(render)?;
+        if matches!(event::read()?, Event::Key(_)) {
+            break Ok(());
+        }
+    }
+}
+
+fn render(frame: &amp;mut Frame) {
+    frame.render_widget(&quot;hello world&quot;, frame.area());
+}
+</code></pre>
+<p>Explicando pontualmente para usar o <em>ratatui</em> na nossa main através do <code>ratatui::init();</code>que basicamente inicializa um terminal, isso quer dizer que esse objeto é responsável para desenhar dentro do terminal.</p>
+<p>Agora temos duas funções que serão muito importantes:</p>
+<pre><code class="language-rust">fn run(mut terminal: DefaultTerminal) -&gt; Result&lt;()&gt; {
+</code></pre>
+<p>Essa função vai ser responsável para chamar nossa função de desenho que chamamos  aqui de render e também ali vamos fazer as iterações com teclado ou mouse pro nosso jogo.
+Deixamos um loop infinito ali onde nesse caso clicando qualquer tecla damos um <code>break</code> e saímos do programa.</p>
+<p>E na função:</p>
+<pre><code class="language-rust">fn render(frame: &amp;mut Frame) {
+</code></pre>
+<p>é nossa função pra desenhar nossa tela, podemos ter mais funções de render se tivermos muitas telas pra desenhar, mas basicamente aqui nos vamos clicar nossos widgets.</p>
+<p>Um ponto importante aqui conheço já o nosso método <code>frame.area())</code> onde ele marca o tamanho do terminal como um todo.</p>
+<h2 id="conceito-do-grid">Conceito do grid</h2>
+<p>Agora quero falar um pouco de como podemos desenhar as telas da nossa TUI, no caso do <code>ratatui</code> temos um conceito de <em>chunks</em> ou seja, são pedaços do nosso <em>layout</em> com eles podemos definir sessões pro nosso jogo. </p>
+<p>Veja na imagem abaixo vamos separar nosso layout do jogo em 3 partes ou 3 <em>chunks</em> uma pro header, outra pro footer e finalmente o meio pro Grid.</p>
+<p><a class="glightbox" href="../images/M4/curso-rust-m4-3-layers.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/M4/curso-rust-m4-3-layers.png" /></a></p>
+<p>Com isso podemos criar na nossa função render nosso layout padrão.</p>
+<pre><code class="language-rust">    let size = frame.area();
+
+    // Layout principal
+    let chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([
+            Constraint::Length(3), // Header
+            Constraint::Min(0),    // Game area
+            Constraint::Length(3), // Footer
+        ])
+        .split(size);
+</code></pre>
+<p>Aqui vamos definir que o <em>size</em> do nosso projeto vai ser toda a área do frame, com isso podemos definir nossos <em>chunks</em>. Pra iniciar nosso layout nós passamos o <code>Layout::default()</code> que fica responsável por iniciar nosso layout.</p>
+<p>Em <code>direction(Direction::Vertical)</code> nós passamos como vamos dividir os <em>chunks</em> que nesse caso será vertical. Em <code>constraints</code> nós definimos os pedaços e pro nosso footer e header vamos passar o valor <em>3</em> que nesse caso vai ser interpretado como linhas e a área do jogo colocamos como <code>Min(0)</code> que dentro da biblioteca vai ocupar todo o espaço disponível no layout.</p>
+<p>Finalmente usamos o <code>.split(size)</code> que aqui tem como objetivo pegar a area da nossa tela e fazer o split conforme capturamos.</p>
+<p>Com isso ainda não vamos ter nada por que não renderizamos a tela mas, podemos começar a desenha nossa tela.</p>
+<p>Pra saber mais dessa parte pode ver aqui.</p>
+<p><a href="https://ratatui.rs/tutorials/json-editor/ui/">Layout do ratatui</a>
+<a href="https://ratatui.rs/examples/layout/layout/#_top">Proporções</a></p>
+<h2 id="arquitetando-nosso-jogo">Arquitetando nosso jogo</h2>
+<p>Vamos agora criar dois arquivos pro nosso jogo, o primeiro vai ser o módulo pro
+nosso jogo vamos chamar de <code>ui.rs</code>.</p>
+<pre><code class="language-bash">touch src/ui.rs
+</code></pre>
+<p>Esse módulo vamos concentrar tudo relacionado ao desenho da tela do nosso jogo, agora vamos
+mudar a forma que trabalhamos com nossos testes, vamos criar um diretório dedicado pros testes e também um arquivo chamado <code>test_ui.rs</code>.</p>
+<pre><code class="language-bash">mkdir -p tests
+touch tests/tests_ui.rs
+</code></pre>
+<p>Agora vamos criar no nosso <code>src</code> um arquivo chamado <code>lib.rs</code> e agora ao invés de exportar nossos módulos no nosso <code>main.rs</code> vamos exportar diretamente no nosso <code>lib.rs</code>.</p>
+<h3 id="por-que-no-lib-e-nao-direto-no-main">Por que no lib e não direto no main?</h3>
+<p>Primeiro quando exportamos para <code>lib.rs</code> estamos deixando nossos módulos como APIs públicas e eles podem ser reutilizados por outros binários se houvesse no nosso código, mas também pro nosso caso vai facilitar pra testarmos nosso código através de um diretório externo que é o caso do nosso diretório <code>tests</code>.</p>
+<p>Com isso agora vamos fazer uma pequena revisão sobre <code>clousures</code>.</p>
+<h2 id="closures">Closures</h2>
+<p><strong>Closures</strong> (ou funções anônimas) são funções que podem processar elementos do ambiente onde foram definidas. Diferente de funções regulares criadas com <code>fn</code>, closures são anônimas (não precisam de nome) e têm a capacidade especial de "lembrar" e usar variáveis do escopo onde foram criadas. Em Rust, o compilador analisa como cada variável é capturada e escolhe automaticamente a melhor estratégia de implementação.</p>
+<p>A sintaxe básica de uma closure é simples: <code>|parâmetros| expressão</code>. Por exemplo, <code>|x| x + 1</code> é uma closure que recebe um valor e retorna esse valor incrementado. Closures podem ser armazenadas em variáveis e passadas como argumentos para outras funções, tornando-as perfeitas para callbacks, iteradores e programação funcional.</p>
+<pre><code class="language-rust">// Closure simples que captura uma variável do ambiente
+let multiplicador = 5;
+let multiplicar = |x| x * multiplicador; // Captura 'multiplicador'
+
+println!(&quot;10 * {} = {}&quot;, multiplicador, multiplicar(10)); // 50
+</code></pre>
+<p>Rust possui três traits principais para closures, que determinam como elas capturam e usam variáveis:
+- <strong><code>Fn</code></strong>: captura por referência imutável (<code>&amp;T</code>) - pode ser chamada múltiplas vezes sem modificar o ambiente
+- <strong><code>FnMut</code></strong>: captura por referência mutável (<code>&amp;mut T</code>) - pode modificar o ambiente, mas pode ser chamada múltiplas vezes
+- <strong><code>FnOnce</code></strong>: captura por valor (toma posse, move) - consome o ambiente, só pode ser chamada uma vez</p>
+<pre><code class="language-rust">// Exemplo dos três tipos de closures
+let mut contador = 0;
+
+// Fn - apenas lê, não modifica
+let ler = || println!(&quot;Contador: {}&quot;, contador);
+ler();
+ler(); // Pode chamar múltiplas vezes
+
+// FnMut - modifica o ambiente
+let mut incrementar = || {
+    contador += 1;
+    contador
+};
+println!(&quot;Novo valor: {}&quot;, incrementar()); // 1
+println!(&quot;Novo valor: {}&quot;, incrementar()); // 2
+
+// FnOnce - consome o valor (move)
+let mensagem = String::from(&quot;Sistema ativado!&quot;);
+let consumir = || {
+    println!(&quot;{}&quot;, mensagem);
+    mensagem // move mensagem pra fora
+};
+consumir(); // OK
+// consumir(); // ERRO! Não pode chamar de novo
+</code></pre>
+<h3 id="por-que-closures-sao-importantes">Por que Closures são Importantes?</h3>
+<p>Closures são fundamentais em Rust porque permitem:
+1. <strong>Callbacks e Event Handlers</strong>: responder a eventos com lógica customizada
+2. <strong>Iteradores</strong>: transformar e filtrar coleções de forma elegante com <code>map</code>, <code>filter</code>, <code>for_each</code>
+3. <strong>Programação Funcional</strong>: compor operações complexas de forma declarativa
+4. <strong>Lazy Evaluation</strong>: adiar computações até que sejam realmente necessárias
+5. <strong>Threads</strong>: passar código com contexto para execução paralela</p>
+<p>Com isso podemos começar a desenhar nosso header.</p>
+<h2 id="criando-um-render-pro-nosso-header">Criando um render pro nosso header</h2>
+<p>Primeiro vamos criar um teste para verificar se nossa função <code>draw_header</code> existe. Nesse momento não vamos usar o <code>rstest</code> pra criar uma <code>fixture</code> mas, vamos criar uma função auxiliar.</p>
+<p>Pra isso vamos importar a <code>struct</code> <code>TestBackend</code> que já vem com o <code>ratatui</code>,  com ele podemos criar uma terminal de teste e usar no nosso código.</p>
+<pre><code class="language-rust">use ratatui::backend::{backend::TestBackend, Terminal};
+
+fn setup_terminal() -&gt; Terminal&lt;TestBackend&gt; {
+    let backend = TestBackend::new(80, 24);
+    Terminal::new(backend).unwrap()
+}
+</code></pre>
+<p>Então a função <code>setup_terminal</code> vai retornar um terminal pra nós e assim podemos usar o método <code>new</code> pra gerar nosso backend, depois usando a <code>struct</code> <code>Terminal</code> criamos o terminal em si.</p>
+<p>Com isso podemos criar um teste pra apenas verificar se vai ser chamada a nossa função <code>draw_header</code> que vamos implementar.</p>
+<p>Nossa função <code>draw_header</code> vamos criar um terminal e chamar seu método <code>draw</code> e no método vamos passar o retorno da nossa função <code>draw_header</code> e assim podemos passar o retorno da nossa função <code>draw_header</code> como uma <code>clousure</code>. Finalmente podemos encadear um <code>expect</code> depois do <code>draw</code> para lançar um erro caso aconteça algum problema.</p>
+<pre><code class="language-rust">use ratatui::{backend::TestBackend, layout::Rect, Terminal};
+
+#[test]
+fn test_draw_header_renders_successfully() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 3);
+
+    // Act - Assert
+    terminal
+        .draw(|f| draw_header(f, area))
+        .expect(&quot;draw_header should render&quot;);
+}
+</code></pre>
+<p>Aqui nosso teste não tem um assert por que só o fato de renderizar já é considerado um sucesso, então vamos rodar assim o nosso código e vamos ter o erro abaixo:</p>
+<pre><code class="language-bash">error[E0425]: cannot find function `draw_header` in this scope
+  --&gt; tests/tests_ui.rs:34:19
+   |
+34 |         .draw(|f| draw_header(f, area))
+   |                   ^^^^^^^^^^^ not found in this scope
+</code></pre>
+<p>Bom como sabemos esse erro é por que não temos o draw_header criado, vamos cria-lo na nosso módulo ui.</p>
+<pre><code class="language-rust">pub fn draw_header(f: &amp;mut Frame, area: Rect) {
+
+}
+</code></pre>
+<p>Agora é importante ressaltar que todas as funções que vamos testar serão publicas nesse projeto, no futuro nos próximos projetos vamos delimitar aspectos que precisam ser públicos e os aspectos privados, manejando os testes corretamente. Mas, nesse projeto eu quero que você se acostume a criar os testes de forma pública já que anteriormente só criamos testes no próprio
+módulo.</p>
+<p>Agora precisamos importar o <code>draw_header</code> no <code>tests_ui.rs</code> e depois rodar os testes:</p>
+<pre><code class="language-rust">// tests_ui.rs
+use wordsearch::ui::draw_header;
+
+</code></pre>
+<pre><code class="language-bash">    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.20s
+     Running unittests src/lib.rs (target/debug/deps/wordsearch-b906015e74c9ad81)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/wordsearch-ca09197567fe797a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/tests_ui.rs (target/debug/deps/tests_ui-547972e55c75e006)
+
+running 1 test
+test test_draw_header_renders_successfully ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests wordsearch
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Sucesso! Agora começamos a construir o primeiro elemento da nossa ui.</p>
+<h2 id="entendo-como-capturar-os-elementos-do-nosso-render">Entendo como capturar os elementos do nosso render</h2>
+<p>Agora nosso teste já passou, queremos que nosso header tenha um label com o tempo que decorrido durante o jogo e o título do jogo que vai ser <code>_Wordsearch_</code>.</p>
+<p>Pra isso vamos ter que criar no nosso teste uma nova função auxiliar, nela vamos acessar nosso terminal de teste, ai vamos precisar navegar por alguns métodos, vamos acessar o método <code>backend</code> nele vamos acessar o método <code>buffer</code> que representa os elementos que foram renderizados. </p>
+<p>Então vamos criar uma função chamada <code>get_buffer_content</code>.</p>
+<pre><code class="language-rust">fn get_buffer_content(terminal: &amp;Terminal&lt;TestBackend&gt;) {
+    terminal
+        .backend()
+        .buffer()
+}
+
+</code></pre>
+<p>Uma vez com isso ainda precisamos acessar o método <code>content</code> pra pegar o conteúdo gerado para o buffer. O <code>content</code> vai retornar um tipo especial o <code>&amp;[Cell]</code> que é uma coleção e por usa vez tem implementado <code>iterator</code> pois ele é uma sequência de elementos.</p>
+<pre><code class="language-rust">fn get_buffer_content(terminal: &amp;Terminal&lt;TestBackend&gt;){
+    terminal
+        .backend()
+        .buffer()
+        .content()
+        .iter()
+}
+</code></pre>
+<p>Como nós queremos um conteúdo especifico do <code>&amp;Cell</code> que foi gerado pelo nosso <code>iterator</code> vamos selecionado. No caso precisamo do campo <code>symbols</code> então vamos mapear todos os <code>symbols</code> dos elementos dentro do content e pra isso vamos criar uma <code>clousure</code> dedicada a capturar esse campo dos elementos de <code>content</code> e finalmente damos um <code>collect</code> no final.</p>
+<p>O <code>collect</code> é um método especial que ainda não vimos mas, seu objetivo é transformar um
+<code>iterator</code> em uma coleção, no nosso caso <code>symbols</code> é um item do tipo <code>&amp;str</code> então o collect vai
+transformar o retorno numa coleção de <code>String</code> então vamos indicar que o retorno dessa função é
+uma <code>String</code>.</p>
+<pre><code class="language-rust">fn get_buffer_content(terminal: &amp;Terminal&lt;TestBackend&gt;) -&gt; String {
+    terminal
+        .backend()
+        .buffer()
+        .content()
+        .iter()
+        .map(|c| c.symbol())
+        .collect()
+}
+</code></pre>
+<p>Pra saber mais sobre os detalhes de cada método e seu retorno você pode <a href="https://docs.rs/ratatui/latest/ratatui/buffer/struct.Buffer.html#structfield.content">consultar a
+documentação do <code>ratatui</code></a>.</p>
+<h2 id="preenchendo-o-header">Preenchendo o header</h2>
+<p>Ainda não vamos desenhar a tela mas, vamos primeiro criar um teste nele vamos checar se dentro do conteúdo do nosso header há uma string chamada tempo, uma string chamada <em>Found</em> que representa as palavras encontradas e outra chamada <code>_Wordsearch_</code>.</p>
+<p>Com isso em mente vamos criar um teste chamado <code>test_draw_header_contains_required_elements</code> vamos passar como setup um terminal e uma area aqui vamos criar um retângulo simples.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_header_contains_required_elements() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 3);
+
+}
+
+</code></pre>
+<p>Agora vamos simplesmente chamar a função <code>terminal.draw</code> precisamos fazer um desempacotamento
+do método pois ele retorna um result.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_header_contains_required_elements() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 3);
+    terminal.draw(|f| draw_header(f, area)).unwrap();
+
+}
+
+</code></pre>
+<p>Agora vamos criar nosso <em>Act</em> recebendo o conteúdo do nosso terminal gerado, pra isso vamos
+usar a função auxiliar <code>get_buffer_content</code> que criamos</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_header_contains_required_elements() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 3);
+    terminal.draw(|f| draw_header(f, area)).unwrap();
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+
+}
+</code></pre>
+<p>Finalmente vamos agora verificar se contem nele existem as strings que precisamos, pra isso
+vamos usar a macro <code>assert!</code> e pra verificar vamos usar o próprio método contains que existe
+dentro da <code>struct String</code>.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_header_contains_required_elements() {
+    //Assert
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 3);
+    terminal.draw(|f| draw_header(f, area)).unwrap();
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+
+    // Assert
+    assert!(
+        content.contains(&quot;Wordsearch&quot;), &quot;Should have a title&quot;
+    );
+    assert!(content.contains(&quot;Time:&quot;), &quot;Should have a label Time&quot;);
+    assert!(
+        content.contains(&quot;Found:&quot;),
+        &quot;Should have a label Found&quot;
+    );
+}
+</code></pre>
+<p>Agora vamos rodar nosso teste e devemos receber a falha abaixo:</p>
+<pre><code class="language-bash">failures:
+
+---- test_draw_header_contains_required_elements stdout ----
+
+thread 'test_draw_header_contains_required_elements' panicked at tests/tests_ui.rs:49:5:
+Should have a title
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+</code></pre>
+<p>Agora precisamos desenhar em si nosso header. Vamos criar uma <code>String</code>
+para exibir o tempo.</p>
+<pre><code class="language-rust">pub fn draw_header(f: &amp;mut Frame, area: Rect) {
+    let time_str = String::from(&quot;Time: &quot;);
+
+</code></pre>
+<p>Agora vamos pra um tópico novo dentro do <code>ratatui</code>, vamos trabalhar com a <code>struct Span</code>  para
+criar nossos textos e para formata-los vamos chamar o método <code>styled</code>. Dentro de <code>styled</code> vamos
+usar a <code>struct Style</code> para aplicar as formatações, e sempre vamos chamar seu construtor
+<code>default</code> para já nos entregar os atributos mínimos preenchidos para facilitar nossa vida.</p>
+<p>Essa é uma forma parecida com uma formatação <code>html</code>, assim podemos aplicar formatação de texto
+de forma mais conhecida para saber mais sobre as nossas opções de estilos você pode <a href="https://docs.rs/ratatui/latest/ratatui/text/struct.Span.html">ver na
+documentação</a>.</p>
+<p>Para criar nosso título vamos criar um vetor chamado <code>header_text</code> e ele vai receber um vetor
+de <a href="https://docs.rs/ratatui/latest/ratatui/text/struct.Line.html">Line</a> que basicamente
+consiste em um ou mais spans. Então vamos adicionar um span para a palavra <code>Wordsearch</code> um para
+<code>Found</code> e vamos criar um espaçamento entre essas palavras usando <code>Span::raw</code> já que vai ser um texto
+vazio apenas.</p>
+<p>Vamos também por um ícone de lupa no nosso <code>header</code> pra isso vamos copiar o emoji através do
+site do <a href="https://emojipedia.org/"><code>emojipedia</code></a>.</p>
+<pre><code class="language-rust">pub fn draw_header(f: &amp;mut Frame, area: Rect) {
+    let time_str = String::new(&quot;Time: &quot;);
+
+    let header_text = vec![Line::from(vec![
+        Span::styled(
+            &quot;🔍 Wordsearch&quot;,
+            Style::default()
+                .fg(Color::Yellow.into())
+                .add_modifier(Modifier::BOLD),
+        ),
+        Span::raw(&quot;  &quot;),
+        Span::styled(time_str, Style::default().fg(Color::Cyan.into())),
+        Span::raw(&quot;  &quot;),
+        Span::styled(format!(&quot;Found: &quot;,), Style::default().fg(Color::Green.into())),
+    ])];
+</code></pre>
+<p>Finalmente podemos fazer o render em si, agora precisamos para isso criar uma variável <code>header</code>
+com ela vamos construir um <a href="https://docs.rs/ratatui/latest/ratatui/widgets/struct.Paragraph.html"><code>Paragraph</code></a> que é um widget que mostra um texto.</p>
+<p>Ainda não falei dos <em>widgets</em> mas, basicamente um <em>widget</em> é um trecho de código reutilizável para renderizar algum elemento da tela, pense como um pedaço do <em>layout</em> da sua tela, eles são uteis pois são elementos que podemos reutilizar e representam algum aspecto da nossa tela, seja um texto, um botão ou qualquer outro
+elemento visual que precisamos.</p>
+<p>Além do <code>Paragraph</code> nós queremos que nosso header tenha uma borda, no <code>ratatui</code> precisamos
+nesse caso criar uma <a href="https://docs.rs/ratatui/latest/ratatui/widgets/struct.Paragraph.html#method.block"><code>Block</code></a> e também vamos chamar o método <code>default()</code> para preencher com os valores mínimos.</p>
+<p>E pra finalizar nossa formatação vamos usar uma <a href="https://docs.rs/ratatui/latest/ratatui/widgets/struct.Wrap.html"><code>struct Wrap</code></a> para configurar a quebra de linha e a opção <code>trim</code> que é para ajustar os espaços, assim nossos textos não vão ficar cortados e vão se ajustar ao tamanho da tela de exibição, então se você não estiver usando o terminal como eu em tela cheia vai perceber que ele vai ajustar o texto com o tamanho da sua tela de terminal e não vai cortar o texto.</p>
+<pre><code class="language-rust">pub fn draw_header(f: &amp;mut Frame, area: Rect) {
+    let time_str = String::new(&quot;Time: &quot;);
+
+    let header_text = vec![Line::from(vec![
+        Span::styled(
+            &quot;🔍 Wordsearch&quot;,
+            Style::default()
+                .fg(Color::Yellow.into())
+                .add_modifier(Modifier::BOLD),
+        ),
+        Span::raw(&quot;  &quot;),
+        Span::styled(time_str, Style::default().fg(Color::Cyan.into())),
+        Span::raw(&quot;  &quot;),
+        Span::styled(format!(&quot;Found: &quot;,), Style::default().fg(Color::Green.into())),
+    ])];
+
+    let header = Paragraph::new(header_text)
+        .block(Block::default().borders(Borders::ALL))
+        .wrap(Wrap { trim: true });
+
+    f.render_widget(header, area);
+}
+
+</code></pre>
+<p>Agora podemos rodar os testes novamente:</p>
+<pre><code class="language-bash">cargo test
+running 2 tests
+test test_draw_header_contains_required_elements ... ok
+test test_draw_header_renders_successfully ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests wordsearch
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Com o nosso teste funcionando vamos adicionar agora no nosso main dentro do nosso render. Vamos
+passar a posição 0 do nosso <em>chunks</em> que é a parte do <em>layout</em> do <code>header</code>.</p>
+<pre><code class="language-rust">fn render(frame: &amp;mut Frame) {
+    let size = frame.area();
+
+    // Layout principal
+    let chunks = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([
+            Constraint::Length(3), // Header
+            Constraint::Min(0),    // Game area
+            Constraint::Length(3), // Footer
+        ])
+        .split(size);
+
+    // Header com informações do jogo
+    draw_header(frame, chunks[0]);
+
+</code></pre>
+<h2 id="option-result-wrap-unwrap-e-expect">Option, Result, Wrap, Unwrap e Expect</h2>
+<p>Bom agora chegou a hora de falarmos de algumas coisas que estamos usando a algum tempo e até
+agora você sabia que existia e não entramos muito a fundo e agora chegou a hora.</p>
+<h3 id="wrap">Wrap</h3>
+<p>Antes de falar sobre desembrulhar (unwrap), precisamos entender como embrulhar valores em Rust. Pense nisso como colocar um presente em uma caixa:
+Nesse presente temos o conteúdo que queremos dar e ele pode vir com um valor que queremos, ou
+vazio ou ainda com uma mensagem do por que não pode entregar o conteúdo. Em rust por <em>default</em>
+vai querer embrulhar sua resposta no método <code>main</code> que é o nosso <code>Result</code> mas, também durante
+esse curso algumas vezes embrulhamos nossos valores usando um <code>Option</code>.</p>
+<h3 id="option">Option<T></h3>
+<p><a href="https://doc.rust-lang.org/std/option/enum.Option.html">Option<T></a> é um <code>enum</code> (tipo enumerado) que representa a possibilidade de ter um valor ou não ter nada. Ele tem dois possíveis estados:</p>
+<p>Some(valor): O valor existe e pode ser acessado
+None: Não há valor — represente o "vazio" com segurança</p>
+<pre><code class="language-rust">fn recuperar_munição_do_arsenal(tipo: &amp;str) -&gt; Option&lt;i32&gt; {
+    match tipo {
+        &quot;míssil&quot; =&gt; Some(5),        // Temos 5 mísseis
+        &quot;laser&quot; =&gt; Some(999),       // Energia infinita de laser
+        &quot;plasma&quot; =&gt; None,           // Não temos plasma, estamos sem ele
+        _ =&gt; None,                  // Tipo desconhecido = nada
+    }
+}
+
+fn equipar_arma() {
+    let munição = recuperar_munição_do_arsenal(&quot;míssil&quot;);
+
+    match munição {
+        Some(qtd) =&gt; println!(&quot;Equipado! Temos {} mísseis!&quot;, qtd),
+        None =&gt; println!(&quot;Arsenal vazio! Sem munição desse tipo.&quot;),
+    }
+}
+</code></pre>
+<p>Você usa Option quando uma operação pode não retornar nada, mas não há um "erro" em sentido técnico. Por exemplo: buscar o primeiro soldado em uma lista (pode não haver nenhum), procurar um item em um mapa (pode não ter sido guardado lá), ou verificar se um inimigo foi detectado pelo radar (o sensor pode estar desligado ou não ter alvos). O Rust força você a lidar com ambos os casos, eliminando bugs silenciosos onde você acessa null por acidente.</p>
+<p>Essa é a forma dele tratar o famoso <em>null pointer</em> assim ao invés de checar se o valor é nulo
+nós verificamos se há algo ali.</p>
+<h4 id="metodos-uteis">Métodos úteis</h4>
+<pre><code class="language-rust">let valor = Some(42);
+
+// unwrap_or: se Some, retorna; se None, retorna padrão
+let resultado = valor.unwrap_or(0);  // 42
+
+// map: transforma o valor se existir
+let dobrado = valor.map(|x| x * 2);  // Some(84)
+
+// is_some / is_none: verificações simples
+if valor.is_some() {
+    println!(&quot;Tem valor!&quot;);
+}
+</code></pre>
+<h3 id="result">Result<T></h3>
+<p>Agora vamos para algo que usamos muito no nosso dia-a-dia com rust, o <a href="https://doc.rust-lang.org/std/result/enum.Result.html">Result<T, E></a> é um <code>enum</code> com dois possíveis estados que representa o resultado de uma operação que pode falhar:</p>
+<p>Ok(valor): A operação funcionou e retorna um valor do tipo T
+Err(erro): A operação falhou e retorna informações sobre o erro do tipo E</p>
+<pre><code class="language-rust">fn conectar_ao_servidor_central(endereço: &amp;str) -&gt; Result&lt;String, String&gt; {
+    // Simulando tentativa de conexão
+    if endereço.contains(&quot;válido&quot;) {
+        Ok(&quot;Conexão estabelecida com sucesso!&quot;.to_string())
+    } else {
+        Err(&quot;Erro: Endereço do servidor inválido&quot;.to_string())
+    }
+}
+
+// Usando o resultado
+fn sincronizar_dados() {
+    let resultado = conectar_ao_servidor_central(&quot;servidor-válido.com&quot;);
+
+    match resultado {
+        Ok(mensagem) =&gt; println!(&quot;✓ {}&quot;, mensagem),
+        Err(erro) =&gt; println!(&quot;✗ Falha: {}&quot;, erro),
+    }
+}
+</code></pre>
+<p>Você usa Result quando uma operação pode ter sucesso ou falha com uma razão específica. Por exemplo: conectar ao servidor central (pode falhar por rede), ler dados do sensores (pode haver interferência), ou disparar a arma principal (pode travar). A diferença crucial: com Result, você sabe por que algo falhou, não só que falhou.</p>
+<h3 id="metodos-uteis_1">Métodos úteis</h3>
+<pre><code class="language-rust">let resultado = Ok::&lt;i32, String&gt;(50);
+
+// unwrap_or: se Ok, retorna; se Err, retorna padrão
+let valor = resultado.unwrap_or(0);  // 50
+
+// map: transforma o Ok se existir
+let dobrado = resultado.map(|x| x * 2);  // Ok(100)
+
+// ? (operador try): retorna Err imediatamente (aprenderemos depois!)
+fn operacao() -&gt; Result&lt;i32, String&gt; {
+    let x = disparar_arma_principal(100)?;  // Se falhar, retorna o erro
+    Ok(42)
+}
+</code></pre>
+<h3 id="unwrap-expect">unwrap - expect</h3>
+<p>Em Rust, tanto Option<T> quanto Result<T, E> encapsulam valores que podem ou não estar presentes. Às vezes, porém, você está absolutamente certo de que o valor existe (ou aceita que o programa falhe se não existir). É aí que unwrap() e expect() entram em cena.
+O que fazem esses métodos?
+unwrap() extrai o valor interno de um Option ou Result. Se for Some(valor) ou Ok(valor), você recebe valor. Se for None ou Err(e), o programa entra em pânico (panic) e termina com uma mensagem genérica:</p>
+<pre><code class="language-rust">fn main() {
+    let combustivel: Option&lt;u32&gt; = Some(100);
+    let quantidade = combustivel.unwrap(); // 100 — tudo certo!
+
+    let vazio: Option&lt;u32&gt; = None;
+    // let falha = vazio.unwrap(); // ⚠️ PANIC: &quot;called `Option::unwrap()` on a `None` value&quot;
+
+}
+</code></pre>
+<h3 id="expect">Expect</h3>
+<p>expect(mensagem) faz o mesmo que unwrap(), mas permite que você forneça uma mensagem personalizada de erro. Isso torna o pânico mais informativo durante a depuração:</p>
+<pre><code class="language-rust">let resultado: Result&lt;String, &amp;str&gt; = Err(&quot;falha no reator&quot;);
+// let comando = resultado.expect(&quot;Sistema de propulsão falhou!&quot;); 
+// ⚠️ PANIC: &quot;Sistema de propulsão falhou!: falha no reator&quot;
+</code></pre>
+<p>Quando usar unwrap/expect?</p>
+<ul>
+<li>Em testes unitários: onde você quer que o teste falhe imediatamente se algo inesperado acontecer.</li>
+<li>Em protótipos: para desenvolvimento rápido antes de adicionar tratamento de erros robusto.</li>
+<li>Quando há garantia lógica: por exemplo, depois de verificar explicitamente com is_some() ou is_ok()</li>
+<li>Em código de exemplo: para manter a clareza sem distrair com tratamento de erros</li>
+</ul>
+<h3 id="boas-praticas">Boas práticas</h3>
+<p>Em código de produção, prefira métodos que não causam pânico:</p>
+<pre><code class="language-rust">// ❌ Perigoso em produção
+let valor = opcao.unwrap();
+
+// ✅ Tratamento seguro com match
+let valor = match opcao {
+    Some(v) =&gt; v,
+    None =&gt; return Err(&quot;Valor ausente&quot;),
+};
+
+// ✅ Valor padrão com unwrap_or
+let valor = opcao.unwrap_or(0);
+
+// ✅ Computação lazy com unwrap_or_else  
+let valor = opcao.unwrap_or_else(|| calcular_padrao());
+
+// ✅ Propagação de erros com ?
+let valor = resultado?;
+</code></pre>
+<h3 id="operador">Operador ?</h3>
+<p>O operador ? é uma forma elegante e segura de desembrulhar valores, mas ao invés de causar pânico, ele propaga o erro para quem chamou a função. É como dizer: "Se der erro aqui, eu não posso resolver, então passo o problema para cima".</p>
+<pre><code class="language-rust">// ❌ Sem o operador ? (verbose)
+fn processar_dados() -&gt; Result&lt;String, String&gt; {
+    let dado1 = match obter_dado1() {
+        Ok(d) =&gt; d,
+        Err(e) =&gt; return Err(e),  // Propagar erro manualmente
+    };
+
+    let dado2 = match obter_dado2() {
+        Ok(d) =&gt; d,
+        Err(e) =&gt; return Err(e),  // Propagar erro manualmente
+    };
+
+    Ok(format!(&quot;{} {}&quot;, dado1, dado2))
+}
+
+// ✅ Com o operador ? (limpo e conciso)
+fn processar_dados() -&gt; Result&lt;String, String&gt; {
+    let dado1 = obter_dado1()?;  // Se Err, retorna automaticamente
+    let dado2 = obter_dado2()?;  // Se Err, retorna automaticamente
+
+    Ok(format!(&quot;{} {}&quot;, dado1, dado2))
+}
+</code></pre>
+<p>O operador ? faz três coisas:</p>
+<p>Se Ok/Some: Desembrulha o valor e continua
+Se Err/None: Converte e retorna o erro imediatamente
+Conversão automática: Converte tipos de erro compatíveis</p>
+<p>✅ USE quando:</p>
+<p>A função já retorna Result ou Option
+Você quer propagar erros para o chamador
+Não precisa fazer tratamento local do erro
+Quer código limpo e conciso</p>
+<p>❌ NÃO use quando:</p>
+<p>Precisa tratar o erro localmente
+Quer fornecer valor padrão (use unwrap_or etc.)
+Os tipos de erro não são compatíveis</p>
+<p>Diferença entre ?, unwrap e match:</p>
+<pre><code class="language-rust">// Operador ? - Propaga erro (seguro, requer Result/Option)
+let valor = funcao_que_pode_falhar()?;
+
+// unwrap - Causa pânico (perigoso)
+let valor = funcao_que_pode_falhar().unwrap();
+
+// match - Tratamento explícito (verboso mas claro)
+let valor = match funcao_que_pode_falhar() {
+    Ok(v) =&gt; v,
+    Err(e) =&gt; return Err(e),
+};
+</code></pre>
+<p>Exemplo prático em um sistema de mecha:</p>
+<pre><code class="language-rust">use std::collections::HashMap;
+
+struct SistemaMecha {
+    energia: HashMap&lt;String, u32&gt;,
+}
+
+impl SistemaMecha {
+    fn obter_energia(&amp;self, sistema: &amp;str) -&gt; Option&lt;u32&gt; {
+        self.energia.get(sistema).copied()
+    }
+
+    // ❌ Versão perigosa - pode causar panic
+    fn ativar_arma_inseguro(&amp;self) {
+        let energia = self.obter_energia(&quot;arma&quot;).unwrap();
+        println!(&quot;Arma ativada com {} unidades&quot;, energia);
+    }
+
+    // ✅ Versão segura - retorna Result
+    fn ativar_arma_seguro(&amp;self) -&gt; Result&lt;(), String&gt; {
+        let energia = self.obter_energia(&quot;arma&quot;)
+            .ok_or_else(|| &quot;Sistema de arma sem energia!&quot;.to_string())?;
+
+        if energia &lt; 10 {
+            return Err(&quot;Energia insuficiente para disparo!&quot;.to_string());
+        }
+
+        println!(&quot;Arma ativada com {} unidades&quot;, energia);
+        Ok(())
+    }
+}
+</code></pre>
+<p>Lembre-se quando usamos unwrap() é como um botão de ejeção, use apenas quando estiver preparado para as consequências ou quando tiver certeza absoluta de que é seguro.</p>
+<h2 id="macros">Macros</h2>
+<p>Existem dois tipos principais de macros em Rust: macros declarativas (definidas com [macro_rules!]https://doc.rust-lang.org/rust-by-example/macros.html) e macros procedurais (que são funções especiais anotadas com atributos). As macros declarativas funcionam através de pattern matching, você define padrões de sintaxe que a macro deve reconhecer e especifica o código que deve ser gerado quando esse padrão é encontrado. Elas são como um match expression super-poderoso que trabalha com tokens de código ao invés de valores. As macros procedurais, por outro lado, são mais flexíveis e podem manipular o AST (Abstract Syntax Tree) diretamente, mas também são mais complexas e requerem uma crate separada.</p>
+<p>Exemplo Básico: Macro declarativa</p>
+<pre><code class="language-rust">macro_rules! log_status {
+    ($msg:expr) =&gt; {
+        println!(&quot;[STATUS] {}&quot;, $msg);
+    };
+
+    ($level:expr, $msg:expr) =&gt; {
+        println!(&quot;[{}] {}&quot;, $level, $msg);
+    };
+}
+
+fn main() {
+    log_status!(&quot;Sistema inicializado&quot;);
+    log_status!(&quot;INFO&quot;, &quot;Todos os sistemas operacionais&quot;);
+
+    // println!(&quot;[STATUS] {}&quot;, &quot;Sistema inicializado&quot;);
+    // println!(&quot;[{}] {}&quot;, &quot;INFO&quot;, &quot;Todos os sistemas operacionais&quot;);
+}
+</code></pre>
+<p>Fragmentos de Sintaxe (Fragment Specifiers)
+Macros podem capturar diferentes tipos de elementos sintáticos:</p>
+<p>expr - expressões (como 2 + 2, minha_funcao())
+ident - identificadores (nomes de variáveis, funções)
+ty - tipos (i32, Vec<String>)
+stmt - statements (declarações)
+block - blocos de código ({ ... })
+tt - token tree (qualquer token)
+literal - literais (42, "texto")</p>
+<pre><code class="language-rust">macro_rules! comando_mecha {
+    // Captura um identificador (nome da ação)
+    ($acao:ident) =&gt; {
+        println!(&quot;Executando comando: {}&quot;, stringify!($acao));
+    };
+
+    // Captura um identificador e uma expressão (com parâmetro)
+    ($acao:ident, $param:expr) =&gt; {
+        println!(&quot;Executando {}: com parâmetro {}&quot;, 
+                 stringify!($acao), $param);
+    };
+}
+
+fn main() {
+    comando_mecha!(avançar);           // Identifica a ação
+    comando_mecha!(girar, 90);         // Ação com parâmetro
+}
+</code></pre>
+<p>Por que usar Macros?</p>
+<p>Evitar repetição de código (DRY - Don't Repeat Yourself): quando você tem um padrão que se repete mas não pode ser abstraído com funções
+Criar DSLs (Domain-Specific Languages): criar sintaxe customizada para seu domínio
+Interfaces variáveis: aceitar número variável de argumentos (como println!, vec!)
+Geração de código em tempo de compilação: zero overhead em runtime
+Capturar informações do contexto: como file!(), line!(), column!() que funções não conseguem</p>
+<h2 id="trabalhando-com-o-footer">Trabalhando com o footer</h2>
+<p>Agora vamos começar a desenhar nosso footer, primeiro vamos criar um teste parecido com o header pra ver se ele consegue chamar a função <code>draw_footer</code>.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_footer_renders_successfully() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 4);
+
+    // Act - Assert
+    terminal
+        .draw(|f| draw_footer(f, area))
+        .expect(&quot;draw_footer should render&quot;);
+}
+</code></pre>
+<p>Agora vamos rodar o nosso teste:</p>
+<pre><code class="language-bash">❯ cargo test
+   Compiling wordsearch v0.1.0 (/home/feanor/projects/wordsearch)
+error[E0425]: cannot find function `draw_footer` in this scope
+   --&gt; tests/tests_ui.rs:108:19
+    |
+108 |         .draw(|f| draw_footer(f, area))
+    |                   ^^^^^^^^^^^ not found in this scope
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `wordsearch` (test &quot;tests_ui&quot;) due to 1 previous error
+</code></pre>
+<p>Certo isso acontece por que não temos uma função <code>draw_footer</code> ainda. Então vamos cria-la e ele
+vai seguir a mesma assinatura do nosso <code>draw_header</code> pois eles possuem a mesma função.</p>
+<pre><code class="language-rust">//ui.rs
+pub fn draw_footer(f: &amp;mut Frame, area: Rect) {
+}
+</code></pre>
+<p>Agora importamos ele no teste e vamos executar novamente.</p>
+<pre><code class="language-rust">running 3 tests
+test test_draw_header_renders_successfully ... ok
+test test_draw_footer_renders_successfully ... ok
+test test_draw_header_contains_required_elements ... ok
+
+</code></pre>
+<p>Para o footer vamos precisar colocar os comandos do jogo pra auxiliar nosso jogador e pra isso
+vamos criar um teste que verifique se o footer tem os comandos. Pra isso vamos criar um vetor
+que vai armazenar uma tupla com duas <code>&amp;str</code>.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_footer_contains_all_controls() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 4);
+    terminal.draw(|f| draw_footer(f, area)).unwrap();
+    let controls = vec![
+        (&quot;Move&quot;, &quot;movement in grid&quot;),
+        (&quot;Select&quot;, &quot;selection letter&quot;),
+        (&quot;Confirm&quot;, &quot;confirmation&quot;),
+        (&quot;Clean&quot;, &quot;clean selection&quot;),
+        (&quot;Close&quot;, &quot;close game&quot;),
+    ];
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+}
+</code></pre>
+<p>Agora pra testarmos a função vamos criar um <em>loop</em> onde vamos comparar se na nossa variável
+content há as strings que estão em <em>controls</em> e pra isso vamos criar um  <em>for</em> que vai percorrer o vetor de <em>controls</em> e desestruturar a tupla em duas variáveis pra percorrermos
+durante o nosso loop e comparar com o conteúdo de <em>content</em>.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_footer_contains_all_controls() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 4);
+    terminal.draw(|f| draw_footer(f, area)).unwrap();
+    let controls = vec![
+        (&quot;Move&quot;, &quot;movement in grid&quot;),
+        (&quot;Select&quot;, &quot;selection letter&quot;),
+        (&quot;Confirm&quot;, &quot;confirmation&quot;),
+        (&quot;Clean&quot;, &quot;clean selection&quot;),
+        (&quot;Close&quot;, &quot;close game&quot;),
+    ];
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+
+    // Assert
+    for (action, description) in controls {
+        assert!(
+            content.contains(action),
+            &quot;Should control for {}: '{}'&quot;,
+            description,
+            action
+        );
+    }
+}
+</code></pre>
+<p>Agora rodando vamos ter a falha que vai ser o texto dentro do nosso <em>assert</em>.</p>
+<pre><code class="language-bash">
+failures:
+
+---- test_draw_footer_contains_all_controls stdout ----
+
+thread 'test_draw_footer_contains_all_controls' panicked at tests/tests_ui.rs:95:9:
+Should control for movement in grid: 'move'
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Certo agora vamos implementar nossa função passando todos os controles que queremos.</p>
+<pre><code class="language-rust">fn draw_footer(f: &amp;mut Frame, area: Rect) {
+    let footer_text = vec![
+        Line::from(vec![
+            Span::raw(&quot;Controls: &quot;),
+            Span::styled(&quot;↑↓←→&quot;, Style::default().fg(Color::Yellow)),
+            Span::raw(&quot; Move | &quot;),
+            Span::styled(&quot;SPACE&quot;, Style::default().fg(Color::Yellow)),
+            Span::raw(&quot; Select | &quot;),
+            Span::styled(&quot;ENTER&quot;, Style::default().fg(Color::Yellow)),
+            Span::raw(&quot; Confirm | &quot;),
+            Span::styled(&quot;c&quot;, Style::default().fg(Color::Yellow)),
+            Span::raw(&quot; Clean | &quot;),
+            Span::styled(&quot;q/ESC&quot;, Style::default().fg(Color::Yellow)),
+            Span::raw(&quot; Close&quot;),
+        ]),
+        Line::from(vec![
+            Span::styled(&quot;Status: &quot;, Style::default().fg(Color::Cyan)),
+            Span::raw(&quot; &quot;),
+        ]),
+    ];
+
+    let footer = Paragraph::new(footer_text)
+        .block(Block::default().borders(Borders::ALL))
+        .wrap(Wrap { trim: true });
+
+    f.render_widget(footer, area);
+}
+
+</code></pre>
+<p>Agora rodamos os testes e vemos que tudo está funcionando:</p>
+<pre><code class="language-bash">running 4 tests
+test test_draw_header_renders_successfully ... ok
+test test_draw_header_contains_required_elements ... ok
+test test_draw_footer_renders_successfully ... ok
+test test_draw_footer_contains_all_controls ... ok
+</code></pre>
+<p>Agora precisamos colocar nossa função footer no <code>main.rs</code></p>
+<pre><code class="language-rust">fn main() {
+    //código
+
+    // Header
+    draw_header(frame, chunks[0]);
+    // Footer
+    draw_footer(frame, chunks[2]);
+
+}
+</code></pre>
+<p>Importante reforçar que o footer como é a ultima parte do nosso layout ele vai pro <code>chunks[2]</code> e podemos ver ele funcionando.</p>
+<p>Vamos criar agora mais um teste para complementar o anterior e verificar se todos os comandos foram inseridos. Isso é importante pra termos certeza que todas as opções estão a vista do jogador.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_footer_shows_control_keys() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 4);
+    terminal.draw(|f| draw_footer(f, area)).unwrap();
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+    let has_arrow_keys = content.contains(&quot;↑&quot;) || content.contains(&quot;↓&quot;);
+    let has_space = content.contains(&quot;SPACE&quot;);
+    let has_enter = content.contains(&quot;ENTER&quot;);
+    let has_clear = content.contains(&quot;c&quot;);
+    let has_quit = content.contains(&quot;q&quot;) || content.contains(&quot;ESC&quot;);
+
+    // Assert
+    assert!(has_arrow_keys, &quot;Should have the movement keys&quot;);
+    assert!(has_space, &quot;Should show key space&quot;);
+    assert!(has_enter, &quot;Should show key enter&quot;);
+    assert!(has_clear, &quot;Should show key c&quot;);
+    assert!(has_quit, &quot;Should show quit keys&quot;);
+}
+</code></pre>
+<p>Agora verificando os testes:</p>
+<pre><code class="language-bash">test test_draw_header_renders_successfully ... ok
+test test_draw_header_contains_required_elements ... ok
+test test_draw_footer_shows_control_keys ... ok
+test test_draw_footer_renders_successfully ... ok
+test test_draw_footer_contains_all_controls ... ok
+</code></pre>
+<p>Perfeito tudo funcionando! Agora podemos ir desenhar nosso grid.</p>
+<h2 id="desenhando-o-grid">Desenhando o grid</h2>
+<p>O grid será necessário dividir em partes, nesse primeiro momento só vamos desenha-lo. Mas,
+ainda não vamos por as palavras.</p>
+<p>Para iniciar vamos fazer aquele teste básico de ver se nosso <em>layout</em> de <em>grid</em> vai renderizar corretamente.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_grid_renders_successfully() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 20);
+
+    // Act - Assert
+    terminal
+        .draw(|f| draw_grid(f, area))
+        .expect(&quot;draw_grid deve renderizar sem erros&quot;);
+}
+</code></pre>
+<p>Agora temos o erro que ele não está no escopo:</p>
+<pre><code class="language-bash">error[E0425]: cannot find function `draw_grid` in this scope
+   --&gt; tests/tests_ui.rs:136:19
+    |
+136 |         .draw(|f| draw_grid(f, area))
+    |                   ^^^^^^^^^ not found in this scope
+</code></pre>
+<p>Como as funções anteriores, vamos criar nossa função <code>draw_grid</code> e também vamos importar no
+nosso teste.</p>
+<pre><code class="language-rust">pub fn draw_grid(f: &amp;mut Frame, area: Rect) {
+}
+</code></pre>
+<p>Agora se rodarmos os testes vamos ver que está tudo funcionando:</p>
+<pre><code class="language-rust">running 6 tests
+test test_draw_footer_shows_control_keys ... ok
+test test_draw_grid_renders_successfully ... ok
+test test_draw_footer_contains_all_controls ... ok
+test test_draw_header_renders_successfully ... ok
+test test_draw_footer_renders_successfully ... ok
+test test_draw_header_contains_required_elements ... ok
+</code></pre>
+<p>Vamos criar um título na parte do <em>grid</em> mas, antes vamos criar um teste para verificar se nosso <em>grid</em> tem o título <em>Grade</em>.</p>
+<pre><code class="language-rust">#[test]
+fn test_draw_grid_has_title() {
+    // Setup
+    let mut terminal = setup_terminal();
+    let area = Rect::new(0, 0, 80, 20);
+    terminal.draw(|f| draw_grid(f, area)).unwrap();
+
+    // Act
+    let content = get_buffer_content(&amp;terminal);
+
+    // Assert
+    assert!(
+        content.contains(&quot;Grade&quot;),
+        &quot;Should a title 'Grade'&quot;
+    );
+}
+</code></pre>
+<p>Certo o teste agora falhou:</p>
+<pre><code class="language-bash">failures:
+
+---- test_draw_grid_has_title stdout ----
+
+thread 'test_draw_grid_has_title' panicked at tests/tests_ui.rs:151:5:
+Should a title 'Grade'
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Vamos criar um título no nosso <em>grid layout</em>. Nesse caso vamos criar um bloco e além de criar
+as bordas vamos dar a esse bloco o título <em>Grade</em> que queremos.</p>
+<pre><code class="language-rust">pub fn draw_grid(f: &amp;mut Frame, area: Rect) {
+    let block = Block::default().title(&quot;Grade&quot;).borders(Borders::ALL);
+
+    f.render_widget(block, area);
+}
+</code></pre>
+<p>Rodamos os testes:</p>
+<pre><code class="language-bash">running 7 tests
+test test_draw_grid_has_title ... ok
+test test_draw_footer_renders_successfully ... ok
+test test_draw_header_renders_successfully ... ok
+test test_draw_grid_renders_successfully ... ok
+test test_draw_header_contains_required_elements ... ok
+test test_draw_footer_shows_control_keys ... ok
+test test_draw_footer_contains_all_controls ... ok
+</code></pre>
+<p>Agora vamos adicionar ao nosso grid a nosso render.</p>
+<pre><code class="language-rust">fn render(frame: &amp;mut Frame) {
+    // Header
+    draw_header(frame, chunks[0]);
+    // Grid
+    draw_grid(frame, chunks[1]);
+    // Footer
+    draw_footer(frame, chunks[2]);
+}
+
+</code></pre>
+<p>Rodamos o nosso projeto e vemos que agora temos todos os elementos da nossa tela desenhados.</p>
+<h2 id="arquitetando-nosso-grid-system">Arquitetando nosso <em>grid system</em></h2>
+<p>Vamos começar a trabalhar no nosso sistema que vai carregar as palavras e exibir na tela. Pra isso vamos começar vamos criar um novo módulo para ser responsável por todas as regras que são relativas ao jogo em si, vamos chama-la de <code>game</code>, também vamos criar um módulo que representa o nosso <em>grid</em> e chama-lo de <code>grid.rs</code>.</p>
+<pre><code class="language-bash">touch src/game.rs
+touch src/grid.rs
+</code></pre>
+<p>Vamos deixar esse módulo publico dentro do nosso <code>lib.rs</code></p>
+<pre><code class="language-rust">pub mod ui;
+pub mod game;
+pub mod grid;
+
+</code></pre>
+<p>Para começar nosso desenvolvimento vamos ter que criar uma representação do nosso <em>grid</em>.</p>
+<h2 id="fundamentos-do-nosso-grid">Fundamentos do nosso grid.</h2>
+<p>Agora preciso lhe explicar como vai funcionar nosso sistema de grid, primeiro teremos 4
+estruturas distintas.</p>
+<h3 id="grid">Grid</h3>
+<p>Ele será uma matriz de células onde cada célula vai ter uma letra.</p>
+<p>Grid (10x10)
+┌─────────────────────────────────────┐
+│  P  A  L  A  V  R  A  S  X  Z       │  ← Linha 0
+│  R  U  S  T  O  M  N  Q  W  Y       │  ← Linha 1
+│  O  K  L  E  T  R  A  S  D  F       │  ← Linha 2
+│  G  H  J  K  L  M  N  O  P  Q       │
+│  R  S  T  U  V  W  X  Y  Z  A       │
+│  A  B  C  D  E  F  G  H  I  J       │
+│  M  N  O  P  Q  R  S  T  U  V       │
+│  A  W  X  Y  Z  A  B  C  D  E       │
+│  R  F  G  H  I  J  K  L  M  N       │
+│  Z  O  P  Q  R  S  T  U  V  W       │
+└─────────────────────────────────────┘</p>
+<p>Ai como vamos distribuir nossas palavras dentro dessa matriz?</p>
+<h3 id="position">Position</h3>
+<p>Vamos precisar de uma <code>struct Position</code> nela vamos conseguir definir a posição que vai ficar a
+primeira letra da nossa palavra.</p>
+<p><a class="glightbox" href="../images/M4/m4-position.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/M4/m4-position.png" /></a></p>
+<h3 id="direction">Direction</h3>
+<p>Vamos precisar também de uma <code>struct Direction</code> nela vamos definir se a palavra vai seguir na
+horizontal, vertical ou diagonal.</p>
+<p><a class="glightbox" href="../images/M4/m4-direction.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/M4/m4-direction.png" /></a></p>
+<h3 id="wordplacement"><code>Wordplacement</code></h3>
+<p>Também precisamos de uma <code>struct Wordplacement</code> sua função vai ser a representação da nossa
+palavra, com ele vamos ter a palavra em si, sua posição, sua direção e também um marcador pra
+indicar se ela foi encontrada ou não.</p>
+<p><a class="glightbox" href="../images/M4/m4-wordplacement.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="" src="../images/M4/m4-wordplacement.png" /></a></p>
+<p>Agora vamos construir cada estrutura. Primeiro vamos criar nossa <em>Position</em> e ela vai ter um número de coluna e linha, vamos cria-lo como um <code>usize</code>. Vamos adicionar as <code>traits</code> <code>Debug</code> e <code>Clone</code>.</p>
+<pre><code class="language-rust">//grid.rs
+#[derive(Debug, Clone)]
+pub struct Position {
+    pub row: usize,
+    pub col: usize,
+}
+</code></pre>
+<p>A nossa <em>Direction</em> vai ser um <code>enum</code> com o nome das posições. Vamos adicionar nele as <code>traits</code> <code>Debug</code>, <code>Clone</code> e <code>PartialEq</code></p>
+<pre><code class="language-rust">//grid.rs
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Direction {
+    Horizontal,
+    Vertical,
+    DiagonalDown,
+    DiagonalUp,
+}
+</code></pre>
+<p>O <code>Wordplacement</code> vai agregar como falamos anteriormente a palavra, posição, direção e se ela foi encontrada ou não.</p>
+<pre><code class="language-rust">//grid.rs
+pub struct WordPlacement {
+    pub word: String,
+    pub start: Position,
+    pub direction: Direction,
+    pub found: bool,
+}
+</code></pre>
+<p>Finalmente vamos criar nosso <code>Grid</code> onde ele vai ser uma <code>struct</code> com suas células que será um vetor de caracteres, as palavras a serem encontradas que serão um vetor de <code>WordPlacement</code> e seu tamanho que será do tipo <code>usize</code>.</p>
+<pre><code class="language-rust">pub struct Grid {
+    cells: Vec&lt;Vec&lt;char&gt;&gt;,
+    pub size: usize,
+    pub words: Vec&lt;WordPlacement&gt;,
+}
+</code></pre>
+<p>Com isso já podemos começar a trabalhar com a lógica do nosso jogo.</p>
+<h2 id="manipulando-arquivos-em-rust">Manipulando arquivos em Rust</h2>
+<p>Para o nosso jogo vamos criar um arquivo de texto simples para armazenar as palavras que
+queremos que nosso jogador procure então agora vamos precisar trabalhar com leitura e escrita de arquivos em rust pra isso vamos trabalhar com a biblioteca <code>fs</code> que já vem por padrão.</p>
+<p>A biblioteca padrão <a href="https://doc.rust-lang.org/std/fs/"><code>std::fs</code></a> fornece pra nós as funcionalidades para manipulação de arquivos e diretórios do sistema de arquivos.</p>
+<p>Para começarmos a trabalhar com a leitura de arquivos vamos no nosso módulo <code>game</code> e criar uma nova <code>struct</code> que será chamada de <code>GameState</code> onde ela vai controlar os estados do nosso jogo.</p>
+<pre><code class="language-rust">//game.rs
+use crate::grid::Grid;
+
+pub struct GameState {
+    pub grid: Grid,
+}
+</code></pre>
+<p>Agora queremos que nosso <code>GameState</code> com a responsabilidade de ler o arquivo pra isso queremos criar uma função <code>load_words_from_file</code> nele para que ele leia o conteúdo do arquivo e transforme pra nós como um vetor de <code>String</code>. Mas, primeiro vamos criar um teste que já verifique isso então vamos criar um novo arquivo de teste e criar duas funções auxiliares uma pra criar um arquivo e outra pra deletar um arquivo.</p>
+<pre><code class="language-bash">touch /tests/tests_game.rs
+</code></pre>
+<pre><code class="language-rust">use std::fs;
+use std::io;
+
+// Helper: cria arquivo temporário para testes
+fn create_test_file(filename: &amp;str, content: &amp;str) {
+    fs::write(filename, content).expect(&quot;Error to create test file&quot;);
+}
+
+// Helper: limpa arquivo de teste
+fn cleanup_test_file(filename: &amp;str) {
+    fs::remove_file(filename).ok();
+}
+</code></pre>
+<p>Com a função <a href="https://doc.rust-lang.org/std/fs/fn.write.html"><code>fs::write</code></a> podemos passar o nome do arquivo e um conteúdo que se o arquivo não existir ele vai cria-lo.</p>
+<p>Já a função <a href="https://doc.rust-lang.org/std/fs/fn.remove_file.html"><code>fs::remove_file</code></a> podemos passar um nome de arquivo e remove-lo.</p>
+<p>Com isso já podemos criar nosso primeiro teste para validar um arquivo.</p>
+<h2 id="lendo-nosso-arquivo-de-palavras">Lendo nosso arquivo de palavras</h2>
+<p>A primeira coisa que vamos fazer é criar um teste pra verificar pra isso vamos criar um arquivo com as palavras "rust", "python" e "java". E vamos chamar nosso método <code>load_words_from_file</code> e verificar se o tamanho e as palavras batem.</p>
+<p>No final do teste vamos chamar a função <code>cleanup_test_file</code> e ele vai ser nosso <code>Tear Down</code> que é basicamente uma função que limpa nosso teste para que ele não afete os próximos testes.</p>
+<pre><code class="language-rust">//tests_game.rs
+#[test]
+fn test_load_words_from_valid_file() {
+    // Setup
+    let filename = &quot;test_words_valid.txt&quot;;
+    create_test_file(filename, &quot;rust\npython\njava\n&quot;);
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert_eq!(words.len(), 3, &quot;Expected 3 words&quot;);
+    assert_eq!(words, vec![&quot;rust&quot;, &quot;python&quot;, &quot;java&quot;]);
+
+    // Tear down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<p>Vamos adiantar e já criar o método antes de rodar o teste. Vamos fazer ele receber um <code>&amp;str</code> chamado filename e vamos retornar um <code>Result</code> que vai ser um vetor de <code>String</code> e por ser um result vamos por que o retorno com erro vai ser um <code>io::Error</code>.</p>
+<pre><code class="language-rust">impl GameState {
+
+    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+    }
+}
+</code></pre>
+<pre><code class="language-bash">error[E0308]: mismatched types
+  --&gt; src/game.rs:12:52
+   |
+12 |     pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+   |            --------------------                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Result&lt;Vec&lt;String&gt;, Error&gt;`, found `()`
+   |            |
+   |            implicitly returns `()` as its body has no tail or `return` expression
+   |
+   = note:   expected enum `Result&lt;Vec&lt;String&gt;, std::io::Error&gt;`
+           found unit type `()`
+</code></pre>
+<p>A falha que deu agora, acontece por que definimos que ele vai retornar um result então
+precisamos pelo menos empacotar um vetor de <code>String</code>, pra isso vamos usar a função
+<a href="https://doc.rust-lang.org/std/fs/fn.read_to_string.html"><code>read_to_string</code></a> para ler nosso arquivo e salva-lo como um vetor.</p>
+<pre><code class="language-rust">
+impl GameState {
+
+    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+        let content = fs::read_to_string(filename)?;
+        let words: Vec&lt;String&gt; = content
+            .lines()
+            .map(|line| line.to_string())
+            .collect();
+        Ok(words)
+    }
+}
+</code></pre>
+<p>Agora rodando os testes vão passar. E agora estamos lendo com sucesso nosso arquivo gerado.</p>
+<pre><code class="language-bash">running 1 test
+test test_load_words_from_valid_file ... ok
+</code></pre>
+<p>Vamos fazer algumas modificações eu quero primeiro que nossas palavras sejam todas em caixa alta para isso vamos criar um teste que valide que as palavras são todas em caixa alta.</p>
+<pre><code class="language-rust">#[test]
+fn test_convert_all_words_to_uppercase() {
+    // Setup
+    let filename = &quot;test_mixed_case.txt&quot;;
+    create_test_file(filename, &quot;rust\nPython\nJaVa\nGO&quot;);
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert!(words.iter().all(|w| w.chars().all(|c| c.is_uppercase())),
+        &quot;Should all words is uppercase, found: {:?}&quot;, words);
+
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">running 2 tests
+test should_convert_all_words_to_uppercase ... FAILED
+test test_load_words_from_valid_file ... ok
+
+failures:
+
+---- should_convert_all_words_to_uppercase stdout ----
+
+thread 'should_convert_all_words_to_uppercase' panicked at tests/tests_game.rs:40:5:
+Should all words is uppercase, found: [&quot;rust&quot;, &quot;Python&quot;, &quot;JaVa&quot;, &quot;GO&quot;]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Vamos refatorar nossa função e ao invés de usar o <code>to_string</code> vamos usar direto o método <code>to_uppercase</code> para deixar todos os caracteres em caixa alta.</p>
+<pre><code class="language-rust">    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+        let content = fs::read_to_string(filename)?;
+        let words: Vec&lt;String&gt; = content
+            .lines()
+            .map(|line| line.to_uppercase())
+            .collect();
+
+        Ok(words)
+    }
+</code></pre>
+<pre><code class="language-bash">running 2 tests
+test test_convert_all_words_to_uppercase ... ok
+test test_load_words_from_valid_file ... FAILED
+
+failures:
+
+---- test_load_words_from_valid_file stdout ----
+
+thread 'test_load_words_from_valid_file' panicked at tests/tests_game.rs:24:5:
+assertion `left == right` failed
+  left: [&quot;RUST&quot;, &quot;PYTHON&quot;, &quot;JAVA&quot;]
+ right: [&quot;rust&quot;, &quot;python&quot;, &quot;java&quot;]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Agora nosso teste anterior começou a falhar, isso por que o teste era em caixa baixa, então vamos mudar o teste para tanto o setup quando o assert sejam em caixa alta.</p>
+<pre><code class="language-rust">#[test]
+fn test_load_words_from_valid_file() {
+    // Setup
+    let filename = &quot;test_words_valid.txt&quot;;
+    create_test_file(filename, &quot;RUST\nPYTHON\nJAVA\n&quot;);
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert_eq!(words.len(), 3, &quot;Expected 3 words&quot;);
+    assert_eq!(words, vec![&quot;RUST&quot;, &quot;PYTHON&quot;, &quot;JAVA&quot;]);
+
+    // Tear down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">running 2 tests
+test test_load_words_from_valid_file ... ok
+test test_convert_all_words_to_uppercase ... ok
+</code></pre>
+<p>Temos que verificar agora se nosso texto quando tiver algumas sujeiras nas palavras como espaço ou tabs eles precisam ser removidos.</p>
+<pre><code class="language-rust">#[test]
+fn test_trim_whitespace_from_words() {
+    // Setup
+    let filename = &quot;test_trim.txt&quot;;
+    create_test_file(
+        filename,
+        &quot;  rust  \n\tpython\t\n   java  &quot;
+    );
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert_eq!(words, vec![&quot;RUST&quot;, &quot;PYTHON&quot;, &quot;JAVA&quot;]);
+    assert!(words.iter().all(|w| !w.starts_with(' ') &amp;&amp; !w.ends_with(' ')),
+        &quot;Words should'nt space or tabs&quot;);
+
+    // Tear Down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">---- test_trim_whitespace_from_words stdout ----
+
+thread 'test_trim_whitespace_from_words' panicked at tests/tests_game.rs:59:5:
+assertion `left == right` failed
+  left: [&quot;  RUST  &quot;, &quot;\tPYTHON\t&quot;, &quot;   JAVA  &quot;]
+ right: [&quot;RUST&quot;, &quot;PYTHON&quot;, &quot;JAVA&quot;]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    test_trim_whitespace_from_words
+</code></pre>
+<p>Agora vamos precisar adicionar o método <code>trim</code> antes do <code>to_uppercase</code>.</p>
+<pre><code class="language-rust">    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+        let content = fs::read_to_string(filename)?;
+        let words: Vec&lt;String&gt; = content
+            .lines()
+            .map(|line| line.trim().to_uppercase())
+            .collect();
+
+        Ok(words)
+    }
+}
+</code></pre>
+<pre><code class="language-bash">running 3 tests
+test test_convert_all_words_to_uppercase ... ok
+test test_load_words_from_valid_file ... ok
+test test_trim_whitespace_from_words ... ok
+</code></pre>
+<p>Agora já conseguimos garantir que nosso arquivo do jogo vai gerar as palavras da forma que queremos.</p>
+<h2 id="analisando-os-casos-excepcionais">Analisando os casos excepcionais</h2>
+<p>O que vai acontecer se nosso arquivo com as palavras tiver vazio ou ainda ele não existir?
+Normalmente vamos ter um arquivo lá, mas caso não tenha sabemos como nosso sistema vai se
+comportar? Chamamos isso de casos excepcionais ou casos de borda ou ainda <em>edge cases</em> que são comportamentos que só vão acontecer em casos muito particulares.
+Vamos tentar fazer um teste para verificar.</p>
+<pre><code class="language-rust">#[test]
+fn test_return_error_when_file_does_not_exist() {
+    // Setup
+    let filename = &quot;file_not_found.txt&quot;;
+
+    // Act
+    let result = GameState::load_words_from_file(filename);
+
+    // Assert
+    assert!(result.is_err(), 
+        &quot;Should raise a error if file not exist&quot;);
+}
+</code></pre>
+<pre><code class="language-bash">running 4 tests
+test test_return_error_when_file_does_not_exist ... ok
+test test_convert_all_words_to_uppercase ... ok
+test test_load_words_from_valid_file ... ok
+test test_trim_whitespace_from_words ... ok
+</code></pre>
+<p>Muito bom o teste passou e agora se o arquivo for vazio, ele vai lançar um erro? Vamos
+verificar se ele não vai retornar o método <code>is_empty</code> como verdadeiro.</p>
+<pre><code class="language-rust">#[test]
+fn test_empty_file_should_raise_error() {
+    // Setup
+    let filename = &quot;test_empty.txt&quot;;
+    create_test_file(
+        filename,
+        &quot;&quot;
+    );
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert!(!words.is_empty(), 
+        &quot;Should raise a error if file is empty&quot;);
+
+    // Tear Down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">running 5 tests
+test test_return_error_when_file_does_not_exist ... ok
+test test_empty_file_should_raise_error ... FAILED
+test test_convert_all_words_to_uppercase ... ok
+test test_load_words_from_valid_file ... ok
+test test_trim_whitespace_from_words ... ok
+
+failures:
+
+---- test_empty_file_should_raise_error stdout ----
+
+thread 'test_empty_file_should_raise_error' panicked at tests/tests_game.rs:93:5:
+Should raise a error if file is empty
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Aqui o teste trouxe um erro pois não tratamos esse caso ainda de não ter nenhuma palavra, então agora precisamos trabalhar para gerar um módulo de erros pro nosso jogo.</p>
+<h2 id="iniciando-nosso-modulo-de-erros">Iniciando nosso módulo de erros</h2>
+<p>Pra iniciar vamos criar um novo módulo <code>error</code> e colocado no nosso <code>lib.rs</code>.</p>
+<pre><code class="language-bash">touch src/error.rs
+</code></pre>
+<pre><code class="language-rust">//lib.rs
+pub mod ui;
+pub mod game;
+pub mod grid;
+pub mod error;
+</code></pre>
+<p>Agora queremos criar um <code>enum</code> com nossos erros, vamos criar um <code>IoError</code> pra usar no nosso result e outro <code>NoWordsProvided</code> para lançar quando o arquivo estiver vazio. Também vamos criar um comentário com 3 barras "///" para servir como documentação.</p>
+<pre><code class="language-rust">#[derive(Debug)]
+pub enum WordSearchError {
+    /// Error by I/O (file not found, permissions, etc.)
+    IoError(std::io::Error),
+    /// Any word found
+    NoWordsProvided,
+}
+
+</code></pre>
+<p>Agora precisamo adicionar um novo <code>impl</code> para indicar para o nosso compilador que nosso <code>WordSearchError</code> faz parte de <code>Error</code>.
+ ```
+impl std::error::Error for WordSearchError {}</p>
+<pre><code>Aqui basicamente dizemos que o tipo `WordSearchError` implementa o `trait std::error::Error`.
+Se você já tem um conhecimento de _estrutura de dados_ aqui não é uma herança mas sim uma
+composição.
+
+Aqui no caso o `for` não é um `loop` nesse contexto ele quer falar que &quot;Eu sei transformar `std::error::Error` em `WordsearchError`&quot;
+
+Por que o bloco está vazio {}?
+O trait `std::error::Error` já vem com implementações padrão (`default impls`) para a maioria dos seus métodos. Então aqui só precisamos realmente criar a implementação vazia.
+
+Outro ponto importante é que para cada `struct` ou `enum` que criamos podemos ter quantos `impl` quisermos.
+
+Agora precisamos colocar mais um `impl` para que nosso `WordsearchError` faça o tratamento do `ioError` internamente. Toda vez que ele receber o `ioError` ele vai trata-lo e devolver um erro customizado do tipo `WordsearchError` para isso precisamos implementar a [`trait From`](https://doc.rust-lang.org/std/convert/trait.From.html).
+
+Ao implementar a trait `From`, definimos o método `from`, que recebe como parâmetro o tipo de origem (no caso, `std::io::Error`) e ele retorna `Self`, ou seja, o tipo que está recebendo a implementação o `WordSearchError`.
+Dentro do método, criamos e retornamos a variante correspondente do nosso tipo de erro `WordSearchError::IoError(error)`.
+
+```rust
+//error.rs
+
+impl From&lt;std::io::Error&gt; for WordSearchError {
+    fn from(error: std::io::Error) -&gt; Self {
+        WordSearchError::IoError(error)
+    }
+}
+</code></pre>
+<p>Com isso podemos apenas trabalhar como nosso erro customizado no nosso código. </p>
+<h2 id="customizando-nossas-mensagens-de-erro">Customizando nossas mensagens de erro</h2>
+<p>Agora vamos implementar a trait Display para trazer uma melhor visualização pro nosso erro. Nela precisamos criar uma função <code>fmt</code> para que possamos criar uma mensagem customizada da forma que queremos.
+Nesse caso também vamos usar um <code>impl</code> só que para <code>fmt::Display</code> que é a nossa trait e vamos fazer um match para verificar qual variante do nosso <code>enum</code> está sendo usada e formatar a mensagem de erro apropriada.
+Também nesse caso vamos usar a macro <code>write!</code> ao invés do <code>println!</code> pois o <code>println!</code> sempre imprime diretamente no console (<code>stdout</code>), mas no nosso caso a <code>trait Display</code> está preparando a representação textual do erro para ser usada em diferentes contextos. O <code>write!</code> é mais flexível porque ele escreve no <code>formatter</code> (<code>buffer</code>) que foi passado como parâmetro, permitindo que essa representação seja usada com outras macros como <code>format!</code>, <code>println!</code>, salvamento em arquivos, etc.
+Nós teremos então na função <code>fmt</code> os parâmetros <code>&amp;self</code> pois vamos usar o próprio contexto do <code>enum</code> e também como disse
+anteriormente o <code>formatter</code> que vai ser do tipo <code>fmt::Formatter&lt;'_&gt;</code> e vamos retornar um <code>fmt::Result</code>.</p>
+<pre><code class="language-rust">impl fmt::Display for WordSearchError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        match self {
+            WordSearchError::IoError(e) =&gt; write!(f, &quot;IO Error: {}&quot;, e),
+            WordSearchError::NoWordsProvided =&gt; write!(f, &quot;No words provided&quot;),
+        }
+    }
+}
+</code></pre>
+<p>Novamente tivemos que recorrer a um <code>lifetime</code> no caso em <code>fmt::Formatter&lt;'_&gt;</code> porque o <code>Formatter</code> mantém uma referência ao buffer onde o texto será escrito, e essa referência precisa ter um tempo de vida válido. O <code>'_</code> indica que estamos deixando o Rust inferir automaticamente qual é o lifetime correto.</p>
+<p>Pense assim: quando você formata o erro de um jogo, é como preparar uma mensagem em um quadro-negro antes de mostrá-la ao jogador. O <code>Formatter</code> é como uma seta apontando para esse quadro-negro, e o lifetime garante que o quadro não seja apagado enquanto você ainda está escrevendo nele. O <code>'_</code> diz ao Rust: "você sabe quanto tempo isso precisa durar, não preciso especificar".</p>
+<p>Voltando ao <code>game.rs</code> vamos implementar uma condição parecida com o nosso <em>assert</em>  vamos verificar se <em>words</em> é vazio e se
+sim vamos lançar o erro do tipo <code>NoWordsProvided</code> nele.</p>
+<pre><code class="language-rust">    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, io::Error&gt; {
+        let content = fs::read_to_string(filename)?;
+        let words: Vec&lt;String&gt; = content
+            .lines()
+            .map(|line| line.trim().to_uppercase())
+            .collect();
+
+        if words.is_empty() {
+            return Err(WordSearchError::NoWordsProvided);
+        }
+
+        Ok(words)
+    }
+</code></pre>
+<p>Vamos mudar o tipo de erro da saída do nosso <code>Result</code> da função pra <code>WordSearchError</code> também.</p>
+<pre><code class="language-rust">    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;, WordSearchError&gt; {
+</code></pre>
+<p>Nos testes precisamos agora parar de desempacotar nossa string e ver se há um erro usando o método <code>is_err</code>.</p>
+<pre><code class="language-rust">#[test]
+fn test_empty_file_should_raise_error() {
+    // Setup
+    let filename = &quot;test_empty.txt&quot;;
+    create_test_file(
+        filename,
+        &quot;&quot;
+    );
+
+    // Act
+    let words = GameState::load_words_from_file(filename);
+
+    // Assert
+    assert!(words.is_err(), &quot;Should raise an error if file is empty&quot;);
+
+    // Tear Down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/tests_game.rs (target/debug/deps/tests_game-48a4cab4eebeef08)
+
+running 5 tests
+test test_return_error_when_file_does_not_exist ... ok
+test test_empty_file_should_raise_error ... ok
+test test_trim_whitespace_from_words ... ok
+test test_convert_all_words_to_uppercase ... ok
+test test_load_words_from_valid_file ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/tests_ui.rs (target/debug/deps/tests_ui-16d9dc32c61ca57b)
+</code></pre>
+<p>Agora já temos um módulo de erros funcional vamos fazer um último teste pra verificar se estamos lidando bem com apenas uma palavra.</p>
+<pre><code class="language-rust">#[test]
+fn should_work_with_single_word() {
+    // Setup
+    let filename = &quot;test_single.txt&quot;;
+    create_test_file(filename, &quot;rust&quot;);
+
+    // Act
+    let words = GameState::load_words_from_file(filename).unwrap();
+
+    // Assert
+    assert_eq!(words.len(), 1);
+    assert_eq!(words[0], &quot;RUST&quot;);
+
+    // Tear Down
+    cleanup_test_file(filename);
+}
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test test_return_error_when_file_does_not_exist ... ok
+test test_empty_file_should_raise_error ... ok
+test test_load_words_from_valid_file ... ok
+test test_convert_all_words_to_uppercase ... ok
+test should_work_with_single_word ... ok
+test test_trim_whitespace_from_words ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Agora temos algumas boas garantias que nosso sistema de arquivos vai funcionar.</p>
+<h2 id="criando-um-alias-pra-um-tipo">Criando um alias pra um tipo</h2>
+<p>Agora eu quero fazer uma mudança ao invés de deixar o retorno do nosso método <code>load_words_from_file</code> como <code>Result&lt;Vec&lt;String&gt;, WordSearchError&gt;</code> quero deixa-lo apenas como <code>Result&lt;(T)&gt;</code> pra isso podemos criar um <a href="https://doc.rust-lang.org/reference/types.html"><code>type</code></a> que é um <em>alias</em> ou um atalho ou ainda representar algo extenso com algo menor.</p>
+<p>Então vamos criar esse <code>type</code> no final do nosso módulo.</p>
+<pre><code class="language-rust">// error.rs
+pub type Result&lt;T&gt; = std::result::Result&lt;T, WordSearchError&gt;;
+</code></pre>
+<p>Com isso a agora podemos alterar o retorno da nossa função, e aqui estamos criando um alias pro Result da biblioteca  <code>std</code> com o nosso tipo de erro já declarado e chamando de result, por conta disso no nosso game vamos precisar importar explicitamente o result sendo ele o que está na nossa biblioteca error.</p>
+<p>Além disso como retornamos uma <code>Vec&lt;String&gt;</code> nosso alias precisa ainda receber o tipo <code>T</code> do retorno.</p>
+<pre><code class="language-rust">use std::fs;
+
+use crate::{error::{Result, WordSearchError}, grid::Grid};
+
+
+pub struct GameState {
+    pub grid: Grid,
+
+}
+impl GameState {
+
+    pub fn load_words_from_file(filename: &amp;str) -&gt; Result&lt;Vec&lt;String&gt;&gt; {
+        let content = fs::read_to_string(filename)?;
+        let words: Vec&lt;String&gt; = content
+            .lines()
+            .map(|line| line.trim().to_uppercase())
+            .collect();
+
+        if words.is_empty() {
+            return Err(WordSearchError::NoWordsProvided);
+        }
+
+        Ok(words)
+    }
+}
+</code></pre>
+<pre><code class="language-bash">-&gt; cargo test
+running 6 tests
+test test_return_error_when_file_does_not_exist ... ok
+test test_convert_all_words_to_uppercase ... ok
+test test_empty_file_should_raise_error ... ok
+test should_work_with_single_word ... ok
+test test_load_words_from_valid_file ... ok
+test test_trim_whitespace_from_words ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+</code></pre>
+<p>Com isso podemos centralizar todos os erros em <code>WordSearchError</code> e só passar o tipo do nosso retorno, isso que chamamos de "açucar sintático".</p>
+<h2 id="lifetimes">Lifetimes</h2>
+<p><strong>Lifetimes</strong> são anotações que dizem ao compilador por quanto tempo uma referência é válida. Em C/C++, usar referências para dados já desalocados causa bugs terríveis. Em Rust, o compilador simplesmente não permite.</p>
+<p><strong>Pense assim:</strong> Lifetimes são como etiquetas de validade em alimentos. O compilador verifica se você não está usando algo "vencido". A maioria das vezes o compilador infere automaticamente, mas às vezes precisamos ajudá-lo com anotações explícitas.</p>
+<p>Normalmente precisamos anotar o lifetime quando em casos específicos e sempre anotar os parâmetros que recebemos emprestados <code>&amp;</code> pois ele mantem-se marcando o tempo de vida dos parâmetros.</p>
+<p>O código abaixo vai dar erro porque o compilador não sabe qual lifetime o retorno deve ter quando a função recebe múltiplas referências.</p>
+<pre><code class="language-rust">fn escolher_arma(arma1: &amp;str, arma2: &amp;str, usar_primeira: bool) -&gt; &amp;str {
+    if usar_primeira { arma1 } else { arma2 }
+}
+let rifle = String::from(&quot;Rifle de Plasma&quot;);
+let espada = String::from(&quot;Espada Laser&quot;);
+let arma = escolher_arma(&amp;rifle, &amp;espada, true); // Erro
+println!(&quot;Arma: {}&quot;, arma);
+</code></pre>
+<p>O erro ocorre por que arma depende da variável rifle ou espada, mas o compilador não sabe como retornar.
+- Posso retornar arma1... mas qual é o lifetime dela?
+- Posso retornar arma2... mas qual é o lifetime dela?
+- São diferentes? São iguais?
+- NÃO SEI! ERRO!</p>
+<p>Isso acontece porque <code>arma1</code> e <code>arma2</code> podem ter lifetimes diferentes. O compilador não consegue garantir qual será retornado (arma1 ou arma2?) sem que você especifique explicitamente que ambos devem ter o mesmo lifetime.</p>
+<p>Podemos resolver usando uma anotação <code>&lt;'a&gt;</code>, assim dizemos que eles duram o tempo <code>a</code>.</p>
+<pre><code class="language-rust">fn escolher_arma&lt;'a&gt;(arma1: &amp;'a str, arma2: &amp;'a str, usar_primeira: bool) -&gt; &amp;'a str {
+    if usar_primeira { arma1 } else { arma2 }
+}
+
+let rifle = String::from(&quot;Rifle de Plasma&quot;);
+let espada = String::from(&quot;Espada Laser&quot;);
+let arma = escolher_arma(&amp;rifle, &amp;espada, true);
+println!(&quot;Arma: {}&quot;, arma); // &quot;Rifle de Plasma&quot;
+</code></pre>
+<p><strong>O que <code>&lt;'a&gt;</code> significa?</strong>
+- <code>'a</code> é um nome de lifetime (pode ser <code>'b</code>, <code>'vida</code>, qualquer nome), todas essas referências vivem <strong>pelo menos</strong> durante o tempo <code>'a</code> e também vive durante <code>'a</code></p>
+<p>Podemos também usar dois lifetimes independentes e combinar esses dados.</p>
+<pre><code class="language-rust">fn combinar_dados&lt;'a, 'b&gt;(
+    piloto: &amp;'a str,
+    missao: &amp;'b str,
+) -&gt; (&amp;'a str, &amp;'b str) {
+    (piloto, missao)
+}
+
+let piloto = String::from(&quot;Elena&quot;);
+let resultado = {
+    let missao = String::from(&quot;Reconhecimento&quot;);
+    combinar_dados(&amp;piloto, &amp;missao)
+}; // ❌ ERRO
+</code></pre>
+<p><strong>Por quê?</strong> <code>'a</code> e <code>'b</code> são independentes. Se <code>missao</code> vive menos, não podemos usar <code>resultado.1</code> depois. Então se mantermos
+as variáveis no mesmo contexto ele é funcional.</p>
+<pre><code class="language-rust">fn combinar_dados&lt;'a, 'b&gt;(
+    piloto: &amp;'a str,
+    missao: &amp;'b str,
+) -&gt; (&amp;'a str, &amp;'b str) {
+    (piloto, missao)
+}
+
+let piloto = String::from(&quot;Elena&quot;);
+let missao = String::from(&quot;Reconhecimento&quot;);
+let resultado = combinar_dados(&amp;piloto, &amp;missao);
+</code></pre>
+<p>Se sua função pode retornar o valor de um parâmetro ou outro podemos anotar o mesmo lifetime pra vários parâmetros.</p>
+<pre><code class="language-rust">fn maior_nome&lt;'a&gt;(nome1: &amp;'a str, nome2: &amp;'a str) -&gt; &amp;'a str {
+    if nome1.len() &gt; nome2.len() { nome1 } else { nome2 }
+}
+
+let n1 = String::from(&quot;Gundam&quot;);
+let n2 = String::from(&quot;Valkyrie&quot;);
+println!(&quot;Maior: {}&quot;, maior_nome(&amp;n1, &amp;n2)); // &quot;Valkyrie&quot;
+</code></pre>
+<p>Agora tivemos casos que recebemos algum parâmetro mas, vamos devolver um <code>static</code>, pra isso podemos usar o lifetime <code>static</code>.</p>
+<pre><code class="language-rust">fn obter_status(codigo: u32) -&gt; &amp;'static str {
+    match codigo {
+        200 =&gt; &quot;Sistema Operacional&quot;,
+        404 =&gt; &quot;Sensor Não Encontrado&quot;,
+        500 =&gt; &quot;Erro Crítico&quot;,
+        _ =&gt; &quot;Status Desconhecido&quot;,
+    }
+}
+
+let status = obter_status(404);
+println!(&quot;{}&quot;, status); // &quot;Sensor Não Encontrado&quot;
+</code></pre>
+<p>String literals são <code>'static</code>, não dependem do parâmetro <code>codigo</code>. Ou seja esse lifetime está indicando que vamos retornar um
+<code>static</code> e não alguma transformação do parâmetro.</p>
+<p>Podemos também usar lifetimes para <code>Struct</code> e métodos, no caso de métodos o retorno vive enquanto <code>self</code> for válido.</p>
+<pre><code class="language-rust">struct Mecha&lt;'a&gt; {
+    nome: &amp;'a str,
+    energia: u32,
+}
+
+impl&lt;'a&gt; Mecha&lt;'a&gt; {
+    fn nome(&amp;self) -&gt; &amp;str {
+        self.nome
+    }
+
+    fn energia(&amp;self) -&gt; u32 {
+        self.energia
+    }
+}
+let nome = String::from(&quot;Valkyrie&quot;);
+let mecha = Mecha { nome: &amp;nome, energia: 100 };
+println!(&quot;{} - {}%&quot;, mecha.nome(), mecha.energia());
+</code></pre>
+<h2 id="construindo-o-grid">Construindo o grid</h2>
+<p>Precisamos criar um método também que vai gerar nosso grid recebendo um tamanho e a mesma string de palavras.</p>
+<pre><code class="language-rust">impl Grid {
+    pub fn new(size: usize, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+    }
+}
+</code></pre>
+<p>Vamos criar agora uma inicialização onde vamos preencher nossa <code>struct Grid</code> e retorna-la.</p>
+<pre><code class="language-rust">    pub fn new(size: usize, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        let mut grid = Grid {
+            cells: vec![vec![' '; size]; size],
+            size,
+            words: Vec::new(),
+        };
+        Ok(grid)
+    }
+
+</code></pre>
+<p>Vamos preencher inicialmente o grid com as palavras do nosso arquivo, para isso precisamos de uma função que coloque as palavras que vão vir do nosso arquivo no grid então, na nossa <code>struct Grid</code> vamos criar um método chamado <code>place_words</code> que vai receber a própria <code>struct</code> e um vetor de <code>String</code> e como retorno vamos retornar apenas um Result então no final da nossa função vamos retornar um <code>Ok(())</code>.</p>
+<pre><code class="language-rust">    fn place_words(&amp;mut self, words: Vec&lt;String&gt;) -&gt; Result&lt;()&gt; {
+        Ok(())
+    }
+
+</code></pre>
+<p>Precisamos inicialmente agora criar um novo arquivo de teste para testar nosso grid e depois criar um teste para validar que <code>Grid</code> retorna <em>OK</em> se for adicionado parâmetros válidos.</p>
+<pre><code class="language-bash">touch tests/tests_grid.rs
+</code></pre>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_valid_parameters() {
+    // Setup
+    let words = vec![
+        &quot;RUST&quot;.to_string(),
+        &quot;CODE&quot;.to_string(),
+        &quot;TEST&quot;.to_string(),
+    ];
+    let size = 10;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_ok(), &quot;Grid creation should succeed with valid parameters&quot;);
+}
+</code></pre>
+<pre><code class="language-bash">running 1 test
+test test_grid_new_with_valid_parameters ... ok
+</code></pre>
+<p>Agora vamos criar um teste para validar se adicionarmos um size de valor 0 lançará um erro. Para isso vamos criar um erro do
+tipo <code>InvalidGridSize</code> ele vai ser responsável por tratar o erro quando nosso <code>grid</code> for menor que 0, vamos fazer que ele
+receba um parâmetro.</p>
+<pre><code class="language-rust">//error.rs
+use std::fmt;
+
+#[derive(Debug)]
+pub enum WordSearchError {
+    /// Error by I/O (file not found, permissions, etc.)
+    IoError(std::io::Error),
+    /// Any word found
+    NoWordsProvided,
+    /// Grid size not valid
+    InvalidGridSize(usize),
+}
+
+impl fmt::Display for WordSearchError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        match self {
+            WordSearchError::IoError(e) =&gt; write!(f, &quot;IO Error: {}&quot;, e),
+            WordSearchError::NoWordsProvided =&gt; write!(f, &quot;No words provided&quot;),
+            WordSearchError::InvalidGridSize(size) =&gt; {
+                write!(f, &quot;Invalid grid size: {}. Size must be greater than 2&quot;, size)
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_zero_size() {
+    // Setup
+    let words = vec![&quot;RUST&quot;.to_string()];
+    let size = 0;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_err(), &quot;Grid creation should fail with size 0&quot;);
+    if let Err(e) = result {
+        match e {
+            Error::InvalidGridSize(s) =&gt; assert_eq!(s, 0),
+            _ =&gt; panic!(&quot;Expected InvalidGridSize error&quot;),
+        }
+    }
+}
+</code></pre>
+<p>Agora como vamos validar o nosso construtor? Poderíamos colocar apenas uma verificação do nosso <code>new</code> mas, poderíamos usar um
+<code>design partner</code> nesse caso que é o padrão <code>build</code>.</p>
+<p>O que é o Builder Pattern?
+O Builder Pattern é um padrão de projeto criacional que permite construir objetos complexos passo a passo. Ele é especialmente útil quando:</p>
+<ul>
+<li>Um objeto tem muitos parâmetros opcionais</li>
+<li>A validação precisa ser feita durante a construção</li>
+<li>Você quer tornar a criação de objetos mais legível</li>
+</ul>
+<p>Assim como quando estamos trabalhando com o arquivo que damos um <code>lines()</code>, <code>map()</code> e <code>collect()</code>, vamos criar nossos métodos
+para encadear durante a construção do nosso grid. Mas, pra isso vamos precisar criar um <code>GridBuilder</code> e a função dele vai ser
+especificamente trabalhar com a validação de <code>size</code> e <code>words</code> e a parte das células vai ficar responsável no nosso grid já
+criado.</p>
+<p>Se fosse um projeto real eu acredito que a melhor abordagem seria criar um método que valide o size é mais simples, porém
+aqui vamos complicar um pouquinho apenas pra você ter uma visão das possibilidades na hora de construir um objeto.</p>
+<p>Nessa construção vamos criar uma <code>struct GridBuilder</code> nela vamos ter <code>size</code> e <code>words</code> seu principal objetivo vai ser validar
+esses dois atributos e construir o <code>grid</code>. Então primeiros vamos criar a  <code>struct</code> e validar se size for menor ou igual a 0
+vamos lançar um erro <code>InvalidGridSize</code>.</p>
+<pre><code class="language-rust">pub struct GridBuilder {
+    size: Option&lt;usize&gt;,
+    words: Option&lt;Vec&lt;String&gt;&gt;,
+}
+
+impl GridBuilder {
+    pub fn new() -&gt; Self {
+        Self {
+            size: None,
+            words: None,
+        }
+    }
+
+    pub fn with_size(mut self, size: usize) -&gt; Result&lt;Self&gt; {
+        if size == 0 {
+            return Err(WordSearchError::InvalidGridSize(size));
+        }
+        self.size = Some(size);
+        Ok(self)
+    }
+</code></pre>
+<p>Como estamos criando um builder vamos criar um método chamado <code>build</code> ele vai criar o grid.</p>
+<pre><code class="language-rust">pub struct GridBuilder {
+    size: Option&lt;usize&gt;,
+    words: Option&lt;Vec&lt;String&gt;&gt;,
+}
+
+impl GridBuilder {
+    pub fn new() -&gt; Self {
+        Self {
+            size: None,
+            words: None,
+        }
+    }
+
+    pub fn with_size(mut self, size: usize) -&gt; Result&lt;Self&gt; {
+        if size == 0 {
+            return Err(WordSearchError::InvalidGridSize(size));
+        }
+        self.size = Some(size);
+        Ok(self)
+    }
+
+    pub fn build(self) -&gt; Grid {
+        let size = self.size.expect(&quot;Size must be set&quot;);
+
+        Grid {
+            size,
+            cells: vec![vec![' '; size]; size],
+            words: vec![],
+        }
+    }
+}
+</code></pre>
+<p>Agora podemos construir ele no nosso <code>struct Grid</code> e podemos encadear nosso método <code>new</code> com a validação de <code>with_size</code> e
+usar o operador "?" para propagar o erro depois só devolvemos o <code>grid</code> do nosso construtor.</p>
+<pre><code class="language-rust">impl Grid {
+    pub fn new(size: usize, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        let grid = GridBuilder::new()
+            .with_size(size)?
+            .build();
+        Ok(grid)
+    }
+
+}
+</code></pre>
+<pre><code class="language-bash">running
+2 tests
+test test_grid_new_with_zero_size ... ok
+test test_grid_new_with_valid_parameters ... ok
+</code></pre>
+<h2 id="validando-nosso-vetor-de-palavras">Validando nosso vetor de palavras</h2>
+<p>Primeiro vamos ajustar nosso método new em <code>grid.rs</code> para receber <code>WordPlacement</code> ao invés de uma string. E vamos aplicar a
+<code>trait Debug</code> tanto em <code>Grid</code> quanto em <code>WordPlacement</code></p>
+<pre><code class="language-rust">#[derive(Debug)]
+pub struct WordPlacement {
+    pub word: String,
+    pub start: Position,
+    pub direction: Direction,
+    pub found: bool,
+}
+
+#[derive(Debug)]
+pub struct Grid {
+    cells: Vec&lt;Vec&lt;char&gt;&gt;,
+    pub size: usize,
+    pub words: Vec&lt;WordPlacement&gt;,
+}
+
+impl Grid {
+    pub fn new(size: usize, words: Vec&lt;WordPlacement&gt;) -&gt; Result&lt;Self&gt; {
+        let grid = GridBuilder::new()
+            .with_size(size)?
+            .build();
+        Ok(grid)
+    }
+
+}
+
+</code></pre>
+<p>Agora precisamos validar as palavras do nosso jogo, pra isso vamos criar um teste que quando for tentado construir o grid sem
+palavras ele de um erro do tipo <code>NoWordsProvided</code> e no nosso grid vamos receber o parâmetro de palavras.</p>
+<pre><code class="language-rust">// tests_grid.rs
+#[test]
+fn test_grid_new_with_empty_words() {
+    let words = Vec::new();
+    let size = 10;
+
+    let result = Grid::new(size, words);
+
+    assert!(result.is_err(), &quot;Grid creation should fail with empty word list&quot;);
+    if let Err(e) = result {
+        match e {
+            Error::EmptyWordList =&gt; {},
+            _ =&gt; panic!(&quot;Expected EmptyWordList error&quot;),
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-rust">//grid.rs
+pub struct Grid {
+    cells: Vec&lt;Vec&lt;char&gt;&gt;,
+    pub size: usize,
+    pub words: Vec&lt;WordPlacement&gt;,
+}
+
+impl Grid {
+    pub fn new(size: usize, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        let grid = GridBuilder::new()
+            .with_size(size)?
+            .with_words(words)?
+            .build();
+        Ok(grid)
+    }
+
+}
+
+pub struct GridBuilder {
+    size: Option&lt;usize&gt;,
+    words: Option&lt;Vec&lt;String&gt;&gt;,
+}
+
+impl GridBuilder {
+    pub fn new() -&gt; Self {
+        Self {
+            size: None,
+            words: None,
+        }
+    }
+
+    pub fn with_size(mut self, size: usize) -&gt; Result&lt;Self&gt; {
+        if size == 0 {
+            return Err(WordSearchError::InvalidGridSize(size));
+        }
+        self.size = Some(size);
+        Ok(self)
+    }
+
+    fn with_words(mut self, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        self.words = Some(words);
+        Ok(self)
+    }
+
+    pub fn build(self) -&gt; Grid {
+        let size = self.size.expect(&quot;Size must be set&quot;);
+
+        Grid {
+            size,
+            cells: vec![vec![' '; size]; size],
+            words: vec![],
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-bash">running 3 tests
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_zero_size ... ok
+test test_grid_new_with_empty_words ... FAILED
+
+failures:
+
+---- test_grid_new_with_empty_words stdout ----
+
+thread 'test_grid_new_with_empty_words' panicked at tests/test_grid.rs:44:5:
+Grid creation should fail with empty word list
+</code></pre>
+<p>O que precisamos fazer agora é criar uma validação se o <code>words</code> for um vetor vazio ele deve lançar um erro. Por isso vamos
+modificar nosso <code>with_words</code> para fazer essa validação.</p>
+<pre><code class="language-rust">    fn with_words(mut self, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        if words.is_empty() {
+            return Err(WordSearchError::NoWordsProvided);
+        }
+        self.words = Some(words);
+        Ok(self)
+    }
+</code></pre>
+<pre><code class="language-bash">running 3 tests
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_zero_size ... ok
+test test_grid_new_with_valid_parameters ... ok
+
+</code></pre>
+<p>Agora o que acontece se criarmos um grid 5x5 e temos uma palavra como "Pneumoultramicroscopicossilicovulcanoconiose" acredito
+que temos um problema não?
+Então vamos criar um teste para verificar se a palavra é maior que o tamanho do nosso grid. Se a palavra for maior precisamos
+lançar um erro do tipo <code>WordTooLong</code> então vamos cria-lo.</p>
+<pre><code class="language-rust"> use std::fmt;
+
+#[derive(Debug)]
+pub enum WordSearchError {
+    /// Error by I/O (file not found, permissions, etc.)
+    IoError(std::io::Error),
+    /// Any word found
+    NoWordsProvided,
+    /// Grid size not valid
+    InvalidGridSize(usize),
+    /// Word is too long for the grid
+    WordTooLong { word: String, size: usize },
+}
+
+impl fmt::Display for WordSearchError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        match self {
+            WordSearchError::IoError(e) =&gt; write!(f, &quot;IO Error: {}&quot;, e),
+            WordSearchError::NoWordsProvided =&gt; write!(f, &quot;No words provided&quot;),
+            WordSearchError::InvalidGridSize(size) =&gt; {
+                write!(f, &quot;Invalid grid size: {}. Size must be greater than 0&quot;, size)
+            }
+            WordSearchError::WordTooLong { word, size } =&gt; {
+                write!(f, &quot;Word '{}' with length {} is too long for grid size {}&quot;, 
+                    word, word.len(), size)
+            }
+        }
+    }
+}
+</code></pre>
+<p>Com isso podemos criar um teste:</p>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_word_too_large() {
+    // Setup
+    let words = vec![&quot;VERYLONGWORDTHATDOESNOTFIT&quot;.to_string()];
+    let size = 5;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_err(), &quot;Grid creation should fail when word is larger than grid&quot;);
+
+    match result {
+        Err(WordSearchError::WordTooLarge { word, size: grid_size }) =&gt; {
+            assert_eq!(word, &quot;VERYLONGWORDTHATDOESNOTFIT&quot;);
+            assert_eq!(grid_size, 5);
+        }
+        _ =&gt; panic!(&quot;Expected WordTooLong error&quot;),
+    }
+}
+</code></pre>
+<pre><code class="language-bash">running 4 tests
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_word_too_large ... FAILED
+test test_grid_new_with_zero_size ... ok
+
+failures:
+
+---- test_grid_new_with_word_too_large stdout ----
+
+thread 'test_grid_new_with_word_too_large' panicked at tests/test_grid.rs:64:5:
+Grid creation should fail when word is larger than grid
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Precisamos agora criar um validador para nosso teste então aqui vamos precisar verificar o size e pra isso vamos criar uma variável condicional chamada let Some(current_size) e receber self.size o valor interno de self.size SE ele for Some.
+Quando fazemos isso abrimos um bloco de código {}  lá podemos criar nosso código condicional no caso ele vai percorrer words e verificar se alguma é maior que current_size se isso for verdadeiro ele lança um erro, se não <code>current_size</code> vai receber <code>self.size</code>.
+Poderiamos aqui tanto fazer um <code>match</code> com <code>self.size</code> e verificar se a <code>option</code> tem algum Some ou vazia ou mesmo
+desempacotar com um <code>unwrap</code> mas, a vantagem do if let é ser seguro (não causa panic), conciso (uma linha), e idiomático. Além disso, ele extrai o valor automaticamente, sem precisar desempacotar manualmente.</p>
+<p>Porém tudo vai depender do que você acha melhor em cada situação, mas hoje vamos fazer assim.</p>
+<pre><code class="language-rust">        if let Some(size) = self.size {
+            for word in &amp;words {
+                if word.len() &gt; size {
+                    return Err(WordSearchError::WordTooLong {
+                        word: word.clone(),
+                        size,
+                    });
+                }
+            }
+        }
+</code></pre>
+<pre><code class="language-bash">running 4 tests
+test test_grid_new_with_word_too_large ... ok
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_zero_size ... ok
+test test_grid_new_with_valid_parameters ... ok
+</code></pre>
+<p>Vamos fazer um teste agora apenas pra validar se a palavra tem o mesmo tamanho do grid ela tem que aceitar.</p>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_exact_word_size() {
+    // Setup
+    let words = vec![&quot;EXACT&quot;.to_string()];
+    let size = 5;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_ok(), &quot;Grid creation should succeed when word length equals grid size&quot;);
+}
+</code></pre>
+<pre><code class="language-bash">running 5 tests
+test test_grid_new_with_exact_word_size ... ok
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_word_too_large ... ok
+test test_grid_new_with_zero_size ... ok
+
+</code></pre>
+<p>Agora uma ultima validação precisamos ver que uma palavra tenha pelo menos dois caracteres, senão não é uma palavra não?
+Então vamos criar um error <code>WordInvalid</code> para lançar quando o tamanho for menor que 2.</p>
+<pre><code class="language-rust">use std::fmt;
+
+#[derive(Debug)]
+pub enum WordSearchError {
+    /// Error by I/O (file not found, permissions, etc.)
+    IoError(std::io::Error),
+    /// Any word found
+    NoWordsProvided,
+    /// Grid size not valid
+    InvalidGridSize(usize),
+    /// Word is too long for the grid
+    WordTooLong { word: String, size: usize },
+    /// Word should the minimal 2 characters
+    WordInvalid { word: String },
+}
+
+impl fmt::Display for WordSearchError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result {
+        match self {
+            WordSearchError::IoError(e) =&gt; write!(f, &quot;IO Error: {}&quot;, e),
+            WordSearchError::NoWordsProvided =&gt; write!(f, &quot;No words provided&quot;),
+            WordSearchError::InvalidGridSize(size) =&gt; {
+                write!(f, &quot;Invalid grid size: {}. Size must be greater than 0&quot;, size)
+            }
+            WordSearchError::WordTooLong { word, size } =&gt; {
+                write!(f, &quot;Word '{}' with length {} is too long for grid size {}&quot;, 
+                    word, word.len(), size)
+            }
+            WordSearchError::WordInvalid { word } =&gt; {
+                write!(f, &quot;Word '{}' with length {} is too short you need the minimum 2 characters&quot;, 
+                    word, word.len())
+            }
+        }
+    }
+}
+</code></pre>
+<p>Agora criamos o teste:</p>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_word_only_caracter_should_a_error() {
+    // Setup
+    let words = vec![&quot;A&quot;.to_string()];
+    let size = 2;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_err(), &quot;Grid creation should fail when word is only one character&quot;);
+
+    match result {
+        Err(WordSearchError::WordInvalid { word }) =&gt; {
+            assert_eq!(word, &quot;A&quot;);
+        }
+        _ =&gt; panic!(&quot;Expected WordInvalid error&quot;),
+    }
+}
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test test_grid_new_with_word_too_large ... ok
+test test_grid_new_with_word_only_caracter ... FAILED
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_exact_word_size ... ok
+test test_grid_new_with_zero_size ... ok
+
+failures:
+
+---- test_grid_new_with_word_only_caracter stdout ----
+
+thread 'test_grid_new_with_word_only_caracter' panicked at tests/test_grid.rs:99:5:
+Grid creation should fail when word is only one character
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</code></pre>
+<p>Vamos colocar por segurança também um validador no build se words existe.</p>
+<pre><code class="language-rust">    pub fn build(self) -&gt; Grid {
+        let size = self.size.expect(&quot;Size must be set&quot;);
+        let words = self.words.expect(&quot;Words must be set&quot;);
+
+        Grid {
+            size,
+            cells: vec![vec![' '; size]; size],
+            words: vec![],
+        }
+
+</code></pre>
+<p>Ajustando agora vamos fazer simplesmente outro <code>if</code> pra validar isso.</p>
+<pre><code class="language-rust">    fn with_words(mut self, words: Vec&lt;String&gt;) -&gt; Result&lt;Self&gt; {
+        if words.is_empty() {
+            return Err(WordSearchError::NoWordsProvided);
+        }
+        if let Some(size) = self.size {
+            for word in &amp;words {
+                if word.len() &gt; size {
+                    return Err(WordSearchError::WordTooLong {
+                        word: word.clone(),
+                        size,
+                    });
+                }
+                if word.len() &lt; 2 {
+                    return Err(WordSearchError::WordInvalid { word: word.clone() })
+                }
+            }
+        }
+        self.words = Some(words);
+        Ok(self)
+    }
+
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_exact_word_size ... ok
+test test_grid_new_with_word_only_caracter_shoudl_a_error ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_zero_size ... ok
+test test_grid_new_with_word_too_large ... ok
+</code></pre>
+<p>Certo tudo funcionando.</p>
+<h2 id="validando-o-tamanho-do-jogo">Validando o tamanho do jogo</h2>
+<p>Bom agora precisamos validar se o size do nosso jogo é maior ou igual a 2, menos que 2 células o jogo não existe
+praticamente. Então vamos refatorar nosso teste pra validar um grid de tamanho 1 ainda vai dar erro.
+Vamos renomear o teste <code>test_grid_new_with_zero_size</code> para  <code>test_grid_new_with_one_size</code> e mudar o tamanho de 0 para 1.</p>
+<pre><code class="language-rust">#[test]
+fn test_grid_new_with_one_size() {
+    // Setup
+    let words = vec![&quot;HI&quot;.to_string()];
+    let size = 1;
+
+    // Act
+    let result = Grid::new(size, words);
+
+    // Assert
+    assert!(result.is_err(), &quot;Grid creation should fail with size 1&quot;);
+
+    match result {
+        Err(WordSearchError::InvalidGridSize(s)) =&gt; {
+            assert_eq!(s, 1, &quot;Error should contain the invalid size value&quot;);
+        }
+        _ =&gt; panic!(&quot;Expected InvalidGridSize error with value 1&quot;),
+    }
+}
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_word_too_large ... ok
+test test_grid_new_with_word_only_caracter_shoudl_a_error ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_exact_word_size ... ok
+test test_grid_new_with_one_size ... FAILED
+
+failures:
+
+---- test_grid_new_with_one_size stdout ----
+
+thread 'test_grid_new_with_one_size' panicked at tests/test_grid.rs:33:14:
+Expected InvalidGridSize error with value 1
+</code></pre>
+<p>Agora alterando nosso grid ele precisa ter valor maior que 1.</p>
+<pre><code class="language-rust">    pub fn with_size(mut self, size: usize) -&gt; Result&lt;Self&gt; {
+        if size &lt;= 1 {
+            return Err(WordSearchError::InvalidGridSize(size));
+        }
+        self.size = Some(size);
+        Ok(self)
+    }
+</code></pre>
+<pre><code class="language-bash">running 6 tests
+test test_grid_new_with_empty_words ... ok
+test test_grid_new_with_one_size ... ok
+test test_grid_new_with_exact_word_size ... ok
+test test_grid_new_with_valid_parameters ... ok
+test test_grid_new_with_word_only_caracter_shoudl_a_error ... ok
+test test_grid_new_with_word_too_large ... ok
+</code></pre>
+<p>WIP - Conteúdo em construção</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 1, 2025</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 21, 2025</span>
       
     
   </small>
