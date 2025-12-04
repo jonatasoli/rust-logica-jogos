@@ -29,7 +29,7 @@ O curso vai ser disponibilizado através da minha [plataforma de cursos](https:/
 Para fazer esse curso é importante ter noções básicas de informática como:
 - Saber usar um navegador
 - Saber entrar num prompt de comando seja no Windows, Mac ou Linux
-- Já ter conhecimento em outra linguagem é desejável mas, não é essencial pois vamos trabalhar do zero e contruir projetos
+- Já ter conhecimento em outra linguagem é desejável mas, não é essencial pois vamos trabalhar do zero e construir projetos.
 
 Obs: O curso será desenvolvido totalmente em linux, caso queira usar Windows é  Eu fiz um vídeo explicando [como instalar o Rust no Windows](https://www.youtube.com/watch?v=KB7n4NCVuGg).
 

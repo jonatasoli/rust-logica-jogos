@@ -6,10 +6,10 @@ Esse material está em desenvolvimento então sugestões são sempre bem-vindas.
 Rust é uma linguagem de programação compilada que se destaca por oferecer um alto desempenho, controle de memória sem a necessidade de um coletor de lixo e garantias de segurança. Ela foi desenvolvida pela Mozilla Research e é projetada para ser eficiente, segura e prática.
 
 ## Sobre o curso
-Este curso foi projetado para oferecer uma experiência prática no ensiono da linguagem Rust, usando desenvolvimento de jogos em ASCII e textual. Durante o curso, o objetivo principal é proporcionar aos participantes um entendimento abrangente dos conceitos fundamentais da linguagem Rust, juntamente com a aplicação prática desses conhecimentos na criação de jogos mesmo não sendo o foco do curso ensinar a fazer jogos profissionalmente.
+Este curso foi projetado para oferecer uma experiência prática no ensino da linguagem Rust, usando desenvolvimento de jogos em ASCII e textual. Durante o curso, o objetivo principal é proporcionar aos participantes um entendimento abrangente dos conceitos fundamentais da linguagem Rust, juntamente com a aplicação prática desses conhecimentos na criação de jogos mesmo não sendo o foco do curso ensinar a fazer jogos profissionalmente.
 
 ## O que você vai aprender?
-Durante esse curso você vai aprender o básico de Rust como fluxos condicionais, repetição, uso de funções, escopo de váriaveis até tópicos avançados como Threads e concorrência.
+Durante esse curso você vai aprender o básico de Rust como fluxos condicionais, repetição, uso de funções, escopo de variáveis até tópicos avançados como Threads e concorrência.
 
 
 ## Esse curso é gratuito?
@@ -23,7 +23,7 @@ O curso vai ser disponibilizado através da minha [plataforma de cursos](https:/
 Para fazer esse curso é importante ter noções básicas de informática como:
 - Saber usar um navegador
 - Saber entrar num prompt de comando seja no Windows, Mac ou Linux
-- Já ter conhecimento em outra linguagem é desejável mas, não é essencial pois vamos trabalhar do zero e contruir projetos
+- Já ter conhecimento em outra linguagem é desejável mas, não é essencial pois vamos trabalhar do zero e construir projetos
 
 Obs: O curso será desenvolvido totalmente em linux, caso queira usar Windows é  Eu fiz um vídeo explicando [como instalar o Rust no Windows](https://www.youtube.com/watch?v=KB7n4NCVuGg).
 
@@ -51,7 +51,6 @@ Todas os exemplos criados para o curso assim como exercicíos estarão no reposi
 Em primeiro lugar fazendo o curso e dando feedback do que gostou e o que não gostou me ajuda muito. Sugestões de melhoria e correções são sempre bem vindas.
 
 Caso desejar poderá me ajudar também através do [github sponsor](https://github.com/sponsors/jonatasoli) ou por pix `contact@jonatasoliveira.dev` valor arrecadado vai me ajudar a me manter durante a produção do curso.
-
 
 # Agradecimentos
 [Reinaldo](https://github.com/oloko64) por fazer revisões pontuais no material
