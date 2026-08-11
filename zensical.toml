@@ -1,0 +1,48 @@
+[project]
+site_name = "Rust da Lógica aos Jogos"
+site_url = "https://rustlogicajogos.jonatasoliveira.dev"
+docs_dir = "aulas"
+repo_url = "https://github.com/jonatasoli/rust-logica-jogos"
+repo_name = "jonatasolivera/rust-logica-jogos"
+edit_uri = "tree/main/aulas"
+
+[project.theme]
+language = "pt-BR"
+features = [
+  "content.tabs.link",
+  "search.suggest",
+  "search.highlight",
+  "search.share",
+]
+
+# Alternância de tema claro/escuro (theme.palette é uma lista)
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "material/lightbulb-outline"
+toggle.name = "Mudar para o tema claro"
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "material/lightbulb"
+toggle.name = "Mudar para o tema escuro"
+
+[project.markdown_extensions]
+attr_list = {}
+md_in_html = {}
+abbr = {}
+pymdownx.critic = {}
+pymdownx.highlight = { anchor_linenums = true }
+pymdownx.inlinehilite = {}
+pymdownx.snippets = {}
+
+# Diagramas Mermaid: o Zensical inicializa o runtime JS sozinho
+pymdownx.superfences = { custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+] }
+
+# Substitui o plugin mkdocs-glightbox (o Zensical não roda plugins do MkDocs)
+zensical.extensions.glightbox = { auto_caption = true }
+
+# A busca é nativa no Zensical, não precisa de plugin.
+# Não há equivalente ainda para backlinks, git-authors e
+# git-revision-date-localized: veja https://zensical.org/compatibility/plugins/

@@ -824,7 +824,7 @@ Referência:
 ### Definindo o baralho
 
 Para criar o baralho precisamos usar um vetor `Vec` de cartas. Para isso precisamos criar uma função que retorne um baralho para o jogo.
-Vamos criar um teste que receba um baralho.[]()
+Vamos criar um teste que receba um baralho.
 
 
 ```rust
@@ -1610,7 +1610,7 @@ Atualmente: A Arte ASCII transcende suas origens e se torna uma forma de express
 ### Exemplos
 
 A arte ASCII pode ser simples:
-![um simples elefante](./elefante.jpg)
+![um simples elefante](./images/elefante.jpg)
 
 Como mais complexa:
 
