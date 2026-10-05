@@ -37,12 +37,12 @@ Para criar esse projeto vamos entender melhor como vamos estruturar nosso jogo.
 ## Estruturando o blackjack
 
 Para esse jogo queremos fazer uma mudança em como nosso jogo vai se comportar:
-- main.rs vai ter nosso loop básico do jogo e vamos iniciar nossa função game.
+- `main.rs` vai ter nosso loop básico do jogo e vamos iniciar nossa função game.
 - Nossa função game vai ser responsável por administrar todos os elementos do jogo e a
   lógica do jogo em si
 - Vamos ter uma função para criar uma carta
 - Vamos ter que ter uma estrutura para criar um baralho
-- Vamos ter que ter uma estrutura para gerenciar a hierarquias das cartas Ex: Valete, Rainha e Rei valém 10 pontos e às vale 1 ou 11.
+- Vamos ter que ter uma estrutura para gerenciar a hierarquias das cartas Ex: Valete, Rainha e Rei além 10 pontos e às vale 1 ou 11.
 
 Assim para manter o código mais organizado vamos separar algumas responsabilidades em arquivos separados para isso vamos ter que começar a usar módulos.
 
@@ -82,7 +82,7 @@ Todas as nossas estruturas, variáveis, constantes, funções e etc. Serão os i
 
 Pensando em visibilidade você pode ser a única pessoa na casa que tem a chave do banheiro da casa, se por padrão nessa casa quem tem a chave sempre a mantém trancada por padrão, isso quer dizer que ninguém além de você vai ter acesso aquele cômodo. Levando isso pro Rust cada módulo por padrão terá todos os seus itens privados então ninguém de outros cômodos poderá acessar o banheiro. Isso quer dizer que se criarmos um módulo no nosso arquivo `main.rs` quem está dentro do arquivo ainda consegue acessar o módulo pois estão no mesmo "cômodo".
 
-Mas, temos uma pegadinha nesse exemplo, pois mesmo vendo que está dentro do banheiro ele não pode usar! Pense que você tem um amigo que precisa usar o banheiro mas, há um poder maior impedindo seu amigo de usa-lo e caso ele precise fazer o número 2 no assento sanitário e mesmo que ele enxergue o banheiro (módulo) não consegue fazer a ação de usar o assento (função) um cenário terrível não? Mas isso tem solução você pode deixa-lo como público usando a palavra reservada `pub` e assim ele ficará feliz e aliviado.
+Mas, temos uma pegadinha nesse exemplo, pois mesmo vendo que está dentro do banheiro ele não pode usar! Pense que você tem um amigo que precisa usar o banheiro mas, há um poder maior impedindo seu amigo de usá-lo e caso ele precise fazer o número 2 no assento sanitário e mesmo que ele enxergue o banheiro (módulo) não consegue fazer a ação de usar o assento (função) um cenário terrível não? Mas isso tem solução você pode deixá-lo como público usando a palavra reservada `pub` e assim ele ficará feliz e aliviado.
 
 ```rust
 //casinha.rs
@@ -109,7 +109,7 @@ fn main() {
 
 Deixando de lado a inutilidade do código, se seu amigo for a representação da função main, ele consegue ver o rolo de papel e consegue usar o `assento_sanitário`, porém ele não consegue acessar a sua escova de dentes por que ela não é pública.
 
-Mas e se caso eu queira que pessoas de outros cômodos possam usar o banheiro? Fácil só deixar ele aberto, ou seja, deixar o módulo público assim todos podem usa-lo.
+Mas e se caso eu queira que pessoas de outros cômodos possam usar o banheiro? Fácil só deixar ele aberto, ou seja, deixar o módulo público assim todos podem usá-lo.
 
 ```rust
 
@@ -141,7 +141,7 @@ fn main() {
 }
 ```
 
-Importante ressaltar que nesse caso `mod banheiro` eu faço referência ao arquivo `banheiro.rs` assim para acessar o módulo dentro do arquivo (que também é um módulo) preciso chama-lo novamente ou seja `banheiro::banheiro`.
+Importante ressaltar que nesse caso `mod banheiro` eu faço referência ao arquivo `banheiro.rs` assim para acessar o módulo dentro do arquivo (que também é um módulo) preciso chamá-lo novamente ou seja `banheiro::banheiro`.
 Para facilitar o entendimento vamos pensar que nesse exemplo o assento vai ser um módulo também já o papel vai ser um item que está fora assim para usar o banheiro preciso acessar o papel que está no banheiro e depois acessar o assento e a função dele de usar.
 
 ```rust
@@ -366,6 +366,7 @@ mod test {
 ```
 
 Agora vamos rodar ele.
+
 ```bash
 ➜ cargo test
    Compiling blackjack v0.1.0 (/home/feanor/projects/blackjack)
@@ -558,7 +559,8 @@ fn main() {
 }
 ```
 
-Booleano são boas escolhas quando queremos validar uma condição de uma estrutura condicional como os `if`e `match`.
+Booleano são boas escolhas quando queremos validar uma condição de uma estrutura condicional como os `if` e `match`.
+
 #### [Tipo `Charactere`](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-character-type)
 
 O char é o tipo primitivo mais simples para representar um `caracter`  em rust.
@@ -784,7 +786,7 @@ for i in &mut v {
 }
 ```
 
-#### Usando um Enum para Armazenar Tipos Diferentes em um Vetor
+#### Usando um `Enum` para Armazenar Tipos Diferentes em um Vetor
 Os vetores em Rust podem armazenar apenas valores do mesmo tipo. No entanto, pode ser necessário armazenar elementos de tipos diferentes, como vidas de inimigos e itens no mesmo vetor. Para isso, podemos usar um `enum`. Por exemplo:
 
 ```rust
@@ -913,7 +915,7 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 ```
 
 Certo agora que o teste passou, nós precisamos fazer com que o _deck_ receba todas as cartas e naipes por conta disso vamos precisar voltar no nosso módulo _card_ e criar uma sequência dos valores para facilitar a construção automática do _deck_.
-Para isso vamos dar um nome (em inglês) para cada carta e usa-la na nossa `struct`.
+Para isso vamos dar um nome (em inglês) para cada carta e usá-la na nossa `struct`.
 
 ```rust
 enum Rank {
@@ -996,12 +998,14 @@ Certo nossos testes estão rodando e agora temos uma estrutura para representar 
 
 Próximo passo agora é adicionarmos as cartas ao baralho. Como revisamos anteriormente os tipos primitivos sabemos que pro baralho tanto a tupla quanto o array não vão ajudar, então vamos usar um novo tipo que é o `Vec`.
 
-#### Usando Vec
-O tipo `Vec` em Rust representa um vetor, que é uma estrutura de dados flexível, muito útil no desenvolvimento de jogos para armazenar coleções de elementos de maneira eficiente e ordenada. Em jogos, precisamos frequentemente manipular conjuntos de dados que mudam dinamicamente, como listas de inimigos, projéteis, ou até os elementos de interface gráfica. É aqui que o`Vec` brilha.
+#### Usando `Vec`
+
+O tipo `Vec` em Rust representa um vetor, que é uma estrutura de dados flexível, muito útil no desenvolvimento de jogos para armazenar coleções de elementos de maneira eficiente e ordenada. Em jogos, precisamos frequentemente manipular conjuntos de dados que mudam dinamicamente, como listas de inimigos, projéteis, ou até os elementos de interface gráfica. É aqui que o `Vec` brilha.
 
 O `Vec` não possui tamanho fixo então podemos adicionar, remover e modificar os valores dentro dele, porém ele também só pode receber valores do mesmo tipo, no nosso caso podemos usar nossa `struct` Card como o tipo.
 
 #### Criando o deck
+
 Vamos alterar nosso teste para receber agora um `Vec<Card>`e testar se ele vai ter o tamanho do baralho. Para isso vamos modificar o nosso teste para ao invés de comparar um deck ele compare o tamanho do deck.
 
 ```rust
@@ -1284,7 +1288,7 @@ impl Hand {
 Com a estrutura acima podemos agora criar nossa "funções" dentro desse bloco de código.
 
 #### Método inicializador
-O primeiro método que vamos criar é um método para inicializar nossa mão com um vetor vazio de cartas, então vamos chama-lo  de `new` podemos criar a estrutura conforme abaixo.
+O primeiro método que vamos criar é um método para inicializar nossa mão com um vetor vazio de cartas, então vamos chamá-lo  de `new` podemos criar a estrutura conforme abaixo.
 
 
 ```rust
@@ -1428,7 +1432,9 @@ test deck::test::test_create_deck_contains_all_suits_and_ranks ... ok
 ```
 
 Maravilha tudo funcionando!
+
 #### Criando a mão do jogador
+
 Agora que temos uma forma de ter um baralho e criar uma mão, vamos criar a primeira lógica pro nosso jogo no loop de _gameplay_, dentro do loop vamos criar a mão do jogador usando `player_hand`. 
 
 ```rust
@@ -1499,7 +1505,6 @@ player_hand.add_card(deck.pop().unwrap());
 Se, por algum motivo, o deck estiver vazio, `pop()` retornará `None` e o `unwrap()` causará um panic, interrompendo o jogo.
 
 Essa combinação de `pop().unwrap()` é comum em situações onde se tem certeza que a coleção não estará vazia, mas deve ser usada com cuidado para evitar panics inesperados.
-
 
 Agora vamos fazer alguns ajustes, o primeiro é que nossa variável deck precisar ser mutável.
 ```rust
@@ -1624,11 +1629,11 @@ E aqui um exemplo da arte do Kenneth Knowlton:
 
 Os primeiros jogos de computador, como "Rogue" (1980) e "Moria" (1975), utilizavam arte ASCII para representar masmorras, monstros e tesouros. A falta de recursos gráficos não impediu a criação de mundos imersivos e aventuras épicas.
 
-A era de ouro dos jogos de texto e aventura viu a arte ASCII florescer. Jogos como "Zork" (1977) e "The Hitchhiker's Guide to the Galaxy" (1984) utilizavam descrições textuais detalhadas e mapas em ASCII para transportar os jogadores para mundos imaginários.
+A era de ouro dos jogos de texto e aventura viu a arte ASCII florescer. Jogos como _Zork_  (1977) e _The_ _Hitchhiker's_ _Guide_ _to_ _the_ _Galaxy_ (1984) utilizavam descrições textuais detalhadas e mapas em ASCII para transportar os jogadores para mundos imaginários.
 
-Mesmo com o avanço dos gráficos, a arte ASCII manteve seu espaço. Jogos como "Dwarf Fortress" (2006) e "Linley's Dungeon Crawl" (1997) continuaram a usar a arte ASCII para criar mundos complexos e desafiadores.
+Mesmo com o avanço dos gráficos, a arte ASCII manteve seu espaço. Jogos como _Dwarf_ _Fortress_ (2006) e _Linley's_ _Dungeon_ _Crawl_ (1997) continuaram a usar a arte ASCII para criar mundos complexos e desafiadores.
 
-Atualmente: A arte ASCII vive um renascimento nos jogos independentes e retrô. Jogos como "Cataclysm: Dark Days Ahead" (2010) e "Cogmind" (2017) celebram a estética clássica da arte ASCII, mostrando que a simplicidade pode ser tão cativante quanto os gráficos modernos.
+Atualmente: A arte ASCII vive um renascimento nos jogos independentes e retrô. Jogos como _Cataclysm_: _Dark_ _Days_ _Ahead_ (2010) e _Cogmind_ (2017) celebram a estética clássica da arte ASCII, mostrando que a simplicidade pode ser tão cativante quanto os gráficos modernos.
 
 ![Moria](./images/moria.jpg)
 ![Dwarf Fortress](./images/dwarf-fortress.jpg)
@@ -1873,7 +1878,7 @@ Agora precisamos somar os valores da mão do _dealer_ e do jogador. Pra isso vam
 Para fazermos essa soma vamos entrar em algumas possibilidades que temos quando trabalhamos com `Vec`.
 
 #### Closures
-#### Vec - iter, map, filter e sum
+#### `Vec` - `iter`, `map`, `filter` e `sum`
 
 Quando trabalhos com algumas estruturas no rust que podem ser iteráveis como o `Vec` podemos usar funções especiais.
 
@@ -1951,7 +1956,7 @@ Vamos fazer agora um parenteses e começar a usar novas ferramentas para melhora
     
 - **`rstest`** — fixtures reutilizáveis e parametrização avançada (casos com `#[case]`, fixtures com `#[fixture]`).
     
-- **`fake`** — geração de dados “realistas” pseudo-aleatórios para testes (útil em simulações e testes de integração).
+- **`fake`** — geração de dados “realistas” pseudo aleatórios para testes (útil em simulações e testes de integração).
 Vamos instalar e durante o uso vamos aprofundando:
 
 ```bash
@@ -2107,6 +2112,7 @@ mod test {
 ```
 
 Agora vamos criar os testes:
+
 ```rust
     #[rstest]
     fn test_ace_properties(ace_of_spades: Card) {
@@ -2257,7 +2263,7 @@ test result: ok. 33 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fin
 ```
 
 E se eu quiser fazer testes com casos aleatórios? Pra isso vamos usar agora o `fake` e gerar alguns casos mais realistas.
-Vamos tentar gerar alguns dados e vamos precisar gerar dados pseudo-realistas (strings, números, índices) de forma simples. Ex.: `(0..13).fake()`  para gerar um número aleatório no intervalo. Pode ajudar a simular embaralhamento/inputs variados sem construir estratégias do zero.
+Vamos tentar gerar alguns dados e vamos precisar gerar dados pseudo realistas (strings, números, índices) de forma simples. Ex.: `(0..13).fake()`  para gerar um número aleatório no intervalo. Pode ajudar a simular embaralhamento/inputs variados sem construir estratégias do zero.
 
 **No seu código:** você usou `fake` para:
 
@@ -2273,8 +2279,8 @@ Vamos tentar gerar alguns dados e vamos precisar gerar dados pseudo-realistas (s
 
 **Cuidados**
 
-- É pseudo-aleatório: se precisar reproduzir uma falha, capture a seed ou imprima os inputs.
-- Não substitui proptest para encontrar casos limite.
+- É pseudo aleatório: se precisar reproduzir uma falha, capture a seed ou imprima os inputs.
+- Não substitui `proptest` para encontrar casos limite.
 
 ```rust
 #[cfg(test)]
@@ -2338,7 +2344,7 @@ test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fin
 
 ```
 
-##### Melhorando o deck.rs
+##### Melhorando o `deck.rs`
 Agora vamos melhorar nosso `deck.rs` primeira coisa que vamos fazer é  voltar o deck pra uma função em deck e criar os testes. Também vamos criar um método que já crie e embaralhe o nosso deck sua função vai ser apenas agregar as duas funções e usar apenas uma função no nosso game.
 
 ```rust
@@ -2537,7 +2543,7 @@ pub fn game_start() {
 
 ```
 
-##### Melhorando o hand.rs
+##### Melhorando o `hand.rs`
 
 No nosso módulo `hand.rs` vamos criar mais alguns testes, primeiro vamos fazer um teste para calcular os valores de uma mão, pra isso vamos criar algumas features para alguns casos de teste depois rodamos os testes.
 
@@ -2876,7 +2882,7 @@ Agora se testarmos nosso jogo no terminal temos um jogo totalmente funcional.
 
 #### Testes do game.rs
 
-Para começar queremos fazer um teste com todas as condições de vitória e derrota do nosso jogo isso é um cenário perfeito para criarmos fixtures com cada condição e usar o `test-case` para testa-los. Só que nossa função game_start tem muitas responsabilidades, então quando estivemos criando os testes vamos pensar que esse teste vai verificar uma função e ela vai retornar a condição de vitória ou derrota.
+Para começar queremos fazer um teste com todas as condições de vitória e derrota do nosso jogo isso é um cenário perfeito para criarmos fixtures com cada condição e usar o `test-case` para testá-los. Só que nossa função game_start tem muitas responsabilidades, então quando estivemos criando os testes vamos pensar que esse teste vai verificar uma função e ela vai retornar a condição de vitória ou derrota.
 Outro ponto tanto no nosso jogo quanto pro teste seria melhor termos um `enum` com todas as condições possíveis sendo que agora podemos colocar nossa condição `draw`.
 
 Vamos criar agora o nosso `enum` e a função vazia.
@@ -3020,7 +3026,7 @@ pub fn game_start() {
     let (mut player_hand, mut dealer_hand) = initial_deal(&mut deck);
 ```
 
-Não tínhamos ainda criado uma função assim, mas nela nós retornamos na função (initial_deal) uma tupla com duas mãos, na nossa função game nós recebemos a tupla no formato de desestruturação onde cada elemento da tupla é uma variável mutável.
+Não tínhamos ainda criado uma função assim, mas nela nós retornamos na função `initial_deal` uma tupla com duas mãos, na nossa função game nós recebemos a tupla no formato de desestruturação onde cada elemento da tupla é uma variável mutável.
 
 O próximo passo que podemos fazer é testar  se  removidas do nosso baralho, pra isso vamos também extrair nossa mão inicial.
 
@@ -3032,13 +3038,14 @@ test result: ok. 54 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fin
 ```
 
 ## Conclusão
+
 Com esse jogo vimos como criar uma módulos em rust, criar testes para essa função usando a suite nativa de testes do rust e também acrescentando novas bibliotecas de testes,  revemos os tipos básicos de rust e vimos alguns tipos mais complexos como o vetor.
 
 Poderíamos agora melhorar ainda mais nossa cobertura de testes extraindo o sistema de retirar as cartas da mão do dealer e do jogador e também  criar testes de integração no`game_start` mas, deixaremos isso para os nossos próximos jogos. Porém nesse momento você pode criar esses testes de forma de desafio.
 
 Também nosso jogo não tem o sistema de apostas mas, isso vai ficar como exercício sugerido.
 
-## Exercicíos sugeridos
+## Exercícios sugeridos
 
 1 - Você está desenvolvendo um RPG de texto onde o jogador digita comandos como "atacar goblin", "pegar espada", "ir norte". Implemente um parser que processe esses comandos.
 
@@ -3092,7 +3099,7 @@ src/
 └── main.rs
 ``` 
 
-No main.rs chamar uma função `create_item`, `create_inventory`, `create_equipament`. Pode ser apenas um println! simples, o objetivo é usar os módulos no nosso main.
+No `main.rs` chamar uma função `create_item`, `create_inventory`, `create_equipament`. Pode ser apenas um println! simples, o objetivo é usar os módulos no nosso main.
 
 3 - Criar um jogo de puzzle onde o jogador decifra 4 segredos codificados em diferentes formatos (char, ASCII, bytes), usando dicas em Unicode e um sistema de pontuação. Você descobriu um **manuscrito antigo** com 4 segredos codificados. Cada segredo está representado de forma diferente e você pode pedir dicas, mas cada dica custa 100 pontos. Comece com 1000 pontos e tente descobrir todos os segredos!
 
@@ -3175,7 +3182,7 @@ assert_eq!(chars_to_string(&['A', 'B']), "AB");
 assert_eq!(ascii_to_string(&[72, 105]).unwrap(), "Hi");
 ```
 
-Funções básicas de condificação:
+Funções básicas de codificação:
 
  ```
  /// Gera dica formatada com caracteres Unicode especiais

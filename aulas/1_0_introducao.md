@@ -8,14 +8,14 @@ Bem vindo ao curso de Rust lógica com jogos, você vai aprender:
 - Configuração do editor
 - Principios básicos de um jogo eletrônico
 - O que é GDD?
-WIP
 
 ## Como fazer esse curso?
 
 Para inicio você pode assistir um vídeo meu [sobre meu método de estudo](https://youtu.be/XCIqvx98iFI) mas, resumidamente:
 - Monte um cronograma
-- Veja o conteúdo
-- Faça os exercicios sugeridos
+- Veja o conteúdo previamente
+- Reassistir a aula e fazer o projeto pausadamente
+- Faça os exercícios sugeridos
 - Use os exercícios sugeridos como uma revisão do conteúdo
 
 ## O que é Rust?
@@ -24,9 +24,9 @@ Nos últimos anos, a linguagem de programação Rust tem ganhado destaque no cen
 ## Principais características do Rust
 ### Segurança
 
-Um dos principais atrativos de Rust é sua forte ênfase na segurança. Ao combinar uma rigorosa verificação de tipos em tempo de compilação com um sistema de gerenciamento de memória sem garbage collector, Rust elimina muitas das classes comuns de bugs que assolam outras linguagens, como corrupção de memória, vazamentos de memória e race conditions.
+Um dos principais atrativos de Rust é sua forte ênfase na segurança. Ao combinar uma rigorosa verificação de tipos em tempo de compilação com um sistema de gerenciamento de memória sem garbage collector, Rust elimina muitas das classes comuns de bugs que assolam outras linguagens, como corrupção de memória, vazamentos de memória e _race_ _conditions_.
 
-O sistema de tipos de Rust é projetado para capturar erros em tempo de compilação que poderiam levar a falhas de segurança em tempo de execução, como acessos inválidos à memória ou uso indevido de ponteiros. Isso é possível graças a recursos exclusivos, como o conceito de propriedade (ownership) e empréstimos (borrowing), que garantem que os recursos de memória sejam gerenciados de forma segura durante toda a vida útil do programa.
+O sistema de tipos de Rust é projetado para capturar erros em tempo de compilação que poderiam levar a falhas de segurança em tempo de execução, como acessos inválidos à memória ou uso indevido de ponteiros. Isso é possível graças a recursos exclusivos, como o conceito de propriedade (_ownership_) e empréstimos (_borrowing_), que garantem que os recursos de memória sejam gerenciados de forma segura durante toda a vida útil do programa.
 
 ### Performance
 
@@ -58,7 +58,7 @@ Isso varia de acordo com o editor que você quer usar vou por aqui algumas suges
 - [Helix](https://youtu.be/MURMkIlCHRg)
 - [Emacs](https://www.youtube.com/watch?v=CvKywSV3fiI&list=PLOQgLBuj2-3I7w8JQvCY8lbbrUZL-gf4m)
 
-## Principios básicos de um jogo eletrônico
+## Princípios básicos de um jogo eletrônico
 
 Os jogos eletrônicos são formas de entretenimento interativo que envolvem os jogadores em experiências virtuais através de dispositivos eletrônicos, como consoles de videogame, computadores e dispositivos móveis. Eles abrangem uma ampla variedade de gêneros, desde jogos de ação e aventura até quebra-cabeças e jogos de simulação.
 
@@ -87,8 +87,8 @@ Os jogos geralmente apresentam um sistema de progressão que permite aos jogador
 
 
 ## O que é GDD?
-O Guia de Design de Jogo (GDD) é um documento crucial no desenvolvimento de jogos, servindo como um mapa do tesouro para os criadores de jogos.
+O Guia de Design de Jogo (*GDD*) é um documento crucial no desenvolvimento de jogos, servindo como um mapa do tesouro para os criadores de jogos.
 
-Um Guia de Design de Jogo (GDD) é um documento detalhado que descreve todos os aspectos de um jogo, desde sua concepção inicial até sua implementação final. Ele serve como um guia abrangente para todos os membros da equipe de desenvolvimento de jogos, fornecendo uma visão clara e coesa do que o jogo será e como ele será criado.
+Um Guia de Design de Jogo (*GDD*) é um documento detalhado que descreve todos os aspectos de um jogo, desde sua concepção inicial até sua implementação final. Ele serve como um guia abrangente para todos os membros da equipe de desenvolvimento de jogos, fornecendo uma visão clara e coesa do que o jogo será e como ele será criado.
 
-O GDD pode ser super detalhado ou apenas com os pontos principais do jogo, o importante que usamos ele como guia.
+O *GDD* pode ser super detalhado ou apenas com os pontos principais do jogo, o importante que usamos ele como guia.

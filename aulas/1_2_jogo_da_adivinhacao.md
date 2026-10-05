@@ -1,7 +1,7 @@
 #  Jogo da adivinhação
 
-Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatóriamente. O jogo inicia com 1000 pontos para o
-jogador e cada vez que ele erra o número é subtraido 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.
+Vamos começar um novo jogo que é o jogo da adivinhação "Guessing Game" o objetivo desse jogo é identificar um número escolhido aleatoriamente. O jogo inicia com 1000 pontos para o
+jogador e cada vez que ele erra o número é subtraído 100 pontos do placar dele quando o placar chegar a zero o jogo é encerrado.
 
 ## Regras
 
@@ -48,15 +48,14 @@ fn main() {
 }
 ```
 
-Aqui vamos mudar ao invés de usar números para opções vamos usar letras pois vamos precisar fazer um tratamento especial no código, estamos usando a captura que estavamos fazendo
-anteriormente fazendo um println apenas no item escolhido, no final vamos dar um break apenas pra encerrar o loop.
-Agora se rodarmos o código vamos ver que ele pegou a escolha que gostariamos e printou na tela.
+Aqui vamos mudar ao invés de usar números para opções vamos usar letras pois vamos precisar fazer um tratamento especial no código, estamos usando a captura que estávamos fazendo
+anteriormente fazendo um `println` apenas no item escolhido, no final vamos dar um break apenas pra encerrar o loop.
+Agora se rodarmos o código vamos ver que ele pegou a escolha que gostaríamos e escreveu na tela.
 ```
 cargo run
 ```
 
-Certo agora vamos fazer um match com nossa escolha str só que como estamos usando letras vou forçar que o que venha de letras senha minuscula ou maiuscula que ele force sempre a
-ser minúsculo.
+Certo agora vamos fazer um match com nossa escolha `str` só que como estamos usando letras vou forçar que o que venha de letras senha minuscula ou maiúscula que ele force sempre a ser minúsculo.
 ```rust
 use std::io;
 
@@ -79,8 +78,8 @@ fn main() {
 ```
 
 Criamos a nossa linha como `match escolha.str.trim().to_lowercase()` usando a função `trim()` para removermos espaços em branco e agora usamos uma nova função chamada
-`to_lowercase()` que vai transformar nossa string caso tenha letras maiusculas em minúsculas.
-Outra função que usamos foi o `as_str` pois quando usamos o `trim` e o `to_lowercase` eles voltam uma String que é um tipo diferente do str, e nesse caso vamos comparar com "i" e "q" e quando passamos esses valores com aspas eles são do tipo str então pra comparar vamos precisar reconverter novamente para str e ai usamos o `as_str`.
+`to_lowercase()` que vai transformar nossa string caso tenha letras maiúsculas em minúsculas.
+Outra função que usamos foi o `as_str` pois quando usamos o `trim` e o `to_lowercase` eles voltam uma String que é um tipo diferente do `str`, e nesse caso vamos comparar com "i" e "q" e quando passamos esses valores com aspas eles são do tipo `str` então pra comparar vamos precisar reconverter novamente para `str` e ai usamos o `as_str`.
 
 Assim conseguimos agora colocar a comparação com a string "i" e a string "q".
 
@@ -145,7 +144,7 @@ Ela possui um tamanho fixo e essa memória existe durante o tempo de alocação 
 
 ![Stack](./images/stack-memory.png)
 
-A memória stack armazena argumentos de funções e variaveis locais ou seja recursos dentro de um bloco de função quando trabalhamos com várias threads cada thread vai ter uma stack especifica e ele é conhecido em tempo de compilação porém ele tem um tamanho dinâmico dentro de um limite especifico, quando esse limite é estourado recebemos o famoso erro _stack overflow_.
+A memória stack armazena argumentos de funções e variáveis locais ou seja recursos dentro de um bloco de função quando trabalhamos com várias threads cada thread vai ter uma stack especifica e ele é conhecido em tempo de compilação porém ele tem um tamanho dinâmico dentro de um limite especifico, quando esse limite é estourado recebemos o famoso erro _stack overflow_.
 Como é uma memória dinâmica o gatilho pra liberar a memória é quando uma função é encerrada.
 
 ### Memória Heap
@@ -154,30 +153,30 @@ Como é uma memória dinâmica o gatilho pra liberar a memória é quando uma fu
 
 A memória heap é um tipo de memória onde armazenamos valores dinâmicos ou seja que durante a execução de um programa pode variar, por exemplo num jogo onde recebemos o nome do jogador nós não vamos saber previamente o tamanho do nome do mesmo então ele será armazenado na memória heap. Ele é usado sempre que tivermos variáveis que são muito grandes ou qual eu não conheça o valor previamente.
 Quanto trabalhamos com threads esse valor é compartilhado e não sabemos em tempo de compilação onde o valor disponível normalmente é fornecido pelo sistema operacional.
-O tempo de vida dessas variáveis serão determinados pelo programador ou pela linguagem usada e no caso do Rust ela é liberada usando RAII.
+O tempo de vida dessas variáveis serão determinados pelo programador ou pela linguagem usada e no caso do Rust ela é liberada usando `RAII`.
 
 ### O que é RAII?
-RAII significa "Resource Acquisition Is Initialization". É um princípio de programação utilizado em linguagens como C++ e Rust. A ideia principal por trás do RAII é associar a aquisição de recursos à inicialização de objetos.
+`RAII` significa "Resource Acquisition Is Initialization". É um princípio de programação utilizado em linguagens como C++ e Rust. A ideia principal por trás do `RAII` é associar a aquisição de recursos à inicialização de objetos.
 
 
-## Diferença entre &str e String
-Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são &str e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre &str e String em Rust.
+## Diferença entre `&str` e String
+Rust é uma linguagem de programação moderna que coloca um forte foco na segurança e no gerenciamento de memória, permitindo aos desenvolvedores escrever código seguro e eficiente. Duas estruturas de dados muito importantes em Rust são `&str` e String. Embora ambas sejam usadas para representar texto, elas têm diferenças fundamentais em termos de propriedades e uso. Vamos explorar as distinções entre `&str` e String em Rust.
 
-&str - Referência para uma Sequência de Caracteres
+`&str` - Referência para uma Sequência de Caracteres
 
-É importante reforçar que caratere representa um simbolo em Rust e ele é um tipo primitivo que acabamos não vendo ainda, o tipo str é uma sequência de caracteres que é o tipo primitivo.
-&str é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do &str:
+É importante reforçar que caractere representa um simbolo em Rust e ele é um tipo primitivo que acabamos não vendo ainda, o tipo `str` é uma sequência de caracteres que é o tipo primitivo.
+`&str` é uma fatia (slice) que representa uma sequência de caracteres em Rust. Essa fatia é uma referência a uma sequência de caracteres armazenada em outro local da memória. Aqui estão algumas características importantes do `&str`:
 
-    Imutável: O &str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
+    *Imutável*: O &str é imutável, o que significa que você não pode modificar o conteúdo da sequência de caracteres a que ele faz referência.
 
-    Alocação Zero: O &str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
+    *Alocação Zero*: O &str em si não aloca memória para a sequência de caracteres. Ele simplesmente aponta para uma sequência existente.
 
-    View (Visão): O &str é uma visão de uma sequência de caracteres (tipo primitivo). Pode ser usado para referenciar substrings de uma String ou literais de string.
+    *View (Visão)*: O &str é uma visão de uma sequência de caracteres (tipo primitivo). Pode ser usado para referenciar substrings de uma String ou literais de string.
 
-    Lifetime: O &str é um tipo estático ou seja ele vai alocar a memória quando o programa é compilado e vai existir durante todo o tempo em que o programa for executado.
+    *Lifetime*: O &str é um tipo estático ou seja ele vai alocar a memória quando o programa é compilado e vai existir durante todo o tempo em que o programa for executado.
 
 
-Aqui está um exemplo de &str:
+Aqui está um exemplo de `&str`:
 
 ```rust
 fn main() {
@@ -192,13 +191,13 @@ String - Propriedade de uma Sequência de Caracteres
 
 String é uma estrutura de dados que representa uma sequência de caracteres alocada dinamicamente em Rust. Aqui estão algumas características importantes da String:
 
-    Mutável: A String é mutável, o que significa que você pode modificar seu conteúdo, adicionando ou removendo caracteres.
+    *Mutável*: A String é mutável, o que significa que você pode modificar seu conteúdo, adicionando ou removendo caracteres.
 
-    Alocação Dinâmica: A String aloca memória dinamicamente para armazenar a sequência de caracteres. Isso permite que você ajuste o tamanho conforme necessário.
+    *Alocação Dinâmica*: A String aloca memória dinamicamente para armazenar a sequência de caracteres. Isso permite que você ajuste o tamanho conforme necessário.
 
-    Proprietária: A String é proprietária, o que significa que é responsável por gerenciar a memória da sequência de caracteres que ela contém.
+    *Proprietária*: A String é proprietária, o que significa que é responsável por gerenciar a memória da sequência de caracteres que ela contém.
 
-    Conversão: Você pode converter um &str em uma String usando a função to_string(), ou usar a função String::from().
+    *Conversão*: Você pode converter um &str em uma String usando a função to_string(), ou usar a função String::from().
 
 Aqui está um exemplo de String:
 
@@ -210,9 +209,9 @@ fn main() {
 }
 ```
 
-Quando Usar &str e String
+Quando Usar `&str` e String
 
-A escolha entre &str e String depende do contexto e dos requisitos do seu programa:
+A escolha entre `&str` e String depende do contexto e dos requisitos do seu programa:
 
     Use &str quando precisar de uma referência imutável a uma sequência de caracteres existente. Por exemplo, ao passar argumentos de função ou realizar operações de leitura em uma sequência.
 
@@ -245,7 +244,7 @@ fn main() {
 O heap é um local de armazenamento de memória de longo prazo, usado para alocar dados cujo tamanho não é conhecido em tempo de compilação e/ou que precisam de tempo de vida mais longo. Aqui estão algumas características do heap:
 
 * Alcance Mais Amplo: Os dados alocados no heap podem ter um tempo de vida mais longo e persistir além do escopo atual.
-* Alocação e Liberação Controladas: A alocação e liberação de memória no heap são controladas manualmente pelo programador, usando funções como Box::new, Vec::new, etc.
+* Alocação e Liberação Controladas: A alocação e liberação de memória no heap são controladas manualmente pelo programador, usando funções como `Box::new`, `Vec::new`, etc.
 
 Exemplo de alocação no heap:
 
@@ -268,12 +267,12 @@ Exemplo de alocação de memória estática:
 static HELLO: &str = "Hello, World!";
 ```
 
-#### 4. String vs &str
+#### 4. String vs `&str`
 
-Rust distingue entre String e &str. String é uma sequência de caracteres alocada no heap, que permite modificações. &str é uma referência a uma sequência de caracteres (geralmente String ou literal de string) e é imutável.
+Rust distingue entre String e `&str`. String é uma sequência de caracteres alocada no heap, que permite modificações. `&str` é uma referência a uma sequência de caracteres (geralmente String ou literal de string) e é imutável.
 
 * Use String quando precisar de uma sequência de caracteres que pode ser modificada.
-* Use &str para referenciar sequências de caracteres imutáveis.
+* Use `&str` para referenciar sequências de caracteres imutáveis.
 
 ```rust
 fn main() {
@@ -285,7 +284,8 @@ fn main() {
 
 ## Criando a função do jogo
 
-Agora vamos criar uma função onde vamos manter nossa lógica do jogo para isso vamos usar a palavra reservada fn
+Agora vamos criar uma função onde vamos manter nossa lógica do jogo para isso vamos usar a palavra reservada `fn`.
+
 ```rust
 fn game() -> () {
     println!("Iniciar Jogo");
@@ -294,7 +294,7 @@ fn game() -> () {
 Com isso movemos nosso print iniciar jogo para dentro da função e vamos ver que vai continuar funcionando vale notar que na função nós anotamos `()` que quer dizer que a função vai
 retornar uma Option vazia ou seja se for OK vão vai ter valor algum isso faz a função main que chama a função game saber que essa função não tem retorno se nós tentarmos receber
 algum valor de game nós vamos receber a Option porém ela vai ver sem nenhum valor, com isso nós nunca vamos receber um valor Nulo no máximo um Option com um Ok porém não existe um
-valor empty ou None isso é uma caracteristica do rust para trabalhar sem usar valores nulos.
+valor empty ou None isso é uma característica do rust para trabalhar sem usar valores nulos.
 Agora quero que nosso jogo defina o número secreto, nesse momento vamos definir um número fixo, mais a frente vamos fazer esse número ser aleatório, também vamos receber a
 pontuação do jogador e vamos já contar um erro e o fim do jogo.
 
@@ -360,15 +360,14 @@ For more information about this error, try `rustc --explain E0384`.
 error: could not compile `guessing_game` (bin "guessing_game") due to previous error
 ```
 
-Essa mensagem diz que pontuação dentro de game é um atributo imutável então precisamos deixar nosso parametro mutável. então simplesmente vamos usar um mut no cabeçalho da função
-game.
+Essa mensagem diz que pontuação dentro de game é um atributo imutável então precisamos deixar nosso parâmetro mutável. Então simplesmente vamos usar um `mut` no cabeçalho da função game.
 
 ```rust
 fn game(mut pontuacao: u16, numero: u8) -> () {
 ...
 ```
 
-Agora se rodarmos vai voltar o resultado que gostariamos.
+Agora se rodarmos vai voltar o resultado que gostaríamos.
 
 ```bash
 Bem vindo ao jogo da adivinhação escolha uma das opções abaixo
@@ -380,7 +379,7 @@ A sua pontuação foi 900, e o número era 42
 ...
 ```
 
-Agora vamos mudar um pouco queremos que nosso print do resultado também seja impresso depois que o loop do game acabar então vamos copia-lo pra fora da função.
+Agora vamos mudar um pouco queremos que nosso print do resultado também seja impresso depois que o loop do game acabar então vamos copiá-lo pra fora da função.
 
 ```rust
 use std::io;
@@ -418,7 +417,7 @@ fn main() {
 }
 ```
 
-Agora vamos receber essa saida
+Agora vamos receber essa saída
 ```bash
 ➜ cargo run
    Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
@@ -435,10 +434,8 @@ A sua pontuação foi 1000, e o número era 42
 
 O que aconteceu?
 Acontece que do jeito que está a função game está recebendo uma cópia dos valores de _pontuacao e _numero_alvo ou seja o valor reduzido de 900 só existe dentro da função game
-quando a função termina o rust limpa as variáveis do escopo de game poderiamos facilmente resolver isso fazendo com que game retorne o valor de 900 para nossa variável _pontuacao
+quando a função termina o rust limpa as variáveis do escopo de game poderíamos facilmente resolver isso fazendo com que game retorne o valor de 900 para nossa variável _pontuacao
 mas, podemos resolver isso sem precisar duplicar os valores dentro da função passando a referência delas através de Borrowing que é o que vamos discutir a seguinte.
-
-
 
 ## Ownership e Borrowing
 
@@ -448,10 +445,10 @@ Rust introduz o conceito de "ownership" (propriedade) e "borrowing" (empréstimo
 * Empréstimo (Borrowing): Outras partes do código podem "emprestar" acesso à variável, mas não podem modificar a propriedade.
 
 Assim sendo no nosso caso particular podemos pedir pro rust nos dar as referências das variáveis _pontuacao e _numero_alvo assim sendo ele não cria uma nova variável `numero` e
-`pontuacao` ele vai simplesmente pegar a referencia onde está armazenado os valores de _pontuacao e _numero_alvo e começar a apontar para os parametros que existem na função assim
-quando a função terminar ela vai devolver as referências para os parametros originais.
+`pontuacao` ele vai simplesmente pegar a referencia onde está armazenado os valores de _pontuacao e _numero_alvo e começar a apontar para os parâmetros que existem na função assim
+quando a função terminar ela vai devolver as referências para os parâmetros originais.
 
-```
+```rust
 use std::io;
 
 fn main() {
@@ -498,33 +495,35 @@ fn game(pontuacao: &mut u16, numero: &u8) -> () {
 }
 ```
 Aqui fizemos algumas alterações a primeira é que passamos na variável o simbolo "&" que indica que estamos emprestando a referência para a função ou seja ela vai ser
-temporáriamente a dona dos parametros passados e no caso de pontuação nós passamos como &mut que quer dizer que ela pode ser modificada, caso fosse passado apenas om o & comercial
-a função game só teria a permissão de ler o parametro e não modificalo.
+temporariamente a dona dos parâmetros passados e no caso de pontuação nós passamos como `&mut` que quer dizer que ela pode ser modificada, caso fosse passado apenas om o & comercial
+a função game só teria a permissão de ler o parâmetro e não modificá-lo.
+
 ```rust
 fn game(pontuacao: &mut u16, numero: &u8) -> () {
 ```
-No cabeçalho da função mudamos também indicando que pontuação é a referencia mutavel de um u16 e a referencia de u8 assim na compilação ele sabe que a função está trabalhando com
+
+No cabeçalho da função mudamos também indicando que pontuação é a referencia mutável de um `u16` e a referencia de `u8` assim na compilação ele sabe que a função está trabalhando com
 referências e não vai criar uma cópia da função.
 
 Por ultimo vamos fazer uma alteração na nossa operação de subtração
+
 ```rust
     *pontuacao -= 100;
 ```
-Usamos o simbilo "*" para indicar que não queremos mexer na referência onde está pontuacao mas, no valor que ele possui assim o valor que estava em _pontuacao mudou de 1000 para
+
+Usamos o símbolo "*" para indicar que não queremos mexer na referência onde está pontuação mas, no valor que ele possui assim o valor que estava em _pontuacao mudou de 1000 para
 900.
 
 Agora com isso conseguimos compreender as linhas onde capturamos a entrada do teclado do jogador
+
 ```rust
         let mut escolha_str = String::new();
         let _ = io::stdin().read_line(&mut escolha_str);
 ```
 
-Onde criamos uma variável escolha_str que é uma String vazia e mutável e quando chamamos a função read_line nós passamos a referência mutável de escolha_str e enquanto ela está em
-execução ela está alterando o valor do `escolha_str` para nós e quando termina conseguimos usar o valor de escolha_str com os valores modificados pela função `read_line` sem
-precisar duplicar a variável dentro da função. 
+Onde criamos uma variável `escolha_str` que é uma String vazia e mutável e quando chamamos a função read_line nós passamos a referência mutável de `escolha_str` e enquanto ela está em execução ela está alterando o valor do `escolha_str` para nós e quando termina conseguimos usar o valor de `escolha_str` com os valores modificados pela função `read_line` sem precisar duplicar a variável dentro da função. 
 É importante reforçar que em muitas linguagens não conseguimos fazer isso nós normalmente precisamos receber a copia modificada dentro da função para conseguir trabalhar. Essa
 característica do rust é muito importante para casos que trabalhamos com pouca memória ou mesmo um jogo onde quanto menos recursos usarmos mais leve será nosso jogo.
-
 
 ## Introdução sobre testes de software
 
@@ -542,7 +541,7 @@ Os testes desempenham um papel fundamental no processo de desenvolvimento de sof
 
 #### Desenvolvimento Orientado a Testes (TDD)
 
-O Desenvolvimento Orientado a Testes (TDD) é uma abordagem de desenvolvimento que enfatiza a escrita de testes antes de escrever o código real. O ciclo TDD segue três passos simples: "Red-Green-Refactor."
+O Desenvolvimento Orientado a Testes (TDD) é uma abordagem de desenvolvimento que enfatiza a escrita de testes antes de escrever o código real. O ciclo TDD segue três passos simples: "`Red-Green-Refactor`."
 
 * Red (Vermelho): Neste estágio, você escreve um teste que descreve a funcionalidade que deseja implementar. Como você ainda não escreveu o código, o teste falhará.
 * Green (Verde): Agora, você escreve o código mínimo necessário para fazer o teste passar. O objetivo é fazer o teste passar o mais rápido possível.
@@ -564,9 +563,8 @@ Portanto, da próxima vez que você começar a escrever código, lembre-se da im
 
 ## Introduzindo testes ao nosso código
 
-Agora vamos abrir nosso arquivo test_game_loop.rs, esse teste vai ser usado para testarmos nossas condições do jogo então vamos criar um primeiro teste para validar a condição que
-está fixa hoje.
-Vamos adicionar o código abaixo no final do nosso main.rs
+Agora vamos abrir nosso arquivo `test_game_loop.rs`, esse teste vai ser usado para testarmos nossas condições do jogo então vamos criar um primeiro teste para validar a condição que está fixa hoje.
+Vamos adicionar o código abaixo no final do nosso `main.rs`.
 
 ```rust
 #[test]
@@ -584,22 +582,23 @@ fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
 
 ```
 
-Inicialmente precisamos adicionar uma anotação _annotattion_ `#[test]` as anotações são colocadas no inicio de uma função/módulo/trait para adicionar alguma funcionalidade aquele
-bloco de código.
-NO nosso caso estamos adicionando uma funcionalidade de teste para nossa função de teste `test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral` assim podemos rodar o
-comando de teste `cargo test`.
+Inicialmente precisamos adicionar uma anotação _annotation_ `#[test]` as anotações são colocadas no inicio de uma função/módulo/trait para adicionar alguma funcionalidade aquele bloco de código.
+NO nosso caso estamos adicionando uma funcionalidade de teste para nossa função de teste `test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral` assim podemos rodar o comando de teste `cargo test`.
+
 Nossa estrutura de testes é divida em 3 partes:
+
 - Arrange -> que é os dados que precisamos preparar para o teste
 - Act -> Execução do código que queremos testas
 - Assert -> Que é o que esperamos que aconteça depois do código sendo executado.
 
-No caso do assert executamos uma macro nova que é o `assert_eq!` sua função é comprar dois valores caso sejam iguais ele termina corretamente, caso sejam diferentes ele vai voltar
-um erro no nosso teste, vamos primeiro rodar o teste do jeito que está.
+No caso do assert executamos uma macro nova que é o `assert_eq!` sua função é comprar dois valores caso sejam iguais ele termina corretamente, caso sejam diferentes ele vai voltar um erro no nosso teste, vamos primeiro rodar o teste do jeito que está.
 
 ```bash
 cargo test
 ```
+
 Você deve ter um retorno parecido com esse:
+
 ```bash
 ➜ cargo test
     Finished test [unoptimized + debuginfo] target(s) in 0.00s
@@ -612,6 +611,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 ```
 
 Vale destacar alguns pontos:
+
 ```bash
 ➜ cargo test
     Finished test [unoptimized + debuginfo] target(s) in 0.00s
@@ -624,9 +624,9 @@ test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
+
 Aqui mostra onde foi compilado o teste
 
-
 ```bash
 ➜ cargo test
     Finished test [unoptimized + debuginfo] target(s) in 0.00s
@@ -640,7 +640,7 @@ test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-Nessas linhas mostram quantos testes rodaram, o nome do teste que rodou e se foi ok ou não
+Nessas linhas mostram quantos testes rodaram, o nome do teste que rodou e se foi ok ou não.
 
 ```bash
 ➜ cargo test
@@ -655,9 +655,9 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
      ==}
 ```
 
-Nessa linha temos um pequeno relatório dos testes quando passaram quantos derram erro e por ai vai, além de tudo mostra o tempo que demorou pra rodar os testes.
+Nessa linha temos um pequeno relatório dos testes quando passaram quantos deram erro e por ai vai, além de tudo mostra o tempo que demorou pra rodar os testes.
 
-Agora vamos mudar nosso teste para ele falhar
+Agora vamos mudar nosso teste para ele falhar.
 
 ```rust
 #[test]
@@ -709,10 +709,11 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; 
 error: test failed, to rerun pass `--bin guessing_game`
 
 ```
+
 É importante não ter medo de ler toda a mensagem mesmo que seja grande pois com ela podemos ver o problema.
 
-Veja que agora ele mostra a saida da execução de game, no caso ele vai mostrar os dois prints que criamos depois ele vai mostrar o erro do assertion mostrando que o valor de
-pontuação foi 900 e o valor da direita foi 0 então sabemos quanto nossa variavel retornou e o valor da comparação.
+Veja que agora ele mostra a saída da execução de game, no caso ele vai mostrar os dois prints que criamos depois ele vai mostrar o erro do assertion mostrando que o valor de
+pontuação foi 900 e o valor da direita foi 0 então sabemos quanto nossa variável retornou e o valor da comparação.
 
 Também podemos ver que agora no nosso relatório temos um teste como failed pois o teste falhou.
 
@@ -746,6 +747,7 @@ fn game(pontuacao: &mut u16, numero: &u8) -> () {
     println!("A sua pontuação foi {}, e o número era {}", pontuacao, numero)
 }
 ```
+
 Se rodarmos nosso teste ele ainda vai passar.
 
 ```bash
@@ -760,7 +762,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 ```
 
 Agora vamos fazer algumas alterações vamos criar uma nova função que vai atualizar a pontuação. Mas primeiro vamos mudar nosso teste para verificar com a função
-_check_win_condition_ e passar mais um parametro chamado chute que vai ser um inteiro também.
+_check_win_condition_ e passar mais um parâmetro chamado chute que vai ser um inteiro também.
 
 ```rust
 #[test]
@@ -777,6 +779,7 @@ fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
     assert_eq!(pontuacao, 900)
 }
 ```
+
 Vamos receber agora um erro de compilação
 
 ```bash
@@ -793,11 +796,12 @@ error: could not compile `guessing_game` (bin "guessing_game" test) due to previ
 ```
 
 É importante sempre ler a mensagem de erro e tentar entender também sempre que quiser poder rodar o `--explain` para ver a descrição do erro.
+
 ```bash
 rustc --explain E0425
 ```
 
-Nesse caso o erro é que check_win_conditition não existe dentro  do escopo isso por que ele não foi criado, vamos então cria-lo e mover o código responsável por diminuir a
+Nesse caso o erro é que `check_win_conditition` não existe dentro  do escopo isso por que ele não foi criado, vamos então criá-lo e mover o código responsável por diminuir a
 pontuação.
 
 ```rust
@@ -813,7 +817,8 @@ fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> () {
 }
 ```
 
-Se rodarmos o teste ele vai funcionar com um warning que logo vamos remove-lo.
+Se rodarmos o teste ele vai funcionar com um warning que logo vamos removê-lo.
+
 ```bash
 ❯ cargo test
    Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
@@ -847,7 +852,7 @@ test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-O principal ponto desse warnings é que não estamos usando várias variaveis vamos ajusta-las. Primeiro precisamos converter nossa variavel chute para int.
+O principal ponto desse warnings é que não estamos usando várias variáveis vamos ajustá-las. Primeiro precisamos converter nossa variável chute para `int`.
 
 ```rust
 use std::io;
@@ -924,9 +929,9 @@ fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
 
 ```
 
-Temos algumas mudanças aqui, precisamos mover pontuacao e numero_alvo para dentro da função game, pois não podemos reimprestar  pontuacao para _verify_win_conditition_ essa é uma
-caracteristica do rust então jogamos tudo para a função game deixando a main apenas para menu.
-Também fizemos o match abaixo para converter a entrada  string para u8 e com isso temos um efeito colateral que precisamos voltar um número que no caso é 0.
+Temos algumas mudanças aqui, precisamos mover pontuação e numero_alvo para dentro da função game, pois não podemos reemprestamos pontuação para _verify_win_conditition_ essa é uma característica do rust então jogamos tudo para a função game deixando a main apenas para menu.
+Também fizemos o match abaixo para converter a entrada  string para `u8` e com isso temos um efeito colateral que precisamos voltar um número que no caso é 0.
+
 ```rust
     let chute: u8 = match chute.trim().parse() {
         Ok(num) => num,
@@ -961,7 +966,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 ```
 
-Vamos agora remover o ultimo warning e vamos começar a usar nosso parametro chute.
+Vamos agora remover o ultimo warning e vamos começar a usar nosso parâmetro chute.
 
 ```rust
 fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> () {
@@ -987,7 +992,7 @@ test test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
-Agora vamos alterar nossa entrada para não receber o parametro "_", pois há uma forma melhor de fazer isso.
+Agora vamos alterar nossa entrada para não receber o parâmetro "_", pois há uma forma melhor de fazer isso.
 
 ```rust
 use std::io;
@@ -1065,9 +1070,8 @@ fn test_jogador_deu_numero_errado_deve_diminuir_pontuacao_geral() {
 }
 ```
 
-Aqui retiramos o parametro não usado e colocamo no final um expect isso é uma captura de erro, vamos detalhar isso mais a frente mas, se pense que agora caso a option que esteja
-com algum dado é a `Err` ele vai printar no nosso console as mensagens que colocamos.
-
+Aqui retiramos o parâmetro não usado e colocamo no final um expect isso é uma captura de erro, vamos detalhar isso mais a frente mas, se pense que agora caso a option que esteja
+com algum dado é a `Err` ele vai escrever no nosso console as mensagens que colocamos.
 
 ## Adicionando condição de vitória
 
@@ -1104,9 +1108,12 @@ fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
 }
 ==}
 ```
+
 Aqui criamos uma função de teste _test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao_ onde simplesmente passamos o número correto e ele deve voltar a com a
 pontuação exata que passamos.
+
 Vamos rodar o teste:
+
 ```bash
 ➜ cargo test
    Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
@@ -1120,9 +1127,7 @@ test test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao ... o
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
-Certo o teste está passando vamos fazer com que nossa função retorne que o jogador ganhou, normalmente em muitas linguagens trabalhariamos com um valor de verdadeiro ou falso
-poderiamos fazer isso aqui também, porém como o rust nos da a ferramenta do result vamos voltar um tipo Result::Win para dizer que o jogador ganhou, mas como vamos ter outras
-condições vamos criar uma estrutura de enumerador para representar os estados que jogo pode retornar:
+Certo o teste está passando vamos fazer com que nossa função retorne que o jogador ganhou, normalmente em muitas linguagens trabalharíamos com um valor de verdadeiro ou falso poderíamos fazer isso aqui também, porém como o rust nos da a ferramenta do result vamos voltar um tipo `Result::Win` para dizer que o jogador ganhou, mas como vamos ter outras condições vamos criar uma estrutura de enumerador para representar os estados que jogo pode retornar:
 
 ```
 #[derive(Debug, PartialEq)]
@@ -1133,21 +1138,20 @@ enum GameResult {
 }
 ```
 
-Vamos primeiro entender o que é um enum:
+Vamos primeiro entender o que é um `enum`:
 
->! Enum
-Enum é um tipo de dado que representa um conjunto de valores que você quer relacionar no nosso caso estamos criando um conjunto relacionado com os estados que podemos representar
-sobre a nossa condição de vitória "WIN" para dizer que o jogador venceu, "GAMING" para dizer que o jogador continua jogando, "LOSE" para dizer que o jogador perdeu, nosso caso essa
-representação é um enum por isso precisamos passar o tipo de dado e o nome desse enum que no nosso caso é GameResult.
-Alguns pontos importantes sobre enums:
+>! `Enum`
+`Enum` é um tipo de dado que representa um conjunto de valores que você quer relacionar no nosso caso estamos criando um conjunto relacionado com os estados que podemos representar sobre a nossa condição de vitória "WIN" para dizer que o jogador venceu, "GAMING" para dizer que o jogador continua jogando, "LOSE" para dizer que o jogador perdeu, nosso caso essa representação é um `enum` por isso precisamos passar o tipo de dado e o nome desse `enum` que no nosso caso é `GameResult`.
+Alguns pontos importantes sobre `enums`:
 * *Valores Variantes*: Em uma enumeração, você define os valores possíveis, chamados de "variantes". Cada variante representa um valor específico que o tipo de enumeração pode ter.
-* *Tipos Personalizados*: Enums permitem que você crie tipos personalizados com valores limitados. Por exemplo, você pode criar uma enumeração para representar os dias da semana ou os estados de um jogo.
-* *Padrão de Correspondência*: Enums são frequentemente usadas em combinação com o padrão de correspondência (match) para fazer escolhas com base no valor da enumeração. Isso torna as enums úteis para expressar a lógica condicional.
-* *Segurança de Tipos*: Enums ajudam a garantir a segurança de tipos, pois o compilador verifica se todas as variantes são tratadas nos padrões de correspondência. Isso evita erros em tempo de execução.
-* *Enumerações com Dados*: Enums podem ter dados associados a suas variantes. Isso permite que você armazene informações adicionais com uma variante. Por exemplo, uma enumeração de formas geométricas pode ter uma variante "Círculo" com um raio associado.
-* *Enums Genéricas*: Enums podem ser genéricas, o que significa que você pode parametrizá-las com tipos de dados, tornando-as versáteis e reutilizáveis.
+* *Tipos Personalizados*: `Enums` permitem que você crie tipos personalizados com valores limitados. Por exemplo, você pode criar uma enumeração para representar os dias da semana ou os estados de um jogo.
+* *Padrão de Correspondência*: `Enums` são frequentemente usadas em combinação com o padrão de correspondência (match) para fazer escolhas com base no valor da enumeração. Isso torna as `enums` úteis para expressar a lógica condicional.
+* *Segurança de Tipos*: `Enums` ajudam a garantir a segurança de tipos, pois o compilador verifica se todas as variantes são tratadas nos padrões de correspondência. Isso evita erros em tempo de execução.
+* *Enumerações com Dados*: `Enums` podem ter dados associados a suas variantes. Isso permite que você armazene informações adicionais com uma variante. Por exemplo, uma enumeração de formas geométricas pode ter uma variante "Círculo" com um raio associado.
+* *`Enums` Genéricas*: `Enums` podem ser genéricas, o que significa que você pode parametrizá-las com tipos de dados, tornando-as versáteis e reutilizáveis.
 
-Enuns podem ter uma chave e um valor como no exemplo abaixo:
+`Enums` podem ter uma chave e um valor como no exemplo abaixo:
+
 ```rust
 enum DiaDaSemana {
     Segunda(u32),
@@ -1160,7 +1164,8 @@ enum DiaDaSemana {
 }
 ```
 
-Ou com multiplos valores para representar uma chave como abaixo:
+Ou com múltiplos valores para representar uma chave como abaixo:
+
 ```rust
 enum Cor {
     RGB(u8, u8, u8),
@@ -1168,10 +1173,10 @@ enum Cor {
 }
 ```
 
-Há outras formas mas, vamos nos fixar em usa-lo apenas para que a chave e o valor sejam os mesmos que no caso é forma que criamos nosso enum sem passar nenhum tipo.
+Há outras formas mas, vamos nos fixar em usá-lo apenas para que a chave e o valor sejam os mesmos que no caso é forma que criamos nosso `enum` sem passar nenhum tipo.
 
-Agora usamos uma anotação nova que é o  `#[derive(...)]
-A anotação #[derive(...)] em Rust é uma característica poderosa que gera automaticamente a implementação de certos traços (traits) para tipos de dados personalizados, como structs e enums. Isso ajuda a evitar a escrita repetitiva de código ao criar tipos de dados personalizados.
+Agora usamos uma anotação nova que é o  `#[derive(...)]`
+A anotação `#[derive(...)]` em Rust é uma característica poderosa que gera automaticamente a implementação de certos traços (traits) para tipos de dados personalizados, como `structs` e `enums`. Isso ajuda a evitar a escrita repetitiva de código ao criar tipos de dados personalizados.
 
 #### Trait
 Em Rust, um trait é como um contrato ou um conjunto de regras que um tipo de dado deve seguir. É uma maneira de definir comportamentos que tipos diferentes podem compartilhar.
@@ -1186,16 +1191,16 @@ Polimorfismo permite que objetos de diferentes tipos sejam tratados de maneira u
 
 #### Derive
 
-A atribuição #[derive] em Rust permite que os programadores gerem automaticamente a implementação de certos traços para suas estruturas de dados, enums ou uniões. Ele é usado para derivar a implementação de traços comuns, como Clone, Debug, Eq, PartialEq, Hash, entre outros, com base na estrutura da sua estrutura de dados.
+A atribuição #[derive] em Rust permite que os programadores gerem automaticamente a implementação de certos traços para suas estruturas de dados, `enums` ou uniões. Ele é usado para derivar a implementação de traços comuns, como Clone, `Debug`, `Eq`, `PartialEq`, Hash, entre outros, com base na estrutura da sua estrutura de dados.
 
 Elas podem ser implementadas diretamente no código caso precise de um código mais complexo.
 
-- Traits de comparação: Eq, PartialEq, Ord, PartialOrd.
+- Traits de comparação: `Eq`, `PartialEq`, `Ord`, `PartialOrd`.
 - Clone, para criar um novo objeto a partir de outro via copia.
 - Copy, para copiar o elemento ao invés de mover.
-- Hash, para computar um hast a partir &T.
+- Hash, para computar um hast a partir `&T`.
 - Default, para criar um objeto padrão do tipo especificado.
-- Debug, para formatar a partir de {:?} formatter.
+- Debug, para formatar a partir de `{:?}` formatter.
 
 #### Vantagens do Derive
 
@@ -1207,17 +1212,18 @@ Você pode criar um código com `#[derive]` usando `procedural macros`
 
 #### Procedural macros
 
-As macros procedurais são uma característica avançada do Rust que permite que os desenvolvedores escrevam código que manipula a representação de código Rust em tempo de compilação. Essas macros permitem que você escreva código que gera código, o que pode ser útil para automatizar tarefas repetitivas, criar DSLs específicas do domínio ou realizar transformações complexas no código Rust.
+As macros procedurais são uma característica avançada do Rust que permite que os desenvolvedores escrevam código que manipula a representação de código Rust em tempo de compilação. Essas macros permitem que você escreva código que gera código, o que pode ser útil para automatizar tarefas repetitivas, criar `DSLs` específicas do domínio ou realizar transformações complexas no código Rust.
 
 - Permitem a geração de código personalizado em tempo de compilação.
 - Podem ser usadas para automatizar tarefas tediosas ou repetitivas.
-- Permitem a criação de DSLs específicas do domínio para tornar o código mais expressivo e legível.
+- Permitem a criação de `DSLs` específicas do domínio para tornar o código mais expressivo e legível.
 - Podem ser usadas para realizar transformações complexas no código, como otimizações de desempenho ou análise estática avançada.
 
 #### No nosso caso vamos passar algumas implementações básicas no derive
-Debug `derive` (#[derive(Debug)]): Ao usar #[derive(Debug)] em uma estrutura ou enumeração, Rust gera automaticamente a implementação do Debug para esse tipo. O `derive` Debug permite que você formate o valor do tipo de forma legível por humanos quando você imprime um objeto desse tipo usando a função println!("{:?}", objeto). Isso é particularmente útil para fins de depuração, pois fornece informações detalhadas sobre o estado do objeto.
 
-PartialEq derive (#[derive(PartialEq)]): Usando #[derive(PartialEq)], Rust gera a implementação do trait PartialEq para o tipo. O PartialEq permite que você compare objetos do tipo com operadores de igualdade (==) e desigualdade (!=). Isso significa que você pode verificar se dois objetos são iguais ou diferentes com facilidade, simplificando a lógica de comparação.
+Debug `derive` `#[derive(Debug)])`: Ao usar `#[derive(Debug)]` em uma estrutura ou enumeração, Rust gera automaticamente a implementação do Debug para esse tipo. O `derive` Debug permite que você formate o valor do tipo de forma legível por humanos quando você imprime um objeto desse tipo usando a função `println!("{:?}", objeto)`. Isso é particularmente útil para fins de depuração, pois fornece informações detalhadas sobre o estado do objeto.
+
+`PartialEq` derive `#[derive(PartialEq)]`: Usando `#[derive(PartialEq)]`, Rust gera a implementação do trait `PartialEq` para o tipo. O `PartialEq` permite que você compare objetos do tipo com operadores de igualdade (==) e desigualdade (!=). Isso significa que você pode verificar se dois objetos são iguais ou diferentes com facilidade, simplificando a lógica de comparação.
 
 Certo agora vamos ajustar o teste para nossa função:
 
@@ -1238,13 +1244,13 @@ fn test_jogador_deu_numero_exato_deve_finalizar_jogo_sem_mudar_pontuacao() {
 }
 ```
 
-Ali colocamos uma variavel para receber o retorno da nossa função chamado result e também verificamos se essa variavél result retorna no seu ResultSet o valor do enum GameResult
-como Win que é o valor do enum que criamos.
+Ali colocamos uma variável para receber o retorno da nossa função chamado result e também verificamos se essa variável result retorna no seu `ResultSet` o valor do `enum GameResult` como Win que é o valor do `enum` que criamos.
 Agora vamos rodar o teste.
 
 ```bash
 cargo test
 ```
+
 Com o seguinte resultado
 
 ```bash
@@ -1263,12 +1269,14 @@ For more information about this error, try `rustc --explain E0308`.
 error: could not compile `guessing_game` (bin "guessing_game" test) due to previous error
 ```
 
-Isso ocorreu por que estamos voltando um ResultSet vazio e ele esperava um ResultSet com um GameResult, então vamos mudar o retorno da nossa função.
+Isso ocorreu por que estamos voltando um `ResultSet` vazio e ele esperava um `ResultSet` com um `GameResult`, então vamos mudar o retorno da nossa função.
+
 ```rust
 ...
 fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<GameResult, GameResult> {
 ...
 ```
+
 Aqui falamos que o result tem o OK como  um `GameResult` e o Erro também como um `GameResult` vamos rodar o teste.
 
 ```bash
@@ -1288,6 +1296,7 @@ For more information about this error, try `rustc --explain E0308`.
 error: could not compile `guessing_game` (bin "guessing_game" test) due to previous error
 
 ```
+
 Aqui fala que o problema é que temos um print no final da função vamos colocar no final um `GameResult::Gaming` para mostrar a condição que o jogo ainda não terminou.
 
 ```rust
@@ -1300,7 +1309,7 @@ fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<
 }
 ```
 
-Aqui colocamos de maneira explicita no final ele vai retornar um result do tipo `OK` com o valor _Gaming_ do nosso enum.
+Aqui colocamos de maneira explicita no final ele vai retornar um result do tipo `OK` com o valor _Gaming_ do nosso `enum`.
 Vale atentar que precisamos agora colocar um  ";" no nosso print.
 Agora vamos rodar os testes:
 
@@ -1374,9 +1383,8 @@ test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; 
 error: test failed, to rerun pass `--bin guessing_game`
 ```
 
-Aqui vamos ter alguns warnings, mas no ponto de destaque mostra ainha que deu erro, no meu caso ainha 90 e mostra que ele espearava um `Ok(Win)` mas, recebeu um `Ok(Gaming)`.
+Aqui vamos ter alguns warnings, mas no ponto de destaque mostra a linha que deu erro, no meu caso a linha 90 e mostra que ele esperava um `Ok(Win)` mas, recebeu um `Ok(Gaming)`.
 Então finalmente  podemos agora colocar nosso bloco de código que determina que o usuário venceu que nesse caso será um _if_.
-
 
 ```rust
 fn check_win_coditition(pontuacao: &mut u16, numero: &u8, chute: &u8) -> Result<GameResult, GameResult> {
@@ -1451,7 +1459,6 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 Ainda temos alguns warnings mas, nossos testes voltaram a passar.
 
-
 ## Adicionando condição de derrota
 
 Bom agora vamos criar uma condição pra nossa função registrar a derrota. Mas, primeiro vamos criar o teste.
@@ -1503,7 +1510,8 @@ fn test_jogador_deu_numero_errado_deve_finalizar_jogo_perdendo() {
 }
 ==}
 ```
-Nesse teste diminuimos a pontuação e erramos pra baixo e ele deve voltar o rusult como Lose e a pontuação como 0. Então vamos testar.
+Nesse teste diminuímos a pontuação e erramos pra baixo e ele deve voltar o `result` como `Lose` e a pontuação como 0. Então vamos testar.
+
 ```bash
 ➜ cargo test
    Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
@@ -1641,7 +1649,8 @@ fn test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo() {
 }
 ==}
 ```
-Aqui renomeamos o nosso teste anterior pra explicitar que estamos chutando um número baixo e criamos outro explicitando que estamos chutando um número altoi, agora rodando os testes teremos uma falha.
+
+Aqui renomeamos o nosso teste anterior pra explicitar que estamos chutando um número baixo e criamos outro explicitando que estamos chutando um número alto, agora rodando os testes teremos uma falha.
 
 ```bash
 ➜ cargo test
@@ -1691,7 +1700,7 @@ error: test failed, to rerun pass `--bin guessing_game`
 
 ```
 
-Como podemos ver ele voltou _Gaming_ ao invés de _Lose_ isso por que não implementamos a condição pra que o valor maior decremente então vamos cria-la.
+Como podemos ver ele voltou _Gaming_ ao invés de _Lose_ isso por que não implementamos a condição pra que o valor maior decremente então vamos criá-la.
 
 ```rust
  check_win_coditition(
@@ -1720,6 +1729,7 @@ Como podemos ver ele voltou _Gaming_ ao invés de _Lose_ isso por que não imple
     Ok(GameResult::Gaming)
 }
 ```
+
 Aqui colocamos nossa condição de decrementar a pontuação com um erro como a primeira coisa a ser verificada, para evitar qualquer problema de ser decrementado após verificar a condição de vitória, assim adicionamos mais um _if_ no nosso código e podemos rodar o teste para verificar se está passando.
 
 ```bash
@@ -1815,7 +1825,7 @@ fn test_jogador_deu_numero_errado_pra_cima_deve_diminuir_pontuacao_geral() {
 ==}
 ```
 
-Aqui mudamos o nome do teste anterior e criamos um novo além de adiconar o result para verificação e também pra nossa função game, o agora se rodarmos os testes os warnings vão desaparecer.
+Aqui mudamos o nome do teste anterior e criamos um novo além de adicionar o result para verificação e também pra nossa função game, o agora se rodarmos os testes os warnings vão desaparecer.
 
 ```bash
 ➜ cargo test
@@ -1836,7 +1846,7 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 ## Melhorando nossa função de condição e ajustando a função game.
 
-Bom poderiamos agora criar testes de integração pra nossa função game, mas vamos trabalhar isso mais a frente, agora vamos melhorar nossa função game, não importa se acertamos ou ▍erramos nós voltamos ao menu principal, então precisamos só voltar pro loop do menu quando perdemos ou ganharmos o jogo pra isso vamos criar um novo loop no nosso jogo.
+Bom poderíamos agora criar testes de integração pra nossa função game, mas vamos trabalhar isso mais a frente, agora vamos melhorar nossa função game, não importa se acertamos ou ▍erramos nós voltamos ao menu principal, então precisamos só voltar pro loop do menu quando perdemos ou ganharmos o jogo pra isso vamos criar um novo loop no nosso jogo.
 
 ```rust
 {==
@@ -1949,18 +1959,18 @@ Existem dois tipos principais de crates em Rust: crates binários e crates de bi
 
 Dentro do diretório do seu crate, você encontrará uma estrutura típica de diretórios:
 
-* src: Contém o código-fonte do seu crate.
-* Cargo.toml: Arquivo de configuração do seu crate, onde você especifica dependências e outras informações.
-* tests: Diretório para escrever testes para o seu crate.
-* examples: Diretório para incluir exemplos de código para demonstrar o uso do seu crate.
+* `src`: Contém o código-fonte do seu crate.
+* `Cargo.toml`: Arquivo de configuração do seu crate, onde você especifica dependências e outras informações.
+* `tests`: Diretório para escrever testes para o seu crate.
+* `examples`: Diretório para incluir exemplos de código para demonstrar o uso do seu crate.
 
 #### Gerenciando Dependências
 
-Rust usa o gerenciador de pacotes Cargo para gerenciar dependências. Você pode especificar as dependências necessárias no arquivo Cargo.toml. Quando você compila seu crate, o Cargo se encarrega de baixar e compilar todas as dependências automaticamente.
+Rust usa o gerenciador de pacotes Cargo para gerenciar dependências. Você pode especificar as dependências necessárias no arquivo `Cargo.toml`. Quando você compila seu crate, o Cargo se encarrega de baixar e compilar todas as dependências automaticamente.
 
 #### Usando Crates de Terceiros
 
-Um dos principais benefícios do ecossistema Rust é a facilidade de uso de crates de terceiros. Você pode pesquisar e encontrar uma vasta coleção de crates de alta qualidade no Rust's package registry, crates.io. Para adicionar uma dependência a um crate, basta adicionar a linha apropriada no seu arquivo Cargo.toml.
+Um dos principais benefícios do ecossistema Rust é a facilidade de uso de crates de terceiros. Você pode pesquisar e encontrar uma vasta coleção de crates de alta qualidade no Rust's package registry, `crates.io`. Para adicionar uma dependência a um crate, basta adicionar a linha apropriada no seu arquivo `Cargo.toml`.
 
 ```toml
 
@@ -1970,7 +1980,7 @@ nome_do_pacote = "versao"
 
 Após adicionar a dependência, execute cargo build para baixar e compilar os crates necessários.
 
-Também podemos instalar diratamente na linha de comando como abaixo:
+Também podemos instalar diretamente na linha de comando como abaixo:
 
 ```bash
 cargo add lib
@@ -1980,13 +1990,13 @@ cargo add lib
 Crates são um componente fundamental do ecossistema Rust, permitindo que você desenvolva, compartilhe e reutilize código de maneira eficaz. A modularidade e a facilidade de gerenciamento de dependências tornam Rust uma linguagem poderosa para o desenvolvimento de software. Compreender o sistema de crates é essencial para qualquer desenvolvedor Rust, pois é uma parte integrante do processo de construção de aplicações robustas e seguras.
 
 Agora vamos entrar no site do [crates.io](https://crates.io) vamos buscar a biblioteca rand, aqui no crates.io podemos ver mais sobre a biblioteca, no nosso caso essa biblioteca serve para gerar números aleatório.
-Vamos instala-la.
+Vamos instalá-la.
 
 ```bash
 cargo add rand
 ```
 
-Agora vamos implementa-la no nosso código.
+Agora vamos implementá-la no nosso código.
 
 ```rust
 == use rand::{thread_rng, Rng}; ==
@@ -2161,13 +2171,14 @@ fn test_jogador_deu_numero_errado_alto_deve_finalizar_jogo_perdendo() {
 }
 ```
 
-No caso do rand gerar o número que queremos precisamos usar a função _gen_range_ olhando na documentação precisamos importar `use rand::{thread_rng, Rng};` que são as funções de base e simplemente removemos o número fixo por essa função na declaração da variável.
+No caso do rand gerar o número que queremos precisamos usar a função _gen_range_ olhando na documentação precisamos importar `use rand::{thread_rng, Rng};` que são as funções de base e simplesmente removemos o número fixo por essa função na declaração da variável.
 
 ```rust
     let numero_alvo: u8 = thread_rng().gen_range(1..100);
 ```
 
 Ai colocamos que queremos gerar um valor entre 1 e 100 e agora vamos rodar os testes para ver se nossa alteração quebrou alguma coisa.
+
 ```bash
 ➜ cargo test
    Compiling guessing_game v0.1.0 (/home/feanor/worspace/protipos-jogos-curso/guessing_game)
@@ -2186,9 +2197,9 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 Certo tudo funcionando.
 
-#### Usando o cargo fmt
+#### Usando o cargo `fmt`
 
-Nesse módulo eu usei o editor helix e nele eu configurei para ajustar a formatação do meu código automaticamente, mas, há um comando no `cargo` que é possível fazer a formatação do seu código que é o fmt podemos roda-lo com o comando abaixo:
+Nesse módulo eu usei o editor helix e nele eu configurei para ajustar a formatação do meu código automaticamente, mas, há um comando no `cargo` que é possível fazer a formatação do seu código que é o `fmt` podemos rodá-lo com o comando abaixo:
 
 ```bash
 cargo fmt
@@ -2196,11 +2207,11 @@ cargo fmt
 
 Com isso pode ajustar nosso código pra já trabalhar com o `clippy`.
 
-#### Usando Clippy
+#### Usando `Clippy`
 
-Clippy é uma ferramenta de análise estática para o Rust, desenvolvida pela comunidade. Ele fornece sugestões e avisos sobre possíveis problemas de código, seguindo as melhores práticas e convenções da linguagem Rust.
+`Clippy` é uma ferramenta de análise estática para o Rust, desenvolvida pela comunidade. Ele fornece sugestões e avisos sobre possíveis problemas de código, seguindo as melhores práticas e convenções da linguagem Rust.
 
-Para rodar o cargo clippy é só executar o comando abaixo:
+Para rodar o cargo `clippy` é só executar o comando abaixo:
 
 ```rust
 cargo clippy
@@ -2246,7 +2257,7 @@ warning: unneeded unit return type
    = note: `#[warn(clippy::unused_unit)]` on by default
 ```
 
-Aqui colocamos nossa saída como uma option vazia `-> ()` então podemos remover conforme ele está indicando, é importnte ver que também ele coloca uma documentação do clippy informando por que é uma má prática. Caso você queira ignorar o erro você pode colocar a anotação que ele recomenda que no caso é `#[warn(clippy::unused_unit)]`.
+Aqui colocamos nossa saída como uma option vazia `-> ()` então podemos remover conforme ele está indicando, é importante ver que também ele coloca uma documentação do `clippy` informando por que é uma má prática. Caso você queira ignorar o erro você pode colocar a anotação que ele recomenda que no caso é `#[warn(clippy::unused_unit)]`.
 
 Agora vamos ver o outro warning:
 
@@ -2262,9 +2273,9 @@ error: this comparison involving the minimum or maximum element for this type co
    = note: `#[deny(clippy::absurd_extreme_comparisons)]` on by default
 ```
 
-Esse warning fala que estamos querendo ver um valor menor que zero, porém estamos usando na pontuação um tipo `u` que não aceita sinal, temos duas formas de resolver isso, mudar nosso prametro pra o tipo `i` que aceita sinal ou ainda como nossa pontuação não deveria nunca ser menor que zero, podemos apenas seguir a instrução do clippy e deixar o sinal de igualdade `==`.
+Esse warning fala que estamos querendo ver um valor menor que zero, porém estamos usando na pontuação um tipo `u` que não aceita sinal, temos duas formas de resolver isso, mudar nosso parâmetro pra o tipo `i` que aceita sinal ou ainda como nossa pontuação não deveria nunca ser menor que zero, podemos apenas seguir a instrução do `clippy` e deixar o sinal de igualdade `==`.
 
-Rodando agora o clippy novamente temos a saída abaixo:
+Rodando agora o `clippy` novamente temos a saída abaixo:
 
 ```bash
 ✦ ➜ cargo clippy
@@ -2275,7 +2286,8 @@ Quer dizer que nosso código está sem erros no momento.
 
 ## Update Rust
 
-O rust vem sendo atualizado com o tempo, no caso do curso começamos com a versão 1.73 então vamos atualizar o nosso código agora simplemente precisamos rodar o comando abaixo:
+O rust vem sendo atualizado com o tempo, no caso do curso começamos com a versão 1.73 então vamos atualizar o nosso código agora simplesmente precisamos rodar o comando abaixo:
+
 ```bash
 rustup update
 ```
@@ -2286,7 +2298,7 @@ Com isso agora vamos pra ultima versão do rust disponível.
 Com esse jogo vimos como criar uma função em rust, criar testes para essa função usando a suite nativa de testes do rust, mais algumas funções de manipulação de strings, como
 funciona o conceito de borrow and ownership, como funciona o gerenciamento de memória do rust.
 
-## Exercicíos sugeridos
+## Exercícios sugeridos
 
 Exercício 1: Jogo de Perguntas e Respostas
 
@@ -2321,7 +2333,7 @@ Crie um jogo multiplayer alternativo da forca em que o jogador deve adivinhar um
 
 Exercício 4: Simulador de Compras com Crate Rust Money
 
-Crie um simulador de compras em que o jogador tem um orçamento limitado e deve fazer compras. Use o crate rust-money para representar valores monetários. O jogo deve incluir as seguintes funcionalidades:
+Crie um simulador de compras em que o jogador tem um orçamento limitado e deve fazer compras. Use o crate `rust-money` para representar valores monetários. O jogo deve incluir as seguintes funcionalidades:
 
     Instale o crate rust-money para lidar com valores monetários.
     Use variáveis mutáveis para rastrear o orçamento do jogador e o custo dos itens.
